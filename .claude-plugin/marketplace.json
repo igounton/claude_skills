@@ -1,0 +1,23 @@
+{
+  "name": "jamie-bitflight-skills",
+  "owner": {
+    "name": "Jamie BitFlight",
+    "email": "jamie@bitflight.io"
+  },
+  "metadata": {
+    "description": "Custom skills for development workflows",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "development-skills",
+      "description": "Collection of opinionated development skills",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./opinionated-python-development",
+        "./clang-format"
+      ]
+    }
+  ]
+}
