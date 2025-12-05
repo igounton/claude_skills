@@ -12,21 +12,31 @@ Options that apply to specific programming languages.
 
 Specify the language for formatting.
 
-**Type:** `LanguageKind`
-**Values:**
-- `Cpp` - C/C++/Objective-C
+**Type:** `LanguageKind` **Values:**
+
+- `None` - Do not use
+- `C` - C
+- `Cpp` - C++
 - `CSharp` - C#
 - `Java` - Java
 - `JavaScript` - JavaScript
 - `Json` - JSON
+- `ObjC` - Objective-C, Objective-C++
 - `Proto` - Protocol Buffers
 - `TableGen` - LLVM TableGen
 - `TextProto` - Text format Protocol Buffers
 - `Verilog` - Verilog/SystemVerilog
 
+**Note:** For `.h` files, specify the language explicitly with a comment:
+
+```cpp
+// clang-format Language: Cpp
+```
+
 **Usage:**
 
 In `.clang-format`:
+
 ```yaml
 ---
 Language: Cpp
@@ -43,8 +53,8 @@ Language: JavaScript
 
 Quote style for JavaScript strings.
 
-**Type:** `JavaScriptQuoteStyle`
-**Values:**
+**Type:** `JavaScriptQuoteStyle` **Values:**
+
 - `Leave` - Keep existing quotes
 - `Single` - Use single quotes
 - `Double` - Use double quotes
@@ -52,12 +62,14 @@ Quote style for JavaScript strings.
 **Example:**
 
 `Single`:
+
 ```javascript
-import { a } from 'foo';
-let x = 'hello';
+import { a } from "foo";
+let x = "hello";
 ```
 
 `Double`:
+
 ```javascript
 import { a } from "foo";
 let x = "hello";
@@ -72,42 +84,37 @@ Wrap ES6 import/export statements.
 **Example:**
 
 `true`:
+
 ```javascript
-import {
-  VeryLongImportsAreAnnoying,
-  VeryLongImportsAreAnnoying,
-  VeryLongImportsAreAnnoying,
-} from 'some/module.js'
+import { VeryLongImportsAreAnnoying, VeryLongImportsAreAnnoying, VeryLongImportsAreAnnoying } from "some/module.js";
 ```
 
 `false`:
+
 ```javascript
-import {VeryLongImportsAreAnnoying, VeryLongImportsAreAnnoying, VeryLongImportsAreAnnoying,} from "some/module.js"
+import { VeryLongImportsAreAnnoying, VeryLongImportsAreAnnoying, VeryLongImportsAreAnnoying } from "some/module.js";
 ```
 
 ### BreakArrays
 
-Break after array assignments (JavaScript/JSON).
+Break after JSON array opening bracket `[`.
 
 **Type:** `Boolean`
+
+**Note:** This is currently only for formatting JSON. When `true`, clang-format will always break after a JSON array `[`. When `false`, it will scan until the closing `]` to determine if it should add newlines between elements (prettier compatible).
 
 **Example:**
 
 `true`:
-```javascript
-const x =
-    [
-      1,
-      2
-    ];
+
+```json
+[1, 2, 3, 4]
 ```
 
 `false`:
-```javascript
-const x = [
-  1,
-  2
-];
+
+```json
+[1, 2, 3, 4]
 ```
 
 ## Java
@@ -128,6 +135,7 @@ JavaImportGroups:
 ```
 
 **Result:**
+
 ```java
 import com.mycompany.Foo;
 import com.mycompany.Bar;
@@ -146,23 +154,50 @@ Break after field annotations in Java.
 **Example:**
 
 `true`:
+
 ```java
 @Annotation
 private int myField;
 ```
 
 `false`:
+
 ```java
 @Annotation private int myField;
 ```
 
-## C#
+### SortJavaStaticImport
 
-### BreakAfterQtProperty
+Control placement of static imports relative to non-static imports.
 
-Break before Qt property declarations (also affects C# properties).
+**Type:** `SortJavaStaticImportOptions` **Values:**
 
-**Type:** `Boolean`
+- `Before` - Static imports are placed before non-static imports (default)
+- `After` - Static imports are placed after non-static imports
+
+**Example:**
+
+`Before`:
+
+```java
+import static org.example.function1;
+
+import org.example.ClassA;
+```
+
+`After`:
+
+```java
+import org.example.ClassA;
+
+import static org.example.function1;
+```
+
+**Note:** This option works in conjunction with `JavaImportGroups` to control Java import organization.
+
+## C
+
+C# uses the `CSharp` language setting and shares most options with other C-family languages.
 
 ## Protocol Buffers
 
@@ -195,13 +230,14 @@ TableGen has specific alignment options (see [Alignment](01-alignment.md)):
 
 Pack Objective-C protocol list.
 
-**Type:** `BinPackStyle`
-**Values:**
+**Type:** `BinPackStyle` **Values:**
+
 - `Auto`, `Always`, `Never`
 
 **Example:**
 
 `Never`:
+
 ```objc
 @interface ccccccccccccc () <
   ccccccccccccc,
@@ -211,6 +247,7 @@ Pack Objective-C protocol list.
 ```
 
 `Always`:
+
 ```objc
 @interface ccccccccccccc () <ccccccccccccc, ccccccccccccc, ccccccccccccc, ccccccccccccc>
 ```
@@ -227,6 +264,40 @@ Break before nested block parameters.
 
 **Type:** `Boolean`
 
+### ObjCPropertyAttributeOrder
+
+Order of Objective-C property attributes.
+
+**Type:** `List of Strings`
+
+**Example:**
+
+```yaml
+ObjCPropertyAttributeOrder:
+  [
+    class,
+    direct,
+    atomic,
+    nonatomic,
+    assign,
+    retain,
+    strong,
+    copy,
+    weak,
+    unsafe_unretained,
+    readonly,
+    readwrite,
+    getter,
+    setter,
+    nullable,
+    nonnull,
+    null_resettable,
+    null_unspecified,
+  ]
+```
+
+**Warning:** Using this option could lead to incorrect code formatting due to clang-format's lack of complete semantic information. Extra care should be taken to review code changes.
+
 ### ObjCSpaceAfterProperty
 
 Add space after @property.
@@ -236,11 +307,13 @@ Add space after @property.
 **Example:**
 
 `true`:
+
 ```objc
 @property (readonly) int a;
 ```
 
 `false`:
+
 ```objc
 @property(readonly) int a;
 ```
@@ -254,11 +327,13 @@ Add space before protocol list.
 **Example:**
 
 `true`:
+
 ```objc
 Foo <Protocol> *foo;
 ```
 
 `false`:
+
 ```objc
 Foo<Protocol> *foo;
 ```
@@ -309,16 +384,19 @@ JavaImportGroups:
 
 clang-format detects language from file extension:
 
+- `.c` → C
 - `.cpp`, `.cc`, `.cxx`, `.h`, `.hpp` → Cpp
 - `.cs` → CSharp
 - `.java` → Java
 - `.js`, `.mjs`, `.ts` → JavaScript
 - `.json`, `.ipynb` → Json
-- `.m`, `.mm` → Objective-C (Cpp)
+- `.m`, `.mm` → ObjC
 - `.proto` → Proto
 - `.td` → TableGen
 - `.txtpb`, `.textproto` → TextProto
 - `.sv`, `.v`, `.vh` → Verilog
+
+**Note:** For `.h` files that could be C, C++, or Objective-C, add a language comment at the top of the file to ensure correct detection.
 
 Override with `--assume-filename`:
 
@@ -395,7 +473,7 @@ IndentWidth: 2
 - [Include Organization](06-includes.md) - Organize imports/includes
 - [Comments & Misc](08-comments.md) - Comment formatting
 - [CLI Usage](cli-usage.md) - Language detection and override
-- [Full Style Options Reference](reference/clang-format-style-options.md)
+- [Full Style Options Reference](complete/clang-format-style-options.md)
 
 ---
 

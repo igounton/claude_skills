@@ -6,34 +6,84 @@
 
 Organize and sort include directives automatically.
 
+## Migration Note
+
+**Important:** In Clang v22, `SortIncludes` has changed from a simple enum to a nested configuration structure:
+
+- Old syntax (deprecated): `SortIncludes: Never|CaseSensitive|CaseInsensitive`
+- New syntax:
+  ```yaml
+  SortIncludes:
+    Enabled: true/false
+    IgnoreCase: true/false
+    IgnoreExtension: true/false
+  ```
+
+**Migration Guide:**
+
+- `SortIncludes: Never` → `SortIncludes: { Enabled: false }`
+- `SortIncludes: CaseSensitive` → `SortIncludes: { Enabled: true, IgnoreCase: false }`
+- `SortIncludes: CaseInsensitive` → `SortIncludes: { Enabled: true, IgnoreCase: true }`
+
+The old values are deprecated but still supported for backward compatibility.
+
 ## Enable Include Sorting
 
 ### SortIncludes
 
-Enable sorting of include directives.
+Controls if and how clang-format will sort `#includes`.
 
-**Type:** `SortIncludesOptions`
-**Values:**
-- `Never` - Don't sort includes
-- `CaseSensitive` - Sort includes case-sensitively
-- `CaseInsensitive` - Sort includes case-insensitively
+**Type:** `SortIncludesOptions` (nested configuration) **Suboptions:**
+
+- `Enabled` (bool) - If `true`, includes are sorted based on other suboptions. Replaces deprecated `Never` value (use `Enabled: false` instead).
+- `IgnoreCase` (bool) - Whether includes are sorted case-insensitively. Replaces deprecated `CaseSensitive` and `CaseInsensitive` values (use `IgnoreCase: false` and `IgnoreCase: true` respectively).
+- `IgnoreExtension` (bool) - When sorting includes in each block, only take file extensions into account if two includes compare equal otherwise.
 
 **Example:**
 
-`CaseSensitive`:
+`IgnoreCase: false` (replaces `CaseSensitive`):
+
 ```cpp
-#include "A.h"
-#include "B.h"
-#include "a.h"
-#include "b.h"
+#include "A/B.h"
+#include "A/b.h"
+#include "B/A.h"
+#include "B/a.h"
+#include "a/b.h"
 ```
 
-`CaseInsensitive`:
+`IgnoreCase: true` (replaces `CaseInsensitive`):
+
 ```cpp
-#include "A.h"
-#include "a.h"
-#include "B.h"
-#include "b.h"
+#include "A/B.h"
+#include "A/b.h"
+#include "a/b.h"
+#include "B/A.h"
+#include "B/a.h"
+```
+
+`IgnoreExtension: true`:
+
+```cpp
+# include "A.h"
+# include "A.inc"
+# include "A-util.h"
+```
+
+`IgnoreExtension: false`:
+
+```cpp
+# include "A-util.h"
+# include "A.h"
+# include "A.inc"
+```
+
+**Configuration:**
+
+```yaml
+SortIncludes:
+  Enabled: true
+  IgnoreCase: false
+  IgnoreExtension: false
 ```
 
 ## Include Blocks
@@ -42,8 +92,8 @@ Enable sorting of include directives.
 
 How to organize include blocks.
 
-**Type:** `IncludeBlocksStyle`
-**Values:**
+**Type:** `IncludeBlocksStyle` **Values:**
+
 - `Preserve` - Keep existing blocks
 - `Merge` - Merge all includes into one block
 - `Regroup` - Separate into blocks by category
@@ -51,6 +101,7 @@ How to organize include blocks.
 **Examples:**
 
 `Preserve`:
+
 ```cpp
 #include "b.h"
 
@@ -59,6 +110,7 @@ How to organize include blocks.
 ```
 
 `Merge`:
+
 ```cpp
 #include "a.h"
 #include "b.h"
@@ -66,6 +118,7 @@ How to organize include blocks.
 ```
 
 `Regroup`:
+
 ```cpp
 #include "a.h"
 #include "b.h"
@@ -82,17 +135,19 @@ Define categories for organizing includes.
 **Type:** `List of IncludeCategories`
 
 **Structure:**
+
 ```yaml
 IncludeCategories:
-  - Regex: '<[[:alnum:]]+>'
+  - Regex: "<[[:alnum:]]+>"
     Priority: 1
-  - Regex: '<.*>'
+  - Regex: "<.*>"
     Priority: 2
-  - Regex: '.*'
+  - Regex: ".*"
     Priority: 3
 ```
 
 **Fields:**
+
 - `Regex` - Regular expression to match include path
 - `Priority` - Sort priority (lower numbers first)
 - `SortPriority` - Optional separate sort priority
@@ -116,12 +171,13 @@ IncludeCategories:
     Priority: 3
     SortPriority: 3
   # C++ standard library
-  - Regex: '^<.*>$'
+  - Regex: "^<.*>$"
     Priority: 4
     SortPriority: 4
 ```
 
 **Result:**
+
 ```cpp
 #include "myclass.h"
 
@@ -141,20 +197,20 @@ IncludeCategories:
 
 Regex to identify main include file.
 
-**Type:** `String`
-**Default:** `([-_](test|unittest))?$`
+**Type:** `String` **Default:** `([-_](test|unittest))?$`
 
 Used to ensure the main header for a .cpp file sorts first.
 
 **Example:**
 
 For `foo.cpp`, these would be detected as main includes:
+
 - `foo.h`
 - `foo_test.h`
 - `foo-unittest.h`
 
 ```yaml
-IncludeIsMainRegex: '([-_](test|unittest))?$'
+IncludeIsMainRegex: "([-_](test|unittest))?$"
 ```
 
 ### IncludeIsMainSourceRegex
@@ -166,7 +222,7 @@ Additional regex for detecting source files.
 **Example:**
 
 ```yaml
-IncludeIsMainSourceRegex: '(_test)?$'
+IncludeIsMainSourceRegex: "(_test)?$"
 ```
 
 This helps clang-format recognize test files as valid source files.
@@ -176,7 +232,9 @@ This helps clang-format recognize test files as valid source files.
 ### C++ with Standard Library Priority
 
 ```yaml
-SortIncludes: CaseSensitive
+SortIncludes:
+  Enabled: true
+  IgnoreCase: false
 IncludeBlocks: Regroup
 IncludeCategories:
   - Regex: '^".*\.h"'
@@ -185,12 +243,13 @@ IncludeCategories:
     Priority: 2
   - Regex: '^<.*\.h>'
     Priority: 3
-  - Regex: '^<.*'
+  - Regex: "^<.*"
     Priority: 4
-IncludeIsMainRegex: '([-_](test|unittest))?$'
+IncludeIsMainRegex: "([-_](test|unittest))?$"
 ```
 
 **Result:**
+
 ```cpp
 // main.cpp
 #include "main.h"
@@ -206,7 +265,9 @@ IncludeIsMainRegex: '([-_](test|unittest))?$'
 ### Google C++ Style
 
 ```yaml
-SortIncludes: CaseSensitive
+SortIncludes:
+  Enabled: true
+  IgnoreCase: false
 IncludeBlocks: Regroup
 IncludeCategories:
   - Regex: '^<ext/.*\.h>'
@@ -215,19 +276,21 @@ IncludeCategories:
   - Regex: '^<.*\.h>'
     Priority: 1
     SortPriority: 1
-  - Regex: '^<.*'
+  - Regex: "^<.*"
     Priority: 2
     SortPriority: 2
-  - Regex: '.*'
+  - Regex: ".*"
     Priority: 3
     SortPriority: 3
-IncludeIsMainRegex: '([-_](test|unittest))?$'
+IncludeIsMainRegex: "([-_](test|unittest))?$"
 ```
 
 ### LLVM Style
 
 ```yaml
-SortIncludes: CaseSensitive
+SortIncludes:
+  Enabled: true
+  IgnoreCase: false
 IncludeBlocks: Regroup
 IncludeCategories:
   - Regex: '^"(llvm|llvm-c|clang|clang-c)/'
@@ -235,32 +298,36 @@ IncludeCategories:
     SortPriority: 0
   - Regex: '^(<|"(gtest|gmock|isl|json)/)'
     Priority: 3
-  - Regex: '.*'
+  - Regex: ".*"
     Priority: 1
-IncludeIsMainRegex: '(Test)?$'
-IncludeIsMainSourceRegex: ''
+IncludeIsMainRegex: "(Test)?$"
+IncludeIsMainSourceRegex: ""
 ```
 
 ### Mozilla Style
 
 ```yaml
-SortIncludes: CaseInsensitive
+SortIncludes:
+  Enabled: true
+  IgnoreCase: true
 IncludeBlocks: Regroup
 IncludeCategories:
   - Regex: '^".*\.h"'
     Priority: 1
   - Regex: '^<.*\.h>'
     Priority: 2
-  - Regex: '^<.*'
+  - Regex: "^<.*"
     Priority: 3
-  - Regex: '.*'
+  - Regex: ".*"
     Priority: 4
 ```
 
 ### Simple Three-Tier
 
 ```yaml
-SortIncludes: CaseSensitive
+SortIncludes:
+  Enabled: true
+  IgnoreCase: false
 IncludeBlocks: Regroup
 IncludeCategories:
   # Local headers
@@ -270,11 +337,12 @@ IncludeCategories:
   - Regex: '^<.*\.h>'
     Priority: 2
   # C++ standard library
-  - Regex: '^<'
+  - Regex: "^<"
     Priority: 3
 ```
 
 **Result:**
+
 ```cpp
 #include "local.h"
 
@@ -309,15 +377,18 @@ To disable include sorting for specific sections:
 Or globally:
 
 ```yaml
-SortIncludes: Never
+SortIncludes:
+  Enabled: false
 ```
+
+Note: `SortIncludes: Never` is deprecated, use `Enabled: false` instead.
 
 ## See Also
 
 - [CLI Usage](cli-usage.md) - Command-line options including `--sort-includes`
 - [Comments & Misc](08-comments.md) - Comment-related options
 - [Languages](07-languages.md) - Language-specific settings
-- [Full Style Options Reference](reference/clang-format-style-options.md)
+- [Full Style Options Reference](complete/clang-format-style-options.md)
 
 ---
 

@@ -4,11 +4,13 @@ A comprehensive skill for configuring clang-format to format C/C++/Java/JavaScri
 
 ## Navigation
 
-**Quick Access:**
+### Quick Access
+
 - [CLI Usage](cli-usage.md) - Command-line tools, flags, and integrations
 - [Quick Reference](quick-reference.md) - Common patterns and complete examples
 
-**Style Options by Category:**
+### Style Options by Category
+
 1. [Alignment Options](01-alignment.md) - Align code elements consistently
 2. [Breaking & Line Wrapping](02-breaking.md) - Control line breaks and wrapping
 3. [Brace Styles](03-braces.md) - Configure brace placement and wrapping
@@ -19,15 +21,17 @@ A comprehensive skill for configuring clang-format to format C/C++/Java/JavaScri
 8. [Comments & Misc](08-comments.md) - Comment formatting and other options
 9. [Advanced Options](09-advanced.md) - Experimental and advanced features
 
-**Complete Reference Documentation:**
-- [Full CLI Reference](reference/clang-format-cli.md) - Complete command-line documentation
-- [Full Style Options](reference/clang-format-style-options.md) - Complete style configuration reference
+### Complete Reference Documentation
+
+- [Full CLI Reference](complete/clang-format-cli.md) - Complete command-line documentation
+- [Full Style Options](complete/clang-format-style-options.md) - Complete style configuration reference
 
 ## What is clang-format?
 
 clang-format is a tool that automatically formats source code according to configurable style rules. It ensures consistent code formatting across your project and team.
 
 **Supported Languages:**
+
 - C/C++
 - Java
 - JavaScript/TypeScript
@@ -49,6 +53,7 @@ clang-format -style=llvm -dump-config > .clang-format
 ```
 
 **Available Base Styles:**
+
 - `LLVM` - LLVM coding conventions
 - `Google` - Google C++ Style Guide
 - `GNU` - GNU coding style
@@ -118,7 +123,6 @@ PointerAlignment: Left
 
 # Include sorting
 SortIncludes: true
-...
 ```
 
 ## Common Workflows
@@ -147,7 +151,7 @@ clang-format --dry-run --Werror src/*.cpp include/*.h
 
 Create `.clang-format-ignore`:
 
-```
+```text
 # Ignore third-party code
 third_party/**
 external/**
@@ -183,6 +187,7 @@ Options are organized by category:
 ## Example Configurations
 
 See [Quick Reference](quick-reference.md) for complete configuration examples:
+
 - Google C++ style customized
 - Linux kernel style
 - Corporate/Microsoft style
@@ -210,14 +215,17 @@ This skill is organized into:
 ## Troubleshooting
 
 **Configuration not found?**
+
 - clang-format searches for `.clang-format` or `_clang-format` from the source file's directory upward
 - Use `-style=file:/path/to/.clang-format` to specify explicitly
 
 **Unknown options warning?**
+
 - Use `--Wno-error=unknown` to allow formatting with unknown (newer) options
 - This happens when your config has options not supported by your clang-format version
 
 **Want to check effective config?**
+
 ```bash
 clang-format -dump-config file.cpp
 ```

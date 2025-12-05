@@ -19,6 +19,7 @@ The main option controlling brace style.
 ### Predefined Styles
 
 #### Attach (K&R style)
+
 ```cpp
 namespace N {
 class C {
@@ -32,6 +33,7 @@ class C {
 ```
 
 #### Linux
+
 ```cpp
 namespace N
 {
@@ -48,6 +50,7 @@ class C
 ```
 
 #### Mozilla
+
 ```cpp
 namespace N {
 class C
@@ -63,6 +66,7 @@ class C
 ```
 
 #### Stroustrup
+
 ```cpp
 namespace N {
 class C {
@@ -78,6 +82,7 @@ class C {
 ```
 
 #### Allman
+
 ```cpp
 namespace N
 {
@@ -97,6 +102,7 @@ class C
 ```
 
 #### Whitesmiths
+
 ```cpp
 namespace N
   {
@@ -116,6 +122,7 @@ class C
 ```
 
 #### GNU
+
 ```cpp
 namespace N
 {
@@ -135,6 +142,7 @@ class C
 ```
 
 #### WebKit
+
 ```cpp
 namespace N {
 class C {
@@ -177,6 +185,7 @@ Wrap case labels.
 **Example:**
 
 `true`:
+
 ```cpp
 switch (foo)
 {
@@ -193,6 +202,7 @@ switch (foo)
 ```
 
 `false`:
+
 ```cpp
 switch (foo) {
   case 1: {
@@ -214,12 +224,14 @@ Wrap class definitions.
 **Example:**
 
 `true`:
+
 ```cpp
 class foo
 {};
 ```
 
 `false`:
+
 ```cpp
 class foo {};
 ```
@@ -228,8 +240,8 @@ class foo {};
 
 Wrap control statements (if/for/while/switch).
 
-**Type:** `BraceWrappingAfterControlStatementStyle`
-**Values:**
+**Type:** `BraceWrappingAfterControlStatementStyle` **Values:**
+
 - `Never` - Never wrap
 - `MultiLine` - Wrap if multi-line
 - `Always` - Always wrap
@@ -237,6 +249,7 @@ Wrap control statements (if/for/while/switch).
 **Examples:**
 
 `Never`:
+
 ```cpp
 if (foo) {
 } else {
@@ -246,6 +259,7 @@ for (int i = 0; i < 10; ++i) {
 ```
 
 `MultiLine`:
+
 ```cpp
 if (foo) {
 } else {
@@ -256,6 +270,7 @@ for (int i = 0; i < 10; ++i)
 ```
 
 `Always`:
+
 ```cpp
 if (foo)
 {
@@ -277,6 +292,7 @@ Wrap enum definitions.
 **Example:**
 
 `true`:
+
 ```cpp
 enum X : int
 {
@@ -285,6 +301,7 @@ enum X : int
 ```
 
 `false`:
+
 ```cpp
 enum X : int { B };
 ```
@@ -298,6 +315,7 @@ Wrap function definitions.
 **Example:**
 
 `true`:
+
 ```cpp
 void foo()
 {
@@ -306,6 +324,7 @@ void foo()
 ```
 
 `false`:
+
 ```cpp
 void foo() {
   bar();
@@ -321,6 +340,7 @@ Wrap namespace definitions.
 **Example:**
 
 `true`:
+
 ```cpp
 namespace
 {
@@ -329,6 +349,7 @@ int foo();
 ```
 
 `false`:
+
 ```cpp
 namespace {
 int foo();
@@ -344,6 +365,7 @@ Wrap struct definitions.
 **Example:**
 
 `true`:
+
 ```cpp
 struct foo
 {
@@ -352,6 +374,7 @@ struct foo
 ```
 
 `false`:
+
 ```cpp
 struct foo {
   int x;
@@ -375,6 +398,7 @@ Wrap extern blocks.
 **Example:**
 
 `true`:
+
 ```cpp
 extern "C"
 {
@@ -383,11 +407,20 @@ extern "C"
 ```
 
 `false`:
+
 ```cpp
 extern "C" {
   int foo();
 }
 ```
+
+#### AfterObjCDeclaration
+
+Wrap ObjC definitions (interfaces, implementations...).
+
+**Type:** `Boolean`
+
+**Note:** `@autoreleasepool` and `@synchronized` blocks are wrapped according to `AfterControlStatement` flag.
 
 #### BeforeCatch
 
@@ -398,6 +431,7 @@ Wrap before catch.
 **Example:**
 
 `true`:
+
 ```cpp
 try {
   foo();
@@ -407,6 +441,7 @@ catch () {
 ```
 
 `false`:
+
 ```cpp
 try {
   foo();
@@ -423,6 +458,7 @@ Wrap before else.
 **Example:**
 
 `true`:
+
 ```cpp
 if (foo()) {
 }
@@ -431,6 +467,7 @@ else {
 ```
 
 `false`:
+
 ```cpp
 if (foo()) {
 } else {
@@ -446,6 +483,7 @@ Wrap before lambda body.
 **Example:**
 
 `true`:
+
 ```cpp
 connect(
   []()
@@ -456,6 +494,7 @@ connect(
 ```
 
 `false`:
+
 ```cpp
 connect(
   []() {
@@ -473,6 +512,7 @@ Wrap before while in do-while.
 **Example:**
 
 `true`:
+
 ```cpp
 do {
   foo();
@@ -481,6 +521,7 @@ while (1);
 ```
 
 `false`:
+
 ```cpp
 do {
   foo();
@@ -496,6 +537,7 @@ Indent wrapped braces themselves.
 **Example:**
 
 `true`:
+
 ```cpp
 void foo()
   {
@@ -506,6 +548,7 @@ void foo()
 ```
 
 `false`:
+
 ```cpp
 void foo()
 {
@@ -524,6 +567,7 @@ Split empty functions.
 **Example:**
 
 `true`:
+
 ```cpp
 int f()
 {
@@ -531,6 +575,7 @@ int f()
 ```
 
 `false`:
+
 ```cpp
 int f() {}
 ```
@@ -544,6 +589,7 @@ Split empty classes/structs.
 **Example:**
 
 `true`:
+
 ```cpp
 class Foo
 {
@@ -551,6 +597,7 @@ class Foo
 ```
 
 `false`:
+
 ```cpp
 class Foo {}
 ```
@@ -569,44 +616,173 @@ Similar to `SplitEmptyRecord`.
 
 Indent width for braced initializers.
 
-**Type:** `Integer`
-**Default:** Uses `IndentWidth`
+**Type:** `Integer` **Default:** If unset or negative, `ContinuationIndentWidth` is used
 
 **Example:**
 
-`BracedInitializerIndentWidth: 2`, `IndentWidth: 4`:
+`BracedInitializerIndentWidth: 2`:
+
 ```cpp
 void f() {
-    SomeType object{
-      "property1",
-      "property2"
-    };
+  SomeClass c{
+    "foo",
+    "bar",
+    "baz",
+  };
+  auto s = SomeStruct{
+    .foo = "foo",
+    .bar = "bar",
+    .baz = "baz",
+  };
+  SomeArrayT a[3] = {
+    {
+      foo,
+      bar,
+    },
+    {
+      foo,
+      bar,
+    },
+    SomeArrayT{},
+  };
 }
 ```
 
 ### InsertBraces
 
-Automatically insert optional braces.
+Automatically insert optional braces after control statements.
 
-**Type:** `Boolean`
-**Default:** `false`
+**Type:** `Boolean` **Default:** `false`
 
 **Example:**
 
 `true`:
+
 ```cpp
-if (x) {
-  f();
+if (isa<FunctionDecl>(D)) {
+  handleFunctionDecl(D);
+} else if (isa<VarDecl>(D)) {
+  handleVarDecl(D);
+} else {
+  return;
+}
+
+while (i--) {
+  for (auto *A : D.attrs()) {
+    handleAttr(A);
+  }
+}
+
+do {
+  --i;
+} while (i);
+```
+
+`false`:
+
+```cpp
+if (isa<FunctionDecl>(D))
+  handleFunctionDecl(D);
+else if (isa<VarDecl>(D))
+  handleVarDecl(D);
+else
+  return;
+
+while (i--)
+  for (auto *A : D.attrs())
+    handleAttr(A);
+
+do
+  --i;
+while (i);
+```
+
+**Warning:** Insert braces after control statements (`if`, `else`, `for`, `do`, and `while`) in C++ unless the control statements are inside macro definitions or the braces would enclose preprocessor directives. Setting this option to `true` could lead to incorrect code formatting due to clang-format's lack of complete semantic information. As such, extra care should be taken to review code changes made by this option.
+
+### RemoveBracesLLVM
+
+Remove optional braces of control statements according to the LLVM coding style.
+
+**Type:** `Boolean` **Default:** `false`
+
+**Example:**
+
+`true`:
+
+```cpp
+if (isa<FunctionDecl>(D))
+  handleFunctionDecl(D);
+else if (isa<VarDecl>(D))
+  handleVarDecl(D);
+
+if (isa<VarDecl>(D)) {
+  for (auto *A : D.attrs())
+    if (shouldProcessAttr(A))
+      handleAttr(A);
+}
+
+if (isa<FunctionDecl>(D))
+  for (auto *A : D.attrs())
+    handleAttr(A);
+
+if (auto *D = (T)(D)) {
+  if (shouldProcess(D))
+    handleVarDecl(D);
+  else
+    markAsIgnored(D);
+}
+
+if (a)
+  b();
+else if (c)
+  d();
+else
+  e();
+```
+
+`false`:
+
+```cpp
+if (isa<FunctionDecl>(D)) {
+  handleFunctionDecl(D);
+} else if (isa<VarDecl>(D)) {
+  handleVarDecl(D);
+}
+
+if (isa<VarDecl>(D)) {
+  for (auto *A : D.attrs()) {
+    if (shouldProcessAttr(A)) {
+      handleAttr(A);
+    }
+  }
+}
+
+if (isa<FunctionDecl>(D)) {
+  for (auto *A : D.attrs()) {
+    handleAttr(A);
+  }
+}
+
+if (auto *D = (T)(D)) {
+  if (shouldProcess(D)) {
+    handleVarDecl(D);
+  } else {
+    markAsIgnored(D);
+  }
+}
+
+if (a) {
+  b();
+} else {
+  if (c) {
+    d();
+  } else {
+    e();
+  }
 }
 ```
 
-`false` (optional braces omitted):
-```cpp
-if (x)
-  f();
-```
-
-**Note:** Only adds braces to single-statement blocks. Use with caution as it changes code semantics in some edge cases.
+**Warning:** Remove optional braces of control statements (`if`, `else`, `for`, and `while`) in C++ according to the LLVM coding style. This option will be renamed and expanded to support other styles. Setting this option to `true` could lead to incorrect code formatting due to clang-format's lack of complete semantic information. As such, extra care should be taken to review code changes made by this option.
 
 ## Common Brace Styles
 
@@ -719,6 +895,7 @@ BraceWrapping:
   AfterEnum: true
   AfterFunction: true
   AfterNamespace: true
+  AfterObjCDeclaration: true
   AfterStruct: true
   AfterUnion: true
   AfterExternBlock: true
@@ -745,7 +922,7 @@ BraceWrapping:
 - [Breaking & Line Wrapping](02-breaking.md) - Control line breaks
 - [Indentation](04-indentation.md) - Control indentation within braces
 - [Quick Reference](quick-reference.md) - Complete configuration examples
-- [Full Style Options Reference](reference/clang-format-style-options.md)
+- [Full Style Options Reference](complete/clang-format-style-options.md)
 
 ---
 

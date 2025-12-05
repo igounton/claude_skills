@@ -12,9 +12,9 @@ Fine-tune whitespace placement throughout your code.
 
 Add space before opening parentheses.
 
-**Type:** `SpaceBeforeParensStyle`
-**Values:**
-- `Never` - Never add space
+**Type:** `SpaceBeforeParensStyle` **Values:**
+
+- `Never` - **Deprecated.** Use `Custom` with all `SpaceBeforeParensOptions` except `AfterPlacementOperator` set to `false`
 - `ControlStatements` - Only before control statement parens
 - `ControlStatementsExceptControlMacros` - Control statements except macros
 - `NonEmptyParentheses` - Only if parentheses aren't empty
@@ -24,6 +24,7 @@ Add space before opening parentheses.
 **Examples:**
 
 `Never`:
+
 ```cpp
 void f() {
   if(true) {
@@ -33,6 +34,7 @@ void f() {
 ```
 
 `ControlStatements`:
+
 ```cpp
 void f() {
   if (true) {
@@ -42,6 +44,7 @@ void f() {
 ```
 
 `Always`:
+
 ```cpp
 void f () {
   if (true) {
@@ -55,17 +58,63 @@ void f () {
 Fine-grained control when `SpaceBeforeParens: Custom`.
 
 **Sub-options:**
-- `AfterControlStatements` (bool)
-- `AfterForeachMacros` (bool)
-- `AfterFunctionDeclarationName` (bool)
-- `AfterFunctionDefinitionName` (bool)
-- `AfterIfMacros` (bool)
-- `AfterOverloadedOperator` (bool)
-- `AfterRequiresInClause` (bool)
-- `AfterRequiresInExpression` (bool)
-- `BeforeNonEmptyParentheses` (bool)
+
+- `AfterControlStatements` (bool) - Space between control statement keywords and opening parentheses
+- `AfterForeachMacros` (bool) - Space between foreach macros and opening parentheses
+- `AfterFunctionDeclarationName` (bool) - Space between function declaration name and opening parentheses
+- `AfterFunctionDefinitionName` (bool) - Space between function definition name and opening parentheses
+- `AfterIfMacros` (bool) - Space between if macros and opening parentheses
+- `AfterOverloadedOperator` (bool) - Space between operator overloading and opening parentheses
+- `AfterPlacementOperator` (bool) - Space between operator `new`/`delete` and opening parentheses
+- `AfterRequiresInClause` (bool) - Space between requires keyword in requires clause and opening parentheses
+- `AfterRequiresInExpression` (bool) - Space between requires keyword in requires expression and opening parentheses
+- `BeforeNonEmptyParentheses` (bool) - Space before opening parentheses only if not empty
+
+### SpacesInParens
+
+Defines in which cases spaces will be inserted after `(` and before `)`.
+
+**Type:** `SpacesInParensStyle` **Values:**
+
+- `Never` - Never put a space in parentheses
+- `Custom` - Use `SpacesInParensOptions`
+
+**Example:**
+
+`Never`:
+
+```cpp
+void f() {
+  if(true) {
+    f();
+  }
+}
+```
+
+### SpacesInParensOptions
+
+Control of individual spaces in parentheses when `SpacesInParens: Custom`.
+
+**Sub-options:**
+
+- `ExceptDoubleParentheses` (bool) - Override other options to prevent space when both opening and closing use multiple parentheses
+- `InConditionalStatements` (bool) - Space in parentheses inside conditional statements
+- `InCStyleCasts` (bool) - Space in C style casts
+- `InEmptyParentheses` (bool) - Space in empty parentheses, i.e. `()`
+- `Other` (bool) - Space in parentheses not covered by preceding options
+
+**Example:**
+
+```yaml
+SpacesInParens: Custom
+SpacesInParensOptions:
+  InConditionalStatements: true
+  Other: true
+```
 
 ### SpacesInParentheses
+
+**Deprecated:** Use `SpacesInParens` with `Custom` and set all `SpacesInParensOptions` to `true` except `InCStyleCasts` and `InEmptyParentheses`.
 
 Add spaces inside parentheses.
 
@@ -74,14 +123,28 @@ Add spaces inside parentheses.
 **Example:**
 
 `true`:
+
 ```cpp
 t f( Deleted & ) & = delete;
 ```
 
 `false`:
+
 ```cpp
 t f(Deleted &) & = delete;
 ```
+
+### SpaceInEmptyParentheses
+
+**Deprecated:** Use `InEmptyParentheses` in `SpacesInParensOptions`.
+
+### SpacesInCStyleCastParentheses
+
+**Deprecated:** Use `InCStyleCasts` in `SpacesInParensOptions`.
+
+### SpacesInConditionalStatement
+
+**Deprecated:** Use `InConditionalStatements` in `SpacesInParensOptions`.
 
 ### SpacesInSquareBrackets
 
@@ -92,26 +155,55 @@ Add spaces inside square brackets.
 **Example:**
 
 `true`:
+
 ```cpp
 int a[ 5 ];
 ```
 
 `false`:
+
 ```cpp
 int a[5];
 ```
+
+### SpaceBeforeSquareBrackets
+
+Add spaces before `[`.
+
+**Type:** `Boolean`
+
+**Example:**
+
+`true`:
+
+```cpp
+int a [5];
+int a [5][5];
+```
+
+`false`:
+
+```cpp
+int a[5];
+int a[5][5];
+```
+
+**Note:** Lambdas will not be affected. Only the first `[` gets a space.
 
 ### SpacesInAngles
 
 Add spaces inside angle brackets.
 
-**Type:** `SpacesInAnglesStyle`
-**Values:**
-- `Never`, `Always`, `Leave`
+**Type:** `SpacesInAnglesStyle` **Values:**
+
+- `Never` - Remove spaces after `<` and before `>`
+- `Always` - Add spaces after `<` and before `>`
+- `Leave` - Keep a single space if any were present
 
 **Example:**
 
 `Always`:
+
 ```cpp
 static_cast< int >(arg);
 std::vector< int > vec;
@@ -123,18 +215,19 @@ std::vector< int > vec;
 
 Add space before assignment operators.
 
-**Type:** `Boolean`
-**Default:** `true`
+**Type:** `Boolean` **Default:** `true`
 
 **Example:**
 
 `true`:
+
 ```cpp
 int a = 5;
 a += 42;
 ```
 
 `false`:
+
 ```cpp
 int a= 5;
 a+= 42;
@@ -144,22 +237,25 @@ a+= 42;
 
 Add space before colon in range-based for loop.
 
-**Type:** `Boolean`
-**Default:** `true`
+**Type:** `Boolean` **Default:** `true`
 
 **Example:**
 
 `true`:
+
 ```cpp
 for (auto v : values) {}
 ```
 
 `false`:
+
 ```cpp
 for (auto v: values) {}
 ```
 
 ### SpaceInEmptyBlock
+
+**Deprecated:** Use `Block` in `SpaceInEmptyBraces`.
 
 Add space in empty blocks.
 
@@ -168,15 +264,58 @@ Add space in empty blocks.
 **Example:**
 
 `true`:
+
 ```cpp
 void f() { }
 while (true) { }
 ```
 
 `false`:
+
 ```cpp
 void f() {}
 while (true) {}
+```
+
+### SpaceInEmptyBraces
+
+Specifies when to insert a space in empty braces.
+
+**Type:** `SpaceInEmptyBracesStyle` **Values:**
+
+- `Always` - Always insert a space in empty braces
+- `Block` - Only insert a space in empty blocks
+- `Never` - Never insert a space in empty braces
+
+**Note:** This option doesn't apply to initializer braces if `Cpp11BracedListStyle` is not `Block`.
+
+**Examples:**
+
+`Always`:
+
+```cpp
+void f() { }
+class Unit { };
+auto a = [] { };
+int x{ };
+```
+
+`Block`:
+
+```cpp
+void f() { }
+class Unit { };
+auto a = [] { };
+int x{};
+```
+
+`Never`:
+
+```cpp
+void f() {}
+class Unit {};
+auto a = [] {};
+int x{};
 ```
 
 ## Casts and Templates
@@ -190,11 +329,13 @@ Add space after C-style cast.
 **Example:**
 
 `true`:
+
 ```cpp
 (int) i;
 ```
 
 `false`:
+
 ```cpp
 (int)i;
 ```
@@ -208,11 +349,13 @@ Add space after logical not operator (!).
 **Example:**
 
 `true`:
+
 ```cpp
 ! someExpression();
 ```
 
 `false`:
+
 ```cpp
 !someExpression();
 ```
@@ -221,17 +364,18 @@ Add space after logical not operator (!).
 
 Add space after template keyword.
 
-**Type:** `Boolean`
-**Default:** `true`
+**Type:** `Boolean` **Default:** `true`
 
 **Example:**
 
 `true`:
+
 ```cpp
 template <int> void foo();
 ```
 
 `false`:
+
 ```cpp
 template<int> void foo();
 ```
@@ -245,6 +389,7 @@ Add space before case colon.
 **Example:**
 
 `true`:
+
 ```cpp
 switch (x) {
   case 1 : break;
@@ -252,6 +397,7 @@ switch (x) {
 ```
 
 `false`:
+
 ```cpp
 switch (x) {
   case 1: break;
@@ -267,6 +413,7 @@ Add space before C++11 braced list.
 **Example:**
 
 `true`:
+
 ```cpp
 Foo foo { bar };
 Foo {};
@@ -275,6 +422,7 @@ new int[3] { 1, 2, 3 };
 ```
 
 `false`:
+
 ```cpp
 Foo foo{ bar };
 Foo{};
@@ -286,17 +434,18 @@ new int[3]{ 1, 2, 3 };
 
 Add space before constructor initializer colon.
 
-**Type:** `Boolean`
-**Default:** `true`
+**Type:** `Boolean` **Default:** `true`
 
 **Example:**
 
 `true`:
+
 ```cpp
 Foo::Foo() : a(a) {}
 ```
 
 `false`:
+
 ```cpp
 Foo::Foo(): a(a) {}
 ```
@@ -305,20 +454,47 @@ Foo::Foo(): a(a) {}
 
 Add space before inheritance colon.
 
-**Type:** `Boolean`
-**Default:** `true`
+**Type:** `Boolean` **Default:** `true`
 
 **Example:**
 
 `true`:
+
 ```cpp
 class Foo : Bar {}
 ```
 
 `false`:
+
 ```cpp
 class Foo: Bar {}
 ```
+
+### SpaceBeforeJsonColon
+
+Add space before JSON colon.
+
+**Type:** `Boolean`
+
+**Example:**
+
+`true`:
+
+```javascript
+{
+  "key" : "value"
+}
+```
+
+`false`:
+
+```javascript
+{
+  "key": "value"
+}
+```
+
+**Note:** For other languages like JavaScript, use `SpacesInContainerLiterals` instead.
 
 ## Containers and Comments
 
@@ -326,12 +502,12 @@ class Foo: Bar {}
 
 Number of spaces before trailing comments.
 
-**Type:** `Unsigned`
-**Default:** `1`
+**Type:** `Unsigned` **Default:** `1`
 
 **Example:**
 
 `2`:
+
 ```cpp
 void f() {
   if (true) {
@@ -349,29 +525,34 @@ Add spaces in container literals.
 **Example:**
 
 `true` (JavaScript/JSON):
+
 ```javascript
-var arr = [ 1, 2, 3 ];
-obj = { a : 1, b : 2, c : 3 };
+var arr = [1, 2, 3];
+obj = { a: 1, b: 2, c: 3 };
 ```
 
 `false`:
+
 ```javascript
 var arr = [1, 2, 3];
-obj = {a: 1, b: 2, c: 3};
+obj = { a: 1, b: 2, c: 3 };
 ```
+
+**Note:** For JSON, use `SpaceBeforeJsonColon` instead.
 
 ### SpacesInLineCommentPrefix
 
 Spaces in line comment prefix.
 
-**Type:** `SpacesInLineComment`
-**Sub-options:**
+**Type:** `SpacesInLineComment` **Sub-options:**
+
 - `Minimum` - Minimum spaces
-- `Maximum` - Maximum spaces
+- `Maximum` - Maximum spaces (use `-1` for no max)
 
 **Example:**
 
 `Minimum: 1, Maximum: -1` (no max):
+
 ```cpp
 //A comment
 // A comment
@@ -382,28 +563,32 @@ Spaces in line comment prefix.
 
 Configure spaces around pointer qualifiers.
 
-**Type:** `SpaceAroundPointerQualifiersStyle`
-**Values:**
+**Type:** `SpaceAroundPointerQualifiersStyle` **Values:**
+
 - `Default`, `Before`, `After`, `Both`
 
 **Examples:**
 
 `Default`:
+
 ```cpp
 void* const* x = NULL;
 ```
 
 `Before`:
+
 ```cpp
 void *const *x = NULL;
 ```
 
 `After`:
+
 ```cpp
 void* const* x = NULL;
 ```
 
 `Both`:
+
 ```cpp
 void * const * x = NULL;
 ```
@@ -414,8 +599,8 @@ void * const * x = NULL;
 
 Spacing around bit field colon.
 
-**Type:** `BitFieldColonSpacingStyle`
-**Values:**
+**Type:** `BitFieldColonSpacingStyle` **Values:**
+
 - `Both` - Add spaces on both sides
 - `None` - No spaces
 - `Before` - Space before only
@@ -424,21 +609,25 @@ Spacing around bit field colon.
 **Examples:**
 
 `Both`:
+
 ```cpp
 unsigned bf : 2;
 ```
 
 `None`:
+
 ```cpp
 unsigned bf:2;
 ```
 
 `Before`:
+
 ```cpp
 unsigned bf :2;
 ```
 
 `After`:
+
 ```cpp
 unsigned bf: 2;
 ```
@@ -449,12 +638,12 @@ unsigned bf: 2;
 
 Maximum consecutive empty lines to keep.
 
-**Type:** `Unsigned`
-**Default:** `1`
+**Type:** `Unsigned` **Default:** `1`
 
 **Example:**
 
 `1`:
+
 ```cpp
 int f() {
   int = 1;
@@ -464,6 +653,7 @@ int f() {
 ```
 
 `2`:
+
 ```cpp
 int f() {
   int i = 1;
@@ -473,16 +663,39 @@ int f() {
 }
 ```
 
+### KeepEmptyLines
+
+Which empty lines are kept.
+
+**Type:** `KeepEmptyLinesStyle` **Sub-options:**
+
+- `AtEndOfFile` (bool) - Keep empty lines at end of file
+- `AtStartOfBlock` (bool) - Keep empty lines at start of blocks
+- `AtStartOfFile` (bool) - Keep empty lines at start of file
+
+**Note:** `MaxEmptyLinesToKeep` determines how many consecutive empty lines are kept.
+
+**Example:**
+
+```yaml
+KeepEmptyLines:
+  AtEndOfFile: false
+  AtStartOfBlock: false
+  AtStartOfFile: false
+```
+
 ### KeepEmptyLinesAtTheStartOfBlocks
+
+**Deprecated:** Use `AtStartOfBlock` in `KeepEmptyLines`.
 
 Keep empty lines at start of blocks.
 
-**Type:** `Boolean`
-**Default:** `true`
+**Type:** `Boolean` **Default:** `true`
 
 **Example:**
 
 `false`:
+
 ```cpp
 void f() {
   foo();
@@ -490,6 +703,7 @@ void f() {
 ```
 
 `true`:
+
 ```cpp
 void f() {
 
@@ -498,6 +712,8 @@ void f() {
 ```
 
 ### KeepEmptyLinesAtEOF
+
+**Deprecated:** Use `AtEndOfFile` in `KeepEmptyLines`.
 
 Keep empty lines at end of file.
 
@@ -510,8 +726,8 @@ Keep empty lines at end of file.
 ```yaml
 SpaceBeforeParens: Never
 SpaceBeforeAssignmentOperators: true
-SpaceInEmptyBlock: false
-SpacesInParentheses: false
+SpaceInEmptyBraces: Never
+SpacesInParens: Never
 SpacesInSquareBrackets: false
 SpacesInAngles: Never
 SpaceAfterCStyleCast: false
@@ -525,8 +741,8 @@ MaxEmptyLinesToKeep: 1
 ```yaml
 SpaceBeforeParens: ControlStatements
 SpaceBeforeAssignmentOperators: true
-SpaceInEmptyBlock: false
-SpacesInParentheses: false
+SpaceInEmptyBraces: Never
+SpacesInParens: Never
 SpacesInSquareBrackets: false
 SpacesInAngles: Never
 SpaceAfterCStyleCast: false
@@ -535,7 +751,8 @@ SpaceAfterTemplateKeyword: true
 SpaceBeforeCpp11BracedList: false
 SpacesBeforeTrailingComments: 2
 MaxEmptyLinesToKeep: 1
-KeepEmptyLinesAtTheStartOfBlocks: false
+KeepEmptyLines:
+  AtStartOfBlock: false
 ```
 
 ### Generous Spacing (Readable)
@@ -543,8 +760,8 @@ KeepEmptyLinesAtTheStartOfBlocks: false
 ```yaml
 SpaceBeforeParens: ControlStatements
 SpaceBeforeAssignmentOperators: true
-SpaceInEmptyBlock: true
-SpacesInParentheses: false
+SpaceInEmptyBraces: Always
+SpacesInParens: Never
 SpacesInSquareBrackets: false
 SpacesInAngles: Never
 SpaceAfterCStyleCast: true
@@ -553,7 +770,8 @@ SpaceAfterTemplateKeyword: true
 SpaceBeforeCpp11BracedList: true
 SpacesBeforeTrailingComments: 2
 MaxEmptyLinesToKeep: 2
-KeepEmptyLinesAtTheStartOfBlocks: true
+KeepEmptyLines:
+  AtStartOfBlock: true
 ```
 
 ## Tips
@@ -564,13 +782,15 @@ KeepEmptyLinesAtTheStartOfBlocks: true
 4. **Trailing Comments**: Use at least 2 spaces before trailing comments for clarity
 5. **Empty Lines**: Limit `MaxEmptyLinesToKeep` to prevent excessive whitespace
 6. **Containers**: Enable `SpacesInContainerLiterals` for JSON/JavaScript readability
+7. **Deprecations**: Prefer newer options like `SpacesInParens` over deprecated `SpacesInParentheses`
+8. **Custom Control**: Use `Custom` settings with fine-grained options for precise control
 
 ## See Also
 
 - [Alignment](01-alignment.md) - Align code elements
 - [Indentation](04-indentation.md) - Control indentation
 - [Breaking](02-breaking.md) - Control line breaks
-- [Full Style Options Reference](reference/clang-format-style-options.md)
+- [Full Style Options Reference](complete/clang-format-style-options.md)
 
 ---
 

@@ -6,6 +6,8 @@
 
 Ready-to-use complete clang-format configurations for common scenarios.
 
+> **Note:** This reference is based on Clang v22 documentation. Some options may differ in earlier versions.
+
 ## How to Use
 
 Copy the desired configuration to your project's `.clang-format` file:
@@ -52,7 +54,7 @@ IncludeCategories:
     Priority: 2
   - Regex: '^<.*\.h>'
     Priority: 3
-  - Regex: '^<.*'
+  - Regex: "^<.*"
     Priority: 4
 
 # Braces
@@ -73,7 +75,6 @@ FixNamespaceComments: true
 # Empty lines
 MaxEmptyLinesToKeep: 1
 KeepEmptyLinesAtTheStartOfBlocks: false
-...
 ```
 
 ## Linux Kernel Style
@@ -129,7 +130,6 @@ MaxEmptyLinesToKeep: 1
 
 # Preprocessor
 IndentPPDirectives: None
-...
 ```
 
 ## Microsoft/Visual Studio Style
@@ -186,7 +186,6 @@ AlignTrailingComments: true
 
 # Empty lines
 MaxEmptyLinesToKeep: 1
-...
 ```
 
 ## Modern C++17/20 Style
@@ -234,9 +233,9 @@ IncludeBlocks: Regroup
 IncludeCategories:
   - Regex: '^<.*\.h>$'
     Priority: 1
-  - Regex: '^<.*>$'
+  - Regex: "^<.*>$"
     Priority: 2
-  - Regex: '.*'
+  - Regex: ".*"
     Priority: 3
 
 # Alignment
@@ -253,7 +252,6 @@ FixNamespaceComments: true
 # Empty lines
 MaxEmptyLinesToKeep: 1
 KeepEmptyLinesAtTheStartOfBlocks: false
-...
 ```
 
 ## Compact/Dense Style (Minimal Whitespace)
@@ -278,13 +276,13 @@ PointerAlignment: Left
 
 # Breaking
 BinPackArguments: true
-BinPackParameters: BinPackAll
+BinPackParameters: BinPack
 BreakBeforeBinaryOperators: None
 AllowAllArgumentsOnNextLine: true
 AllowAllParametersOfDeclarationOnNextLine: true
 
 # Spacing
-SpaceInEmptyBlock: false
+SpaceInEmptyBraces: Never
 SpaceBeforeParens: Never
 SpacesInParentheses: false
 SpacesBeforeTrailingComments: 1
@@ -303,7 +301,6 @@ AlignConsecutiveDeclarations: false
 AlignConsecutiveMacros: false
 AlignTrailingComments: false
 AlignOperands: DontAlign
-...
 ```
 
 ## Readable/Spacious Style
@@ -327,11 +324,11 @@ AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: false
 AllowShortBlocksOnASingleLine: Never
 BinPackArguments: false
-BinPackParameters: Never
+BinPackParameters: OnePerLine
 BreakBeforeBinaryOperators: NonAssignment
 
 # Spacing
-SpaceInEmptyBlock: true
+SpaceInEmptyBraces: Block
 SpaceAfterCStyleCast: true
 SpaceBeforeParens: ControlStatements
 SpacesBeforeTrailingComments: 3
@@ -367,7 +364,6 @@ FixNamespaceComments: true
 # Empty lines
 EmptyLineBeforeAccessModifier: Always
 EmptyLineAfterAccessModifier: Always
-...
 ```
 
 ## Multi-Language Configuration
@@ -464,18 +460,21 @@ clang-format --dry-run --Werror src/**/*.{cpp,h}
 ## Troubleshooting
 
 **Configuration not applied:**
+
 ```bash
 # Check if clang-format finds your config
 clang-format --dump-config file.cpp
 ```
 
 **Unexpected formatting:**
+
 ```bash
 # Test with explicit style
 clang-format --style=file:/path/to/.clang-format file.cpp
 ```
 
 **Unknown options (version mismatch):**
+
 ```bash
 # Allow unknown options
 clang-format --Wno-error=unknown -i file.cpp
@@ -489,8 +488,8 @@ clang-format --version
 - [Index](index.md) - Main documentation hub
 - [CLI Usage](cli-usage.md) - Command-line options
 - [All Style Options](index.md#style-options-by-category) - Detailed option documentation
-- [Full Style Options Reference](reference/clang-format-style-options.md)
-- [Full CLI Reference](reference/clang-format-cli.md)
+- [Full Style Options Reference](complete/clang-format-style-options.md)
+- [Full CLI Reference](complete/clang-format-cli.md)
 
 ---
 

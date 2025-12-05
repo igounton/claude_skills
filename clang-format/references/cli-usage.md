@@ -1,8 +1,10 @@
 # clang-format CLI Usage
 
-[← Back to Index](index.md) | [Quick Reference](quick-reference.md) | [Full CLI Reference](reference/clang-format-cli.md)
+[← Back to Index](index.md) | [Quick Reference](quick-reference.md) | [Full CLI Reference](complete/clang-format-cli.md)
 
 Command-line usage, tools, and integrations for clang-format.
+
+**Documentation Version:** Updated for Clang v22.0.0
 
 ## Command-Line Options
 
@@ -25,12 +27,15 @@ clang-format -i src/*.cpp include/*.h
 ### Common Flags
 
 #### `-i` - In-Place Editing
+
 Modify files directly instead of outputting to stdout:
+
 ```bash
 clang-format -i file.cpp
 ```
 
 #### `--style=<style>` - Set Coding Style
+
 Specify the formatting style:
 
 ```bash
@@ -48,17 +53,24 @@ clang-format --style="{BasedOnStyle: llvm, IndentWidth: 8}" file.cpp
 ```
 
 **Available Predefined Styles:**
-- `LLVM`, `GNU`, `Google`, `Chromium`, `Microsoft`, `Mozilla`, `WebKit`
+
+- `LLVM`, `GNU`, `Google`, `Chromium`, `Microsoft`, `Mozilla`, `WebKit`, `InheritParentConfig`
+
+Note: `InheritParentConfig` is not a real style, but allows using the `.clang-format` file from the parent directory. If no parent file is found, it falls back to the `fallback` style.
 
 #### `--dry-run` / `-n` - Check Without Modifying
+
 Check what would change without making modifications:
+
 ```bash
 clang-format --dry-run file.cpp
 clang-format -n file.cpp
 ```
 
 #### `--fallback-style=<style>` - Fallback Style
+
 Style to use if `.clang-format` file cannot be found:
+
 ```bash
 clang-format --style=file --fallback-style=google file.cpp
 
@@ -67,7 +79,9 @@ clang-format --style=file --fallback-style=none file.cpp
 ```
 
 #### `--dump-config` - Show Effective Configuration
+
 Display the configuration that will be used:
+
 ```bash
 # Dump LLVM style
 clang-format --style=llvm --dump-config
@@ -82,7 +96,9 @@ clang-format --style=google --dump-config > .clang-format
 ### Advanced Options
 
 #### `--lines=<start>:<end>` - Format Specific Lines
+
 Format only specified line ranges:
+
 ```bash
 # Format lines 10-20
 clang-format --lines=10:20 file.cpp
@@ -92,7 +108,9 @@ clang-format --lines=10:20 --lines=50:60 file.cpp
 ```
 
 #### `--offset=<bytes>` and `--length=<bytes>` - Format by Byte Range
+
 Format specific byte ranges:
+
 ```bash
 clang-format --offset=100 --length=500 file.cpp
 
@@ -101,24 +119,33 @@ clang-format --offset=100 file.cpp
 ```
 
 #### `--assume-filename=<name>` - Set Language for stdin
+
 Specify filename for language detection when reading from stdin:
+
 ```bash
 cat source.txt | clang-format --assume-filename=file.cpp
 ```
 
-**Recognized Extensions:**
-- CSharp: `.cs`
+**Supported Languages (as of Clang v22):**
+
+- C
+- C++ (Cpp)
+- C# (CSharp): `.cs`
 - Java: `.java`
 - JavaScript: `.js`, `.mjs`, `.cjs`, `.ts`
-- JSON: `.json`, `.ipynb`
-- Objective-C: `.m`, `.mm`
-- Proto: `.proto`, `.protodevel`
+- JSON (Json): `.json`, `.ipynb`
+- Objective-C (ObjC): `.m`, `.mm`
+- Protocol Buffers (Proto): `.proto`, `.protodevel`
 - TableGen: `.td`
-- TextProto: `.txtpb`, `.textpb`, `.pb.txt`, `.textproto`, `.asciipb`
+- Text Protocol Buffers (TextProto): `.txtpb`, `.textpb`, `.pb.txt`, `.textproto`, `.asciipb`
 - Verilog: `.sv`, `.svh`, `.v`, `.vh`
 
+For `.h` files, you can specify the language by adding `// clang-format Language: Cpp` (or `C`, `ObjC`) before the first non-comment line.
+
 #### `--files=<filename>` - Process File List
+
 Read list of files to process from a file:
+
 ```bash
 # Create file list
 find src -name '*.cpp' > files.txt
@@ -128,7 +155,9 @@ clang-format -i --files=files.txt
 ```
 
 #### `--verbose` - Show Processed Files
+
 Display the list of files being processed:
+
 ```bash
 clang-format -i --verbose src/*.cpp
 ```
@@ -136,25 +165,32 @@ clang-format -i --verbose src/*.cpp
 ### Error Handling
 
 #### `--Werror` - Treat Warnings as Errors
+
 Convert formatting warnings to errors:
+
 ```bash
 clang-format --Werror --dry-run file.cpp
 ```
 
 #### `--Wno-error=<type>` - Ignore Specific Warnings
+
 ```bash
 # Allow unknown format options
 clang-format --Wno-error=unknown -i file.cpp
 ```
 
 #### `--ferror-limit=<n>` - Limit Error Count
+
 Set maximum number of errors before stopping:
+
 ```bash
 clang-format --dry-run --ferror-limit=10 file.cpp
 ```
 
 #### `--fail-on-incomplete-format` - Fail on Incomplete Formatting
+
 Exit with code 1 if formatting is incomplete:
+
 ```bash
 clang-format --fail-on-incomplete-format file.cpp
 ```
@@ -165,7 +201,7 @@ Create a `.clang-format-ignore` file to exclude files from formatting.
 
 ### Format
 
-```
+```gitignore
 # Comments start with #
 # Blank lines are ignored
 
@@ -200,7 +236,7 @@ vendor/library.h
 - **`/` separator** for directories
 - **Patterns are relative** to the `.clang-format-ignore` file location
 - **Absolute patterns** start with `/`
-- **Bash globstar `**`** is supported
+- **Bash globstar `**`\*\* is supported
 - **`!` prefix** negates the pattern
 
 ### Multiple .clang-format-ignore Files
@@ -243,6 +279,7 @@ git clang-format [OPTIONS] [<commit>] [<commit>|--staged] [--] [<file>...]
 ```
 
 **Common Options:**
+
 - `--binary <path>` - Path to clang-format binary
 - `--style <style>` - Formatting style to use
 - `--diff` - Print diff instead of applying
@@ -291,6 +328,7 @@ hg diff -U0 --color=never | clang-format-diff.py -i -p1
 ```
 
 **Options:**
+
 - `-i` - Apply edits to files instead of displaying diff
 - `-p <num>` - Strip N leading directories from paths
 - `-regex <pattern>` - Custom pattern for file paths (case sensitive)
@@ -301,6 +339,7 @@ hg diff -U0 --color=never | clang-format-diff.py -i -p1
 - `-v, --verbose` - Be more verbose
 
 **Example with filters:**
+
 ```bash
 # Only format .cpp files
 git diff -U0 | clang-format-diff.py -i -regex '.*\.cpp'
@@ -316,6 +355,7 @@ git diff -U0 | clang-format-diff.py -i -iregex '.*\.(cpp|h)'
 Install the "Clang-Format" extension from the marketplace.
 
 **Configuration (settings.json):**
+
 ```json
 {
   "editor.defaultFormatter": "xaver.clang-format",
@@ -335,11 +375,13 @@ Install the "Clang-Format" extension from the marketplace.
 CLion has built-in clang-format support.
 
 **Enable:**
+
 1. Settings → Editor → Code Style
 2. Enable "Enable ClangFormat support"
 3. Place `.clang-format` in project root
 
 **Features:**
+
 - Automatic formatting on type
 - Respects `.clang-format` file
 - Can generate `.clang-format` from IDE settings
@@ -363,6 +405,7 @@ endif
 ```
 
 **Format on save:**
+
 ```vim
 function! Formatonsave()
   let l:formatdiff = 1
@@ -438,6 +481,7 @@ find src -name '*.cpp' | parallel clang-format -i {}
 clang-format searches for `.clang-format` or `_clang-format` starting from the source file's directory up to the filesystem root.
 
 **Solutions:**
+
 ```bash
 # Specify config file explicitly
 clang-format -style=file:/path/to/.clang-format file.cpp
@@ -451,6 +495,7 @@ clang-format -dump-config file.cpp
 Occurs when your config file has options not supported by your clang-format version.
 
 **Solutions:**
+
 ```bash
 # Warn instead of error
 clang-format --Wno-error=unknown -i file.cpp
@@ -477,10 +522,20 @@ find src -name '*.cpp' | parallel -j8 clang-format -i {}
 git clang-format
 ```
 
+## What's New in Clang v22
+
+Clang-format v22 introduces several new style configuration options:
+
+- **AllowBreakBeforeQtProperty**: Control line breaks before Qt `Q_Property` keywords
+- **NumericLiteralCase**: Configure capitalization style for numeric literals
+- **SpaceInEmptyBraces**: More granular control over spacing in empty braces
+
+For a complete list of v22 style options, refer to the [ClangFormatStyleOptions_v22.md](../../knowledge/ClangFormatStyleOptions_v22.md) documentation.
+
 ## Reference
 
-For complete command-line documentation, see [Full CLI Reference](reference/clang-format-cli.md).
+For complete command-line documentation, see [Full CLI Reference](complete/clang-format-cli.md).
 
 ---
 
-[← Back to Index](index.md) | [Quick Reference](quick-reference.md) | [Full CLI Reference](reference/clang-format-cli.md)
+[← Back to Index](index.md) | [Quick Reference](quick-reference.md) | [Full CLI Reference](complete/clang-format-cli.md)

@@ -2,25 +2,17 @@
 
 ## ClangFormat
 
-«  [ClangCheck](https://clang.llvm.org/docs/ClangCheck.html)
-::
-[Contents](https://clang.llvm.org/docs/index.html)
-::
-[Clang-Format Style Options](https://clang.llvm.org/docs/ClangFormatStyleOptions.html)  »
+« [ClangCheck](https://clang.llvm.org/docs/ClangCheck.html) :: [Contents](https://clang.llvm.org/docs/index.html) :: [Clang-Format Style Options](https://clang.llvm.org/docs/ClangFormatStyleOptions.html) »
 
+# ClangFormat [¶](https://clang.llvm.org/docs/ClangFormat.html#clangformat "Link to this heading")
 
-# ClangFormat [¶](https://clang.llvm.org/docs/ClangFormat.html\#clangformat "Link to this heading")
+ClangFormat describes a set of tools that are built on top of [LibFormat](https://clang.llvm.org/docs/LibFormat.html). It can support your workflow in a variety of ways including a standalone tool and editor integrations.
 
-ClangFormat describes a set of tools that are built on top of
-[LibFormat](https://clang.llvm.org/docs/LibFormat.html). It can support your workflow in a variety of ways including a
-standalone tool and editor integrations.
+## Standalone Tool [¶](https://clang.llvm.org/docs/ClangFormat.html#standalone-tool "Link to this heading")
 
-## Standalone Tool [¶](https://clang.llvm.org/docs/ClangFormat.html\#standalone-tool "Link to this heading")
+**clang-format** is located in clang/tools/clang-format and can be used to format C/C++/Java/JavaScript/JSON/Objective-C/Protobuf/C# code.
 
-**clang-format** is located in clang/tools/clang-format and can be used
-to format C/C++/Java/JavaScript/JSON/Objective-C/Protobuf/C# code.
-
-```
+```text
 $ clang-format --help
 OVERVIEW: A tool to format C/C++/Java/JavaScript/JSON/Objective-C/Protobuf/C# code.
 
@@ -119,28 +111,21 @@ Generic Options:
   --help                         - Display available options (--help-hidden for more)
   --help-list                    - Display list of available options (--help-list-hidden for more)
   --version                      - Display the version of this program
-
 ```
 
-When the desired code formatting style is different from the available options,
-the style can be customized using the `-style="{key: value, ...}"` option or
-by putting your style configuration in the `.clang-format` or `_clang-format`
-file in your project’s directory and using `clang-format -style=file`.
+When the desired code formatting style is different from the available options, the style can be customized using the `-style="{key: value, ...}"` option or by putting your style configuration in the `.clang-format` or `_clang-format` file in your project’s directory and using `clang-format -style=file`.
 
 An easy way to create the `.clang-format` file is:
 
-```
+```bash
 clang-format -style=llvm -dump-config > .clang-format
-
 ```
 
 Available style options are described in [Clang-Format Style Options](https://clang.llvm.org/docs/ClangFormatStyleOptions.html).
 
-## .clang-format-ignore [¶](https://clang.llvm.org/docs/ClangFormat.html\#clang-format-ignore "Link to this heading")
+## .clang-format-ignore [¶](https://clang.llvm.org/docs/ClangFormat.html#clang-format-ignore "Link to this heading")
 
-You can create `.clang-format-ignore` files to make `clang-format` ignore
-certain files. A `.clang-format-ignore` file consists of patterns of file path
-names. It has the following format:
+You can create `.clang-format-ignore` files to make `clang-format` ignore certain files. A `.clang-format-ignore` file consists of patterns of file path names. It has the following format:
 
 - A blank line is skipped.
 
@@ -152,34 +137,23 @@ names. It has the following format:
 
 - The slash ( `/`) is used as the directory separator.
 
-- A pattern is relative to the directory of the `.clang-format-ignore` file
-(or the root directory if the pattern starts with a slash). Patterns
-containing drive names (e.g. `C:`) are not supported.
+- A pattern is relative to the directory of the `.clang-format-ignore` file (or the root directory if the pattern starts with a slash). Patterns containing drive names (e.g. `C:`) are not supported.
 
-- Patterns follow the rules specified in [POSIX 2.13.1, 2.13.2, and Rule 1 of\\
-2.13.3](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_13).
+- Patterns follow the rules specified in [POSIX 2.13.1, 2.13.2, and Rule 1 of\\ 2.13.3](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_13).
 
 - Bash globstar ( `**`) is supported.
 
 - A pattern is negated if it starts with a bang ( `!`).
 
+To match all files in a directory, use e.g. `foo/bar/*`. To match all files in the directory of the `.clang-format-ignore` file, use `*`. Multiple `.clang-format-ignore` files are supported similar to the `.clang-format` files, with a lower directory level file voiding the higher level ones.
 
-To match all files in a directory, use e.g. `foo/bar/*`. To match all files in
-the directory of the `.clang-format-ignore` file, use `*`.
-Multiple `.clang-format-ignore` files are supported similar to the
-`.clang-format` files, with a lower directory level file voiding the higher
-level ones.
+## Vim Integration [¶](https://clang.llvm.org/docs/ClangFormat.html#vim-integration "Link to this heading")
 
-## Vim Integration [¶](https://clang.llvm.org/docs/ClangFormat.html\#vim-integration "Link to this heading")
-
-There is an integration for **vim** which lets you run the
-**clang-format** standalone tool on your current buffer, optionally
-selecting regions to reformat. The integration has the form of a python-file
-which can be found under clang/tools/clang-format/clang-format.py.
+There is an integration for **vim** which lets you run the **clang-format** standalone tool on your current buffer, optionally selecting regions to reformat. The integration has the form of a python-file which can be found under clang/tools/clang-format/clang-format.py.
 
 This can be integrated by adding the following to your .vimrc:
 
-```
+```vim
 if has('python')
   map <C-K> :pyf <path-to-this-file>/clang-format.py<cr>
   imap <C-K> <c-o>:pyf <path-to-this-file>/clang-format.py<cr>
@@ -190,23 +164,15 @@ endif
 
 ```
 
-The first line enables **clang-format** for NORMAL and VISUAL mode, the
-second line adds support for INSERT mode. Change “C-K” to another binding if
-you need **clang-format** on a different key (C-K stands for Ctrl+k).
+The first line enables **clang-format** for NORMAL and VISUAL mode, the second line adds support for INSERT mode. Change “C-K” to another binding if you need **clang-format** on a different key (C-K stands for Ctrl+k).
 
-With this integration you can press the bound key and clang-format will
-format the current line in NORMAL and INSERT mode or the selected region in
-VISUAL mode. The line or region is extended to the next bigger syntactic
-entity.
+With this integration you can press the bound key and clang-format will format the current line in NORMAL and INSERT mode or the selected region in VISUAL mode. The line or region is extended to the next bigger syntactic entity.
 
-It operates on the current, potentially unsaved buffer and does not create
-or save any files. To revert a formatting, just undo.
+It operates on the current, potentially unsaved buffer and does not create or save any files. To revert a formatting, just undo.
 
-An alternative option is to format changes when saving a file and thus to
-have a zero-effort integration into the coding workflow. To do this, add this to
-your .vimrc:
+An alternative option is to format changes when saving a file and thus to have a zero-effort integration into the coding workflow. To do this, add this to your .vimrc:
 
-```
+```vim
 function! Formatonsave()
   let l:formatdiff = 1
   pyf <path-to-this-file>/clang-format.py
@@ -215,59 +181,43 @@ autocmd BufWritePre *.h,*.cc,*.cpp call Formatonsave()
 
 ```
 
-## Emacs Integration [¶](https://clang.llvm.org/docs/ClangFormat.html\#emacs-integration "Link to this heading")
+## Emacs Integration [¶](https://clang.llvm.org/docs/ClangFormat.html#emacs-integration "Link to this heading")
 
-Similar to the integration for **vim**, there is an integration for
-**emacs**. It can be found at clang/tools/clang-format/clang-format.el
-and used by adding this to your .emacs:
+Similar to the integration for **vim**, there is an integration for **emacs**. It can be found at clang/tools/clang-format/clang-format.el and used by adding this to your .emacs:
 
-```
+```lisp
 (load "<path-to-clang>/tools/clang-format/clang-format.el")
 (global-set-key [C-M-tab] 'clang-format-region)
 
 ```
 
-This binds the function clang-format-region to C-M-tab, which then formats the
-current line or selected region.
+This binds the function clang-format-region to C-M-tab, which then formats the current line or selected region.
 
-## BBEdit Integration [¶](https://clang.llvm.org/docs/ClangFormat.html\#bbedit-integration "Link to this heading")
+## BBEdit Integration [¶](https://clang.llvm.org/docs/ClangFormat.html#bbedit-integration "Link to this heading")
 
-**clang-format** cannot be used as a text filter with BBEdit, but works
-well via a script. The AppleScript to do this integration can be found at
-clang/tools/clang-format/clang-format-bbedit.applescript; place a copy in
-~/Library/Application Support/BBEdit/Scripts, and edit the path within it to
-point to your local copy of **clang-format**.
+**clang-format** cannot be used as a text filter with BBEdit, but works well via a script. The AppleScript to do this integration can be found at clang/tools/clang-format/clang-format-bbedit.applescript; place a copy in ~/Library/Application Support/BBEdit/Scripts, and edit the path within it to point to your local copy of **clang-format**.
 
-With this integration you can select the script from the Script menu and
-**clang-format** will format the selection. Note that you can rename the
-menu item by renaming the script, and can assign the menu item a keyboard
-shortcut in the BBEdit preferences, under Menus & Shortcuts.
+With this integration you can select the script from the Script menu and **clang-format** will format the selection. Note that you can rename the menu item by renaming the script, and can assign the menu item a keyboard shortcut in the BBEdit preferences, under Menus & Shortcuts.
 
-## CLion Integration [¶](https://clang.llvm.org/docs/ClangFormat.html\#clion-integration "Link to this heading")
+## CLion Integration [¶](https://clang.llvm.org/docs/ClangFormat.html#clion-integration "Link to this heading")
 
-**clang-format** is integrated into [CLion](https://www.jetbrains.com/clion/) as an alternative code formatter. CLion turns it on
-automatically when there is a `.clang-format` file under the project root.
-Code style rules are applied as you type, including indentation,
-auto-completion, code generation, and refactorings.
+**clang-format** is integrated into [CLion](https://www.jetbrains.com/clion/) as an alternative code formatter. CLion turns it on automatically when there is a `.clang-format` file under the project root. Code style rules are applied as you type, including indentation, auto-completion, code generation, and refactorings.
 
-**clang-format** can also be enabled without a `.clang-format` file.
-In this case, CLion prompts you to create one based on the current IDE settings
-or the default LLVM style.
+**clang-format** can also be enabled without a `.clang-format` file. In this case, CLion prompts you to create one based on the current IDE settings or the default LLVM style.
 
-## Visual Studio Integration [¶](https://clang.llvm.org/docs/ClangFormat.html\#visual-studio-integration "Link to this heading")
+## Visual Studio Integration [¶](https://clang.llvm.org/docs/ClangFormat.html#visual-studio-integration "Link to this heading")
 
 Download the latest Visual Studio extension from the [alpha build site](https://llvm.org/builds/). The default key-binding is Ctrl-R,Ctrl-F.
 
-## Visual Studio Code Integration [¶](https://clang.llvm.org/docs/ClangFormat.html\#visual-studio-code-integration "Link to this heading")
+## Visual Studio Code Integration [¶](https://clang.llvm.org/docs/ClangFormat.html#visual-studio-code-integration "Link to this heading")
 
 Get the latest Visual Studio Code extension from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=xaver.clang-format). The default key-binding is Alt-Shift-F.
 
-## Git integration [¶](https://clang.llvm.org/docs/ClangFormat.html\#git-integration "Link to this heading")
+## Git integration [¶](https://clang.llvm.org/docs/ClangFormat.html#git-integration "Link to this heading")
 
-The script clang/tools/clang-format/git-clang-format can be used to
-format just the lines touched in git commits:
+The script clang/tools/clang-format/git-clang-format can be used to format just the lines touched in git commits:
 
-```
+```text
 % git clang-format -h
 usage: git clang-format [OPTIONS] [<commit>] [<commit>|--staged] [--] [<file>...]
 
@@ -315,13 +265,11 @@ optional arguments:
 
 ```
 
-## Script for patch reformatting [¶](https://clang.llvm.org/docs/ClangFormat.html\#script-for-patch-reformatting "Link to this heading")
+## Script for patch reformatting [¶](https://clang.llvm.org/docs/ClangFormat.html#script-for-patch-reformatting "Link to this heading")
 
-The python script clang/tools/clang-format/clang-format-diff.py parses the
-output of a unified diff and reformats all contained lines with
-**clang-format**.
+The python script clang/tools/clang-format/clang-format-diff.py parses the output of a unified diff and reformats all contained lines with **clang-format**.
 
-```
+```text
 usage: clang-format-diff.py [-h] [-i] [-p NUM] [-regex PATTERN] [-iregex PATTERN] [-sort-includes] [-v] [-style STYLE]
                             [-fallback-style FALLBACK_STYLE] [-binary BINARY]
 
@@ -355,23 +303,15 @@ optional arguments:
 
 To reformat all the lines in the latest Mercurial/ **hg** commit, do:
 
-```
+```bash
 hg diff -U0 --color=never | clang-format-diff.py -i -p1
 
 ```
 
-The option -U0 will create a diff without context lines (the script would format
-those as well).
+The option -U0 will create a diff without context lines (the script would format those as well).
 
-These commands use the file paths shown in the diff output
-so they will only work from the root of the repository.
+These commands use the file paths shown in the diff output so they will only work from the root of the repository.
 
-«  [ClangCheck](https://clang.llvm.org/docs/ClangCheck.html)
-::
-[Contents](https://clang.llvm.org/docs/index.html)
-::
-[Clang-Format Style Options](https://clang.llvm.org/docs/ClangFormatStyleOptions.html)  »
+« [ClangCheck](https://clang.llvm.org/docs/ClangCheck.html) :: [Contents](https://clang.llvm.org/docs/index.html) :: [Clang-Format Style Options](https://clang.llvm.org/docs/ClangFormatStyleOptions.html) »
 
-
-© Copyright 2007-2025, The Clang Team.
-Created using [Sphinx](https://www.sphinx-doc.org/) 7.2.6.
+© Copyright 2007-2025, The Clang Team. Created using [Sphinx](https://www.sphinx-doc.org/) 7.2.6.

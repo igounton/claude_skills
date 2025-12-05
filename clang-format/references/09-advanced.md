@@ -12,9 +12,7 @@ Experimental, advanced, and less commonly used options.
 
 Automatically detect bin packing from existing code.
 
-**Type:** `Boolean`
-**Default:** `false`
-**Status:** Experimental
+**Type:** `Boolean` **Default:** `false` **Status:** Experimental
 
 When enabled, clang-format attempts to detect whether arguments/parameters are bin-packed in the existing code and maintains that style.
 
@@ -26,12 +24,12 @@ When enabled, clang-format attempts to detect whether arguments/parameters are b
 
 Use C++11 braced list style.
 
-**Type:** `BracedListStyle`
-**Default:** `true`
+**Type:** `BracedListStyle` **Default:** `true`
 
 **Example:**
 
 `true`:
+
 ```cpp
 vector<int> x{1, 2, 3, 4};
 vector<T> x{{}, {}, {}, {}};
@@ -40,6 +38,7 @@ new int[3]{1, 2, 3};
 ```
 
 `false`:
+
 ```cpp
 vector<int> x{ 1, 2, 3, 4 };
 vector<T> x{ {}, {}, {}, {} };
@@ -51,37 +50,32 @@ new int[3]{ 1, 2, 3 };
 
 Control breaking after template declarations (deprecated).
 
-**Type:** `BreakTemplateDeclarationsStyle`
-**Note:** Use `BreakTemplateDeclarations` instead
+**Type:** `BreakTemplateDeclarationsStyle` **Note:** Use `BreakTemplateDeclarations` instead
 
 ### AlwaysBreakAfterDefinitionReturnType
 
 Control breaking after function definition return type (deprecated).
 
-**Type:** `DefinitionReturnTypeBreakingStyle`
-**Note:** Use `BreakAfterReturnType` instead
+**Type:** `DefinitionReturnTypeBreakingStyle` **Note:** Use `BreakAfterReturnType` instead
 
 ### AllowAllConstructorInitializersOnNextLine
 
 Allow constructor initializers on next line (deprecated).
 
-**Type:** `Boolean`
-**Default:** `true`
-**Note:** Deprecated in favor of `PackConstructorInitializers`
+**Type:** `Boolean` **Default:** `true` **Note:** Deprecated in favor of `PackConstructorInitializers`
 
 ### ConstructorInitializerAllOnOneLineOrOnePerLine
 
 Format constructor initializers (deprecated).
 
-**Type:** `Boolean`
-**Note:** Deprecated in favor of `PackConstructorInitializers`
+**Type:** `Boolean` **Note:** Deprecated in favor of `PackConstructorInitializers`
 
 ### PackConstructorInitializers
 
 How to pack constructor initializers.
 
-**Type:** `PackConstructorInitializersStyle`
-**Values:**
+**Type:** `PackConstructorInitializersStyle` **Values:**
+
 - `Never` - Always put one per line
 - `BinPack` - Bin-pack constructor initializers
 - `CurrentLine` - Pack on current line if it fits
@@ -103,8 +97,8 @@ When true, long braced lists will be bin-packed even if arguments aren't.
 
 Control breaking of binary operations.
 
-**Type:** `BreakBinaryOperationsStyle`
-**Values:**
+**Type:** `BreakBinaryOperationsStyle` **Values:**
+
 - `RespectPrecedence` - Break respecting precedence
 - `OnePerLine` - One operation per line
 - `Never` - Don't break
@@ -112,6 +106,7 @@ Control breaking of binary operations.
 **Example:**
 
 `OnePerLine`:
+
 ```cpp
 auto x =
     (aaaaa
@@ -130,6 +125,7 @@ Break before `>` in template declarations.
 **Example:**
 
 `true`:
+
 ```cpp
 template<typename T
         >
@@ -137,6 +133,7 @@ class Foo {};
 ```
 
 `false`:
+
 ```cpp
 template<typename T>
 class Foo {};
@@ -151,6 +148,7 @@ Always break before multiline string literals.
 **Example:**
 
 `true`:
+
 ```cpp
 aaaa =
     "bbbb"
@@ -158,6 +156,7 @@ aaaa =
 ```
 
 `false`:
+
 ```cpp
 aaaa = "bbbb"
        "cccc";
@@ -186,11 +185,13 @@ Allow short namespace declarations on one line.
 **Example:**
 
 `true`:
+
 ```cpp
 namespace a { class A; }
 ```
 
 `false`:
+
 ```cpp
 namespace a {
 class A;
@@ -201,9 +202,117 @@ class A;
 
 Control breaking before noexcept specifier.
 
-**Type:** `BreakBeforeNoexceptSpecifierStyle`
-**Values:**
+**Type:** `BreakBeforeNoexceptSpecifierStyle` **Values:**
+
 - `Never`, `OnlyWithParen`, `Always`
+
+### AllowBreakBeforeQtProperty
+
+Allow breaking before Qt property keywords.
+
+**Type:** `Boolean` **Since:** v22
+
+Allow breaking before `Q_Property` keywords `READ`, `WRITE`, etc. as if they were preceded by a comma. This allows them to be formatted according to `BinPackParameters`.
+
+**Example:**
+
+When enabled with appropriate bin-packing settings, Qt property declarations can have their keywords broken across lines more flexibly.
+
+## Numeric Literals
+
+### NumericLiteralCase
+
+Capitalization style for numeric literals.
+
+**Type:** `NumericLiteralCaseStyle` **Since:** v22
+
+Separate control for each numeric literal component.
+
+**Sub-options:**
+
+- `ExponentLetter` - Format floating point exponent separator letter case
+- `HexDigit` - Format hexadecimal digit case
+- `Prefix` - Format integer prefix case
+- `Suffix` - Format suffix case (excludes case-sensitive reserved suffixes like `min` in C++)
+
+**Values for each component:**
+
+- `Leave` - Leave this component as is
+- `Upper` - Format with uppercase characters
+- `Lower` - Format with lowercase characters
+
+**Example:**
+
+```yaml
+NumericLiteralCase:
+  ExponentLetter: Leave
+  HexDigit: Lower
+  Prefix: Upper
+  Suffix: Lower
+```
+
+**Before:**
+
+```cpp
+float a = 6.02e23 + 1.0E10;
+a = 0xaBcDeF;
+a = 0xF0 | 0b1;
+a = 1uLL;
+```
+
+**After (with config above):**
+
+```cpp
+float a = 6.02e23 + 1.0E10;  // ExponentLetter: Leave
+a = 0xabcdef;                 // HexDigit: Lower
+a = 0XF0 | 0B1;               // Prefix: Upper
+a = 1ull;                     // Suffix: Lower
+```
+
+## Spacing in Empty Constructs
+
+### SpaceInEmptyBraces
+
+Specifies when to insert a space in empty braces.
+
+**Type:** `SpaceInEmptyBracesStyle` **Since:** v22 **Note:** Replaces deprecated `SpaceInEmptyBlock` option
+
+**Values:**
+
+- `Always` - Always insert a space in empty braces
+- `Block` - Only insert a space in empty blocks (functions, classes, lambdas)
+- `Never` - Never insert a space in empty braces
+
+**Example:**
+
+`Always`:
+
+```cpp
+void f() { }
+class Unit { };
+auto a = [] { };
+int x{ };
+```
+
+`Block`:
+
+```cpp
+void f() { }
+class Unit { };
+auto a = [] { };
+int x{};  // No space in initializer braces
+```
+
+`Never`:
+
+```cpp
+void f() {}
+class Unit {};
+auto a = [] {};
+int x{};
+```
+
+**Note:** This option does not apply to initializer braces if `Cpp11BracedListStyle` is not `Block`.
 
 ## Penalty System
 
@@ -220,6 +329,30 @@ Penalty for breaking around assignment operator.
 Penalty for breaking before first call parameter.
 
 **Type:** `Unsigned`
+
+### PenaltyBreakBeforeMemberAccess
+
+Penalty for breaking before a member access operator (`.` or `->`).
+
+**Type:** `Unsigned` **Since:** v20
+
+Controls how reluctant clang-format is to break before member access operators. Higher values make it less likely to break.
+
+**Example:**
+
+With lower penalty:
+
+```cpp
+object
+    ->member
+    ->anotherMember();
+```
+
+With higher penalty:
+
+```cpp
+object->member->anotherMember();
+```
 
 ### PenaltyBreakComment
 
@@ -238,6 +371,30 @@ Penalty for breaking before first `<<`.
 Penalty for breaking after open parenthesis.
 
 **Type:** `Unsigned`
+
+### PenaltyBreakScopeResolution
+
+Penalty for breaking after scope resolution operator (`::`).
+
+**Type:** `Unsigned` **Since:** v18
+
+Controls how reluctant clang-format is to break after `::` in qualified names. Higher values make it less likely to break.
+
+**Example:**
+
+With lower penalty:
+
+```cpp
+namespace::
+    ClassName::
+    memberFunction();
+```
+
+With higher penalty:
+
+```cpp
+namespace::ClassName::memberFunction();
+```
 
 ### PenaltyBreakString
 
@@ -304,8 +461,8 @@ This allows formatting embedded protocol buffer text within raw strings.
 
 Indent content in namespaces.
 
-**Type:** `NamespaceIndentationKind`
-**Values:**
+**Type:** `NamespaceIndentationKind` **Values:**
+
 - `None` - Don't indent
 - `Inner` - Indent inner namespaces only
 - `All` - Indent all namespaces
@@ -313,6 +470,7 @@ Indent content in namespaces.
 **Example:**
 
 `None`:
+
 ```cpp
 namespace out {
 namespace in {
@@ -322,6 +480,7 @@ class foo {};
 ```
 
 `Inner`:
+
 ```cpp
 namespace out {
 namespace in {
@@ -331,6 +490,7 @@ namespace in {
 ```
 
 `All`:
+
 ```cpp
 namespace out {
   namespace in {
@@ -351,8 +511,7 @@ Macros that behave like namespace declarations.
 
 Indentation width for preprocessor statements.
 
-**Type:** `Integer`
-**Default:** Uses `IndentWidth`
+**Type:** `Integer` **Default:** Uses `IndentWidth`
 
 Separate from `IndentPPDirectives`, this controls the width when indenting.
 
@@ -391,7 +550,7 @@ clang-format --style="{BasedOnStyle: llvm, ColumnLimit: 100}" --dry-run file.cpp
 - [Breaking & Line Wrapping](02-breaking.md) - Core breaking options
 - [Comments & Misc](08-comments.md) - Common miscellaneous options
 - [Quick Reference](quick-reference.md) - Complete working examples
-- [Full Style Options Reference](reference/clang-format-style-options.md)
+- [Full Style Options Reference](complete/clang-format-style-options.md)
 
 ---
 

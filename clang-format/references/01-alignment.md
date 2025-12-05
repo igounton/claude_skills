@@ -13,6 +13,7 @@ Alignment options control how clang-format aligns various code elements vertical
 ## Quick Examples
 
 **Aligned Assignments:**
+
 ```cpp
 int a        = 1;
 int somelongname = 2;
@@ -20,6 +21,7 @@ double c     = 3;
 ```
 
 **Aligned Declarations:**
+
 ```cpp
 int         aaaa = 12;
 float       b = 23;
@@ -27,6 +29,7 @@ std::string ccc = 23;
 ```
 
 **Aligned Macros:**
+
 ```cpp
 #define SHORT_NAME       42
 #define LONGER_NAME      0x007f
@@ -39,8 +42,8 @@ std::string ccc = 23;
 
 Controls alignment of parameters after an opening bracket.
 
-**Type:** `BracketAlignmentStyle`
-**Values:**
+**Type:** `BracketAlignmentStyle` **Values:**
+
 - `Align` - Align parameters on the open bracket
 - `DontAlign` - Don't align, use ContinuationIndentWidth
 - `AlwaysBreak` - Always break after bracket
@@ -49,24 +52,28 @@ Controls alignment of parameters after an opening bracket.
 **Examples:**
 
 `Align`:
+
 ```cpp
 someLongFunction(argument1,
                  argument2);
 ```
 
 `DontAlign`:
+
 ```cpp
 someLongFunction(argument1,
     argument2);
 ```
 
 `AlwaysBreak`:
+
 ```cpp
 someLongFunction(
     argument1, argument2);
 ```
 
 `BlockIndent`:
+
 ```cpp
 someLongFunction(
     argument1,
@@ -78,8 +85,8 @@ someLongFunction(
 
 Align array of structures horizontally.
 
-**Type:** `ArrayInitializerAlignmentStyle`
-**Values:**
+**Type:** `ArrayInitializerAlignmentStyle` **Values:**
+
 - `None` - Don't align array initializers
 - `Left` - Align and left-justify initializers
 - `Right` - Align and right-justify initializers
@@ -87,6 +94,7 @@ Align array of structures horizontally.
 **Examples:**
 
 `None`:
+
 ```cpp
 struct test demo[] = {
     {56, 23, "hello"},
@@ -96,6 +104,7 @@ struct test demo[] = {
 ```
 
 `Left`:
+
 ```cpp
 struct test demo[] = {
     {56,    23, "hello"},
@@ -105,6 +114,7 @@ struct test demo[] = {
 ```
 
 `Right`:
+
 ```cpp
 struct test demo[] = {
     {   56,    23, "hello"},
@@ -117,18 +127,18 @@ struct test demo[] = {
 
 Align consecutive assignment statements.
 
-**Type:** `AlignConsecutiveStyle`
-**Sub-options:**
+**Type:** `AlignConsecutiveStyle` **Sub-options:**
+
 - `Enabled` (bool) - Enable alignment
 - `AcrossEmptyLines` (bool) - Align across empty lines
 - `AcrossComments` (bool) - Align across comments
 - `AlignCompound` (bool) - Align compound assignments
-- `AlignFunctionPointers` (bool) - Align function pointer assignments
 - `PadOperators` (bool) - Pad operators to right
 
 **Examples:**
 
 `Enabled: true`:
+
 ```cpp
 int a            = 1;
 int somelongname = 2;
@@ -136,6 +146,7 @@ double c         = 3;
 ```
 
 `Enabled: true, AcrossEmptyLines: true`:
+
 ```cpp
 int a            = 1;
 int somelongname = 2;
@@ -145,18 +156,21 @@ int d            = 4;
 ```
 
 `Enabled: true, AlignCompound: true`:
+
 ```cpp
 a   &= 2;
 bbb  = 2;
 ```
 
 `Enabled: true, PadOperators: true`:
+
 ```cpp
 a   >>= 2;
 bbb   = 2;
 ```
 
 **Shorthand:**
+
 ```yaml
 # Boolean shorthand
 AlignConsecutiveAssignments: true
@@ -177,6 +191,7 @@ Align consecutive bit field declarations.
 **Type:** `AlignConsecutiveStyle`
 
 **Example:**
+
 ```cpp
 int aaaa : 1;
 int b    : 12;
@@ -187,11 +202,18 @@ int ccc  : 8;
 
 Align consecutive declarations.
 
-**Type:** `AlignConsecutiveStyle`
+**Type:** `AlignConsecutiveStyle` **Sub-options:**
+
+- `Enabled` (bool) - Enable alignment
+- `AcrossEmptyLines` (bool) - Align across empty lines
+- `AcrossComments` (bool) - Align across comments
+- `AlignFunctionDeclarations` (bool) - Align function declarations
+- `AlignFunctionPointers` (bool) - Align function pointers
 
 **Examples:**
 
 `Enabled: true`:
+
 ```cpp
 int         aaaa = 12;
 float       b = 23;
@@ -199,12 +221,30 @@ std::string ccc;
 ```
 
 `Enabled: true, AcrossEmptyLines: true`:
+
 ```cpp
 int         aaaa = 12;
 float       b = 23;
 
 std::string ccc;
 int         d = 45;
+```
+
+`Enabled: true, AlignFunctionDeclarations: true`:
+
+```cpp
+unsigned int f1(void);
+void         f2(void);
+size_t       f3(void);
+```
+
+`Enabled: true, AlignFunctionPointers: true`:
+
+```cpp
+unsigned i;
+int     &r;
+int     *p;
+int      (*f)();
 ```
 
 ### AlignConsecutiveMacros
@@ -216,6 +256,7 @@ Align consecutive macro definitions.
 **Examples:**
 
 `Enabled: true`:
+
 ```cpp
 #define SHORT_NAME       42
 #define LONGER_NAME      0x007f
@@ -224,6 +265,7 @@ Align consecutive macro definitions.
 ```
 
 `Enabled: true, AcrossEmptyLines: true`:
+
 ```cpp
 #define SHORT_NAME       42
 #define LONGER_NAME      0x007f
@@ -236,8 +278,8 @@ Align consecutive macro definitions.
 
 Align consecutive short case labels.
 
-**Type:** `ShortCaseStatementsAlignmentStyle`
-**Sub-options:**
+**Type:** `ShortCaseStatementsAlignmentStyle` **Sub-options:**
+
 - `Enabled` (bool)
 - `AcrossEmptyLines` (bool)
 - `AcrossComments` (bool)
@@ -247,6 +289,7 @@ Align consecutive short case labels.
 **Example:**
 
 `Enabled: true`:
+
 ```cpp
 switch (x) {
 case 1:  return "one";
@@ -256,6 +299,7 @@ case 10: return "ten";
 ```
 
 `Enabled: true, AlignCaseColons: true`:
+
 ```cpp
 switch (x) {
 case 1  : return "one";
@@ -268,8 +312,8 @@ case 10 : return "ten";
 
 Align escaped newlines in macros.
 
-**Type:** `EscapedNewlineAlignmentStyle`
-**Values:**
+**Type:** `EscapedNewlineAlignmentStyle` **Values:**
+
 - `DontAlign` - Don't align
 - `Left` - Align to the left
 - `Right` - Align to the right
@@ -278,6 +322,7 @@ Align escaped newlines in macros.
 **Examples:**
 
 `Left`:
+
 ```cpp
 #define A \
   int aaaa; \
@@ -286,6 +331,7 @@ Align escaped newlines in macros.
 ```
 
 `Right`:
+
 ```cpp
 #define A                                                                      \
   int aaaa;                                                                    \
@@ -297,8 +343,8 @@ Align escaped newlines in macros.
 
 Align operands of binary and ternary expressions.
 
-**Type:** `OperandAlignmentStyle`
-**Values:**
+**Type:** `OperandAlignmentStyle` **Values:**
+
 - `DontAlign` - Don't align
 - `Align` - Align operands
 - `AlignAfterOperator` - Align after operators
@@ -306,12 +352,14 @@ Align operands of binary and ternary expressions.
 **Examples:**
 
 `Align`:
+
 ```cpp
 int aaa = bbbbbbbbbbbbbbb +
           ccccccccccccccc;
 ```
 
 `AlignAfterOperator`:
+
 ```cpp
 int aaa = bbbbbbbbbbbbbbb
         + ccccccccccccccc;
@@ -321,20 +369,22 @@ int aaa = bbbbbbbbbbbbbbb
 
 Align trailing comments.
 
-**Type:** `TrailingCommentsAlignmentStyle`
-**Sub-options:**
+**Type:** `TrailingCommentsAlignmentStyle` **Sub-options:**
+
 - `Kind` - Alignment kind (Leave, Always, Never)
 - `OverEmptyLines` - Lines to align over
 
 **Examples:**
 
 `Kind: Always`:
+
 ```cpp
 int a;      // Comment a
 int b = 2;  // Comment b
 ```
 
 `Kind: Always, OverEmptyLines: 1`:
+
 ```cpp
 int a;  // Comment a
 
@@ -342,6 +392,7 @@ int b;  // Comment b (aligned with comment a)
 ```
 
 **Shorthand:**
+
 ```yaml
 # Boolean shorthand
 AlignTrailingComments: true
@@ -398,10 +449,14 @@ AlignConsecutiveAssignments:
   Enabled: true
   AcrossEmptyLines: true
   AcrossComments: true
+  AlignCompound: true
+  PadOperators: true
 AlignConsecutiveBitFields:
   Enabled: true
 AlignConsecutiveDeclarations:
   Enabled: true
+  AlignFunctionDeclarations: true
+  AlignFunctionPointers: true
 AlignConsecutiveMacros:
   Enabled: true
   AcrossEmptyLines: true
@@ -438,7 +493,7 @@ AlignTrailingComments: true
 - [Breaking & Line Wrapping](02-breaking.md) - Control where lines break
 - [Indentation](04-indentation.md) - Control indentation behavior
 - [Spacing](05-spacing.md) - Fine-tune whitespace
-- [Full Style Options Reference](reference/clang-format-style-options.md)
+- [Full Style Options Reference](complete/clang-format-style-options.md)
 
 ---
 

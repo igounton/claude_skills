@@ -16,8 +16,7 @@ Breaking options determine where and how clang-format inserts line breaks. These
 
 Maximum line length before wrapping.
 
-**Type:** `Unsigned`
-**Default:** `80`
+**Type:** `Unsigned` **Default:** `80`
 
 ```yaml
 ColumnLimit: 100  # 100 characters per line
@@ -25,6 +24,7 @@ ColumnLimit: 0    # No limit
 ```
 
 **Example:**
+
 ```cpp
 // ColumnLimit: 80
 void function(int param1,
@@ -41,8 +41,8 @@ These options control when short code blocks can remain on one line.
 
 ### AllowShortBlocksOnASingleLine
 
-**Type:** `ShortBlockStyle`
-**Values:**
+**Type:** `ShortBlockStyle` **Values:**
+
 - `Never` - Never merge blocks into single line
 - `Empty` - Only merge empty blocks
 - `Always` - Always merge short blocks
@@ -50,6 +50,7 @@ These options control when short code blocks can remain on one line.
 **Examples:**
 
 `Never`:
+
 ```cpp
 while (true) {
 }
@@ -59,6 +60,7 @@ while (true) {
 ```
 
 `Empty`:
+
 ```cpp
 while (true) {}
 while (true) {
@@ -67,6 +69,7 @@ while (true) {
 ```
 
 `Always`:
+
 ```cpp
 while (true) {}
 while (true) { continue; }
@@ -81,6 +84,7 @@ Keep short case labels on a single line.
 **Example:**
 
 `true`:
+
 ```cpp
 switch (a) {
 case 1: x = 1; break;
@@ -89,6 +93,7 @@ case 2: return;
 ```
 
 `false`:
+
 ```cpp
 switch (a) {
 case 1:
@@ -108,6 +113,7 @@ Keep short enums on a single line.
 **Example:**
 
 `true`:
+
 ```cpp
 enum { A, B } myEnum;
 
@@ -115,6 +121,7 @@ enum class Color { Red, Green, Blue };
 ```
 
 `false`:
+
 ```cpp
 enum {
   A,
@@ -130,8 +137,8 @@ enum class Color {
 
 ### AllowShortFunctionsOnASingleLine
 
-**Type:** `ShortFunctionStyle`
-**Values:**
+**Type:** `ShortFunctionStyle` **Values:**
+
 - `None` - Never merge functions
 - `InlineOnly` - Only merge functions defined inside a class
 - `Empty` - Only merge empty functions
@@ -141,6 +148,7 @@ enum class Color {
 **Examples:**
 
 `InlineOnly`:
+
 ```cpp
 class Foo {
   void f() { foo(); }
@@ -151,6 +159,7 @@ void f() {
 ```
 
 `Empty`:
+
 ```cpp
 void f() {}
 void f2() {
@@ -159,6 +168,7 @@ void f2() {
 ```
 
 `All`:
+
 ```cpp
 class Foo {
   void f() { foo(); }
@@ -168,8 +178,8 @@ void f() { bar(); }
 
 ### AllowShortIfStatementsOnASingleLine
 
-**Type:** `ShortIfStyle`
-**Values:**
+**Type:** `ShortIfStyle` **Values:**
+
 - `Never` - Never put short ifs on one line
 - `WithoutElse` - Only if without else
 - `OnlyFirstIf` - Only first if without else
@@ -178,6 +188,7 @@ void f() { bar(); }
 **Examples:**
 
 `Never`:
+
 ```cpp
 if (a)
   return;
@@ -189,6 +200,7 @@ else
 ```
 
 `WithoutElse`:
+
 ```cpp
 if (a) return;
 
@@ -199,6 +211,7 @@ else
 ```
 
 `AllIfsAndElse`:
+
 ```cpp
 if (a) return;
 
@@ -208,8 +221,8 @@ else return;
 
 ### AllowShortLambdasOnASingleLine
 
-**Type:** `ShortLambdaStyle`
-**Values:**
+**Type:** `ShortLambdaStyle` **Values:**
+
 - `None` - Never merge lambdas
 - `Empty` - Only empty lambdas
 - `Inline` - Lambdas inside function calls
@@ -218,6 +231,7 @@ else return;
 **Examples:**
 
 `None`:
+
 ```cpp
 auto lambda = []() {
   return 1;
@@ -225,6 +239,7 @@ auto lambda = []() {
 ```
 
 `Empty`:
+
 ```cpp
 auto lambda = []() {};
 auto lambda2 = []() {
@@ -233,6 +248,7 @@ auto lambda2 = []() {
 ```
 
 `All`:
+
 ```cpp
 auto lambda = []() { return 1; };
 ```
@@ -246,12 +262,14 @@ Keep short loops on a single line.
 **Example:**
 
 `true`:
+
 ```cpp
 while (true) continue;
 for (int i = 0; i < 10; ++i) {}
 ```
 
 `false`:
+
 ```cpp
 while (true)
   continue;
@@ -265,8 +283,8 @@ for (int i = 0; i < 10; ++i) {
 
 Where to wrap binary operators.
 
-**Type:** `BinaryOperatorStyle`
-**Values:**
+**Type:** `BinaryOperatorStyle` **Values:**
+
 - `None` - Break after operators
 - `NonAssignment` - Break before non-assignment operators
 - `All` - Break before all binary operators
@@ -274,6 +292,7 @@ Where to wrap binary operators.
 **Examples:**
 
 `None`:
+
 ```cpp
 LooooooooooongType loooooooooooooooooooooongVariable =
     someLooooooooooooooooongFunction();
@@ -284,6 +303,7 @@ bool value = aaaaaaaaaaaaaaaaaaaaa +
 ```
 
 `NonAssignment`:
+
 ```cpp
 LooooooooooongType loooooooooooooooooooooongVariable =
     someLooooooooooooooooongFunction();
@@ -294,6 +314,7 @@ bool value = aaaaaaaaaaaaaaaaaaaaa + aaaaaaaaaaaaaaaaaaa
 ```
 
 `All`:
+
 ```cpp
 LooooooooooongType loooooooooooooooooooooongVariable
     = someLooooooooooooooooongFunction();
@@ -312,6 +333,7 @@ Break before ternary operators.
 **Examples:**
 
 `true`:
+
 ```cpp
 veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongDescription
     ? firstValue
@@ -319,18 +341,59 @@ veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongDescription
 ```
 
 `false`:
+
 ```cpp
 veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongDescription ?
     firstValue :
     secondValue;
 ```
 
+### BreakBinaryOperations
+
+**Type:** `BreakBinaryOperationsStyle` **Since:** clang-format 20
+
+The break binary operations style to use.
+
+**Values:**
+
+- `Never` - Don't break binary operations
+- `OnePerLine` - Binary operations will either be all on same line, or each operation will have one line each
+- `RespectPrecedence` - Binary operations of a particular precedence that exceed the column limit will have one line each
+
+**Examples:**
+
+`Never`:
+
+```cpp
+aaa + bbbb * ccccc - ddddd +
+eeeeeeeeeeeeeeee;
+```
+
+`OnePerLine`:
+
+```cpp
+aaa +
+bbbb *
+ccccc -
+ddddd +
+eeeeeeeeeeeeeeee;
+```
+
+`RespectPrecedence`:
+
+```cpp
+aaa +
+bbbb * ccccc -
+ddddd +
+eeeeeeeeeeeeeeee;
+```
+
 ### BreakConstructorInitializers
 
 Break constructor initializers.
 
-**Type:** `BreakConstructorInitializersStyle`
-**Values:**
+**Type:** `BreakConstructorInitializersStyle` **Values:**
+
 - `BeforeColon` - Break before `:` and `,`
 - `BeforeComma` - Break before `,`
 - `AfterColon` - Break after `:`
@@ -338,6 +401,7 @@ Break constructor initializers.
 **Examples:**
 
 `BeforeColon`:
+
 ```cpp
 Constructor()
     : initializer1()
@@ -345,6 +409,7 @@ Constructor()
 ```
 
 `BeforeComma`:
+
 ```cpp
 Constructor()
     : initializer1(),
@@ -352,6 +417,7 @@ Constructor()
 ```
 
 `AfterColon`:
+
 ```cpp
 Constructor() :
     initializer1(),
@@ -362,8 +428,8 @@ Constructor() :
 
 Break inheritance list.
 
-**Type:** `BreakInheritanceListStyle`
-**Values:**
+**Type:** `BreakInheritanceListStyle` **Values:**
+
 - `BeforeColon` - Break before `:`
 - `BeforeComma` - Break before `,`
 - `AfterColon` - Break after `:`
@@ -372,6 +438,7 @@ Break inheritance list.
 **Examples:**
 
 `BeforeColon`:
+
 ```cpp
 class Foo
     : Base1
@@ -380,6 +447,7 @@ class Foo
 ```
 
 `AfterColon`:
+
 ```cpp
 class Foo :
     Base1,
@@ -396,6 +464,7 @@ Allow breaking string literals.
 **Example:**
 
 `true`:
+
 ```cpp
 const char* x = "veryVeryVeryVeryVeryVe"
                 "ryVeryVeryVeryVeryVery"
@@ -403,6 +472,7 @@ const char* x = "veryVeryVeryVeryVeryVe"
 ```
 
 `false` (exceeds column limit):
+
 ```cpp
 const char* x = "veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongString";
 ```
@@ -411,17 +481,18 @@ const char* x = "veryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLongString";
 
 Break adjacent string literals.
 
-**Type:** `Boolean`
-**Default:** `true`
+**Type:** `Boolean` **Default:** `true`
 
 **Example:**
 
 `true`:
+
 ```cpp
 return "Code" "Llama";
 ```
 
 `false`:
+
 ```cpp
 return "CodeLlama";
 ```
@@ -432,8 +503,8 @@ return "CodeLlama";
 
 Control breaking after return types.
 
-**Type:** `ReturnTypeBreakingStyle`
-**Values:**
+**Type:** `ReturnTypeBreakingStyle` **Values:**
+
 - `None` - Automatic
 - `All` - Always break after return type
 - `TopLevel` - Break after top-level function return types
@@ -443,6 +514,7 @@ Control breaking after return types.
 **Examples:**
 
 `None`:
+
 ```cpp
 class A {
   int f() { return 0; }
@@ -452,6 +524,7 @@ int f() { return 1; }
 ```
 
 `All`:
+
 ```cpp
 class A {
   int
@@ -468,6 +541,7 @@ f() {
 ```
 
 `TopLevel`:
+
 ```cpp
 class A {
   int f() { return 0; }
@@ -484,8 +558,8 @@ f() {
 
 Breaking around template declarations.
 
-**Type:** `BreakTemplateDeclarationsStyle`
-**Values:**
+**Type:** `BreakTemplateDeclarationsStyle` **Values:**
+
 - `No` - Don't force breaks
 - `MultiLine` - Break multi-line template declarations
 - `Yes` - Always break after template declaration
@@ -493,6 +567,7 @@ Breaking around template declarations.
 **Examples:**
 
 `No`:
+
 ```cpp
 template <typename T> T foo() {
 }
@@ -502,6 +577,7 @@ template <typename T> T foo(int aaaaaaaaaaaaaaaaaaaaa,
 ```
 
 `MultiLine`:
+
 ```cpp
 template <typename T> T foo() {
 }
@@ -512,6 +588,7 @@ T foo(int aaaaaaaaaaaaaaaaaaaaa,
 ```
 
 `Yes`:
+
 ```cpp
 template <typename T>
 T foo() {
@@ -526,8 +603,8 @@ T foo(int aaaaaaaaaaaaaaaaaaaaa,
 
 Break after attributes.
 
-**Type:** `AttributeBreakingStyle`
-**Values:**
+**Type:** `AttributeBreakingStyle` **Values:**
+
 - `Always` - Always break after attributes
 - `Leave` - Leave as is
 - `Never` - Never break after attributes
@@ -535,6 +612,7 @@ Break after attributes.
 **Example:**
 
 `Always`:
+
 ```cpp
 [[nodiscard]]
 int f();
@@ -544,6 +622,7 @@ int g();
 ```
 
 `Never`:
+
 ```cpp
 [[nodiscard]] int f();
 
@@ -556,8 +635,8 @@ int g();
 
 Break before C++20 concept declarations.
 
-**Type:** `BreakBeforeConceptDeclarationsStyle`
-**Values:**
+**Type:** `BreakBeforeConceptDeclarationsStyle` **Values:**
+
 - `Never` - Keep on same line
 - `Allowed` - Break if needed
 - `Always` - Always break
@@ -565,22 +644,59 @@ Break before C++20 concept declarations.
 **Example:**
 
 `Always`:
+
 ```cpp
 template <typename T>
 concept ...
 ```
 
 `Never`:
+
 ```cpp
 template <typename T> concept ...
+```
+
+### BreakBeforeTemplateCloser
+
+**Type:** `Boolean` **Since:** clang-format 21
+
+If `true`, break before a template closing bracket (`>`) when there is a line break after the matching opening bracket (`<`).
+
+**Examples:**
+
+`true`:
+
+```cpp
+template <typename Foo, typename Bar>
+
+template <typename Foo,
+          typename Bar>
+
+template <
+    typename Foo,
+    typename Bar
+>
+```
+
+`false`:
+
+```cpp
+template <typename Foo, typename Bar>
+
+template <typename Foo,
+          typename Bar>
+
+template <
+    typename Foo,
+    typename Bar>
 ```
 
 ### BreakBeforeInlineASMColon
 
 Break before inline ASM colon.
 
-**Type:** `BreakBeforeInlineASMColonStyle`
-**Values:**
+**Type:** `BreakBeforeInlineASMColonStyle` **Values:**
+
 - `Never`, `OnlyMultiline`, `Always`
 
 ### BreakFunctionDefinitionParameters
@@ -592,6 +708,7 @@ Break function definition parameters.
 **Example:**
 
 `true`:
+
 ```cpp
 void functionDeclaration(int A, int B);
 
@@ -614,12 +731,14 @@ Allow putting all arguments on the next line.
 **Example:**
 
 `true`:
+
 ```cpp
 callFunction(
     a, b, c, d);
 ```
 
 `false` (will try to fit some on same line):
+
 ```cpp
 callFunction(a,
              b, c, d);
@@ -633,6 +752,12 @@ Allow all parameters of declaration on next line.
 
 Similar to `AllowAllArgumentsOnNextLine` but for declarations.
 
+### AllowBreakBeforeQtProperty
+
+**Type:** `Boolean` **Since:** clang-format 22
+
+Allow breaking before `Q_Property` keywords `READ`, `WRITE`, etc. as if they were preceded by a comma. This allows them to be formatted according to `BinPackParameters`.
+
 ### BinPackArguments
 
 Pack function arguments together.
@@ -642,6 +767,7 @@ Pack function arguments together.
 **Example:**
 
 `true`:
+
 ```cpp
 void f() {
   f(aaaaaaaaaaaaaaaaaaaa, aaaaaaaaaaaaaaaaaaaa,
@@ -650,6 +776,7 @@ void f() {
 ```
 
 `false`:
+
 ```cpp
 void f() {
   f(aaaaaaaaaaaaaaaaaaaa,
@@ -658,17 +785,68 @@ void f() {
 }
 ```
 
+### BinPackLongBracedList
+
+**Type:** `Boolean` **Since:** clang-format 21
+
+If `true`, overrides `BinPackArguments` when there are 20 or more items in a braced initializer list.
+
+**Example:**
+
+`false`:
+
+```cpp
+vector<int> x{
+    1,
+    2,
+    ...,
+    20,
+    21};
+```
+
+`true`:
+
+```cpp
+vector<int> x{1, 2, ...,
+              20, 21};
+```
+
 ### BinPackParameters
 
 Pack function parameters together.
 
-**Type:** `BinPackParametersStyle`
-**Values:**
-- `Never` - One parameter per line
-- `BinPackAll` - Pack all parameters
-- `BinPackFirstParameter` - First parameter different from rest
+**Type:** `BinPackParametersStyle` **Values:**
 
-Similar to `BinPackArguments` but for declarations.
+- `BinPack` - Bin-pack parameters
+- `OnePerLine` - All on current line if they fit, otherwise one per line
+- `AlwaysOnePerLine` - Always put each parameter on its own line
+
+**Examples:**
+
+`BinPack`:
+
+```cpp
+void f(int a, int bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb,
+       int ccccccccccccccccccccccccccccccccccccccccccc);
+```
+
+`OnePerLine`:
+
+```cpp
+void f(int a, int b, int c);
+
+void f(int a,
+       int b,
+       int ccccccccccccccccccccccccccccccccccccc);
+```
+
+`AlwaysOnePerLine`:
+
+```cpp
+void f(int a,
+       int b,
+       int c);
+```
 
 ## Common Patterns
 
@@ -682,7 +860,7 @@ AllowShortLoopsOnASingleLine: true
 AllowShortBlocksOnASingleLine: Always
 BreakBeforeBinaryOperators: None
 BinPackArguments: true
-BinPackParameters: BinPackAll
+BinPackParameters: BinPack
 ```
 
 ### Aggressive Breaking (Narrow Lines)
@@ -717,7 +895,7 @@ BinPackParameters: BinPackFirstParameter
 - [Brace Styles](03-braces.md) - Configure brace placement
 - [Indentation](04-indentation.md) - Control indentation
 - [Alignment](01-alignment.md) - Align code elements
-- [Full Style Options Reference](reference/clang-format-style-options.md)
+- [Full Style Options Reference](complete/clang-format-style-options.md)
 
 ---
 

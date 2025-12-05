@@ -12,14 +12,14 @@ Control indentation behavior for various code constructs.
 
 Number of columns for each indentation level.
 
-**Type:** `Unsigned`
-**Default:** `2`
+**Type:** `Unsigned` **Default:** `2`
 
 ```yaml
 IndentWidth: 4
 ```
 
 **Example:**
+
 ```cpp
 void function() {
     if (condition) {
@@ -30,19 +30,20 @@ void function() {
 
 ### UseTab
 
-Tab usage policy.
+The way to use tab characters in the resulting file.
 
-**Type:** `UseTabStyle`
-**Values:**
-- `Never` - Never use tabs
-- `ForIndentation` - Use tabs for indentation, spaces for alignment
-- `ForContinuationAndIndentation` - Use tabs for line continuation and indentation
-- `AlignWithSpaces` - Use tabs for indentation, spaces for alignment (deprecated, use `ForIndentation`)
-- `Always` - Use tabs for indentation and alignment
+**Type:** `UseTabStyle` **Values:**
+
+- `Never` - Never use tab
+- `ForIndentation` - Use tabs only for indentation
+- `ForContinuationAndIndentation` - Fill all leading whitespace with tabs, and use spaces for alignment that appears within a line (e.g. consecutive assignments and declarations)
+- `AlignWithSpaces` - Use tabs for line continuation and indentation, and spaces for alignment
+- `Always` - Use tabs whenever we need to fill whitespace that spans at least from one tab stop to the next one
 
 **Examples:**
 
 `Never`:
+
 ```cpp
 void f() {
 ••••int i;
@@ -50,6 +51,7 @@ void f() {
 ```
 
 `ForIndentation`:
+
 ```cpp
 void f() {
 →   int i;
@@ -57,6 +59,7 @@ void f() {
 ```
 
 `Always`:
+
 ```cpp
 void f() {
 →   int i;
@@ -67,8 +70,7 @@ void f() {
 
 Visual width of a tab character.
 
-**Type:** `Unsigned`
-**Default:** `8`
+**Type:** `Unsigned` **Default:** `8`
 
 ```yaml
 TabWidth: 4
@@ -80,14 +82,14 @@ Affects how existing tabs are displayed and formatted.
 
 Indent for line continuations.
 
-**Type:** `Unsigned`
-**Default:** `4`
+**Type:** `Unsigned` **Default:** `4`
 
 ```yaml
 ContinuationIndentWidth: 4
 ```
 
 **Example:**
+
 ```cpp
 int var = function1() +
     function2();
@@ -103,14 +105,14 @@ result = longFunction(
 
 Offset for access modifiers (public, private, protected).
 
-**Type:** `Integer`
-**Default:** `0`
+**Type:** `Integer` **Default:** `0`
 
 Negative values indent left, positive values indent right.
 
 **Examples:**
 
 `AccessModifierOffset: -2`:
+
 ```cpp
 class C {
 public:
@@ -119,6 +121,7 @@ public:
 ```
 
 `AccessModifierOffset: 0`:
+
 ```cpp
 class C {
   public:
@@ -127,6 +130,7 @@ class C {
 ```
 
 `AccessModifierOffset: 2`:
+
 ```cpp
 class C {
     public:
@@ -140,12 +144,12 @@ Indent access modifiers
 
 .
 
-**Type:** `Boolean`
-**Default:** `false`
+**Type:** `Boolean` **Default:** `false`
 
 **Example:**
 
 `true`:
+
 ```cpp
 class C {
     public:
@@ -154,6 +158,7 @@ class C {
 ```
 
 `false`:
+
 ```cpp
 class C {
   public:
@@ -167,12 +172,12 @@ class C {
 
 Indent case labels from switch statement.
 
-**Type:** `Boolean`
-**Default:** `false`
+**Type:** `Boolean` **Default:** `false`
 
 **Examples:**
 
 `false`:
+
 ```cpp
 switch (fool) {
 case 1:
@@ -184,6 +189,7 @@ default:
 ```
 
 `true`:
+
 ```cpp
 switch (fool) {
   case 1:
@@ -198,12 +204,12 @@ switch (fool) {
 
 Indent case blocks.
 
-**Type:** `Boolean`
-**Default:** `false`
+**Type:** `Boolean` **Default:** `false`
 
 **Examples:**
 
 `false`:
+
 ```cpp
 switch (fool) {
 case 1: {
@@ -216,6 +222,7 @@ default: {
 ```
 
 `true`:
+
 ```cpp
 switch (fool) {
 case 1:
@@ -232,19 +239,43 @@ default:
 
 ## Preprocessor Directives
 
+### PPIndentWidth
+
+Number of columns for preprocessor statement indentation.
+
+**Type:** `Integer` **Default:** `-1` (uses `IndentWidth`)
+
+```yaml
+PPIndentWidth: 1
+```
+
+**Example:**
+
+```cpp
+#ifdef __linux__
+# define FOO
+#else
+# define BAR
+#endif
+```
+
+When set to -1 (default), `IndentWidth` is used also for preprocessor statements.
+
 ### IndentPPDirectives
 
 Indent preprocessor directives.
 
-**Type:** `PPDirectiveIndentStyle`
-**Values:**
+**Type:** `PPDirectiveIndentStyle` **Values:**
+
 - `None` - Don't indent directives
 - `AfterHash` - Indent after the hash
 - `BeforeHash` - Indent before the hash
+- `Leave` - Leave indentation as-is (ignores `PPIndentWidth`)
 
 **Examples:**
 
 `None`:
+
 ```cpp
 #if FOO
 #if BAR
@@ -254,6 +285,7 @@ Indent preprocessor directives.
 ```
 
 `AfterHash`:
+
 ```cpp
 #if FOO
 #  if BAR
@@ -263,11 +295,22 @@ Indent preprocessor directives.
 ```
 
 `BeforeHash`:
+
 ```cpp
 #if FOO
   #if BAR
     #include <foo>
   #endif
+#endif
+```
+
+`Leave`:
+
+```cpp
+#if FOO
+    #if BAR
+#include <foo>
+    #endif
 #endif
 ```
 
@@ -277,12 +320,12 @@ Indent preprocessor directives.
 
 Indent goto labels.
 
-**Type:** `Boolean`
-**Default:** `true`
+**Type:** `Boolean` **Default:** `true`
 
 **Examples:**
 
 `true`:
+
 ```cpp
 int f() {
   if (foo()) {
@@ -295,6 +338,7 @@ label2:
 ```
 
 `false`:
+
 ```cpp
 int f() {
   if (foo()) {
@@ -310,8 +354,8 @@ label2:
 
 Indent extern blocks.
 
-**Type:** `IndentExternBlockStyle`
-**Values:**
+**Type:** `IndentExternBlockStyle` **Values:**
+
 - `AfterExternBlock` - Indent after extern
 - `NoIndent` - Don't indent
 - `Indent` - Indent extern block
@@ -319,6 +363,7 @@ Indent extern blocks.
 **Examples:**
 
 `AfterExternBlock`:
+
 ```cpp
 extern "C" {
 void f();
@@ -331,6 +376,7 @@ void g();
 ```
 
 `NoIndent`:
+
 ```cpp
 extern "C" {
 void f();
@@ -338,6 +384,7 @@ void f();
 ```
 
 `Indent`:
+
 ```cpp
 extern "C" {
   void f();
@@ -346,24 +393,32 @@ extern "C" {
 
 ### IndentRequiresClause
 
-Indent C++20 requires clause.
+Indent C++20 requires clause. This only applies when `RequiresClausePosition` is `OwnLine`, `OwnLineWithBrace`, or `WithFollowing`.
 
 **Type:** `Boolean`
+
+Note: In clang-format 12, 13 and 14 this was named `IndentRequires`.
 
 **Example:**
 
 `true`:
+
 ```cpp
 template <typename It>
   requires Iterator<It>
-void sort(It begin, It end) {}
+void sort(It begin, It end) {
+  //....
+}
 ```
 
 `false`:
+
 ```cpp
 template <typename It>
 requires Iterator<It>
-void sort(It begin, It end) {}
+void sort(It begin, It end) {
+  //....
+}
 ```
 
 ### IndentWrappedFunctionNames
@@ -375,12 +430,14 @@ Indent wrapped function names after line break.
 **Example:**
 
 `true`:
+
 ```cpp
 LoooooooooooooooooooooooooooooongReturnType
     LoooooooooooooooooooongFunctionDeclaration();
 ```
 
 `false`:
+
 ```cpp
 LoooooooooooooooooooooooooooooongReturnType
 LoooooooooooooooooooongFunctionDeclaration();
@@ -388,44 +445,99 @@ LoooooooooooooooooooongFunctionDeclaration();
 
 ### ConstructorInitializerIndentWidth
 
-Indent width for constructor initializers.
+Indent width for constructor initializers and inheritance lists.
 
-**Type:** `Unsigned`
-**Default:** Uses `IndentWidth`
+**Type:** `Unsigned` **Default:** Uses `IndentWidth`
+
+```yaml
+ConstructorInitializerIndentWidth: 2
+```
 
 **Example:**
 
-`ConstructorInitializerIndentWidth: 2`:
 ```cpp
 Constructor()
   : member1(),
     member2() {}
 ```
 
+### BracedInitializerIndentWidth
+
+Number of columns to indent braced init list contents.
+
+**Type:** `Integer` **Default:** Uses `ContinuationIndentWidth` if unset or negative **Since:** clang-format 17
+
+```yaml
+AlignAfterOpenBracket: AlwaysBreak
+BracedInitializerIndentWidth: 2
+```
+
+**Example:**
+
+```cpp
+void f() {
+  SomeClass c{
+    "foo",
+    "bar",
+    "baz",
+  };
+  auto s = SomeStruct{
+    .foo = "foo",
+    .bar = "bar",
+    .baz = "baz",
+  };
+  SomeArrayT a[3] = {
+    {
+      foo,
+      bar,
+    },
+    {
+      foo,
+      bar,
+    },
+    SomeArrayT{},
+  };
+}
+```
+
 ## Language-Specific
 
 ### IndentExportBlock
 
-Indent export blocks (JavaScript).
+Indent export blocks (JavaScript). If `true`, clang-format will indent the body of an `export { ... }` block. This doesn't affect the formatting of anything else related to exported declarations.
 
-**Type:** `Boolean`
+**Type:** `Boolean` **Since:** clang-format 20
 
 **Example:**
 
 `true`:
+
 ```javascript
-export {
-  foo,
-  bar
-};
+export { foo, bar };
 ```
 
 `false`:
+
 ```javascript
-export {
-foo,
-bar
-};
+export { foo, bar };
+```
+
+### ObjCBlockIndentWidth
+
+Number of columns for indentation of ObjC blocks.
+
+**Type:** `Unsigned`
+
+```yaml
+ObjCBlockIndentWidth: 4
+```
+
+**Example:**
+
+```objc
+[operation setCompletionBlock:^{
+    [self onOperationDone];
+}];
 ```
 
 ## Common Patterns
@@ -457,7 +569,9 @@ IndentCaseLabels: true
 IndentCaseBlocks: false
 IndentGotoLabels: true
 IndentPPDirectives: AfterHash
+PPIndentWidth: -1
 IndentWrappedFunctionNames: true
+BracedInitializerIndentWidth: 4
 ```
 
 ### Tab-Based Indentation
@@ -491,15 +605,17 @@ IndentPPDirectives: None
 2. **Tab Width**: If using tabs, ensure `TabWidth` matches team editor settings
 3. **Continuation**: Set `ContinuationIndentWidth` to help distinguish continuations from blocks
 4. **Access Modifiers**: Negative `AccessModifierOffset` creates outdent effect
-5. **Preprocessor**: Be careful with `IndentPPDirectives` in complex macro code
+5. **Preprocessor**: Be careful with `IndentPPDirectives` in complex macro code; use `PPIndentWidth` to control preprocessor indentation separately
 6. **Mixed Tabs/Spaces**: Avoid mixing; use `Never` or `ForIndentation` for consistent results
+7. **Braced Initializers**: Use `BracedInitializerIndentWidth` (clang-format 17+) to control indentation of braced init lists independently
+8. **Leave Option**: The `Leave` value for `IndentPPDirectives` preserves existing preprocessor indentation without changes
 
 ## See Also
 
 - [Alignment](01-alignment.md) - Align code elements
 - [Spacing](05-spacing.md) - Control whitespace
 - [Braces](03-braces.md) - Configure brace placement
-- [Full Style Options Reference](reference/clang-format-style-options.md)
+- [Full Style Options Reference](complete/clang-format-style-options.md)
 
 ---
 
