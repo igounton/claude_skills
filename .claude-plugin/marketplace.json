@@ -15,9 +15,30 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./opinionated-python-development",
-        "./clang-format"
-      ]
+        "./agent-orchestration",
+        "./async-python-patterns",
+        "./brainstorming-skill",
+        "./clang-format",
+        "./commitlint",
+        "./conventional-commits",
+        "./fastmcp-creator",
+        "./gitlab-skill",
+        "./hatchling",
+        "./holistic-linting",
+        "./litellm",
+        "./llamafile",
+        "./mkdocs",
+        "./pre-commit",
+        "./prompt-optimization-claude-45",
+        "./pypi-readme-creator",
+        "./python3-development",
+        "./story-based-framing",
+        "./toml-python",
+        "./uv",
+        "./verification-gate",
+        "./xdg-base-directory"
+      ],
+      "commands": ["./commands"]
     }
   ]
 }

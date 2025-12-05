@@ -10,6 +10,7 @@
 Discovers all skills in the repository and creates symlinks in ~/.claude/skills/.
 """
 
+import json
 from collections import Counter
 from enum import StrEnum
 from pathlib import Path
@@ -25,7 +26,11 @@ console = Console()
 error_console = Console(stderr=True, style="bold red")
 
 # Application setup
-app = typer.Typer(name="install", help="Install Claude Code skills from this repository", rich_markup_mode="rich")
+app = typer.Typer(
+    name="install",
+    help="Install Claude Code skills from this repository",
+    rich_markup_mode="rich",
+)
 
 
 class InstallStatus(StrEnum):
@@ -35,6 +40,106 @@ class InstallStatus(StrEnum):
     NEWLY_INSTALLED = "newly_installed"
     SKIPPED = "skipped"
     ERROR = "error"
+
+
+class MarketplaceUpdater:
+    """Updates .claude-plugin/marketplace.json with discovered components.
+
+    Args:
+        repo_root: Root directory of the skills repository
+    """
+
+    def __init__(self, repo_root: Path) -> None:
+        """Initialize marketplace updater.
+
+        Args:
+            repo_root: Root directory of the skills repository
+        """
+        self.repo_root = repo_root
+        self.marketplace_path = repo_root / ".claude-plugin" / "marketplace.json"
+
+    def discover_skills(self) -> list[str]:
+        """Discover all skill directories containing SKILL.md.
+
+        Returns:
+            List of relative skill paths (e.g., ["./python3-development", "./uv"])
+        """
+        skill_files = list(self.repo_root.glob("*/SKILL.md"))
+        return sorted(f"./{skill_file.parent.name}" for skill_file in skill_files)
+
+    def discover_commands(self) -> list[str] | None:
+        """Check if commands directory exists at repo root.
+
+        Returns:
+            ["./commands"] if directory exists with .md files, None otherwise
+        """
+        commands_dir = self.repo_root / "commands"
+        if commands_dir.is_dir() and list(commands_dir.glob("*.md")):
+            return ["./commands"]
+        return None
+
+    def discover_agents(self) -> list[str] | None:
+        """Check if agents directory exists at repo root (not .claude/agents).
+
+        Returns:
+            ["./agents"] if directory exists with .md files, None otherwise
+        """
+        agents_dir = self.repo_root / "agents"
+        if agents_dir.is_dir() and list(agents_dir.glob("*.md")):
+            return ["./agents"]
+        return None
+
+    def load_marketplace(self) -> dict | None:
+        """Load existing marketplace.json.
+
+        Returns:
+            Parsed JSON as dict, or None if file doesn't exist
+        """
+        if not self.marketplace_path.exists():
+            return None
+        with self.marketplace_path.open("r", encoding="utf-8") as f:
+            return json.load(f)
+
+    def update(self) -> tuple[bool, str, dict[str, list[str] | None]]:
+        """Update marketplace.json with discovered components.
+
+        Returns:
+            Tuple of (success, message, discovered_components)
+        """
+        marketplace = self.load_marketplace()
+        if marketplace is None:
+            return (False, "marketplace.json not found", {})
+
+        # Discover components
+        skills = self.discover_skills()
+        commands = self.discover_commands()
+        agents = self.discover_agents()
+
+        discovered = {"skills": skills, "commands": commands, "agents": agents}
+
+        # Update first plugin entry
+        if not marketplace.get("plugins"):
+            return (False, "No plugins array in marketplace.json", discovered)
+
+        plugin = marketplace["plugins"][0]
+        plugin["skills"] = skills
+
+        if commands:
+            plugin["commands"] = commands
+        elif "commands" in plugin:
+            del plugin["commands"]
+
+        if agents:
+            plugin["agents"] = agents
+        elif "agents" in plugin:
+            del plugin["agents"]
+
+        # Write updated marketplace.json
+        with self.marketplace_path.open("w", encoding="utf-8") as f:
+            json.dump(marketplace, f, indent=2)
+            f.write("\n")  # Trailing newline
+
+        return (True, "Successfully updated", discovered)
 
 
 class SkillInstaller:
@@ -187,6 +292,55 @@ def display_results(results: dict[str, tuple[InstallStatus, str]]) -> None:
     console.print(Panel(summary, border_style=summary_style))
 
 
+def display_marketplace_results(
+    success: bool,
+    message: str,
+    discovered: dict[str, list[str] | None],
+    dry_run: bool = False,
+) -> None:
+    """Display marketplace update results.
+
+    Args:
+        success: Whether the update succeeded
+        message: Status message
+        discovered: Dictionary of discovered components
+        dry_run: Whether this is a dry run
+    """
+    console.print()
+
+    if not success:
+        console.print(
+            Panel(
+                f"[yellow]:warning: Marketplace update skipped:[/yellow] {message}",
+                title=":package: Marketplace Plugin",
+                border_style="yellow",
+            )
+        )
+        return
+
+    # Build component summary
+    components = []
+    skills = discovered.get("skills")
+    if skills:
+        components.append(f"[cyan]{len(skills)}[/cyan] skills")
+    if discovered.get("commands"):
+        components.append("[cyan]commands[/cyan] directory")
+    if discovered.get("agents"):
+        components.append("[cyan]agents[/cyan] directory")
+
+    action = "Would update" if dry_run else "Updated"
+    component_text = ", ".join(components) if components else "no components"
+
+    console.print(
+        Panel(
+            f"[green]:white_check_mark: {action}[/green] .claude-plugin/marketplace.json\n"
+            f"Components: {component_text}",
+            title=":package: Marketplace Plugin",
+            border_style="green",
+        )
+    )
+
+
 def _exit_no_skills() -> NoReturn:
     """Exit when no skills found (abstracted for TRY301)."""
     raise typer.Exit(0)
@@ -202,7 +356,10 @@ def main(
     repo_path: Annotated[
         Path,
         typer.Option(
-            "--repo", "-r", help="Repository root path (default: script directory)", rich_help_panel="Configuration"
+            "--repo",
+            "-r",
+            help="Repository root path (default: script directory)",
+            rich_help_panel="Configuration",
         ),
     ] = Path(__file__).parent,
     target_path: Annotated[
@@ -217,7 +374,10 @@ def main(
     dry_run: Annotated[
         bool,
         typer.Option(
-            "--dry-run", "-n", help="Show what would be done without making changes", rich_help_panel="Options"
+            "--dry-run",
+            "-n",
+            help="Show what would be done without making changes",
+            rich_help_panel="Options",
         ),
     ] = False,
 ) -> None:
@@ -244,7 +404,12 @@ def main(
 
         # Show dry-run notice if applicable
         if dry_run:
-            console.print(Panel("[yellow]DRY RUN MODE - No changes will be made[/yellow]", border_style="yellow"))
+            console.print(
+                Panel(
+                    "[yellow]DRY RUN MODE - No changes will be made[/yellow]",
+                    border_style="yellow",
+                )
+            )
             console.print()
 
         # Install each skill
@@ -254,15 +419,41 @@ def main(
             if dry_run:
                 # In dry run, just check status
                 if installer.is_correctly_installed(skill_dir):
-                    results[skill_name] = (InstallStatus.ALREADY_INSTALLED, "Would skip (already installed)")
+                    results[skill_name] = (
+                        InstallStatus.ALREADY_INSTALLED,
+                        "Would skip (already installed)",
+                    )
                 else:
-                    results[skill_name] = (InstallStatus.NEWLY_INSTALLED, "Would install")
+                    results[skill_name] = (
+                        InstallStatus.NEWLY_INSTALLED,
+                        "Would install",
+                    )
             else:
                 status, message = installer.install_skill(skill_dir)
                 results[skill_name] = (status, message)
 
         # Display results
         display_results(results)
+
+        # Update marketplace.json
+        marketplace_updater = MarketplaceUpdater(repo_path)
+        if dry_run:
+            # In dry run, discover but don't write
+            discovered = {
+                "skills": marketplace_updater.discover_skills(),
+                "commands": marketplace_updater.discover_commands(),
+                "agents": marketplace_updater.discover_agents(),
+            }
+            marketplace_exists = marketplace_updater.marketplace_path.exists()
+            display_marketplace_results(
+                success=marketplace_exists,
+                message="marketplace.json not found" if not marketplace_exists else "",
+                discovered=discovered,
+                dry_run=True,
+            )
+        else:
+            success, message, discovered = marketplace_updater.update()
+            display_marketplace_results(success, message, discovered)
 
         # Exit with error code if any installations failed
         error_count = sum(1 for s, _ in results.values() if s == InstallStatus.ERROR)
