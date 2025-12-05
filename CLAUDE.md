@@ -319,22 +319,26 @@ Before documenting ANY behavior, capability, or characteristic of:
 <verification_steps>
 
 1. **Read the Actual Source**
+
    - Command files: Read entire file, note line numbers
    - Agent files: Read YAML frontmatter and complete prompt
    - Official documentation: Use WebSearch, WebFetch, or mcp\_\_Ref tools
    - Library code: Read source files directly
 
 2. **Verify the Behavior**
+
    - Execute commands/scripts if possible to observe actual behavior
    - Cite evidence from source files with line number references
    - Test against documented claims before writing them
 
 3. **Cite Observations**
+
    - Format: "According to lines X-Y of [file path]..."
    - Format: "Testing command X produces output: [exact output]"
    - Format: "Per official documentation at [URL]..."
 
 4. **Never Fabricate**
+
    - If unknown, state "unverified" explicitly
    - Research using available tools (Read, Grep, WebSearch, mcp\_\_Ref)
    - If unable to verify, state "Unable to verify [claim] due to [reason]"
@@ -722,27 +726,32 @@ Task(
 This refactored version implements:
 
 1. **Strategic XML Tagging** (Anthropic best practice):
+
    - `<skill_activation_triggers>` for clear activation conditions
    - `<verification_protocol>` with nested `<verification_steps>`
    - `<examples>` with `<correct>` and `<incorrect>` variants
    - `<anti_patterns>` and `<correct_pattern>` for file references
 
 2. **Explicit Imperatives** (Anthropic + OpenAI best practice):
+
    - Replaced all vague qualifiers with "MUST", "MUST NOT"
    - Added positive and negative trigger conditions
    - Quantified requirements: "minimum 3 sources", "cite line numbers"
 
 3. **Structured Examples** (Anthropic multishot pattern):
+
    - All examples follow consistent `<example>` XML structure
    - Include scenario, input, output, rationale
    - Clear distinction between correct and incorrect patterns
 
 4. **Consolidated Verification** (Original strength enhanced):
+
    - Single authoritative `<verification_protocol>` section
    - Explicit 5-step process with quantified requirements
    - Clear consequences of violations explained
 
 5. **Unambiguous Triggers** (Addressing key weakness):
+
    - Explicit positive triggers for skill activation
    - Explicit negative conditions (when NOT to activate)
    - Session framework detection with file system check
