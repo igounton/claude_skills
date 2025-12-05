@@ -6,25 +6,15 @@ repos:
     hooks:
       - id: sync-pre-commit-deps
 
-  - repo: https://github.com/compilerla/conventional-pre-commit
-    rev: v4.3.0
+  # WORKAROUND: prek bug https://github.com/j178/prek/issues/1194
+  # commit-msg hooks don't receive the commit message file, so we use a local hook
+  - repo: local
     hooks:
       - id: conventional-pre-commit
         name: Validate Conventional Commits format
         stages: [commit-msg]
-        args:
-          - --strict
-          - --force-scope
-          - feat
-          - fix
-          - chore
-          - docs
-          - test
-          - refactor
-          - perf
-          - ci
-          - style
-          - build
+        language: system
+        entry: uv run --with conventional-pre-commit conventional-pre-commit --strict --force-scope feat fix chore docs test refactor perf ci style build
 
   # Standard pre-commit hooks for general file maintenance
   - repo: https://github.com/pre-commit/pre-commit-hooks
