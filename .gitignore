@@ -1,0 +1,30 @@
+raw/
+.cache*/
+.*_cache/
+.DS_Store
+__pycache__
+.venv
+node_modules/
+# cc-sessions runtime files
+sessions/sessions-state.json
+sessions/package.json
+sessions/transcripts/
+sessions/.archived/
+# Build artifacts
+*.zip
+.coverage
+# Code review reports
+.claude/smells/
+# Agent research artifacts (intermediate analysis files)
+**/analysis-*.md
+**/comparative-analysis-*.md
+**/synthesis-analysis.md
+
+# MCP configuration with API keys
+.mcp.json
+
+# GitLab skill sync lock files
+*/.sync-gitlab-docs.lock
+
+# uv lock file (dependency management)
+uv.lock
