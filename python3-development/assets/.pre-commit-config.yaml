@@ -1,0 +1,110 @@
+# Pre-commit configuration for python_picotool repository
+
+repos:
+  - repo: https://github.com/mxr/sync-pre-commit-deps
+    rev: v0.0.3
+    hooks:
+      - id: sync-pre-commit-deps
+
+  # Standard pre-commit hooks for general file maintenance
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: \.lock$
+      - id: end-of-file-fixer
+        exclude: \.lock$
+      - id: check-yaml
+        args: [--unsafe] # Allow Python tags in mkdocs.yml
+      - id: check-json
+      - id: check-toml
+      - id: check-added-large-files
+        args: ["--maxkb=10000"] # 10MB limit
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+
+  # Python formatting and linting
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.13.3
+    hooks:
+      - id: ruff
+        name: Lint Python with ruff
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
+        name: Format Python with ruff
+
+  # Shell script linting
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+        name: Check shell scripts with shellcheck
+        files: \.(sh|bash)$
+        args: [-x, --severity=warning]
+
+  # YAML/JSON formatting
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        name: Format YAML, JSON, and Markdown files
+        types_or: [yaml, json, markdown]
+        exclude: \.lock$
+
+  # Shell formatting
+  - repo: https://github.com/pecigonzalo/pre-commit-shfmt
+    rev: v2.2.0
+    hooks:
+      - id: shell-fmt-go
+        args:
+          - "--apply-ignore"
+          - -w
+          - -i
+          - "4"
+          - -ci
+
+  # Local hooks for type checking
+  - repo: local
+    hooks:
+      - id: install-pep723-deps
+        name: Install PEP 723 script dependencies
+        entry: bash -c 'for file in "$@"; do if head -20 "$file" | grep -q "# /// script"; then uv export --script "$file" | uv pip install --quiet -r -; fi; done' --
+        language: system
+        types: [python]
+        pass_filenames: true
+      - id: mypy
+        name: mypy
+        entry: uv run mypy
+        language: system
+        types: [python]
+        pass_filenames: true
+
+      - id: pyright
+        name: basedpyright
+        entry: uv run basedpyright
+        language: system
+        types: [python]
+        pass_filenames: true
+        require_serial: true
+
+# Configuration for specific hooks
+default_language_version:
+  python: python3
+
+# Exclude patterns
+exclude: |
+  (?x)^(
+    \.git/|
+    \.venv/|
+    __pycache__/|
+    \.mypy_cache/|
+    \.cache/|
+    \.pytest_cache/|
+    \.lock$|
+    typings/
+  )
