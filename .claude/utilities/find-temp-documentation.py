@@ -44,6 +44,7 @@ from __future__ import annotations
 
 import shutil
 import sys
+from collections import Counter
 from dataclasses import dataclass
 from datetime import date, datetime
 from pathlib import Path
@@ -74,6 +75,12 @@ TEMP_DOC_PATTERNS = [
 ]
 
 EXCLUDE_DIRS = {".git", "node_modules", "__pycache__", "docs"}
+
+# Display limits for output formatting
+MAX_TASKS_TO_DISPLAY = 10  # Maximum number of tasks to show in summary
+TASK_NAME_TRUNCATE_LENGTH = 50  # Maximum length for task names before truncation
+DESCRIPTION_TRUNCATE_LENGTH = 80  # Maximum length for description preview
+CONTENT_PREVIEW_LINES = 5  # Number of content lines to show in preview
 
 # Type aliases for YAML frontmatter values
 # Based on .claude/commands/templates/temporary-doc-template.md
@@ -183,8 +190,8 @@ class TempDoc:
                 status=post["status"],
                 content=post.content,
             )
-        except Exception:
-            # Return None for any parsing errors
+        except (OSError, KeyError, TypeError, ValueError):
+            # Return None for file errors, missing keys, type mismatches, or date parsing errors
             return None
 
     def is_valid(self) -> tuple[bool, list[str]]:
@@ -346,8 +353,6 @@ def _print_summary_yaml(docs: list[TempDoc], path: Path) -> None:
         docs: List of TempDoc objects
         path: Root path for computing relative paths
     """
-    from collections import Counter
-
     # Count by type, status, and task
     type_counts = Counter(doc.type for doc in docs)
     status_counts = Counter(doc.status for doc in docs)
@@ -366,11 +371,15 @@ def _print_summary_yaml(docs: list[TempDoc], path: Path) -> None:
         for status, count in sorted(status_counts.items()):
             console.print(f"    {status}: {count}")
 
-    if task_counts and len(task_counts) <= 10:  # Only show if not too many tasks
+    if task_counts and len(task_counts) <= MAX_TASKS_TO_DISPLAY:
         console.print("  by_task:")
         for task, count in sorted(task_counts.items()):
             # Truncate long task names
-            task_display = task[:50] + "..." if len(task) > 50 else task
+            task_display = (
+                task[:TASK_NAME_TRUNCATE_LENGTH] + "..."
+                if len(task) > TASK_NAME_TRUNCATE_LENGTH
+                else task
+            )
             console.print(f"    {task_display}: {count}")
 
 
@@ -428,7 +437,11 @@ def _print_doc_yaml(doc: TempDoc, index: int, path: Path, indent: int = 2) -> No
     # Extract first line of content as description
     content_lines = doc.content.strip().split("\n")
     first_line = content_lines[0] if content_lines else ""
-    description = first_line[:80] + "..." if len(first_line) > 80 else first_line
+    description = (
+        first_line[:DESCRIPTION_TRUNCATE_LENGTH] + "..."
+        if len(first_line) > DESCRIPTION_TRUNCATE_LENGTH
+        else first_line
+    )
 
     console.print(f"{prefix}- index: {index}")
     console.print(f"{prefix}  name: {doc.path.stem}")
@@ -456,28 +469,27 @@ def _find_doc_by_identifier(
     Returns:
         TempDoc if found, None otherwise
     """
+    # Handle index-based lookup
     if index is not None:
-        if 0 <= index < len(docs):
-            return docs[index]
-        return None
+        return docs[index] if 0 <= index < len(docs) else None
 
     if identifier is None:
         return None
 
-    # Try by path first (exact match)
-    for doc in docs:
-        if str(doc.path) == identifier or str(doc.path.absolute()) == identifier:
-            return doc
+    # Search strategies in priority order: exact path, stem name, partial path
+    def matches_path(doc: TempDoc) -> bool:
+        return str(doc.path) == identifier or str(doc.path.absolute()) == identifier
 
-    # Try by name (stem)
-    for doc in docs:
-        if doc.path.stem == identifier:
-            return doc
+    def matches_stem(doc: TempDoc) -> bool:
+        return doc.path.stem == identifier
 
-    # Try partial path match
-    for doc in docs:
-        if identifier in str(doc.path):
-            return doc
+    def matches_partial(doc: TempDoc) -> bool:
+        return identifier in str(doc.path)
+
+    for match_fn in (matches_path, matches_stem, matches_partial):
+        for doc in docs:
+            if match_fn(doc):
+                return doc
 
     return None
 
@@ -831,10 +843,11 @@ def _print_full_doc_details(doc: TempDoc, is_valid: bool, errors: list[str]) -> 
     # Show first few lines
     if content_lines:
         console.print("\n[bold]First Few Lines:[/]")
-        for line in content_lines[:5]:
+        for line in content_lines[:CONTENT_PREVIEW_LINES]:
             console.print(f"  [dim]{line}[/]")
-        if len(content_lines) > 5:
-            console.print(f"  [dim]... and {len(content_lines) - 5} more lines[/]")
+        if len(content_lines) > CONTENT_PREVIEW_LINES:
+            remaining = len(content_lines) - CONTENT_PREVIEW_LINES
+            console.print(f"  [dim]... and {remaining} more lines[/]")
 
 
 @app.command()
