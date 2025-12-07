@@ -149,6 +149,18 @@ Research and document the **[CATEGORY NAME]** aspect of [TOOL/LIBRARY] for the {
 - Use: `[Category Name](./references/{category}/index.md) - Category Description about what can be found at this document`
 - **Reason**: Relative paths ensure portability and correct linking in the final package.
 
+## MCP Tool Usage
+
+Use the right tool for the right level of fidelity.
+
+| Tool         | Purpose                | Fidelity          | Use When...                                                                                                                     |
+| :----------- | :--------------------- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------ |
+| **WebFetch** | **Scoping & Overview** | Low (Summarized)  | You need to know _what_ something is or get a high-level summary of a page. **NEVER** use for technical implementation details. |
+| **Exa**      | **Content Extraction** | Medium (Markdown) | You need to read documentation, see code snippets, or extract specific content from a page.                                     |
+| **Ref**      | **Deep Reading**       | High (Detailed)   | You need authoritative, verbatim documentation or deep technical specs.                                                         |
+
+**Critical Rule**: If you need to see _how_ something works, file structures, or specific code comments, you **MUST** use `Exa` or `Ref`. `WebFetch` will hallucinate or omit these details.
+
 ## Agent Type Selection
 
 | Agent Type                        | Best For                              | Strengths                           |

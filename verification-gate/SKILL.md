@@ -143,6 +143,8 @@ REQUIRED: Either:
 - `mcp__exa__web_search_exa` for web research with LLM-optimized output
 - WebFetch as fallback only when MCP tools don't provide needed content
 
+> [Web resource access, definitive guide for getting accurate data for high quality results](./references/accessing_online_resources.md)
+
 **If pattern-matching detected:**
 
 ```
@@ -197,16 +199,19 @@ Required before proceeding: [specific next steps]
 **Verification workflow:**
 
 1. **Checkpoint 1 - State hypothesis:**
+
    - "Hypothesis: pydantic is missing from project dependencies"
    - BUT need to specify WHICH dependency system (there are multiple)
 
 2. **Checkpoint 2 - Gather evidence:**
+
    - Read script file to check for PEP 723 `# /// script` block
    - Read `pyproject.toml` to check declared dependencies
    - Check if script is standalone (PEP 723) or project-managed
    - Evidence gathered, hypothesis refined: "PEP 723 script missing pydantic in inline metadata"
 
 3. **Checkpoint 3 - Verify alignment:**
+
    - Hypothesis system: PEP 723 inline `# /// script` block
    - Proposed action: Add pydantic to `# /// script` block
    - **✓ ALIGNED** - both target PEP 723 system
@@ -232,16 +237,19 @@ Required before proceeding: [specific next steps]
 **Verification workflow:**
 
 1. **Checkpoint 1 - State hypothesis:**
+
    - Initial: "Timeout configuration not working"
    - Refined: "Hypothesis: Application reads timeout from environment variable, not config file"
 
 2. **Checkpoint 2 - Gather evidence:**
+
    - Grep for timeout configuration loading code
    - Read relevant source files
    - Check which configuration source has precedence
    - Evidence: Code reads from env var first, config file as fallback
 
 3. **Checkpoint 3 - Verify alignment:**
+
    - Hypothesis system: Environment variable configuration
    - Proposed action: Set environment variable
    - **✓ ALIGNED**
@@ -260,10 +268,12 @@ Required before proceeding: [specific next steps]
 **Verification workflow:**
 
 1. **Checkpoint 1 - State hypothesis:**
+
    - Need to investigate before stating hypothesis
    - **✗ BLOCKED** - Cannot proceed without hypothesis
 
 2. **Investigation required:**
+
    - Read package.json to understand dependencies
    - Read build logs to identify specific failure
    - Check if node_modules exists and is current

@@ -359,6 +359,8 @@ When encountering unique names, tool references, or technical jargon (e.g., "Web
 - **Incorrect**: "Use the web summary tool to get page info." (Paraphrased "WebFetch")
 - **Correct**: "Use `WebFetch` to retrieve specific web content." (Verified term)
 
+> [Web resource access, definitive guide for getting accurate data for high quality results](./references/accessing_online_resources.md)
+
 ## Compression Techniques
 
 When CLAUDE.md or Skill files grow too large, apply these density optimizations. Use judiciously—over-compression can reduce compliance.

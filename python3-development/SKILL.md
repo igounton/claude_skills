@@ -571,16 +571,16 @@ def process(val: str | int) -> None:
 
 **Decision Matrix**:
 
-| Feature | attrs | dataclasses | pydantic |
-| --- | --- | --- | --- |
-| **Performance** | Fastest (compiled) | Fast (native) | Slower (validation overhead) |
-| **Validation** | Basic (via converters/validators) | None (requires custom `__post_init__`) | Comprehensive (built-in) |
-| **Immutability** | `@frozen` | `frozen=True` | `frozen=True` (v2) |
-| **Evolution** | Excellent (`evolve()`) | Basic (`replace()`) | Good (`model_copy()`) |
-| **Slots** | Automatic | Manual (`slots=True`) | Automatic (v2) |
-| **Type Coercion** | Manual | None | Automatic |
-| **JSON Serialization** | Manual | Manual | Native (`model_dump_json()`) |
-| **Use When** | High-performance, pure Python data | Stdlib-only requirement | External data validation (APIs, configs) |
+| Feature                | attrs                              | dataclasses                            | pydantic                                 |
+| ---------------------- | ---------------------------------- | -------------------------------------- | ---------------------------------------- |
+| **Performance**        | Fastest (compiled)                 | Fast (native)                          | Slower (validation overhead)             |
+| **Validation**         | Basic (via converters/validators)  | None (requires custom `__post_init__`) | Comprehensive (built-in)                 |
+| **Immutability**       | `@frozen`                          | `frozen=True`                          | `frozen=True` (v2)                       |
+| **Evolution**          | Excellent (`evolve()`)             | Basic (`replace()`)                    | Good (`model_copy()`)                    |
+| **Slots**              | Automatic                          | Manual (`slots=True`)                  | Automatic (v2)                           |
+| **Type Coercion**      | Manual                             | None                                   | Automatic                                |
+| **JSON Serialization** | Manual                             | Manual                                 | Native (`model_dump_json()`)             |
+| **Use When**           | High-performance, pure Python data | Stdlib-only requirement                | External data validation (APIs, configs) |
 
 **attrs Pattern** (high performance, pure Python):
 
@@ -805,6 +805,8 @@ Research tool preference for PEP documentation:
 1. mcp__Ref__ref_search_documentation(query="PEP {number} Python enhancement proposal")
 2. mcp__exa__get_code_context_exa(query="PEP {number} implementation examples")
 3. WebFetch as fallback
+
+> [Web resource access, definitive guide for getting accurate data for high quality results](./references/accessing_online_resources.md)
 ```
 
 **With file path argument**:
@@ -896,6 +898,7 @@ Each workflow uses agent chaining with specific quality gates. See the orchestra
    **Note**: prek is a Rust-based drop-in replacement for pre-commit. Both tools use the same `.pre-commit-config.yaml` and have identical CLI interfaces.
 
    **Use detected tool with**: `uv run <detected-tool> run --files <files>` for ALL quality checks
+
    - This runs the complete toolchain configured in the project
    - Includes formatting, linting, type checking, and custom validators
    - Matches exactly what runs in CI and blocks merges
@@ -908,6 +911,7 @@ Each workflow uses agent chaining with specific quality gates. See the orchestra
    ```
 
    **If found**: Read the CI config to identify required linting tools and their exact commands
+
    - Look for `ruff`, `mypy`, `basedpyright`, `pyright`, `bandit` invocations
    - Note the exact commands and flags used
    - Execute those specific commands to ensure CI compatibility
@@ -1113,12 +1117,12 @@ These templates implement the patterns documented in [User Project Conventions](
 
 **Delegation Pattern**:
 
-| Instead of | Use this pattern |
-| --- | --- |
-| Writing Python code directly | Delegate to `@agent-python-cli-architect` with clear requirements |
-| Skipping validation steps | Complete workflow: implement → test → review → validate |
-| Pre-deciding technical implementations | Let agents determine HOW based on requirements |
-| Implementing and testing in same step | Chain agents: `@agent-python-cli-architect` → `@agent-python-pytest-architect` |
+| Instead of                             | Use this pattern                                                               |
+| -------------------------------------- | ------------------------------------------------------------------------------ |
+| Writing Python code directly           | Delegate to `@agent-python-cli-architect` with clear requirements              |
+| Skipping validation steps              | Complete workflow: implement → test → review → validate                        |
+| Pre-deciding technical implementations | Let agents determine HOW based on requirements                                 |
+| Implementing and testing in same step  | Chain agents: `@agent-python-cli-architect` → `@agent-python-pytest-architect` |
 
 **Reason**: Orchestrators coordinate workflows. Agents have specialized expertise and focused tool access for implementation.
 

@@ -14,7 +14,8 @@ repos:
         name: Validate Conventional Commits format
         stages: [commit-msg]
         language: system
-        entry: uv run --with conventional-pre-commit conventional-pre-commit --strict --force-scope feat fix chore docs test refactor perf ci style build
+        always_run: true
+        entry: uv run --with conventional-pre-commit conventional-pre-commit --strict --force-scope feat fix chore docs test refactor perf ci style build .git/COMMIT_EDITMSG
 
   # Standard pre-commit hooks for general file maintenance
   - repo: https://github.com/pre-commit/pre-commit-hooks

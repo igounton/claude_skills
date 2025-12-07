@@ -523,18 +523,22 @@ The orchestrator must task sub-agents with ALL code changes, including the small
 Before sending delegation, verify:
 
 1. **Am I enabling full discovery?**
+
    - Listed available tools/access → ENABLING ✅
    - Specified which tool to use → LIMITING (rewrite to list available resources)
 
 2. **Am I stating facts or making assumptions?**
+
    - "Fails with error X" → FACT ✅
    - "Probably fails because..." → ASSUMPTION (rewrite as observations)
 
 3. **Am I defining WHAT or prescribing HOW?**
+
    - "Must successfully build the package" → WHAT ✅
    - "Run 'npm build' to build" → HOW (rewrite as success criteria)
 
 4. **Am I sharing observations or solutions?**
+
    - "Line 42 contains 'import X'" → OBSERVATION ✅
    - "Change line 42 to 'import Y'" → SOLUTION (rewrite as problem statement)
 
@@ -653,10 +657,12 @@ YOUR TASK:
 Before delegating, ask:
 
 1. **Is this a repeatable pattern?**
+
    - Code style → YES, audit file/module
    - Unique one-off fix → NO, targeted fix only
 
 2. **What was developer's mental model?**
+
    - If they missed it here, they missed it everywhere similar
    - Pattern indicates consistent thinking at time of development
 
@@ -855,13 +861,15 @@ AVAILABLE RESOURCES:
 
 **Why this matters - accuracy, precision, and fidelity:**
 
-| Term | Definition | Tool Comparison |
-| --- | --- | --- |
-| **Accurate** | Conforming exactly to truth | `Ref` returns verbatim source (accurate). `WebFetch` returns AI interpretation (may be correct in spirit but not accurate to source) |
-| **Precise** | Exactly defined, not vague | `Ref` preserves every character, directive, code block (precise). `WebFetch` omits specifics like version numbers, syntax examples (imprecise) |
-| **Fidelity** | Degree of faithful reproduction | `Ref` = high fidelity (output IS the source). `WebFetch` = low fidelity (output is a lossy transformation) |
+| Term         | Definition                      | Tool Comparison                                                                                                                                |
+| ------------ | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Accurate** | Conforming exactly to truth     | `Ref` returns verbatim source (accurate). `WebFetch` returns AI interpretation (may be correct in spirit but not accurate to source)           |
+| **Precise**  | Exactly defined, not vague      | `Ref` preserves every character, directive, code block (precise). `WebFetch` omits specifics like version numbers, syntax examples (imprecise) |
+| **Fidelity** | Degree of faithful reproduction | `Ref` = high fidelity (output IS the source). `WebFetch` = low fidelity (output is a lossy transformation)                                     |
 
 For technical documentation and skill creation, **high-fidelity access to sources** is essential. When orchestrators list `WebFetch` without mentioning `Ref`, agents use the low-fidelity tool and produce work based on summaries rather than source material.
+
+> [Web resource access, definitive guide for getting accurate data for high quality results](./references/accessing_online_resources.md)
 
 **Reason**: Each pattern limits agent effectiveness. Replacements empower agents with observations, success criteria, and autonomy while avoiding unverified assumptions.
 
@@ -998,6 +1006,7 @@ As an orchestrator, your role is:
 Before delegating to any sub-agent, verify the prompt:
 
 1. **Uses observational language:**
+
    - Replace "I think" → "Observed: [fact]"
    - Replace "probably" → "Command X produces Y"
    - Replace "likely" → "Pattern seen at [locations]"
@@ -1006,6 +1015,7 @@ Before delegating to any sub-agent, verify the prompt:
    - Replace "might be" → "Symptoms include: [list]"
 
 2. **Includes empowering context:**
+
    - Raw observations
    - Success criteria
    - Available resources/tools
@@ -1013,6 +1023,7 @@ Before delegating to any sub-agent, verify the prompt:
    - User constraints only
 
 3. **Preserves agent autonomy:**
+
    - Lists available tools instead of prescribing tool usage
    - Defines WHAT instead of HOW
    - States problems instead of solutions
@@ -1020,6 +1031,7 @@ Before delegating to any sub-agent, verify the prompt:
    - Trusts agent expertise over orchestrator assumptions
 
 4. **References documents efficiently:**
+
    - Uses `@filepath` for detailed documents instead of transcribing
    - Provides high-level context and success criteria in prompt
    - Lets agent read source documents for implementation details

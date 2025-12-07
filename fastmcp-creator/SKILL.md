@@ -85,6 +85,8 @@ RESEARCH TOOL PREFERENCE (in order):
 
 RATIONALE: MCP tools provide higher fidelity (verbatim source) compared to WebFetch (AI summaries)
 
+> [Web resource access, definitive guide for getting accurate data for high quality results](./references/accessing_online_resources.md)
+
 #### 1.3 Study Framework Documentation
 
 DECISION_TREE:
