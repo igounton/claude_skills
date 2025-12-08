@@ -1,4 +1,16 @@
-# Pre-commit configuration for python_picotool repository
+# prek - Pre-commit Re-engineered in Rust
+# install via: `uv tool install prek`
+# prek is a Rust-based drop-in replacement for pre-commit created by https://github.com/j178/prek
+# Sources:
+# - https://github.com/j178/prek
+# - https://prek.j178.dev/
+# - https://pypi.org/project/prek/
+# - https://hugovk.dev/blog/2025/ready-prek-go/
+# - https://pydevtools.com/blog/prek-pre-commit-but-fast/
+
+default_stages:
+  - commit-msg
+  - pre-commit
 
 repos:
   - repo: https://github.com/mxr/sync-pre-commit-deps
@@ -7,15 +19,15 @@ repos:
       - id: sync-pre-commit-deps
 
   # WORKAROUND: prek bug https://github.com/j178/prek/issues/1194
-  # commit-msg hooks don't receive the commit message file, so we use a local hook
+  # commit-msg hooks don't receive the commit message file on Linux
   - repo: local
     hooks:
       - id: conventional-pre-commit
-        name: Validate Conventional Commits format
+        name: Conventional Commit
         stages: [commit-msg]
         language: system
         always_run: true
-        entry: uv run --with conventional-pre-commit conventional-pre-commit --strict --force-scope feat fix chore docs test refactor perf ci style build .git/COMMIT_EDITMSG
+        entry: uv run --with conventional-pre-commit conventional-pre-commit --strict --force-scope .git/COMMIT_EDITMSG
 
   # Standard pre-commit hooks for general file maintenance
   - repo: https://github.com/pre-commit/pre-commit-hooks
