@@ -101,38 +101,25 @@ repos:
     hooks:
       - id: mypy
         name: mypy
-        entry: uv run -q --no-sync pep723-loader mypy
+        entry: uv run -q --no-sync --with pep723-loader --with mypy pep723-loader mypy
         language: system
         types: [python]
         pass_filenames: true
 
       - id: robotidy
         name: Format Robot Framework files
-        entry: uv run -q --no-sync --with robotframework-tidy robotidy --check --diff robotTests/
+        entry: uv run -q --no-sync --with robotframework-tidy robotidy --check --diff
         language: system
         files: \.robot$
-        pass_filenames: false
+        pass_filenames: true
 
       - id: robocop
         name: Lint Robot Framework files
-        entry: uv run -q --no-sync --with robotframework-robocop robocop robotTests/
+        entry: uv run -q --no-sync --with robotframework-robocop robocop
         language: system
         files: \.robot$
-        pass_filenames: false
+        pass_filenames: true
 
 # Configuration for specific hooks
 default_language_version:
   python: python3
-
-# Exclude patterns
-exclude: |
-  (?x)^(
-    \.git/|
-    \.venv/|
-    __pycache__/|
-    \.mypy_cache/|
-    \.cache/|
-    \.pytest_cache/|
-    \.lock$|
-    typings/
-  )
