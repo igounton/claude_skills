@@ -29,7 +29,7 @@
         ]
       },
       {
-        "matcher": "Write|Edit|MultiEdit|Task|Bash|TodoWrite|NotebookEdit",
+        "matcher": "Write|Edit|Task|Bash|TodoWrite|NotebookEdit",
         "hooks": [
           {
             "type": "command",

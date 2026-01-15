@@ -83,5 +83,3 @@ For the most up-to-date guidelines, refer to the official Google documentation:
 *   **Prompt Design Strategies:** [https://ai.google.dev/gemini-api/docs/prompting-strategies](https://ai.google.dev/gemini-api/docs/prompting-strategies)
 *   **Gemini API Developer Guide:** [https://ai.google.dev/gemini-api/docs](https://ai.google.dev/gemini-api/docs)
 *   **Vertex AI Prompting Guide:** [https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/gemini-prompts](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/gemini-prompts)
-
-

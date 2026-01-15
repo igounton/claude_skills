@@ -1,7 +1,7 @@
 ---
 name: context-refinement
 description: Updates task context manifest with discoveries from current work session. Reads transcript to understand what was learned. Only updates if drift or new discoveries found.
-tools: Read, Edit, MultiEdit, LS, Glob
+tools: Read, Edit, LS, Glob
 ---
 
 # Context Refinement Agent

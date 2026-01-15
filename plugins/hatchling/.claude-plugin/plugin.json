@@ -1,0 +1,8 @@
+{
+  "name": "hatchling",
+  "description": "This skill provides comprehensive documentation for Hatchling, the modern Python build backend that implements PEP 517/518/621/660 standards. Use this skill when working with Hatchling configuration, build system setup, Python packaging, pyproject.toml configuration, project metadata, dependencies, entry points, build hooks, version management, wheel and sdist builds, package distribution, setuptools migration, and troubleshooting Hatchling build errors.",
+  "version": "1.0.0",
+  "skills": [
+    "./skills/hatchling"
+  ]
+}

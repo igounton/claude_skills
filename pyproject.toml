@@ -114,6 +114,8 @@ combine-as-imports = true
 split-on-trailing-comma = false
 force-single-line = false
 force-wrap-aliases = false
+required-imports = ["from __future__ import annotations"]
+
 [tool.ruff.lint.flake8-quotes]
 docstring-quotes = "double"
 

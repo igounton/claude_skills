@@ -209,7 +209,7 @@ while (!startFound && transcriptQueue.length > 0) {
     const content = message.content;
     if (Array.isArray(content)) {
       for (const block of content) {
-        if (block.type === "tool_use" && ["Edit", "MultiEdit", "Write"].includes(block.name)) {
+        if (block.type === "tool_use" && ["Edit", "Write"].includes(block.name)) {
           startFound = true;
           break;
         }

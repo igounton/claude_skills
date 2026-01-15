@@ -334,7 +334,7 @@ function isCIEnvironment() {
 PreToolUse Hook
 
 Trigger conditions:
-- Write/subagent tool invocation (Bash, Write, Edit, MultiEdit, Task, TodoWrite)
+- Write/subagent tool invocation (Bash, Write, Edit, Task, TodoWrite)
 
 Enforces DAIC (Discussion, Alignment, Implementation, Check) workflow:
 - Blocks write tools in discussion mode
@@ -653,9 +653,9 @@ if (!filePath) {
   process.exit(0); // No file path, allow to proceed
 }
 
-// Block direct modification of state file via Write/Edit/MultiEdit
+// Block direct modification of state file via Write/Edit
 if (
-  ["Write", "Edit", "MultiEdit", "NotebookEdit"].includes(toolName) &&
+  ["Write", "Edit", "NotebookEdit"].includes(toolName) &&
   path.basename(filePath) === "sessions-state.json" &&
   path.basename(path.dirname(filePath)) === "sessions" &&
   !STATE.flags.bypass_mode

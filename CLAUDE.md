@@ -656,6 +656,40 @@ uv run pre-commit --files <file>
 
 ---
 
+## Linting Exception Conditions
+
+<linting_exceptions>
+
+The model MUST NOT ignore or bypass linting errors UNLESS the code falls into one of these categories:
+
+**Acceptable Exceptions** (OK to ignore linting):
+
+1. **Vendored code** - Third-party code copied into the repository without modification. The model did not author this code and should not modify it.
+
+2. **Examples of what-not-to-do** - Intentionally incorrect code used for educational purposes or negative test cases. The linting errors are the point.
+
+3. **Code pinned to historic Python version** - Code that must remain compatible with Python versions older than 3.11 where modern syntax is unavailable.
+
+4. **Code for Python derivatives** - CircuitPython, MicroPython, or other Python implementations with different syntax requirements or missing standard library modules.
+
+**Unacceptable Exceptions** (MUST fix or escalate):
+
+If NONE of the above conditions apply, the model MUST:
+
+1. Fix the linting error at root cause
+2. If unable to fix, document the specific blocker
+3. Never add `# type: ignore`, `# noqa`, or similar suppressions without explicit user approval
+
+**Pre-existing Issues in Moved Files**:
+
+When files are being moved or renamed (git status shows `RM` or `R`), pre-existing linting issues in those files are OUT OF SCOPE for the move operation. These issues existed before the move and should be addressed in a separate task to avoid scope creep.
+
+**SOURCE**: User policy established in conversation (2025-01-15)
+
+</linting_exceptions>
+
+---
+
 ## Sessions Framework Integration
 
 <sessions_integration>

@@ -94,7 +94,6 @@ const CCTools = {
   READ: "Read",
   WRITE: "Write",
   EDIT: "Edit",
-  MULTIEDIT: "MultiEdit",
   NOTEBOOKEDIT: "NotebookEdit",
   GREP: "Grep",
   GLOB: "Glob",

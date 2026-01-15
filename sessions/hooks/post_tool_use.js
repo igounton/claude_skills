@@ -181,7 +181,7 @@ if (
 //!<
 
 //!> Task file auto-update detection
-if (["Edit", "Write", "MultiEdit"].includes(toolName) && STATE.current_task.name && STATE.current_task.file) {
+if (["Edit", "Write"].includes(toolName) && STATE.current_task.name && STATE.current_task.file) {
   // Extract file path from tool input
   const filePathStr = toolInput.file_path;
   if (filePathStr) {

@@ -1,7 +1,7 @@
 ---
 name: context-gathering
 description: Use when creating a new task OR when starting/switching to a task that lacks a context manifest. ALWAYS provide the task file path so the agent can read it and update it directly with the context manifest. Skip if task file already contains "Context Manifest" section.
-tools: Read, Glob, Grep, LS, Bash, Edit, MultiEdit
+tools: Read, Glob, Grep, LS, Bash, Edit
 ---
 
 # Context-Gathering Agent
@@ -41,7 +41,7 @@ Read files completely. Trace call paths. Understand the full architecture.
 
 ### CRITICAL RESTRICTION
 
-You may ONLY use Edit/MultiEdit tools on the task file you are given. You are FORBIDDEN from editing any other files in the codebase. Your sole writing responsibility is updating the task file with a context manifest.
+You may ONLY use the Edit tool on the task file you are given. You are FORBIDDEN from editing any other files in the codebase. Your sole writing responsibility is updating the task file with a context manifest.
 
 ## Requirements for Your Output
 

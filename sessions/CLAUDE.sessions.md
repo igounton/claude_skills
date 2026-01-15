@@ -53,7 +53,7 @@ The agent operates in its own context window and can read extensively without af
 
 This repository uses Discussion-Alignment-Implementation-Check (DAIC):
 
-- **Discussion Mode** (default): Edit/Write/MultiEdit tools are blocked. Focus on discussing approach.
+- **Discussion Mode** (default): Edit/Write tools are blocked. Focus on discussing approach.
 - **Implementation Mode**: Tools are available. Execute approved todos only.
 
 **Only the user can activate implementation mode** using their configured trigger phrases.

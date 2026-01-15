@@ -10,35 +10,92 @@
   },
   "plugins": [
     {
-      "name": "development-skills",
-      "description": "Collection of opinionated development skills",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./agent-orchestration",
-        "./async-python-patterns",
-        "./brainstorming-skill",
-        "./clang-format",
-        "./commitlint",
-        "./conventional-commits",
-        "./fastmcp-creator",
-        "./gitlab-skill",
-        "./hatchling",
-        "./holistic-linting",
-        "./litellm",
-        "./llamafile",
-        "./mkdocs",
-        "./pre-commit",
-        "./prompt-optimization-claude-45",
-        "./pypi-readme-creator",
-        "./python3-development",
-        "./story-based-framing",
-        "./toml-python",
-        "./uv",
-        "./verification-gate",
-        "./xdg-base-directory"
-      ],
-      "commands": ["./commands"]
+      "name": "agent-orchestration",
+      "source": "./plugins/agent-orchestration"
+    },
+    {
+      "name": "async-python-patterns",
+      "source": "./plugins/async-python-patterns"
+    },
+    {
+      "name": "brainstorming-skill",
+      "source": "./plugins/brainstorming-skill"
+    },
+    {
+      "name": "clang-format",
+      "source": "./plugins/clang-format"
+    },
+    {
+      "name": "commitlint",
+      "source": "./plugins/commitlint"
+    },
+    {
+      "name": "conventional-commits",
+      "source": "./plugins/conventional-commits"
+    },
+    {
+      "name": "fastmcp-creator",
+      "source": "./plugins/fastmcp-creator"
+    },
+    {
+      "name": "gitlab-skill",
+      "source": "./plugins/gitlab-skill"
+    },
+    {
+      "name": "hatchling",
+      "source": "./plugins/hatchling"
+    },
+    {
+      "name": "holistic-linting",
+      "source": "./plugins/holistic-linting"
+    },
+    {
+      "name": "litellm",
+      "source": "./plugins/litellm"
+    },
+    {
+      "name": "llamafile",
+      "source": "./plugins/llamafile"
+    },
+    {
+      "name": "mkdocs",
+      "source": "./plugins/mkdocs"
+    },
+    {
+      "name": "pre-commit",
+      "source": "./plugins/pre-commit"
+    },
+    {
+      "name": "prompt-optimization-claude-45",
+      "source": "./plugins/prompt-optimization-claude-45"
+    },
+    {
+      "name": "pypi-readme-creator",
+      "source": "./plugins/pypi-readme-creator"
+    },
+    {
+      "name": "python3-development",
+      "source": "./plugins/python3-development"
+    },
+    {
+      "name": "story-based-framing",
+      "source": "./plugins/story-based-framing"
+    },
+    {
+      "name": "toml-python",
+      "source": "./plugins/toml-python"
+    },
+    {
+      "name": "uv",
+      "source": "./plugins/uv"
+    },
+    {
+      "name": "verification-gate",
+      "source": "./plugins/verification-gate"
+    },
+    {
+      "name": "xdg-base-directory",
+      "source": "./plugins/xdg-base-directory"
     }
   ]
 }
