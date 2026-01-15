@@ -18,8 +18,7 @@ repos:
     hooks:
       - id: sync-pre-commit-deps
 
-  # WORKAROUND: prek bug https://github.com/j178/prek/issues/1194
-  # commit-msg hooks don't receive the commit message file on Linux
+  # prek now correctly passes commit message file path (issue #1194 fixed)
   - repo: local
     hooks:
       - id: conventional-pre-commit
@@ -27,7 +26,7 @@ repos:
         stages: [commit-msg]
         language: system
         always_run: true
-        entry: uv run --with conventional-pre-commit conventional-pre-commit --strict --force-scope .git/COMMIT_EDITMSG
+        entry: uv run --with conventional-pre-commit conventional-pre-commit --strict --force-scope
 
   # Standard pre-commit hooks for general file maintenance
   - repo: https://github.com/pre-commit/pre-commit-hooks

@@ -1104,9 +1104,28 @@ If NONE of the above conditions apply, the model MUST:
 2. If unable to fix, document the specific blocker
 3. Never add `# type: ignore`, `# noqa`, or similar suppressions without explicit user approval
 
-**Pre-existing Issues in Moved Files**:
+**Rule Codes That MUST Always Be Fixed** (never suppress):
 
-When files are being moved or renamed (git status shows `RM` or `R`), pre-existing linting issues are OUT OF SCOPE for the move operation. Address in a separate task.
+These rule codes indicate real code quality issues that must be resolved at root cause:
+
+- **BLE001** (blind-except): Replace generic `except Exception` with specific exception types
+- **D103** (missing-docstring-in-public-function): Add docstrings to public functions
+- **TRY300** (try-consider-else): Restructure try/except/else blocks properly
+
+**Per-File Exceptions in pyproject.toml** (acceptable):
+
+The following rules may be configured as per-file ignores in `pyproject.toml` `[tool.ruff.lint.per-file-ignores]`:
+
+- `**/scripts/**`: T201 (print), S (security), DOC, ANN401, PLR0911, PLR0917, PLC0415
+- `**/tests/**`: S, D, E501, ANN, DOC, PLC, SLF, PLR, EXE, N, T
+- `**/assets/**`: PLC0415, DOC
+- `typings/**`: N, ANN, A
+
+These configurations allow relaxed checking in appropriate contexts without inline suppressions.
+
+**Touched Files Must Be Clean**:
+
+When files are modified, moved, or renamed, all linting issues in those files MUST be resolved before committing. Touching a file means taking responsibility for its quality.
 
 ## Standard Project Structure
 
