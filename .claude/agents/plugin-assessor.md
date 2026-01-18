@@ -6,11 +6,7 @@ description: >
   marketplace submission, auditing existing plugins, validating plugin structure,
   or identifying improvements. Handles large plugins with many reference files.
   Detects orphaned documentation, duplicate content, and missing cross-references.
-tools:
-  - Read
-  - Glob
-  - Grep
-  - Bash
+tools: Read, Glob, Grep, Bash
 model: sonnet
 ---
 
