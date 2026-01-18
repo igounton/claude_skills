@@ -26,8 +26,16 @@ With this plugin installed, Claude will:
 
 ## Installation
 
+First, add the marketplace (one-time setup):
+
 ```bash
-/plugin install pypi-readme-creator
+/plugin marketplace add Jamie-BitFlight/claude_skills
+```
+
+Then install the plugin:
+
+```bash
+/plugin install pypi-readme-creator@jamie-bitflight-skills
 ```
 
 ## Usage

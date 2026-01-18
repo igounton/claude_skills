@@ -32,8 +32,16 @@ With this plugin installed, when you ask Claude to review or improve your CLAUDE
 
 ## Installation
 
+First, add the marketplace (one-time setup):
+
 ```bash
-/plugin install prompt-optimization-claude-45
+/plugin marketplace add Jamie-BitFlight/claude_skills
+```
+
+Then install the plugin:
+
+```bash
+/plugin install prompt-optimization-claude-45@jamie-bitflight-skills
 ```
 
 ## Usage

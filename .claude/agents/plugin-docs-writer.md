@@ -153,8 +153,16 @@ When you encounter unfamiliar tools, libraries, or concepts in the plugin:
 
 ## Installation
 
+First, add the marketplace (one-time setup):
+
 \`\`\`bash
-/plugin install {plugin-name}
+/plugin marketplace add {owner}/{repo}
+\`\`\`
+
+Then install the plugin:
+
+\`\`\`bash
+/plugin install {plugin-name}@{marketplace-name}
 \`\`\`
 
 ## Usage

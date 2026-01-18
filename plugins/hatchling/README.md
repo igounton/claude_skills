@@ -24,8 +24,16 @@ With this plugin installed, Claude can:
 
 ## Installation
 
+First, add the marketplace (one-time setup):
+
 ```bash
-/plugin install hatchling
+/plugin marketplace add Jamie-BitFlight/claude_skills
+```
+
+Then install the plugin:
+
+```bash
+/plugin install hatchling@jamie-bitflight-skills
 ```
 
 ## Usage

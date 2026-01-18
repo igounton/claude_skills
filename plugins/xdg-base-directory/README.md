@@ -25,8 +25,16 @@ With this plugin installed, Claude will:
 
 ## Installation
 
+First, add the marketplace (one-time setup):
+
 ```bash
-/plugin install xdg-base-directory
+/plugin marketplace add Jamie-BitFlight/claude_skills
+```
+
+Then install the plugin:
+
+```bash
+/plugin install xdg-base-directory@jamie-bitflight-skills
 ```
 
 ## Usage

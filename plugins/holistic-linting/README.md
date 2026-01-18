@@ -23,8 +23,16 @@ With this plugin installed, Claude will:
 
 ## Installation
 
+First, add the marketplace (one-time setup):
+
 ```bash
-/plugin install holistic-linting
+/plugin marketplace add Jamie-BitFlight/claude_skills
+```
+
+Then install the plugin:
+
+```bash
+/plugin install holistic-linting@jamie-bitflight-skills
 ```
 
 ## Usage
