@@ -27,15 +27,6 @@
             "command": "node $CLAUDE_PROJECT_DIR/sessions/hooks/subagent_hooks.js"
           }
         ]
-      },
-      {
-        "matcher": "Write|Edit|Task|Bash|TodoWrite|NotebookEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node $CLAUDE_PROJECT_DIR/sessions/hooks/sessions_enforce.js"
-          }
-        ]
       }
     ],
     "PostToolUse": [
