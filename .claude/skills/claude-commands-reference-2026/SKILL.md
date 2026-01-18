@@ -97,25 +97,29 @@ Result: `$1` → `456`, `$2` → `high`, `$3` → `alice`
 
 ## Special Prefixes
 
-### Bash Execution: `!`
+### Bash Execution Prefix
+
+**Prefix**: exclamation mark followed by backtick-wrapped command
 
 Execute bash commands, output included in context.
 
-```markdown
+```text
 ---
 allowed-tools: Bash(git:*)
 ---
 
 ## Context
 
-- Git status: !`git status`
-- Git diff: !`git diff HEAD`
-- Current branch: !`git branch --show-current`
+- Git status: !(git status)
+- Git diff: !(git diff HEAD)
+- Current branch: !(git branch --show-current)
 
 ## Task
 
 Create a commit based on above changes.
 ```
+
+**Note**: In actual usage, replace `()` with backticks around the command.
 
 **Requirements**: Must include `allowed-tools` with `Bash` tool.
 
