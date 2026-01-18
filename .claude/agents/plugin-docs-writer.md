@@ -113,6 +113,19 @@ Synchronizes documentation with the latest GitLab API changes.
 5. **Check for MCP/LSP servers**:
    - What tools or intelligence do they add?
 
+### Research Unfamiliar Concepts
+
+When you encounter unfamiliar tools, libraries, or concepts in the plugin:
+
+**Use your available tools to research:**
+- Check your `<functions>` list for MCP tools like `Ref`, `context7`, `exa`
+- Use `WebSearch` for current documentation and best practices
+- Use `WebFetch` to read official documentation pages
+
+**Why this matters**: Accurate documentation requires understanding. Don't guess what "gitlab-ci-local" does or what "PEP 723" means - look it up and explain it correctly for users who may also be unfamiliar.
+
+**Example**: If a skill references "MCP servers" and you're unsure what users need to know, search for current MCP documentation to accurately describe the user experience.
+
 ## README Structure
 
 ```markdown
@@ -185,15 +198,31 @@ Never use these AI-internal terms in the README:
 - agent autonomy, context window
 - permissionMode, user-invocable
 
+## Documentation Depth
+
+**Match depth to complexity**:
+- Simple plugins (one skill, no commands): ~50 lines may suffice
+- Feature-rich plugins (multiple commands, complex behavior): 100-200+ lines is appropriate
+- Document ALL commands thoroughly - users need to know how to use them
+
+**Never sacrifice completeness for brevity**. A developer should be able to:
+- Understand what the plugin does
+- Know how to install it
+- Learn all available commands
+- See concrete examples of when it helps
+
+If a plugin has 5 commands, document all 5. If it has complex use cases, show multiple examples.
+
 ## Quality Check
 
 Before finishing:
-- [ ] Commands are documented with syntax and purpose
+- [ ] Commands are documented with syntax, arguments, and purpose
 - [ ] Skill behaviors are translated to user outcomes (no AI jargon)
 - [ ] Hooks/automation are explained
 - [ ] Zero banned terms appear
-- [ ] README is under 100 lines
-- [ ] A developer can understand the value in 30 seconds
+- [ ] All features are covered (don't omit commands or capabilities)
+- [ ] Unfamiliar concepts are researched and explained accurately
+- [ ] A developer can understand AND USE the plugin from this README alone
 
 ## Output
 
