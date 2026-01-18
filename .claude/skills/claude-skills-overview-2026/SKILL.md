@@ -48,26 +48,26 @@ Your instructions here...
 
 ## All Frontmatter Fields
 
-| Field | Required | Type | Max Length | Description |
-|-------|----------|------|------------|-------------|
-| `name` | **Yes** | string | 64 chars | Unique identifier: lowercase letters, numbers, hyphens only |
-| `description` | **Yes** | string | 1024 chars | Claude uses this to decide when to apply the Skill |
-| `allowed-tools` | No | string/array | — | Tools Claude can use: `Read, Grep, Glob, Bash(npm run:*)` |
-| `model` | No | string | — | Override model: `claude-opus-4-5-20251101`, `claude-sonnet-4-20250514` |
-| `context` | No | string | — | Set to `fork` for isolated sub-agent context |
-| `agent` | No | string | — | With `context: fork`: `Explore`, `Plan`, `general-purpose`, or custom agent |
-| `user-invocable` | No | boolean | — | Show in slash command menu (default: `true`) |
-| `disable-model-invocation` | No | boolean | — | Block `Skill` tool from calling this programmatically |
-| `hooks` | No | object | — | Scoped hooks: `PreToolUse`, `PostToolUse`, `Stop` |
+| Field                      | Required | Type         | Max Length | Description                                                                 |
+| -------------------------- | -------- | ------------ | ---------- | --------------------------------------------------------------------------- |
+| `name`                     | **Yes**  | string       | 64 chars   | Unique identifier: lowercase letters, numbers, hyphens only                 |
+| `description`              | **Yes**  | string       | 1024 chars | Claude uses this to decide when to apply the Skill                          |
+| `allowed-tools`            | No       | string/array | —          | Tools Claude can use: `Read, Grep, Glob, Bash(npm run:*)`                   |
+| `model`                    | No       | string       | —          | Override model: `claude-opus-4-5-20251101`, `claude-sonnet-4-20250514`      |
+| `context`                  | No       | string       | —          | Set to `fork` for isolated sub-agent context                                |
+| `agent`                    | No       | string       | —          | With `context: fork`: `Explore`, `Plan`, `general-purpose`, or custom agent |
+| `user-invocable`           | No       | boolean      | —          | Show in slash command menu (default: `true`)                                |
+| `disable-model-invocation` | No       | boolean      | —          | Block `Skill` tool from calling this programmatically                       |
+| `hooks`                    | No       | object       | —          | Scoped hooks: `PreToolUse`, `PostToolUse`, `Stop`                           |
 
 ---
 
 ## String Substitutions
 
-| Variable | Description |
-|----------|-------------|
-| `$ARGUMENTS` | All arguments passed to the Skill |
-| `${CLAUDE_SESSION_ID}` | Current session ID for logging |
+| Variable               | Description                       |
+| ---------------------- | --------------------------------- |
+| `$ARGUMENTS`           | All arguments passed to the Skill |
+| `${CLAUDE_SESSION_ID}` | Current session ID for logging    |
 
 ---
 
@@ -126,28 +126,31 @@ context: fork
 agent: Explore
 ```
 
-| Agent | Model | Tools | Use Case |
-|-------|-------|-------|----------|
-| `Explore` | Haiku | Read-only | Fast codebase analysis |
-| `Plan` | Inherits | Read-only | Research before planning |
+| Agent             | Model    | Tools     | Use Case                     |
+| ----------------- | -------- | --------- | ---------------------------- |
+| `Explore`         | Haiku    | Read-only | Fast codebase analysis       |
+| `Plan`            | Inherits | Read-only | Research before planning     |
 | `general-purpose` | Inherits | All tools | Complex operations (default) |
-| Custom | Custom | Custom | Project-specific work |
+| Custom            | Custom   | Custom    | Project-specific work        |
 
 ---
 
 ## Description Best Practices
 
 **Good**:
+
 ```yaml
 description: Extract text and tables from PDFs, fill forms, merge documents. Use when working with PDF files or when user mentions PDFs, forms, extraction.
 ```
 
 **Bad**:
+
 ```yaml
 description: Helps with documents
 ```
 
 **Template**:
+
 ```
 [Action 1], [Action 2], [Action 3]. Use when [situation 1], [situation 2],
 or when the user mentions [keywords].
@@ -258,20 +261,21 @@ Only runs when user types `/deploy-production`.
 
 ## Skills vs Other Features
 
-| Feature | Invocation | Use Case |
-|---------|------------|----------|
-| **Skills** | Claude decides | Specialized knowledge/workflows |
-| **Slash Commands** | User types `/command` | Simple reusable prompts |
-| **CLAUDE.md** | Always loaded | Project-wide instructions |
-| **Subagents** | Claude delegates | Isolated complex operations |
-| **MCP Servers** | Claude calls | External tools/data |
-| **Hooks** | Tool events | Automate actions |
+| Feature            | Invocation            | Use Case                        |
+| ------------------ | --------------------- | ------------------------------- |
+| **Skills**         | Claude decides        | Specialized knowledge/workflows |
+| **Slash Commands** | User types `/command` | Simple reusable prompts         |
+| **CLAUDE.md**      | Always loaded         | Project-wide instructions       |
+| **Subagents**      | Claude delegates      | Isolated complex operations     |
+| **MCP Servers**    | Claude calls          | External tools/data             |
+| **Hooks**          | Tool events           | Automate actions                |
 
 ---
 
 ## Installation
 
 **Marketplace**:
+
 ```bash
 /plugin marketplace add anthropics/skills
 /plugin install document-skills@anthropic-agent-skills
