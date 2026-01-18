@@ -24,8 +24,16 @@ Works across any domain: code reviews, security audits, business process analysi
 
 ## Installation
 
+First, add the marketplace (one-time setup):
+
 ```bash
-/plugin install story-based-framing
+/plugin marketplace add Jamie-BitFlight/claude_skills
+```
+
+Then install the plugin:
+
+```bash
+/plugin install story-based-framing@jamie-bitflight-skills
 ```
 
 ## Usage

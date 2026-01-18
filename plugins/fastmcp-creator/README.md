@@ -27,8 +27,16 @@ With this plugin installed, Claude will:
 
 ## Installation
 
+First, add the marketplace (one-time setup):
+
 ```bash
-/plugin install fastmcp-creator
+/plugin marketplace add Jamie-BitFlight/claude_skills
+```
+
+Then install the plugin:
+
+```bash
+/plugin install fastmcp-creator@jamie-bitflight-skills
 ```
 
 ## Usage

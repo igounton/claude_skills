@@ -5,19 +5,11 @@ A collection of Claude Code plugins that make Claude better at specific developm
 ## Installation
 
 ```bash
-# Add the marketplace
+# Add the marketplace (one-time setup)
 /plugin marketplace add Jamie-BitFlight/claude_skills
 
 # Install a plugin
-/plugin install plugin-name
-```
-
-Or install locally:
-
-```bash
-git clone https://github.com/Jamie-BitFlight/claude_skills.git
-cd claude_skills
-./install.py
+/plugin install plugin-name@jamie-bitflight-skills
 ```
 
 ## Available Plugins
@@ -91,20 +83,16 @@ plugins/plugin-name/
 └── README.md             # Documentation
 ```
 
-## Creating Plugins
-
-Ask Claude to create a new skill, then run:
-
-```bash
-./install.py
-```
-
 ## Contributing
 
 1. Fork the repository
 2. Create your feature branch
 3. Add or modify plugins
-4. Test locally with `./install.py`
+4. Test locally:
+   ```bash
+   ./install.py
+   ```
+   This creates symlinks from plugin components (skills, commands, agents) to `~/.claude/` for local testing.
 5. Submit a pull request
 
 ## License

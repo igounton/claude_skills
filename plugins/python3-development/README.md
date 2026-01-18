@@ -23,8 +23,16 @@ With this plugin installed, Claude will:
 
 ## Installation
 
+First, add the marketplace (one-time setup):
+
 ```bash
-/plugin install python3-development
+/plugin marketplace add Jamie-BitFlight/claude_skills
+```
+
+Then install the plugin:
+
+```bash
+/plugin install python3-development@jamie-bitflight-skills
 ```
 
 ## Usage
