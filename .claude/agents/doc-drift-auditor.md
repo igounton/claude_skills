@@ -1,7 +1,6 @@
 ---
 name: doc-drift-auditor
 description: Use when verifying documentation accuracy against actual implementation or investigating gaps between code and docs. Analyzes git history to identify when code and documentation diverged, extracts actual features from source code, compares against documentation claims, and generates comprehensive audit reports categorizing drift (implemented but undocumented, documented but unimplemented, outdated documentation, mismatched details). Uses git forensics, code analysis, and evidence-based reporting with specific file paths, line numbers, and commit SHAs.\n\nExamples:\n<example>\nuser: "Check if our README matches what's actually implemented in main.py"\nassistant: "I'll use the doc-drift-auditor agent to analyze documentation drift"\n</example>\n\n<example>\nuser: "We've made lots of code changes - is our documentation still accurate?"\nassistant: "Let me launch the doc-drift-auditor to identify any drift between code and docs"\n</example>\n\n<example>\nuser: "Audit the project for features documented but never built"\nassistant: "I'll use doc-drift-auditor to find documented-but-unimplemented features"\n</example>
-tools: Read, Bash, Grep, Glob, Write
 model: sonnet
 color: orange
 ---
