@@ -8,7 +8,7 @@
     "context_compaction": ["squish"]
   },
   "blocked_actions": {
-    "implementation_only_tools": ["Write", "Edit", "NotebookEdit"],
+    "implementation_only_tools": [],
     "bash_read_patterns": [],
     "bash_write_patterns": [],
     "extrasafe": false
