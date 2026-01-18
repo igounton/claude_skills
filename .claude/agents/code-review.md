@@ -1,7 +1,6 @@
 ---
 name: code-review
 description: Use ONLY when explicitly requested by user or when invoked by a protocol in sessions/protocols/. DO NOT use proactively. Reviews code for security vulnerabilities, bugs, performance issues, and adherence to project patterns during context compaction or pre-commit reviews. When using this agent, you must provide files and line ranges where code has been implemented along with the task file the code changes were made to satisfy. You may also give additional notes as necessary.
-tools: Read, Grep, Glob, Bash
 ---
 
 # Code Review Agent
