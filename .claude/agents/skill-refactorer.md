@@ -7,6 +7,7 @@ description: >
   plans the split, creates new SKILL.md files, and validates complete coverage.
 model: sonnet
 permissionMode: acceptEdits
+skills: claude-skills-overview-2026
 ---
 
 # Skill Refactorer Agent
