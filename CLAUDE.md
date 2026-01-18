@@ -733,40 +733,113 @@ ls -la ./sessions/ 2>/dev/null || ls -la ./CLAUDE.sessions.md 2>/dev/null
 
 ---
 
-## Agent Usage for AI-Facing Documentation
+## Agent Usage for Plugin Maintenance
 
 <agent_usage_guidance>
 
-**claude-context-optimizer agent**:
+This repository provides specialized agents for maintaining and improving Claude Code plugins.
 
-The model MUST use the sub-agent claude-context-optimizer for reviewing and improving AI-facing documentation including:
+### plugin-assessor
 
-- **Skills** (`SKILL.md` and `references/*.md` files)
-- **Agent definitions** (`~/.claude/agents/*.md` files)
-- **Commands** (`~/.claude/commands/*.md` files)
+**Purpose**: Analyze plugins for structural correctness, frontmatter optimization, schema compliance, and enhancement opportunities.
 
-**When to delegate to claude-context-optimizer**:
+**When to use**:
+
+- Reviewing plugins before marketplace submission
+- Auditing existing plugins for issues
+- Validating plugin structure against schema
+- Identifying orphaned documentation or missing cross-references
+- Assessing frontmatter quality
+
+**Delegation Pattern**:
+
+```claude
+Task(
+  agent="plugin-assessor",
+  prompt="Assess the plugin at ./plugins/my-plugin for marketplace readiness"
+)
+```
+
+---
+
+### plugin-docs-writer
+
+**Purpose**: Generate comprehensive README.md and supplementary documentation for plugins.
+
+**When to use**:
+
+- Creating documentation for new plugins
+- Updating documentation after plugin changes
+- Generating docs/skills.md, docs/commands.md, docs/agents.md
+- Creating usage examples and configuration guides
+
+**Delegation Pattern**:
+
+```claude
+Task(
+  agent="plugin-docs-writer",
+  prompt="Generate complete documentation for the plugin at ./plugins/my-plugin"
+)
+```
+
+---
+
+### skill-refactorer
+
+**Purpose**: Refactor large or multi-domain skills into smaller, focused skills without losing fidelity.
+
+**When to use**:
+
+- Skill exceeds 500 lines
+- Skill covers multiple distinct domains
+- Skill would benefit from separation of concerns
+- Need to split by use case, tool requirements, or expertise level
+
+**Delegation Pattern**:
+
+```claude
+Task(
+  agent="skill-refactorer",
+  prompt="Refactor ./plugins/python3-development/skills/python3/SKILL.md into focused skills for testing, async, and packaging"
+)
+```
+
+---
+
+### claude-context-optimizer
+
+**Purpose**: Review and improve AI-facing documentation following Anthropic prompt engineering best practices.
+
+**When to use**:
 
 - Reviewing existing AI-facing documentation for clarity
 - Optimizing instructions for LLM consumption
-- Analyzing structure against Anthropic prompt engineering best practices
+- Analyzing structure against best practices
 - Converting unstructured documentation to structured format
 - Creating new skills, agents, or commands
-
-**Important Constraints**:
-
-- Do NOT provide bash command examples when using claude-context-optimizer
-- The agent has access to: Glob, Grep, Read, Write, Edit, and web access tools
-- The agent will use appropriate tools based on its own decision-making
 
 **Delegation Pattern**:
 
 ```claude
 Task(
   agent="claude-context-optimizer",
-  prompt="Review [skill|agent|command] at [path] and suggest improvements for AI comprehension following Anthropic prompt engineering best practices"
+  prompt="Review [skill|agent|command] at [path] and suggest improvements for AI comprehension"
 )
 ```
+
+---
+
+### Agent Skills Configuration
+
+All plugin maintenance agents load reference skills automatically:
+
+| Agent | Loaded Skills |
+|-------|---------------|
+| plugin-assessor | claude-skills-overview-2026, claude-plugins-reference-2026, claude-commands-reference-2026, claude-hooks-reference-2026 |
+| plugin-docs-writer | claude-skills-overview-2026, claude-plugins-reference-2026, claude-commands-reference-2026, claude-hooks-reference-2026 |
+| skill-refactorer | claude-skills-overview-2026 |
+
+This ensures agents have complete knowledge of Claude Code plugin architecture, frontmatter schemas, and best practices.
 
 </agent_usage_guidance>
 

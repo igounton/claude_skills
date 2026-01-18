@@ -7,7 +7,7 @@ description: >
   or identifying improvements. Handles large plugins with many reference files.
   Detects orphaned documentation, duplicate content, and missing cross-references.
 model: sonnet
-skills: claude-skills-overview-2026
+skills: claude-skills-overview-2026, claude-plugins-reference-2026, claude-commands-reference-2026, claude-hooks-reference-2026
 ---
 
 # Plugin Assessor Agent
