@@ -474,10 +474,9 @@ model: opus  # Complex reasoning needed
 ```yaml
 name: researcher
 description: Research codebase patterns. Use before major changes.
-context: fork  # Note: This is a skill field, not agent
-model: haiku  # Fast exploration
+model: haiku  # Fast for exploration
 tools: Read, Grep, Glob
-permissionMode: plan
+permissionMode: plan  # Read-only mode
 ```
 
 ### Skill-Enhanced Agent
