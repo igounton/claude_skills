@@ -105,8 +105,14 @@ If no similar agent exists, build from scratch using [Agent Schema Reference](./
 | "Write/run tests" | Tester |
 | "Review this code/PR" | Reviewer |
 | "Set up CI/CD" | DevOps / SRE |
+| "Audit for compliance/drift" | Auditor |
+| "Gather context before implementing" | Context Gatherer |
+| "Optimize/improve this artifact" | Optimizer |
+| "Expert in {domain}" | Domain Expert |
 
 *Role-based agents include `skills: subagent-contract` for status signaling.*
+
+**See also**: [Best Practices from Existing Agents](./references/agent-templates.md#best-practices-from-existing-agents) for patterns like embedded examples in descriptions, identity sections, and self-verification checklists.
 
 **Step 3: Present Options via AskUserQuestion**
 
