@@ -1,19 +1,88 @@
 # Agent Templates & Archetypes
 
-Pre-built templates for common agent patterns. When creating new agents, present these options to the user and adapt the chosen template section-by-section.
+Templates for creating Claude Code agents. This file contains two categories:
+
+1. **Standard Templates** - Flexible patterns for user-facing agents
+2. **Role-Based Contract Archetypes** - Structured patterns for orchestrated multi-agent workflows
+
+---
+
+## Choosing Between Template Types
+
+<template_decision>
+
+### Use Standard Templates When
+
+- Agent responds **directly to user** (not delegated by another agent)
+- Agent has **flexibility** in how it operates and reports
+- Output format can **vary by task** or user preference
+- Agent operates **independently** without supervisor coordination
+
+**Examples**: A code reviewer that runs when user asks, a documentation generator, a language expert.
+
+### Use Role-Based Contract Archetypes When
+
+- Agent is **delegated to by another agent** (orchestration pattern)
+- Strict **DONE/BLOCKED signaling** needed for workflow control
+- Work involves **clear handoffs** between multiple agents
+- **Blocking is preferred** over guessing when information is missing
+- Supervisor needs **predictable status** to decide next steps
+
+**Examples**: A coder subagent in a supervisor-worker pattern, a researcher gathering context for an architect agent.
+
+</template_decision>
+
+---
+
+## Template Methodology
+
+<methodology>
+
+### Standard Templates
+
+**Origin**: Derived from common software engineering workflows and existing agent patterns in Claude Code repositories.
+
+**Structure**: Uses `{placeholder}` syntax for customization points. Each template includes:
+- Frontmatter with sensible defaults
+- Identity/role statement
+- Focus areas or competencies
+- Workflow steps
+- Output format (flexible, task-appropriate)
+- Quality standards
+
+**Templating**: Replace `{placeholder}` values with domain-specific content while preserving structural patterns.
+
+### Role-Based Contract Archetypes
+
+**Origin**: Based on the supervisor-worker delegation pattern where agents must signal completion status for workflow orchestration.
+
+**Structure**: Uses `{{placeholder}}` syntax (double braces). Each archetype includes:
+- Frontmatter with `skills: subagent-contract`
+- Mission statement (single responsibility)
+- Scope (explicit do/don't boundaries)
+- Inputs specification
+- Operating rules
+- SOP (Standard Operating Procedure)
+- Output format with STATUS: DONE/BLOCKED signaling
+- Supervisor co-prompt template
+
+**Templating**: Replace `{{placeholder}}` values. The DONE/BLOCKED signaling is mandatory; artifact structure is customizable per agent.
+
+</methodology>
 
 ---
 
 ## How to Use Templates
 
-1. **Present Options**: List relevant archetypes based on user's requirements
-2. **Let User Choose**: Use AskUserQuestion to confirm template selection
-3. **Adapt Section-by-Section**: Preserve structure, update content
-4. **Customize**: Modify tool access, skills, and specifics for the use case
+1. **Determine Category**: Standard (user-facing) or Role-Based (orchestrated)?
+2. **Present Options**: List relevant templates based on user's requirements
+3. **Let User Choose**: Use AskUserQuestion to confirm template selection
+4. **Adapt Section-by-Section**: Preserve structure, update content
+5. **Customize**: Modify tool access, skills, output format for the use case
 
 ---
 
-## Template Categories
+## Standard Template Categories
 
 - [Read-Only Analyzers](#read-only-analyzers) - Inspect without modifying
 - [Content Generators](#content-generators) - Create documentation, tests, etc.
@@ -21,6 +90,10 @@ Pre-built templates for common agent patterns. When creating new agents, present
 - [Research & Planning](#research--planning) - Gather context, plan work
 - [Quality Gates](#quality-gates) - Validate before proceeding
 - [Domain Specialists](#domain-specialists) - Deep expertise in specific areas
+
+---
+
+# Standard Templates
 
 ---
 
@@ -666,9 +739,11 @@ You are a {Framework} specialist with expertise in {specific areas}.
 
 ---
 
-## Selecting Templates
+## Selecting Standard Templates
 
-When user requests a new agent, evaluate their needs against these archetypes:
+**First, determine if this is a user-facing agent** (standard) or **orchestrated subagent** (role-based). See [Choosing Between Template Types](#choosing-between-template-types).
+
+For **user-facing agents**, match requirements to these templates:
 
 | User Need | Recommended Template |
 |-----------|---------------------|

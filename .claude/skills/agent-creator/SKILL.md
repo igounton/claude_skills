@@ -58,13 +58,33 @@ USE the AskUserQuestion tool to gather information systematically:
 
 ### Phase 3: Template Selection
 
-AFTER gathering requirements, ALWAYS present template options:
+AFTER gathering requirements, ALWAYS determine template category first, then present options.
 
-**Step 1: Match to Archetypes**
+**Step 1: Determine Template Category**
 
-Consult [Agent Templates](./references/agent-templates.md) and identify matching archetypes:
+Ask the user or infer from context:
 
-**Standard Templates:**
+<template_decision>
+
+**Use Standard Templates when:**
+- Agent responds directly to user (not delegated by another agent)
+- Agent has flexibility in how it operates and reports
+- Output format can vary by task
+- Agent operates independently
+
+**Use Role-Based Contract Archetypes when:**
+- Agent is delegated to by another agent (orchestration)
+- Strict DONE/BLOCKED signaling needed for workflow control
+- Work involves clear handoffs between multiple agents
+- Blocking preferred over guessing when information missing
+
+</template_decision>
+
+**Step 2: Match to Archetypes**
+
+Consult [Agent Templates](./references/agent-templates.md) for full templates.
+
+**Standard Templates** (user-facing, flexible output):
 
 | User Need | Archetype |
 |-----------|-----------|
@@ -80,7 +100,7 @@ Consult [Agent Templates](./references/agent-templates.md) and identify matching
 | "Expert in {language}" | Language Expert |
 | "Expert in {framework}" | Framework Expert |
 
-**Role-Based Contract Archetypes** (include `skills: subagent-contract`):
+**Role-Based Contract Archetypes** (orchestrated, DONE/BLOCKED signaling):
 
 | User Need | Role Archetype |
 |-----------|----------------|
@@ -92,7 +112,9 @@ Consult [Agent Templates](./references/agent-templates.md) and identify matching
 | "Review this code/PR" | Reviewer |
 | "Set up CI/CD" | DevOps / SRE |
 
-**Step 2: Present Options via AskUserQuestion**
+*Role-based agents include `skills: subagent-contract` for status signaling.*
+
+**Step 3: Present Options via AskUserQuestion**
 
 ALWAYS use AskUserQuestion to present template choices:
 
@@ -112,7 +134,7 @@ E) Build from scratch using best practices
 Which would you like to use as a foundation?
 ```
 
-**Step 3: Confirm Selection**
+**Step 4: Confirm Selection**
 
 When user selects a template:
 - If archetype: Read template from [Agent Templates](./references/agent-templates.md)

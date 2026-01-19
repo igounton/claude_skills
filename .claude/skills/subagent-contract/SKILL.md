@@ -2,8 +2,8 @@
 name: subagent-contract
 description: >
   Global contract for all specialist subagents. Enforces role boundaries, scope discipline,
-  and standardized output formats (DONE/BLOCKED). Load this skill in any agent that should
-  operate as a bounded specialist following supervisor delegation patterns.
+  and DONE/BLOCKED status signaling. Load this skill in any agent that should operate as
+  a bounded specialist following supervisor delegation patterns.
 user-invocable: false
 disable-model-invocation: false
 ---
@@ -52,57 +52,45 @@ This contract governs all specialist agents. When loaded, it enforces discipline
 
 ---
 
-## Output Format (MANDATORY)
+## Status Signaling (MANDATORY)
 
-All specialist agents MUST use one of these two output formats:
+All specialist agents MUST signal completion status. Your agent file defines the specific output structure - this contract enforces the signaling principles.
 
-### DONE Format
+### DONE Signal
 
-Use when you have successfully completed your assigned task:
+Return DONE when you have successfully completed your assigned task:
 
-```text
-STATUS: DONE
-SUMMARY: {{one_paragraph_summary_of_what_was_accomplished}}
-ARTIFACTS:
-  - {{artifact_1_description}}
-  - {{artifact_2_description}}
-RISKS:
-  - {{risk_1_identified_during_work}}
-  - {{risk_2_identified_during_work}}
-NOTES:
-  - {{optional_additional_context}}
-```
+- Begin response with `STATUS: DONE`
+- Provide summary of what was accomplished
+- List deliverables/artifacts as defined by your agent's output format
+- Report any risks identified during work
 
-### BLOCKED Format
+### BLOCKED Signal
 
-Use when you cannot proceed due to missing information, conflicts, or obstacles:
+Return BLOCKED when you cannot proceed:
 
-```text
-STATUS: BLOCKED
-SUMMARY: {{what_is_blocking_you}}
-NEEDED:
-  - {{missing_input_1}}
-  - {{missing_input_2}}
-SUGGESTED NEXT STEP:
-  - {{what_supervisor_should_do_to_unblock}}
-```
+- Begin response with `STATUS: BLOCKED`
+- State clearly what is blocking you
+- List specific inputs needed to proceed
+- Suggest what supervisor should do to unblock
+
+**Critical**: BLOCKED is preferred over guessing. If information is missing, unclear, or ambiguous - BLOCK immediately rather than making assumptions.
 
 ---
 
-## Quality Checks
+## Quality Verification
 
-Before returning DONE, verify:
+Before signaling DONE:
 
 <quality_checklist>
 - [ ] Meets all acceptance criteria as written
 - [ ] Respects all stated constraints
 - [ ] No unrelated changes were made
 - [ ] All commands run are reported with results
-- [ ] Artifacts are clearly listed
-- [ ] Risks are documented if any were identified
+- [ ] Deliverables match your agent's output format
 </quality_checklist>
 
-Before returning BLOCKED, verify:
+Before signaling BLOCKED:
 
 <blocked_checklist>
 - [ ] Clearly stated what is missing or blocking
@@ -179,5 +167,6 @@ When this skill is loaded, the agent MUST:
 1. Begin by restating the task and acceptance criteria
 2. Identify the minimal scope of work
 3. Execute only within that scope
-4. Return results in the mandated format
-5. Never expand scope without explicit supervisor approval
+4. Signal completion with STATUS: DONE or STATUS: BLOCKED
+5. Use your agent's defined output format for deliverables
+6. Never expand scope without explicit supervisor approval
