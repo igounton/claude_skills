@@ -16,6 +16,8 @@ Problem: Rich Console wraps text at default width (80 chars in non-TTY), breakin
 Solution: Use crop=False + overflow="ignore" on console.print() calls.
 """
 
+from __future__ import annotations
+
 from rich.console import Console
 
 # Sample long text that would wrap at 80 characters

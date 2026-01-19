@@ -11,11 +11,13 @@
 ## Execution Steps
 
 1. **Phase 1 - Analysis**
+
    - [Step 1]
    - [Step 2]
    - [Step 3]
 
 2. **Phase 2 - Implementation**
+
    - [Step 1]
    - [Step 2]
    - [Step 3]

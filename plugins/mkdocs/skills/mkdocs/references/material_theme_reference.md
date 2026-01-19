@@ -1020,24 +1020,28 @@ extra_javascript:
 ## Best Practices
 
 1. **Performance**
+
    - Use `navigation.instant` for SPA-like experience
    - Enable `navigation.prune` to reduce site size
    - Use the `optimize` plugin for media compression
    - Implement lazy loading for images
 
 2. **SEO**
+
    - Always set `site_url` with trailing slash
    - Configure meta descriptions for all pages
    - Use the `social` plugin for social media cards
    - Implement proper heading hierarchy
 
 3. **Accessibility**
+
    - Provide alt text for all images
    - Use semantic HTML in custom templates
    - Ensure sufficient color contrast
    - Test keyboard navigation
 
 4. **Privacy**
+
    - Use the `privacy` plugin for GDPR compliance
    - Implement cookie consent for analytics
    - Self-host fonts and assets when required

@@ -436,19 +436,23 @@ clang-format --dry-run --Werror src/**/*.{cpp,h}
 ## Configuration Tips
 
 1. **Start with a Base Style**
+
    - Choose a predefined style closest to your preferences
    - Only override specific options that differ
 
 2. **Customize Incrementally**
+
    - Apply to a small test file first
    - Gradually expand to entire codebase
    - Test on representative code samples
 
 3. **Document Your Choices**
+
    - Add comments explaining non-obvious settings
    - Maintain a style guide alongside configuration
 
 4. **Version Control**
+
    - Commit `.clang-format` to repository root
    - Consider `.clang-format-ignore` for third-party code
 

@@ -5,6 +5,7 @@ Modern Python project management with uv - the extremely fast Python package man
 ## Why Install This?
 
 When working on Python projects, you might encounter:
+
 - Slow dependency installation (pip taking minutes)
 - Unclear project setup (where do requirements go?)
 - Scripts that break when dependencies change
@@ -17,6 +18,7 @@ This plugin helps Claude guide you toward modern Python project practices using 
 ## What Changes
 
 With this plugin installed, Claude will:
+
 - Recommend uv for new Python projects instead of traditional pip workflows
 - Set up projects with proper structure (pyproject.toml, lockfiles, virtual environments)
 - Create portable single-file scripts with built-in dependency management
@@ -104,6 +106,7 @@ Automatic environment handling
 ## When This Helps
 
 This plugin is especially useful when you:
+
 - Start new Python projects
 - Set up dependency management
 - Create standalone Python scripts

@@ -175,16 +175,16 @@ Valid in:
 
 ### Expression Variables
 
-| Variable | Syntax | Description | Access Rules |
-| --- | --- | --- | --- |
-| Environment | `${{env.VAR}}` | Environment variables set in execution environment or previous steps | All |
-| Inputs | `${{inputs.name}}` | Step inputs | Within step only |
-| Job | `${{job.VAR}}` | CI/CD variables | CI*, DOCKER*, GITLAB\_ prefixed only |
-| Prior outputs | `${{steps.step_name.outputs.var}}` | Prior step outputs | After that step executes |
-| Step directory | `${{step_dir}}` | Downloaded step location | Executable steps |
-| Work directory | `${{work_dir}}` | Current working directory | Executable steps |
-| Output file | `${{output_file}}` | Path to output file | Executable steps |
-| Export file | `${{export_file}}` | Path to environment export file | Executable steps |
+| Variable       | Syntax                             | Description                                                          | Access Rules                         |
+| -------------- | ---------------------------------- | -------------------------------------------------------------------- | ------------------------------------ |
+| Environment    | `${{env.VAR}}`                     | Environment variables set in execution environment or previous steps | All                                  |
+| Inputs         | `${{inputs.name}}`                 | Step inputs                                                          | Within step only                     |
+| Job            | `${{job.VAR}}`                     | CI/CD variables                                                      | CI*, DOCKER*, GITLAB\_ prefixed only |
+| Prior outputs  | `${{steps.step_name.outputs.var}}` | Prior step outputs                                                   | After that step executes             |
+| Step directory | `${{step_dir}}`                    | Downloaded step location                                             | Executable steps                     |
+| Work directory | `${{work_dir}}`                    | Current working directory                                            | Executable steps                     |
+| Output file    | `${{output_file}}`                 | Path to output file                                                  | Executable steps                     |
+| Export file    | `${{export_file}}`                 | Path to environment export file                                      | Executable steps                     |
 
 ## Input/Output Handling
 

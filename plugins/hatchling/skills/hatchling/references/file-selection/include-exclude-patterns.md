@@ -325,6 +325,7 @@ Common issues:
    ```
 
 3. **Use different patterns for different targets**
+
    - sdist: Include source, tests, docs
    - wheel: Include only runtime files
    - custom: Target-specific needs

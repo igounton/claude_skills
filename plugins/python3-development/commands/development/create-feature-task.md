@@ -19,17 +19,20 @@ Set up a comprehensive feature development task with proper tracking, phases, an
 ## Execution Steps
 
 1. **Parse Feature Requirements**
+
    - Extract feature name and description from $ARGUMENTS
    - Identify key requirements and constraints
    - Determine complexity and scope
 
 2. **Generate Task Structure**
+
    - Use the feature task template as base
    - Customize phases based on feature type
    - Add specific acceptance criteria
    - Include relevant technical considerations
 
 3. **Create Task Documentation**
+
    - Copy template from ~/.claude/templates/feature-task-template.md
    - Fill in all sections with feature-specific details
    - Save to appropriate location (suggest: .claude/tasks/[feature-name].md)

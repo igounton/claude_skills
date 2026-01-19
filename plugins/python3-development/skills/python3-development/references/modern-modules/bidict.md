@@ -82,17 +82,20 @@ Source: @[docs/intro.rst: "to model a bidirectional mapping correctly and unambi
 ### Use bidict When
 
 1. **Bidirectional lookups are required**
+
    - Symbol-to-element mapping (H ↔ hydrogen)
    - User ID-to-username mapping
    - Code-to-description mappings
    - Translation dictionaries between two systems
 
 2. **One-to-one relationships must be enforced**
+
    - Database primary key mappings
    - File path-to-identifier mappings
    - Token-to-user session mappings
 
 3. **You need both directions with equal frequency**
+
    - The overhead of two dicts is justified by lookup patterns
    - Inverse lookups are not occasional edge cases
 
@@ -104,14 +107,17 @@ Source: @[docs/intro.rst: "to model a bidirectional mapping correctly and unambi
 ### Use Two Separate Dicts When
 
 1. **Inverse lookups are rare or never needed**
+
    - Simple one-way mappings
    - Lookups only in one direction
 
 2. **Values are not unique**
+
    - Many-to-one relationships (multiple keys → same value)
    - Example: category-to-items mapping
 
 3. **Values are unhashable**
+
    - Lists, dicts, or other mutable/unhashable values
    - bidict requires values to be hashable
 

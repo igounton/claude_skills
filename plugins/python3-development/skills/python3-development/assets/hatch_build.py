@@ -50,7 +50,9 @@ class BinaryBuildHook(BuildHookInterface[Any]):
             return
 
         # No scripts found - silently continue
-        self.app.display_info("No binary build scripts found, skipping binary compilation")
+        self.app.display_info(
+            "No binary build scripts found, skipping binary compilation"
+        )
 
     def _run_shell_script(self, script_path: Path) -> None:
         """Execute a shell script for binary building.
@@ -71,14 +73,20 @@ class BinaryBuildHook(BuildHookInterface[Any]):
 
         try:
             result = subprocess.run(  # nosec B603 - using command list with full path, not shell=True
-                [bash_path, str(script_path)], cwd=self.root, capture_output=True, text=True, check=True
+                [bash_path, str(script_path)],
+                cwd=self.root,
+                capture_output=True,
+                text=True,
+                check=True,
             )
             if result.stdout:
                 self.app.display_info(result.stdout)
             if result.stderr:
                 self.app.display_warning(result.stderr)
         except subprocess.CalledProcessError as e:
-            self.app.display_error(f"Binary build script failed with exit code {e.returncode}")
+            self.app.display_error(
+                f"Binary build script failed with exit code {e.returncode}"
+            )
             if e.stdout:
                 self.app.display_info(f"stdout: {e.stdout}")
             if e.stderr:
@@ -104,14 +112,20 @@ class BinaryBuildHook(BuildHookInterface[Any]):
 
         try:
             result = subprocess.run(  # nosec B603 - using command list with full path, not shell=True
-                [python_path, str(script_path)], cwd=self.root, capture_output=True, text=True, check=True
+                [python_path, str(script_path)],
+                cwd=self.root,
+                capture_output=True,
+                text=True,
+                check=True,
             )
             if result.stdout:
                 self.app.display_info(result.stdout)
             if result.stderr:
                 self.app.display_warning(result.stderr)
         except subprocess.CalledProcessError as e:
-            self.app.display_error(f"Binary build script failed with exit code {e.returncode}")
+            self.app.display_error(
+                f"Binary build script failed with exit code {e.returncode}"
+            )
             if e.stdout:
                 self.app.display_info(f"stdout: {e.stdout}")
             if e.stderr:

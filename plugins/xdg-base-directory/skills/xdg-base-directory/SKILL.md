@@ -57,13 +57,13 @@ When an environment variable is unset or empty, use the specification-defined de
 
 ### User-Specific Directories (Single Path)
 
-| Variable | Purpose | Default | Use For |
-| --- | --- | --- | --- |
-| `$XDG_CONFIG_HOME` | User configuration files | `$HOME/.config` | Settings, preferences, user configs |
-| `$XDG_DATA_HOME` | User data files | `$HOME/.local/share` | Databases, generated content, persistent data |
-| `$XDG_STATE_HOME` | User state files | `$HOME/.local/state` | Logs, history, undo buffers, recent files |
-| `$XDG_CACHE_HOME` | User cache files | `$HOME/.cache` | Temporary data, downloaded files, build artifacts |
-| `$XDG_RUNTIME_DIR` | User runtime files | System-set (`/run/user/$UID`) | Sockets, pipes, lock files, IPC |
+| Variable           | Purpose                  | Default                       | Use For                                           |
+| ------------------ | ------------------------ | ----------------------------- | ------------------------------------------------- |
+| `$XDG_CONFIG_HOME` | User configuration files | `$HOME/.config`               | Settings, preferences, user configs               |
+| `$XDG_DATA_HOME`   | User data files          | `$HOME/.local/share`          | Databases, generated content, persistent data     |
+| `$XDG_STATE_HOME`  | User state files         | `$HOME/.local/state`          | Logs, history, undo buffers, recent files         |
+| `$XDG_CACHE_HOME`  | User cache files         | `$HOME/.cache`                | Temporary data, downloaded files, build artifacts |
+| `$XDG_RUNTIME_DIR` | User runtime files       | System-set (`/run/user/$UID`) | Sockets, pipes, lock files, IPC                   |
 
 ### System-Wide Directories (Search Paths)
 
@@ -304,11 +304,11 @@ config_dir = Path(user_config_dir(APP_NAME, APP_AUTHOR, ensure_exists=True))
 
 **Platform-specific paths:**
 
-| Platform | Config | Data | Cache | State |
-| --- | --- | --- | --- | --- |
-| Linux | `~/.config/myapp` | `~/.local/share/myapp` | `~/.cache/myapp` | `~/.local/state/myapp` |
-| macOS | `~/Library/Application Support/myapp` | `~/Library/Application Support/myapp` | `~/Library/Caches/myapp` | `~/Library/Application Support/myapp` |
-| Windows | `C:\Users\<user>\AppData\Local\myapp\myapp` | `C:\Users\<user>\AppData\Local\myapp\myapp` | `C:\Users\<user>\AppData\Local\myapp\myapp\Cache` | `C:\Users\<user>\AppData\Local\myapp\myapp` |
+| Platform | Config                                      | Data                                        | Cache                                             | State                                       |
+| -------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------------- | ------------------------------------------- |
+| Linux    | `~/.config/myapp`                           | `~/.local/share/myapp`                      | `~/.cache/myapp`                                  | `~/.local/state/myapp`                      |
+| macOS    | `~/Library/Application Support/myapp`       | `~/Library/Application Support/myapp`       | `~/Library/Caches/myapp`                          | `~/Library/Application Support/myapp`       |
+| Windows  | `C:\Users\<user>\AppData\Local\myapp\myapp` | `C:\Users\<user>\AppData\Local\myapp\myapp` | `C:\Users\<user>\AppData\Local\myapp\myapp\Cache` | `C:\Users\<user>\AppData\Local\myapp\myapp` |
 
 **When to use platformdirs:**
 

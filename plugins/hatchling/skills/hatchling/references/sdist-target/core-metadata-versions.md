@@ -156,14 +156,17 @@ license-files = { globs = ["LICENSE*", "COPYING*"] }
 ### Decision Tree
 
 1. **Are you using SPDX license expressions?**
+
    - Yes → Use 2.4
    - No → Continue to step 2
 
 2. **Do you need to support Python < 3.6?**
+
    - Yes → Use 2.1
    - No → Continue to step 3
 
 3. **Are you publishing to PyPI?**
+
    - Yes → Use 2.4
    - No → Continue to step 4
 

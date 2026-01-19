@@ -349,16 +349,19 @@ shiv -o test.pyz pytest pytest-cov hypothesis
 Based on GitHub search results (@<https://github.com/search?q=shiv+zipapp>):
 
 1. **JanssenProject/jans** - IAM authentication server
+
    - Uses shiv to build CLI and TUI applications
    - Makefile integration for zipapp builds
    - @<https://github.com/JanssenProject/jans>
 
 2. **scs/smartmeter-datacollector** - Smart meter data collection
+
    - Poetry integration with custom build command
    - Self-contained distribution for Raspberry Pi
    - @<https://github.com/scs/smartmeter-datacollector>
 
 3. **praetorian-inc/noseyparker-explorer** - Security scanning results explorer
+
    - TUI application distributed via shiv
    - @<https://github.com/praetorian-inc/noseyparker-explorer>
 

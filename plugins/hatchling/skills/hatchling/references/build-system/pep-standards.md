@@ -204,14 +204,17 @@ python -m build --wheel --outdir /tmp/test
 Help users resolve these issues:
 
 1. **Missing Required Hooks**
+
    - Ensure hatchling is in `requires`
    - Verify `build-backend = "hatchling.build"`
 
 2. **Invalid Return Types**
+
    - Hooks must return strings (filenames)
    - Metadata hook returns directory name
 
 3. **Non-Reproducible Builds**
+
    - Enable `reproducible = true`
    - Set SOURCE_DATE_EPOCH
 

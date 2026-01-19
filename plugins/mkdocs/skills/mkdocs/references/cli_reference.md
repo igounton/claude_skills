@@ -34,16 +34,16 @@ mkdocs build [OPTIONS]
 
 **Options:**
 
-| Option | Short | Description | Default |
-| --- | --- | --- | --- |
-| `--config-file` | `-f` | Path to mkdocs.yml configuration file | `mkdocs.yml` |
-| `--clean` / `--dirty` | `-c` / | Remove stale files from site_dir before building | `--clean` |
-| `--strict` | `-s` | Enable strict mode (fail on warnings) | `false` |
-| `--theme` | `-t` | Theme to use (mkdocs or readthedocs) | From config |
-| `--use-directory-urls` / `--no-directory-urls` |  | Enable/disable directory URLs | From config |
-| `--site-dir` | `-d` | Output directory for documentation site | `site` |
-| `--quiet` | `-q` | Suppress warnings |  |
-| `--verbose` | `-v` | Enable verbose output |  |
+| Option                                         | Short  | Description                                      | Default      |
+| ---------------------------------------------- | ------ | ------------------------------------------------ | ------------ |
+| `--config-file`                                | `-f`   | Path to mkdocs.yml configuration file            | `mkdocs.yml` |
+| `--clean` / `--dirty`                          | `-c` / | Remove stale files from site_dir before building | `--clean`    |
+| `--strict`                                     | `-s`   | Enable strict mode (fail on warnings)            | `false`      |
+| `--theme`                                      | `-t`   | Theme to use (mkdocs or readthedocs)             | From config  |
+| `--use-directory-urls` / `--no-directory-urls` |        | Enable/disable directory URLs                    | From config  |
+| `--site-dir`                                   | `-d`   | Output directory for documentation site          | `site`       |
+| `--quiet`                                      | `-q`   | Suppress warnings                                |              |
+| `--verbose`                                    | `-v`   | Enable verbose output                            |              |
 
 **Examples:**
 
@@ -77,20 +77,20 @@ mkdocs serve [OPTIONS]
 
 **Options:**
 
-| Option | Short | Description | Default |
-| --- | --- | --- | --- |
-| `--dev-addr` | `-a` | Address and port to serve on | `127.0.0.1:8000` |
-| `--config-file` | `-f` | Path to mkdocs.yml configuration file | `mkdocs.yml` |
-| `--strict` | `-s` | Enable strict mode (fail on warnings) | `false` |
-| `--theme` | `-t` | Theme to use | From config |
-| `--use-directory-urls` / `--no-directory-urls` |  | Enable/disable directory URLs | From config |
-| `--livereload` |  | Enable live reloading in browser (default) | `true` |
-| `--no-livereload` |  | Disable live reloading |  |
-| `--dirtyreload` |  | Only rebuild files that have changed | `false` |
-| `--watch-theme` |  | Watch theme files for changes | `false` |
-| `--watch` | `-w` | Additional directories or files to watch |  |
-| `--clean` | `-c` | Clean site_dir before building | `false` |
-| `--dirty` |  | Only rebuild pages that have changed (implies --dirtyreload) |  |
+| Option                                         | Short | Description                                                  | Default          |
+| ---------------------------------------------- | ----- | ------------------------------------------------------------ | ---------------- |
+| `--dev-addr`                                   | `-a`  | Address and port to serve on                                 | `127.0.0.1:8000` |
+| `--config-file`                                | `-f`  | Path to mkdocs.yml configuration file                        | `mkdocs.yml`     |
+| `--strict`                                     | `-s`  | Enable strict mode (fail on warnings)                        | `false`          |
+| `--theme`                                      | `-t`  | Theme to use                                                 | From config      |
+| `--use-directory-urls` / `--no-directory-urls` |       | Enable/disable directory URLs                                | From config      |
+| `--livereload`                                 |       | Enable live reloading in browser (default)                   | `true`           |
+| `--no-livereload`                              |       | Disable live reloading                                       |                  |
+| `--dirtyreload`                                |       | Only rebuild files that have changed                         | `false`          |
+| `--watch-theme`                                |       | Watch theme files for changes                                | `false`          |
+| `--watch`                                      | `-w`  | Additional directories or files to watch                     |                  |
+| `--clean`                                      | `-c`  | Clean site_dir before building                               | `false`          |
+| `--dirty`                                      |       | Only rebuild pages that have changed (implies --dirtyreload) |                  |
 
 **Examples:**
 

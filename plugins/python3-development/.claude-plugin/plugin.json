@@ -2,10 +2,6 @@
   "name": "python3-development",
   "description": "'The model must use this skill when : 1. working within any python project. 2. Python CLI applications with Typer and Rich are mentioned by the user. 2. tasked with Python script writing or editing. 3. building CI scripts or tools. 4. Creating portable Python scripts with stdlib only. 5. planning out a python package design. 6. running any python script or test. 7. writing tests (unit, integration, e2e, validation) for a python script, package, or application. Reviewing Python code against best practices or for code smells. 8. The python command fails to run or errors, or the python3 command shows errors. 9. pre-commit or linting errors occur in python files. 10. Writing or editing python code  in a git repository.\\n<hint>This skill provides : 1. the users preferred workflow patterns for test-driven development, feature addition, refactoring, debugging, and code review using modern Python 3.11+ patterns (including PEP 723 inline metadata, native generics, and type-safe async processing). 2. References to favored modules. 3. Working pyproject.toml configurations. 4. Linting and formatting configuration and troubleshooting. 5. Resource files that provide solutions to known errors and linting issues. 6. Project layouts the user prefers.</hint>'",
   "version": "1.0.0",
-  "skills": [
-    "./skills/python3-development"
-  ],
-  "commands": [
-    "./commands"
-  ]
+  "skills": ["./skills/python3-development"],
+  "commands": ["./commands"]
 }

@@ -76,13 +76,13 @@ MEMORY_BANK_ROOT/
 
 By Client Type:
 
-| Client | Config File Path | Configuration Type |
-| --- | --- | --- |
-| Cline (VS Code) | `~/Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json` | JSON MCP settings |
-| Roo Code | `~/Library/Application Support/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json` | JSON MCP settings |
-| Cursor | Custom via Cursor settings UI | Shell environment command |
-| Claude Desktop | `~/Library/Application Support/Claude/claude_desktop_config.json` | JSON MCP settings |
-| Claude Code CLI | `~/.claude.json` | JSON MCP settings |
+| Client          | Config File Path                                                                                                  | Configuration Type        |
+| --------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| Cline (VS Code) | `~/Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json` | JSON MCP settings         |
+| Roo Code        | `~/Library/Application Support/Code/User/globalStorage/rooveterinaryinc.roo-cline/settings/mcp_settings.json`     | JSON MCP settings         |
+| Cursor          | Custom via Cursor settings UI                                                                                     | Shell environment command |
+| Claude Desktop  | `~/Library/Application Support/Claude/claude_desktop_config.json`                                                 | JSON MCP settings         |
+| Claude Code CLI | `~/.claude.json`                                                                                                  | JSON MCP settings         |
 
 ### MCP Settings Structure (JSON Format)
 

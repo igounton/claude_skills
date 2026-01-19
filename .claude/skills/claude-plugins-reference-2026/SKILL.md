@@ -37,33 +37,33 @@ Plugins bundle multiple Claude Code capabilities (skills, commands, agents, hook
 
 ### Required Fields
 
-| Field | Type | Constraints |
-|-------|------|-------------|
+| Field  | Type   | Constraints                                 |
+| ------ | ------ | ------------------------------------------- |
 | `name` | string | Kebab-case, unique identifier, max 64 chars |
 
 ### Recommended Fields
 
-| Field | Type | Purpose |
-|-------|------|---------|
-| `version` | string | Semantic versioning (X.Y.Z) |
+| Field         | Type   | Purpose                                  |
+| ------------- | ------ | ---------------------------------------- |
+| `version`     | string | Semantic versioning (X.Y.Z)              |
 | `description` | string | Max 1024 chars, include trigger keywords |
-| `author` | object | `{name, email?, url?}` |
-| `homepage` | string | Documentation URL |
-| `repository` | string | Source code URL |
-| `license` | string | SPDX identifier |
-| `keywords` | array | Marketplace discoverability |
+| `author`      | object | `{name, email?, url?}`                   |
+| `homepage`    | string | Documentation URL                        |
+| `repository`  | string | Source code URL                          |
+| `license`     | string | SPDX identifier                          |
+| `keywords`    | array  | Marketplace discoverability              |
 
 ### Component Paths
 
-| Field | Type | Default Location |
-|-------|------|------------------|
-| `commands` | string/array | `./commands/` |
-| `agents` | string/array | `./agents/` |
-| `skills` | string/array | `./skills/` |
-| `hooks` | string/object | `./hooks.json` or inline |
-| `mcpServers` | string/object | `./.mcp.json` or inline |
-| `lspServers` | string/object | `./.lsp.json` or inline |
-| `outputStyles` | string | `./styles/` |
+| Field          | Type          | Default Location         |
+| -------------- | ------------- | ------------------------ |
+| `commands`     | string/array  | `./commands/`            |
+| `agents`       | string/array  | `./agents/`              |
+| `skills`       | string/array  | `./skills/`              |
+| `hooks`        | string/object | `./hooks.json` or inline |
+| `mcpServers`   | string/object | `./.mcp.json` or inline  |
+| `lspServers`   | string/object | `./.lsp.json` or inline  |
+| `outputStyles` | string        | `./styles/`              |
 
 ---
 
@@ -125,11 +125,11 @@ plugin-name/
 
 ### Plugin Sources
 
-| Type | Format |
-|------|--------|
-| Relative path | `"./plugins/my-plugin"` |
-| GitHub | `{ "source": "github", "repo": "owner/repo" }` |
-| Git URL | `{ "source": "url", "url": "https://..." }` |
+| Type          | Format                                         |
+| ------------- | ---------------------------------------------- |
+| Relative path | `"./plugins/my-plugin"`                        |
+| GitHub        | `{ "source": "github", "repo": "owner/repo" }` |
+| Git URL       | `{ "source": "url", "url": "https://..." }`    |
 
 ### Installation Commands
 
@@ -155,43 +155,49 @@ plugin-name/
 
 ## Installation Scopes
 
-| Scope | Settings File | Use Case |
-|-------|---------------|----------|
-| `user` | `~/.claude/settings.json` | Personal, global (default) |
-| `project` | `.claude/settings.json` | Team, shared via git |
-| `local` | `.claude/settings.local.json` | Project-specific, gitignored |
-| `managed` | `managed-settings.json` | Enterprise, admin-controlled |
+| Scope     | Settings File                 | Use Case                     |
+| --------- | ----------------------------- | ---------------------------- |
+| `user`    | `~/.claude/settings.json`     | Personal, global (default)   |
+| `project` | `.claude/settings.json`       | Team, shared via git         |
+| `local`   | `.claude/settings.local.json` | Project-specific, gitignored |
+| `managed` | `managed-settings.json`       | Enterprise, admin-controlled |
 
 ---
 
 ## Bundled Capabilities
 
 ### Commands
+
 - Location: `commands/` directory
 - Format: Markdown with frontmatter
 - Namespace: `/plugin-name:command-name`
 
 ### Agents
+
 - Location: `agents/` directory
 - Format: Markdown with frontmatter
 - Auto-delegation by Claude
 
 ### Skills
+
 - Location: `skills/` with `SKILL.md`
 - Auto-activation by Claude
 - Progressive disclosure support
 
 ### Hooks
+
 - Location: `hooks.json` or `plugin.json` inline
 - Events: PreToolUse, PostToolUse, Stop, etc.
 - Use `${CLAUDE_PLUGIN_ROOT}` for paths
 
 ### MCP Servers
+
 - Location: `.mcp.json`
 - Types: http, stdio
 - Auto-start when plugin enabled
 
 ### LSP Servers
+
 - Location: `.lsp.json`
 - Requires binary installation
 - Code intelligence features
@@ -200,10 +206,10 @@ plugin-name/
 
 ## Environment Variables
 
-| Variable | Description |
-|----------|-------------|
+| Variable                | Description                       |
+| ----------------------- | --------------------------------- |
 | `${CLAUDE_PLUGIN_ROOT}` | Absolute path to plugin directory |
-| `${CLAUDE_PROJECT_DIR}` | Project root directory |
+| `${CLAUDE_PROJECT_DIR}` | Project root directory            |
 
 ---
 
@@ -246,11 +252,11 @@ claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two
 }
 ```
 
-| Setting | Effect |
-|---------|--------|
-| `strictKnownMarketplaces: []` | Complete lockdown |
-| `strictKnownMarketplaces: [sources]` | Allowlist only |
-| `strictKnownMarketplaces: undefined` | No restrictions |
+| Setting                              | Effect            |
+| ------------------------------------ | ----------------- |
+| `strictKnownMarketplaces: []`        | Complete lockdown |
+| `strictKnownMarketplaces: [sources]` | Allowlist only    |
+| `strictKnownMarketplaces: undefined` | No restrictions   |
 
 ---
 
@@ -268,11 +274,11 @@ claude --plugin-dir ./plugin-one --plugin-dir ./plugin-two
 
 ## Private Repository Authentication
 
-| Service | Environment Variable | Scope |
-|---------|---------------------|-------|
-| GitHub | `GITHUB_TOKEN` or `GH_TOKEN` | `repo` |
-| GitLab | `GITLAB_TOKEN` or `GL_TOKEN` | `read_repository` |
-| Bitbucket | `BITBUCKET_TOKEN` | read access |
+| Service   | Environment Variable         | Scope             |
+| --------- | ---------------------------- | ----------------- |
+| GitHub    | `GITHUB_TOKEN` or `GH_TOKEN` | `repo`            |
+| GitLab    | `GITLAB_TOKEN` or `GL_TOKEN` | `read_repository` |
+| Bitbucket | `BITBUCKET_TOKEN`            | read access       |
 
 ---
 

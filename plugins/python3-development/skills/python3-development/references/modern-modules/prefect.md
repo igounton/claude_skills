@@ -384,15 +384,15 @@ Orchestration in cloud, execution anywhere:
 
 ### Prefect vs. Airflow
 
-| Dimension | Prefect | Airflow |
-| --- | --- | --- |
-| **Development Model** | Pure Python functions with decorators | DAG definitions with operators |
-| **Dynamic Workflows** | Runtime task creation based on data | Static DAG structure at parse time |
-| **Local Development** | Run locally without infrastructure | Requires full Airflow setup |
-| **Learning Curve** | Minimal - just Python | Steep - framework concepts required |
-| **Infrastructure** | Runs anywhere Python runs | Multi-component (scheduler, webserver, DB) |
-| **Cost** | 60-70% lower (per customer reports)@[62] | Higher due to always-on infrastructure@[63] |
-| **Best For** | ML/AI, modern data teams, dynamic pipelines | Traditional ETL, platform teams invested in ecosystem |
+| Dimension             | Prefect                                     | Airflow                                               |
+| --------------------- | ------------------------------------------- | ----------------------------------------------------- |
+| **Development Model** | Pure Python functions with decorators       | DAG definitions with operators                        |
+| **Dynamic Workflows** | Runtime task creation based on data         | Static DAG structure at parse time                    |
+| **Local Development** | Run locally without infrastructure          | Requires full Airflow setup                           |
+| **Learning Curve**    | Minimal - just Python                       | Steep - framework concepts required                   |
+| **Infrastructure**    | Runs anywhere Python runs                   | Multi-component (scheduler, webserver, DB)            |
+| **Cost**              | 60-70% lower (per customer reports)@[62]    | Higher due to always-on infrastructure@[63]           |
+| **Best For**          | ML/AI, modern data teams, dynamic pipelines | Traditional ETL, platform teams invested in ecosystem |
 
 **Migration Path:** Prefect provides 73.78% cost reduction over Astronomer (managed Airflow)@[64]
 

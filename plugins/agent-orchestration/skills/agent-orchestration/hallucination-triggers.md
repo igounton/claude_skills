@@ -164,11 +164,13 @@ The model decorates outputs with quantitative artifacts from training corpus WIT
 #### Next Actions
 
 1. **For each quantitative claim, verify**:
+
    - What observable evidence supports this number?
    - What is the measurement scale/methodology?
    - Can I reproduce this measurement with available tools?
 
 2. **If cannot verify**:
+
    - Remove the quantification entirely, OR
    - Mark explicitly as estimate: "Estimated at ~70% based on [reasoning]", OR
    - Replace with qualitative assessment: "Significant improvement observed in [specific measurable outcome]"
@@ -227,6 +229,7 @@ Analysis claims completeness but verification reveals gaps:
    ```
 
 2. **Coverage verification**:
+
    - List what WAS analyzed
    - List what SHOULD have been analyzed
    - Identify gaps explicitly
@@ -560,17 +563,20 @@ SYNC CHECKPOINT 2: Final Review
 When reviewing agent output for hallucinations:
 
 1. **Scan for trigger language**:
+
    - Ctrl+F for assumption words: "likely", "probably", "think", "seems", "appears"
    - Ctrl+F for timeline words: "week", "sprint", "hour", "Q1", "month"
    - Look for unscaled numbers: "X/10", "X% improvement", statistics
 
 2. **For each trigger found**:
+
    - Identify the claim being made
    - Ask: "What observable evidence supports this?"
    - Verify using available tools or mark as unverified
    - Replace or remove the hallucinated content
 
 3. **For completeness claims**:
+
    - Count what was analyzed vs what exists
    - List gaps explicitly
    - Never claim 100%/all/every without showing verification

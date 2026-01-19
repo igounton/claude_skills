@@ -272,14 +272,14 @@ class PathValidationHook(BuildHookInterface):
 
 ## Common Path Validation Errors and Solutions
 
-| Error | Cause | Solution |
-| --- | --- | --- |
-| `force-included path does not exist` | Missing file in force-include | Ensure file exists or remove from config |
-| `At least one file selection option must be defined` | No files selected for wheel | Define packages, include, or only-include |
-| `Cannot find package directory` | Wrong package name/path | Match actual directory structure |
-| `Symlink resolution failed` | Broken or external symlinks | Fix symlinks or use regular files |
-| `Path contains invalid characters` | Special chars in filenames | Rename files to use safe characters |
-| `Path outside project root` | Absolute paths or ../ references | Use relative paths within project |
+| Error                                                | Cause                            | Solution                                  |
+| ---------------------------------------------------- | -------------------------------- | ----------------------------------------- |
+| `force-included path does not exist`                 | Missing file in force-include    | Ensure file exists or remove from config  |
+| `At least one file selection option must be defined` | No files selected for wheel      | Define packages, include, or only-include |
+| `Cannot find package directory`                      | Wrong package name/path          | Match actual directory structure          |
+| `Symlink resolution failed`                          | Broken or external symlinks      | Fix symlinks or use regular files         |
+| `Path contains invalid characters`                   | Special chars in filenames       | Rename files to use safe characters       |
+| `Path outside project root`                          | Absolute paths or ../ references | Use relative paths within project         |
 
 ## Version History
 

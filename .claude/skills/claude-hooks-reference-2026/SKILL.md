@@ -11,18 +11,18 @@ Hooks execute custom commands or prompts in response to Claude Code events. Use 
 
 ## All Hook Events
 
-| Event | When Fired | Matcher Applies | Common Uses |
-|-------|------------|-----------------|-------------|
-| `PreToolUse` | Before tool execution | Yes | Validation, blocking |
-| `PermissionRequest` | When Claude requests permission | Yes | Auto-approval policies |
-| `PostToolUse` | After successful tool execution | Yes | Formatting, linting |
-| `Notification` | When Claude wants attention | Yes | Custom notifications |
-| `UserPromptSubmit` | User submits prompt | No | Input validation |
-| `Stop` | Claude finishes response | No | Cleanup, final checks |
-| `SubagentStop` | Subagent completes | No | Result validation |
-| `PreCompact` | Before context compaction | No | State backup |
-| `SessionStart` | Session begins | No | Environment setup |
-| `SessionEnd` | Session ends | No | Cleanup, persistence |
+| Event               | When Fired                      | Matcher Applies | Common Uses            |
+| ------------------- | ------------------------------- | --------------- | ---------------------- |
+| `PreToolUse`        | Before tool execution           | Yes             | Validation, blocking   |
+| `PermissionRequest` | When Claude requests permission | Yes             | Auto-approval policies |
+| `PostToolUse`       | After successful tool execution | Yes             | Formatting, linting    |
+| `Notification`      | When Claude wants attention     | Yes             | Custom notifications   |
+| `UserPromptSubmit`  | User submits prompt             | No              | Input validation       |
+| `Stop`              | Claude finishes response        | No              | Cleanup, final checks  |
+| `SubagentStop`      | Subagent completes              | No              | Result validation      |
+| `PreCompact`        | Before context compaction       | No              | State backup           |
+| `SessionStart`      | Session begins                  | No              | Environment setup      |
+| `SessionEnd`        | Session ends                    | No              | Cleanup, persistence   |
 
 ---
 
@@ -106,26 +106,26 @@ hooks:
 
 ### Fields
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `matcher` | string | For tool events | Regex pattern (case-sensitive) |
-| `type` | string | Yes | `command` or `prompt` |
-| `command` | string | For command type | Bash command |
-| `prompt` | string | For prompt type | LLM prompt |
-| `timeout` | number | No | Seconds (default: 60) |
-| `once` | boolean | No | Run once per session (Skills/Commands only) |
+| Field     | Type    | Required         | Description                                 |
+| --------- | ------- | ---------------- | ------------------------------------------- |
+| `matcher` | string  | For tool events  | Regex pattern (case-sensitive)              |
+| `type`    | string  | Yes              | `command` or `prompt`                       |
+| `command` | string  | For command type | Bash command                                |
+| `prompt`  | string  | For prompt type  | LLM prompt                                  |
+| `timeout` | number  | No               | Seconds (default: 60)                       |
+| `once`    | boolean | No               | Run once per session (Skills/Commands only) |
 
 ---
 
 ## Matcher Syntax
 
-| Pattern | Matches |
-|---------|---------|
-| `Write` | Exact match (case-sensitive) |
-| `Edit\|Write` | Either Edit or Write |
-| `Notebook.*` | NotebookEdit, NotebookRead, etc. |
-| `mcp__.*__write.*` | MCP write tools |
-| `*` or `""` | All tools |
+| Pattern            | Matches                          |
+| ------------------ | -------------------------------- |
+| `Write`            | Exact match (case-sensitive)     |
+| `Edit\|Write`      | Either Edit or Write             |
+| `Notebook.*`       | NotebookEdit, NotebookRead, etc. |
+| `mcp__.*__write.*` | MCP write tools                  |
+| `*` or `""`        | All tools                        |
 
 **Not applicable to**: UserPromptSubmit, Stop, SubagentStop, PreCompact, SessionStart, SessionEnd
 
@@ -150,11 +150,11 @@ hooks:
 
 ### Exit Codes
 
-| Code | Behavior |
-|------|----------|
-| 0 | Success - execution continues |
-| 2 | Blocking error - prevents action, shows stderr |
-| Other | Non-blocking error - stderr in verbose mode |
+| Code  | Behavior                                       |
+| ----- | ---------------------------------------------- |
+| 0     | Success - execution continues                  |
+| 2     | Blocking error - prevents action, shows stderr |
+| Other | Non-blocking error - stderr in verbose mode    |
 
 ---
 
@@ -172,11 +172,11 @@ For advanced control, output JSON to stdout:
 }
 ```
 
-| Field | Values | Effect |
-|-------|--------|--------|
-| `decision` | `allow`, `block`, `ask` | Controls tool execution |
-| `reason` | string | Shown to user if blocked |
-| `updatedInput` | object | Modifies tool input |
+| Field          | Values                  | Effect                   |
+| -------------- | ----------------------- | ------------------------ |
+| `decision`     | `allow`, `block`, `ask` | Controls tool execution  |
+| `reason`       | string                  | Shown to user if blocked |
+| `updatedInput` | object                  | Modifies tool input      |
 
 ### Stop/SubagentStop Response
 
@@ -188,11 +188,11 @@ For advanced control, output JSON to stdout:
 }
 ```
 
-| Field | Values | Effect |
-|-------|--------|--------|
-| `decision` | `continue`, `stop` | Continue or stop agent |
-| `reason` | string | Shown if continuing |
-| `additionalContext` | string | Added to context |
+| Field               | Values             | Effect                 |
+| ------------------- | ------------------ | ---------------------- |
+| `decision`          | `continue`, `stop` | Continue or stop agent |
+| `reason`            | string             | Shown if continuing    |
+| `additionalContext` | string             | Added to context       |
 
 ### Override Field
 
@@ -223,12 +223,12 @@ LLM-evaluated decisions (Stop/SubagentStop only).
 
 ## Environment Variables
 
-| Variable | Description | Available In |
-|----------|-------------|--------------|
-| `CLAUDE_PROJECT_DIR` | Project root (absolute path) | All hooks |
-| `CLAUDE_CODE_REMOTE` | `"true"` if remote, empty if local | All hooks |
-| `CLAUDE_ENV_FILE` | Path for persisting env vars | SessionStart only |
-| `CLAUDE_PLUGIN_ROOT` | Plugin directory (absolute) | Plugin hooks |
+| Variable             | Description                        | Available In      |
+| -------------------- | ---------------------------------- | ----------------- |
+| `CLAUDE_PROJECT_DIR` | Project root (absolute path)       | All hooks         |
+| `CLAUDE_CODE_REMOTE` | `"true"` if remote, empty if local | All hooks         |
+| `CLAUDE_ENV_FILE`    | Path for persisting env vars       | SessionStart only |
+| `CLAUDE_PLUGIN_ROOT` | Plugin directory (absolute)        | Plugin hooks      |
 
 ### Using in Commands
 
@@ -241,12 +241,12 @@ LLM-evaluated decisions (Stop/SubagentStop only).
 
 ## Execution Details
 
-| Aspect | Behavior |
-|--------|----------|
-| **Parallelization** | All matching hooks run in parallel |
-| **Deduplication** | Identical commands deduplicated |
-| **Timeout** | 60 seconds default per command |
-| **Hook order** | Hooks from all sources execute together |
+| Aspect              | Behavior                                |
+| ------------------- | --------------------------------------- |
+| **Parallelization** | All matching hooks run in parallel      |
+| **Deduplication**   | Identical commands deduplicated         |
+| **Timeout**         | 60 seconds default per command          |
+| **Hook order**      | Hooks from all sources execute together |
 
 ---
 

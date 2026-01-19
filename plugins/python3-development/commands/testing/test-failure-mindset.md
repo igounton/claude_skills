@@ -29,10 +29,12 @@ Going forward in this session, whenever you encounter failing tests, apply a bal
    - A failing test is providing valuable information
 
 2. **Dual Hypothesis Approach** Always consider both possibilities:
+
    - Hypothesis A: The test's expectations are incorrect
    - Hypothesis B: The implementation has a bug
 
 3. **Evidence-Based Decisions**
+
    - Never assume; always investigate
    - Look for evidence supporting each hypothesis
    - Document your reasoning process
@@ -59,19 +61,23 @@ NOT: "The test is failing, so I'll fix the test to match the implementation." </
 For EVERY test failure you encounter:
 
 1. **Pause and Read**
+
    - Understand what the test is trying to verify
    - Read its name, comments, and assertions carefully
 
 2. **Trace the Implementation**
+
    - Follow the code path that leads to the failure
    - Understand what the code actually does vs. what's expected
 
 3. **Consider the Context**
+
    - Is this testing a documented requirement?
    - Would the current behavior surprise a user?
    - What would be the impact of each possible fix?
 
 4. **Make a Reasoned Decision**
+
    - If the implementation is wrong: Fix the bug
    - If the test is wrong: Fix the test AND document why
    - If unclear: Seek clarification before changing anything

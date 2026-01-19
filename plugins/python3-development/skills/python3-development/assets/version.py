@@ -3,6 +3,10 @@
 Based on <https://github.com/maresb/hatch-vcs-footgun-example>.
 """
 
+from __future__ import annotations
+
+import pathlib
+
 
 def _get_hatch_version() -> str | None:
     """Compute the most up-to-date version number in a development environment.
@@ -25,7 +29,7 @@ def _get_hatch_version() -> str | None:
     pyproject_toml = locate_file(__file__, "pyproject.toml")
     if pyproject_toml is None:
         raise RuntimeError("pyproject.toml not found although hatchling is installed")
-    root = os.path.dirname(pyproject_toml)
+    root = pathlib.Path(pyproject_toml).parent
     metadata = ProjectMetadata(root=root, plugin_manager=PluginManager())
     # Version can be either statically set in pyproject.toml or computed dynamically:
     return metadata.core.version or metadata.hatch.version.cached
@@ -41,8 +45,7 @@ def _get_importlib_metadata_version() -> str:
     """
     from importlib.metadata import version
 
-    __version__ = version(__package__ or __name__)
-    return __version__
+    return version(__package__ or __name__)
 
 
 __version__ = _get_hatch_version() or _get_importlib_metadata_version()

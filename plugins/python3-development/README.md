@@ -5,6 +5,7 @@ Teaches Claude modern Python 3.11+ patterns and your preferred workflows.
 ## Why Install This?
 
 When you ask Claude to write Python code, Claude sometimes:
+
 - Uses outdated syntax (old typing patterns, Python 3.8 style)
 - Picks random libraries instead of ones that work well together
 - Creates inconsistent project structures across different projects
@@ -14,6 +15,7 @@ When you ask Claude to write Python code, Claude sometimes:
 ## What Changes
 
 With this plugin installed, Claude will:
+
 - Write Python 3.11+ code with modern syntax (native generics, union types with `|`)
 - Use proven library combinations (Typer+Rich for CLIs, specific tools you've used)
 - Follow project structure patterns extracted from your actual codebases
@@ -38,6 +40,7 @@ Then install the plugin:
 ## Usage
 
 Just install it - Claude uses it automatically when working with Python code. You'll notice:
+
 - Cleaner, more modern Python code
 - Consistent project structures
 - Better library choices

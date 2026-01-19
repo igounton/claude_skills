@@ -18,13 +18,13 @@ Conventions extracted from actual production projects. The model MUST follow the
 
 The following template files are available in the skill's `assets/` directory for use in new projects:
 
-| File | Purpose | Usage |
-| --- | --- | --- |
-| `version.py` | Dual-mode version management (hatch-vcs + fallback) | Copy to `packages/{package_name}/version.py` |
-| `hatch_build.py` | Build hook for binary/asset handling | Copy to `scripts/hatch_build.py` |
-| `.markdownlint.json` | Markdown linting configuration (most rules disabled) | Copy to project root |
-| `.pre-commit-config.yaml` | Standard pre-commit hooks configuration | Copy to project root, run `uv run pre-commit install` |
-| `.editorconfig` | Editor formatting settings | Copy to project root |
+| File                      | Purpose                                              | Usage                                                 |
+| ------------------------- | ---------------------------------------------------- | ----------------------------------------------------- |
+| `version.py`              | Dual-mode version management (hatch-vcs + fallback)  | Copy to `packages/{package_name}/version.py`          |
+| `hatch_build.py`          | Build hook for binary/asset handling                 | Copy to `scripts/hatch_build.py`                      |
+| `.markdownlint.json`      | Markdown linting configuration (most rules disabled) | Copy to project root                                  |
+| `.pre-commit-config.yaml` | Standard pre-commit hooks configuration              | Copy to project root, run `uv run pre-commit install` |
+| `.editorconfig`           | Editor formatting settings                           | Copy to project root                                  |
 
 The model MUST copy these files when creating new Python projects to ensure consistency with established conventions documented below.
 

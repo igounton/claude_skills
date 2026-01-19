@@ -316,14 +316,17 @@ Series of refinements to metadata handling:
 ### Build Time Reduction Strategies
 
 1. **Skip unnecessary directories** (v1.4.0+)
+
    - Automatically excludes `__pycache__`, venv, etc.
    - ~10-30% faster scanning on large projects
 
 2. **Metadata reuse** (v1.22.0+)
+
    - Wheel metadata from source dist PKG-INFO
    - Significant speedup for wheel builds from sdist
 
 3. **Lazy evaluation**
+
    - Only process explicitly dynamic fields
    - Skip metadata computation for static fields
 
@@ -336,6 +339,7 @@ Series of refinements to metadata handling:
 ### Performance Considerations
 
 1. **Minimize Hook Complexity**
+
    - Avoid expensive operations in hooks
    - Cache computed results when possible
    - Use simple hooks for simple operations

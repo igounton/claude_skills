@@ -287,10 +287,12 @@ strict-naming = false  # Keep dots in artifact names
 When users encounter naming-related issues, help them debug with these steps:
 
 1. **Import errors after installation**
+
    - Guide users to check that import name uses underscores
    - Help them verify package structure matches configuration
 
 2. **Package not found on PyPI**
+
    - Remind users that PyPI URLs use normalized names
    - Explain that search is case-insensitive
 

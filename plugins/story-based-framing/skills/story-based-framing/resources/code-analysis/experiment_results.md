@@ -31,6 +31,7 @@ Actual codebase: `usb_powertools` repository
 ### Experimental Design
 
 1. **Created 5 pattern descriptions** with identical semantic content but different formatting:
+
    - Checklist style (flat list of 5 indicators)
    - Narrative style (4-act story structure)
    - Formal mathematical style (5 conditions with logic notation)
@@ -40,6 +41,7 @@ Actual codebase: `usb_powertools` repository
 2. **Launched 5 concurrent Explore agents**, each receiving one description style
 
 3. **Measured**:
+
    - Steps required to identify the pattern
    - Completeness of identification
    - Quality of evidence provided

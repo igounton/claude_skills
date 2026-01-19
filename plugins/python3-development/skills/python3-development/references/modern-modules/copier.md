@@ -83,16 +83,19 @@ _Source: @<https://github.com/copier-org/copier/blob/master/pyproject.toml> (cla
 ### Primary Use Cases
 
 1. **Project Scaffolding with Future Updates**
+
    - Generate new projects from templates
    - Apply template updates to existing projects
    - Track which template version each project uses
 
 2. **Multi-Project Standardization**
+
    - Maintain consistency across microservices
    - Roll out organization-wide best practices
    - Synchronize CI/CD configurations
 
 3. **Living Templates**
+
    - Templates that evolve with ecosystem changes
    - Security patches propagated to all projects
    - Dependency updates across project families

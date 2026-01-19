@@ -353,11 +353,13 @@ Tools documented as available:
 ### Key Commands (Quoted from Official Documentation)
 
 1. **"follow your custom instructions"**
+
    - Triggers Pre-Flight Validation (\*a)
    - Follows Memory Bank Access Pattern (\*f)
    - Executes appropriate Mode flow (Plan/Act)
 
 2. **"initialize memory bank"**
+
    - Follows Pre-Flight Validation (\*a)
    - Creates new project if needed
    - Establishes core files structure (\*f)

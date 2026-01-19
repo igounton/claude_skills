@@ -466,31 +466,37 @@ async def test_json_api():
 ### ❌ Scenarios Where Datasette Is Inappropriate
 
 1. **High-Write Applications**
+
    - Datasette is optimized for read-heavy workloads
    - SQLite has write limitations with concurrent access
    - **Better Alternative**: PostgreSQL with PostgREST, or Django REST Framework
 
 2. **Real-Time Collaborative Editing**
+
    - No built-in support for concurrent data editing
    - Read-only by default (writes require plugins)
    - **Better Alternative**: Airtable, Retool, or custom CRUD application
 
 3. **Large-Scale Data Warehousing**
+
    - SQLite works well up to ~100GB, struggles beyond
    - Not designed for massive analytical workloads
    - **Better Alternative**: DuckDB with MotherDuck, or BigQuery with Looker
 
 4. **Complex BI Dashboards**
+
    - Limited visualization capabilities without plugins
    - Not a replacement for full BI platforms
    - **Better Alternative**: Apache Superset @ <https://github.com/apache/superset>, Metabase @ <https://github.com/metabase/metabase>, or Grafana
 
 5. **Transactional Systems**
+
    - Not designed for OLTP workloads
    - Limited transaction support
    - **Better Alternative**: Django ORM with PostgreSQL, or FastAPI with SQLAlchemy
 
 6. **User Authentication and Authorization**
+
    - Basic auth support, but not a full auth system
    - RBAC requires plugins and configuration
    - **Better Alternative**: Use Datasette behind proxy with auth, or use Metabase for built-in user management
@@ -503,6 +509,7 @@ async def test_json_api():
 ### ⚠️ Use With Caution
 
 1. **Sensitive Data Without Proper Access Controls**
+
    - Default is public access
    - Requires careful permission configuration
    - **Mitigation**: Use `--root` for admin access, configure permissions @ <https://docs.datasette.io/en/stable/authentication.html>

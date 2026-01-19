@@ -5,6 +5,7 @@ Makes Claude better at GitLab work: writing pipelines, creating documentation, a
 ## Why Install This?
 
 When working with GitLab projects, Claude sometimes:
+
 - Writes pipelines that fail validation or miss optimizations
 - Creates README files with syntax that doesn't render correctly in GitLab
 - Suggests pushing untested pipeline changes
@@ -15,6 +16,7 @@ This plugin fixes those problems.
 ## What Changes
 
 Claude will:
+
 - Write `.gitlab-ci.yml` files with proper caching, parallelization, and optimization
 - Create GitLab documentation that renders correctly the first time
 - Test pipelines locally with `gitlab-ci-local` before pushing
@@ -40,6 +42,7 @@ Then install the plugin:
 Just install it - works automatically when you work with GitLab projects.
 
 Useful for:
+
 - "Add a test stage to the pipeline"
 - "Create a README for this GitLab project"
 - "Test this pipeline locally before pushing"

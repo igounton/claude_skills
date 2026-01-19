@@ -86,15 +86,18 @@ def stripe_create_refund(
 1. **One-liner first**: Action + object (e.g., "Create refund for charge"). No fluff.
 
 2. **Output contract**: Describe JSON shape and stable keys. Note nullables.
+
    - Format: `Returns: {key: type, ...}`
    - Call out any nullable fields
 
 3. **Side effects + scope**: What changes in system, required auth/tenant, idempotency support.
+
    - State mutations clearly
    - List required permissions
    - Note if idempotency keys supported
 
 4. **Failure modes**: Common errors with short "when/why" notes for retry/fallback.
+
    - Error name + when it occurs
    - Actionable guidance for agent
 

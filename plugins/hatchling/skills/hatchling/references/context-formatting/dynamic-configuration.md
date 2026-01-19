@@ -268,6 +268,7 @@ class MyMetadataHook(MetadataHookInterface):
 1. **Modify in place**: The `update()` method receives a dictionary and modifies it directly. Return value is ignored.
 
 2. **Use correct types**:
+
    - Arrays → `list` (e.g., `metadata["authors"]`)
    - Objects → `dict` (e.g., `metadata["urls"]`)
    - Strings → `str`

@@ -19,17 +19,20 @@ Create a new Claude Code command following our established patterns and template
 ## Execution Steps
 
 1. **Determine Command Type**
+
    - Parse command purpose from $ARGUMENTS
    - Identify appropriate category (analysis/development/quality/etc)
    - Choose suitable command name (verb-noun format)
 
 2. **Apply Template**
+
    - Start with base template from [command-template.md](./templates/command-template.md)
    - Customize sections for specific command purpose
    - Ensure all required sections are included
    - Add command-specific flags if needed
 
 3. **Configure Integration**
+
    - Check [command-patterns.yml](./config/command-patterns.yml) for workflow placement
    - Identify prerequisite commands
    - Define what context this command produces

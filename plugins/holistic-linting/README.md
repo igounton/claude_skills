@@ -5,6 +5,7 @@ Makes Claude automatically check and fix code quality issues before completing t
 ## Why Install This?
 
 When you ask Claude to write or modify code, Claude sometimes:
+
 - Says "all done!" but leaves linting errors in the code
 - Adds `# type: ignore` or `# noqa` comments to silence errors instead of fixing them
 - Forgets to run formatters and linters before finishing
@@ -15,6 +16,7 @@ This plugin makes Claude treat code quality checks as a required part of every t
 ## What Changes
 
 With this plugin installed, Claude will:
+
 - Automatically format and lint modified files before saying a task is complete
 - Investigate the root cause of linting errors instead of just suppressing them
 - Read your project's linting configuration from `CLAUDE.md` to know which tools to use
@@ -44,12 +46,14 @@ Just install it - Claude will automatically check code quality when finishing ta
 ### Manual Commands
 
 **Check specific files**:
+
 ```bash
 /lint src/auth.py
 /lint src/*.py
 ```
 
 **Auto-detect your project's linters**:
+
 ```bash
 /lint init
 ```
@@ -59,6 +63,7 @@ This scans your project (pyproject.toml, .pre-commit-config.yaml, package.json, 
 ## Example
 
 **Without this plugin**:
+
 ```
 You: "Add authentication to the API"
 Claude: [writes code]
@@ -68,6 +73,7 @@ You: "There are 5 linting errors..."
 ```
 
 **With this plugin**:
+
 ```
 You: "Add authentication to the API"
 Claude: [writes code]

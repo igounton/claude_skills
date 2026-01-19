@@ -13,6 +13,8 @@ to run, matches file patterns to tools, and executes formatters and linters in
 the correct order with aggregated results.
 """
 
+from __future__ import annotations
+
 import re
 import subprocess
 from dataclasses import dataclass
@@ -96,7 +98,9 @@ def parse_linters_section(claude_md: Path) -> LintersConfig:
 
     # Parse formatters
     formatters: list[Tool] = []
-    formatter_match = re.search(r"### Formatters\s*\n(.*?)(?=###|\Z)", linters_section, re.DOTALL)
+    formatter_match = re.search(
+        r"### Formatters\s*\n(.*?)(?=###|\Z)", linters_section, re.DOTALL
+    )
     if formatter_match:
         for line in formatter_match.group(1).splitlines():
             if tool_info := _parse_tool_line(line):
@@ -105,7 +109,11 @@ def parse_linters_section(claude_md: Path) -> LintersConfig:
 
     # Parse linters
     linters: list[Tool] = []
-    linter_match = re.search(r"### Static Checking and Linting\s*\n(.*?)(?=###|\Z)", linters_section, re.DOTALL)
+    linter_match = re.search(
+        r"### Static Checking and Linting\s*\n(.*?)(?=###|\Z)",
+        linters_section,
+        re.DOTALL,
+    )
     if linter_match:
         for line in linter_match.group(1).splitlines():
             if tool_info := _parse_tool_line(line):
@@ -219,7 +227,9 @@ def run_tool(tool: Tool, file_path: Path) -> ToolResult:
     cmd = build_tool_command(tool.name, file_path)
 
     start_time = time.time()
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+    result = subprocess.run(
+        cmd, check=False, capture_output=True, text=True, timeout=60
+    )
     duration = time.time() - start_time
 
     return ToolResult(
@@ -232,7 +242,9 @@ def run_tool(tool: Tool, file_path: Path) -> ToolResult:
     )
 
 
-def run_tools_on_files(tools: list[Tool], file_paths: list[Path], is_formatter: bool) -> list[ToolResult]:
+def run_tools_on_files(
+    tools: list[Tool], file_paths: list[Path], is_formatter: bool
+) -> list[ToolResult]:
     """Run tools on files, matching by pattern.
 
     Args:
@@ -255,17 +267,29 @@ def run_tools_on_files(tools: list[Tool], file_paths: list[Path], is_formatter: 
                 results.append(result)
 
                 # Show progress
-                status = ":white_check_mark:" if result.exit_code == 0 else ":cross_mark:"
+                status = (
+                    ":white_check_mark:" if result.exit_code == 0 else ":cross_mark:"
+                )
                 action = "Formatted" if is_formatter else "Checked"
-                console.print(f"{status} {action} [cyan]{file_path}[/cyan] with [yellow]{tool.name}[/yellow]")
+                console.print(
+                    f"{status} {action} [cyan]{file_path}[/cyan] with [yellow]{tool.name}[/yellow]"
+                )
 
-            except (subprocess.TimeoutExpired, subprocess.CalledProcessError, ValueError) as e:
-                error_console.print(f":cross_mark: Failed to run {tool.name} on {file_path}: {e}")
+            except (
+                subprocess.TimeoutExpired,
+                subprocess.CalledProcessError,
+                ValueError,
+            ) as e:
+                error_console.print(
+                    f":cross_mark: Failed to run {tool.name} on {file_path}: {e}"
+                )
 
     return results
 
 
-def show_results_summary(formatter_results: list[ToolResult], linter_results: list[ToolResult]) -> None:
+def show_results_summary(
+    formatter_results: list[ToolResult], linter_results: list[ToolResult]
+) -> None:
     """Display summary of linting results.
 
     Args:
@@ -287,12 +311,16 @@ def show_results_summary(formatter_results: list[ToolResult], linter_results: li
     if formatter_results:
         unique_files = len({r.file_path for r in formatter_results})
         unique_tools = len({r.tool_name for r in formatter_results})
-        table.add_row("Formatters", str(unique_files), str(unique_tools), str(formatter_errors))
+        table.add_row(
+            "Formatters", str(unique_files), str(unique_tools), str(formatter_errors)
+        )
 
     if linter_results:
         unique_files = len({r.file_path for r in linter_results})
         unique_tools = len({r.tool_name for r in linter_results})
-        table.add_row("Linters", str(unique_files), str(unique_tools), str(linter_errors))
+        table.add_row(
+            "Linters", str(unique_files), str(unique_tools), str(linter_errors)
+        )
 
     console.print(table)
 
@@ -301,7 +329,9 @@ def show_results_summary(formatter_results: list[ToolResult], linter_results: li
     if error_results:
         console.print("\n[bold red]Errors Found:[/bold red]")
         for result in error_results:
-            console.print(f"\n[yellow]{result.tool_name}[/yellow] on [cyan]{result.file_path}[/cyan]:")
+            console.print(
+                f"\n[yellow]{result.tool_name}[/yellow] on [cyan]{result.file_path}[/cyan]:"
+            )
             if result.stdout:
                 console.print(Panel(result.stdout, border_style="red"))
             if result.stderr:
@@ -309,16 +339,26 @@ def show_results_summary(formatter_results: list[ToolResult], linter_results: li
 
 
 app = typer.Typer(
-    name="lint-orchestrator", help="Run project linters based on CLAUDE.md configuration", rich_markup_mode="rich"
+    name="lint-orchestrator",
+    help="Run project linters based on CLAUDE.md configuration",
+    rich_markup_mode="rich",
 )
 
 
 @app.command()
 def main(
-    paths: Annotated[list[Path], typer.Argument(help="File or directory paths to lint", exists=True)],
-    config: Annotated[Path, typer.Option(help="Path to CLAUDE.md file (default: ./CLAUDE.md)")] = Path("CLAUDE.md"),
-    format_only: Annotated[bool, typer.Option("--format-only", help="Run only formatters, skip linters")] = False,
-    lint_only: Annotated[bool, typer.Option("--lint-only", help="Run only linters, skip formatters")] = False,
+    paths: Annotated[
+        list[Path], typer.Argument(help="File or directory paths to lint", exists=True)
+    ],
+    config: Annotated[
+        Path, typer.Option(help="Path to CLAUDE.md file (default: ./CLAUDE.md)")
+    ] = Path("CLAUDE.md"),
+    format_only: Annotated[
+        bool, typer.Option("--format-only", help="Run only formatters, skip linters")
+    ] = False,
+    lint_only: Annotated[
+        bool, typer.Option("--lint-only", help="Run only linters, skip formatters")
+    ] = False,
 ) -> None:
     """Run project linters based on CLAUDE.md LINTERS configuration.
 
@@ -335,7 +375,9 @@ def main(
         typer.Exit: On configuration errors or linting failures
     """
     if format_only and lint_only:
-        error_console.print(":cross_mark: [red]Cannot use both --format-only and --lint-only[/red]")
+        error_console.print(
+            ":cross_mark: [red]Cannot use both --format-only and --lint-only[/red]"
+        )
         raise typer.Exit(code=1)
 
     # Parse LINTERS configuration
@@ -343,7 +385,9 @@ def main(
         linters_config = parse_linters_section(config)
     except ValueError as e:
         error_console.print(f":cross_mark: [red]Configuration error:[/red] {e}")
-        error_console.print("\n[yellow]Run:[/yellow] uv run python scripts/discover-linters.py")
+        error_console.print(
+            "\n[yellow]Run:[/yellow] uv run python scripts/discover-linters.py"
+        )
         raise typer.Exit(code=1) from e
 
     # Collect all files to lint
@@ -359,25 +403,33 @@ def main(
         error_console.print(":cross_mark: [red]No files found to lint[/red]")
         raise typer.Exit(code=1)
 
-    console.print(f"[cyan]Linting {len(all_files)} files with CLAUDE.md configuration[/cyan]\n")
+    console.print(
+        f"[cyan]Linting {len(all_files)} files with CLAUDE.md configuration[/cyan]\n"
+    )
 
     # Run formatters
     formatter_results: list[ToolResult] = []
     if not lint_only and linters_config.formatters:
         console.print("[bold cyan]Running formatters...[/bold cyan]")
-        formatter_results = run_tools_on_files(linters_config.formatters, all_files, is_formatter=True)
+        formatter_results = run_tools_on_files(
+            linters_config.formatters, all_files, is_formatter=True
+        )
 
     # Run linters
     linter_results: list[ToolResult] = []
     if not format_only and linters_config.linters:
         console.print("\n[bold cyan]Running linters...[/bold cyan]")
-        linter_results = run_tools_on_files(linters_config.linters, all_files, is_formatter=False)
+        linter_results = run_tools_on_files(
+            linters_config.linters, all_files, is_formatter=False
+        )
 
     # Show summary
     show_results_summary(formatter_results, linter_results)
 
     # Exit with appropriate code
-    total_errors = sum(1 for r in formatter_results + linter_results if r.exit_code != 0)
+    total_errors = sum(
+        1 for r in formatter_results + linter_results if r.exit_code != 0
+    )
     if total_errors > 0:
         error_console.print(f"\n:cross_mark: [red]Found {total_errors} errors[/red]")
         raise typer.Exit(code=1)

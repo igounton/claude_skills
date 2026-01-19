@@ -20,12 +20,12 @@ The wheel builder is configured in the `pyproject.toml` file:
 
 ### Core Metadata
 
-| Option | Default | Description |
-| --- | --- | --- |
+| Option                  | Default | Description                                                                                       |
+| ----------------------- | ------- | ------------------------------------------------------------------------------------------------- |
 | `core-metadata-version` | `"2.3"` | The version of [core metadata](https://packaging.python.org/specifications/core-metadata/) to use |
-| `strict-naming` | `true` | Whether file names should contain the normalized version of the project name |
-| `macos-max-compat` | `true` | Whether to signal broad macOS support in wheel names |
-| `bypass-selection` | `false` | Whether to suppress errors when no file selection is defined |
+| `strict-naming`         | `true`  | Whether file names should contain the normalized version of the project name                      |
+| `macos-max-compat`      | `true`  | Whether to signal broad macOS support in wheel names                                              |
+| `bypass-selection`      | `false` | Whether to suppress errors when no file selection is defined                                      |
 
 ### Data and Scripts
 

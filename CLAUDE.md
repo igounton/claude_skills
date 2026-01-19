@@ -833,11 +833,11 @@ Task(
 
 All plugin maintenance agents load reference skills automatically:
 
-| Agent | Loaded Skills |
-|-------|---------------|
-| plugin-assessor | claude-skills-overview-2026, claude-plugins-reference-2026, claude-commands-reference-2026, claude-hooks-reference-2026 |
+| Agent              | Loaded Skills                                                                                                           |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| plugin-assessor    | claude-skills-overview-2026, claude-plugins-reference-2026, claude-commands-reference-2026, claude-hooks-reference-2026 |
 | plugin-docs-writer | claude-skills-overview-2026, claude-plugins-reference-2026, claude-commands-reference-2026, claude-hooks-reference-2026 |
-| skill-refactorer | claude-skills-overview-2026 |
+| skill-refactorer   | claude-skills-overview-2026                                                                                             |
 
 This ensures agents have complete knowledge of Claude Code plugin architecture, frontmatter schemas, and best practices.
 

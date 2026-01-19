@@ -14,16 +14,19 @@ Modern Python packaging (PEP 517, PEP 660) uses `pyproject.toml` as the source o
 ### Scenarios Requiring Legacy Support
 
 1. **Very Old Pip Versions**
+
    - pip < 19.0 (released December 2018)
    - These versions cannot use PEP 517 build backends
    - Require `setup.py` to exist
 
 2. **Legacy Python Versions**
+
    - Python 2.7 (no longer maintained)
    - Python 3.4-3.5 (not recommended for new projects)
    - Some very old installation tools
 
 3. **Legacy Build Systems**
+
    - Custom build scripts that invoke `setup.py`
    - CI/CD systems with hardcoded `python setup.py install`
    - Packaging tools that predate PEP 517

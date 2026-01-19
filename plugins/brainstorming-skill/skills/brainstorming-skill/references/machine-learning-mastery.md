@@ -278,13 +278,13 @@ ChatGPT can miss important details, especially domain-specific constraints (visa
 
 The Actor-Request-Context-Constraints framework works across diverse brainstorming scenarios:
 
-| Scenario | Actor | Request | Context | Constraints |
-| --- | --- | --- | --- | --- |
-| **Travel** | Travel agent with regional expertise | Plan itinerary | Interests, travel style, group composition | Budget, duration, visa requirements, accessibility |
-| **Cooking** | Chef with cuisine expertise | Design meal | Dietary restrictions, flavor preferences, guest count | Time, budget, ingredient availability, equipment |
-| **Career** | Career coach in your industry | Plan next steps | Skills, values, career stage, interests | Timeline, geographic preferences, salary requirements |
-| **Business** | Consultant in your domain | Develop strategy | Market position, competitive landscape, resources | Budget, timeline, team size, regulatory environment |
-| **Product** | Product manager with UX expertise | Design feature | User needs, existing constraints, business goals | Technical limitations, timeline, resource availability |
+| Scenario     | Actor                                | Request          | Context                                               | Constraints                                            |
+| ------------ | ------------------------------------ | ---------------- | ----------------------------------------------------- | ------------------------------------------------------ |
+| **Travel**   | Travel agent with regional expertise | Plan itinerary   | Interests, travel style, group composition            | Budget, duration, visa requirements, accessibility     |
+| **Cooking**  | Chef with cuisine expertise          | Design meal      | Dietary restrictions, flavor preferences, guest count | Time, budget, ingredient availability, equipment       |
+| **Career**   | Career coach in your industry        | Plan next steps  | Skills, values, career stage, interests               | Timeline, geographic preferences, salary requirements  |
+| **Business** | Consultant in your domain            | Develop strategy | Market position, competitive landscape, resources     | Budget, timeline, team size, regulatory environment    |
+| **Product**  | Product manager with UX expertise    | Design feature   | User needs, existing constraints, business goals      | Technical limitations, timeline, resource availability |
 
 The pattern is consistent: specify the role, define the task, provide relevant context, and state hard constraints.
 

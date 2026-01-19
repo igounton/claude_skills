@@ -12,29 +12,34 @@ This directory contains comprehensive documentation of Hatchling's plugin system
 ### By Plugin Type
 
 1. **[Builder Plugins](./builder-plugins.md)** - Create distributable packages
+
    - Wheel builder
    - Source distribution (sdist) builder
    - Custom/third-party builders
    - Interface: `BuilderInterface`
 
 2. **[Build Hook Plugins](./build-hook-plugins.md)** - Execute code during builds
+
    - Initialize phase (before build)
    - Finalize phase (after build)
    - Clean phase (with --clean flag)
    - Interface: `BuildHookInterface`
 
 3. **[Metadata Hook Plugins](./metadata-hook-plugins.md)** - Dynamically modify project metadata
+
    - Dynamic version, description, dependencies
    - Custom classifiers
    - Interface: `MetadataHookInterface`
 
 4. **[Version Source Plugins](./version-source-plugins.md)** - Determine project version
+
    - VCS tags (via hatch-vcs)
    - Code extraction (regex/file parsing)
    - Environment variables
    - Interface: `VersionSourceInterface`
 
 5. **[Version Scheme Plugins](./version-scheme-plugins.md)** - Validate version bumping
+
    - PEP 440 validation
    - Custom version formats
    - Interface: `VersionSchemeInterface`
@@ -79,6 +84,7 @@ class SpecialBuilder(BuilderInterface):
 ### Plugin Categories
 
 1. **Hatchling Plugins** (Build-time)
+
    - Builder plugins
    - Build hook plugins
    - Metadata hook plugins

@@ -111,11 +111,13 @@ Each document follows a consistent structure:
 Standards are maintained in the following authority order:
 
 1. **PyPA Specifications** (primary authority)
+
    - Active, maintained by Python Packaging Authority
    - Updated with fixes and clarifications
    - Found at: <https://packaging.python.org/specifications/>
 
 2. **PEP Documents** (historical authority)
+
    - Reference documents, final versions
    - Superseded by PyPA Specifications where conflicting
    - Found at: <https://peps.python.org/>

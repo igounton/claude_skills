@@ -22,18 +22,18 @@ Comprehensive catalog of development tools, testing frameworks, CLI libraries, d
 
 ### Category Matrix
 
-| Category | Tool Count | Mandatory Tools | Optional Tools | Use Cases |
-| --- | --- | --- | --- | --- |
-| Development Tools | 8 | uv, ruff, mypy, pyright | prospector, bandit | Package management, linting, type checking |
-| Testing Tools | 9 | pytest, pytest-mock, pytest-cov | hypothesis, mutmut, robotframework | Unit tests, BDD, mutation testing |
-| CLI Frameworks | 4 | typer, argparse | textual, click | Human-facing CLIs, portable scripts, TUIs |
-| Data Libraries | 5 | - | datasette, arrow, httpx, requests | Data exploration, time handling, HTTP clients |
-| Workflow Tools | 4 | - | prefect, fabric, copier, invoke | Orchestration, automation, templating |
-| IoT/Messaging | 2 | - | paho-mqtt, blinker | MQTT messaging, signals/events |
-| Build Tools | 4 | uv | hatchling, shiv, pip-tools | Package building, executable creation |
-| Quality Tools | 4 | pre-commit, ruff | prospector, bandit | Code quality gates, security scanning |
-| Utility Libraries | 3 | - | boltons, pydantic, structlog | General utilities, validation, logging |
-| MCP Tools | 8 | - | context7, ref, exa, github | Documentation lookup, code search, reasoning |
+| Category          | Tool Count | Mandatory Tools                 | Optional Tools                     | Use Cases                                     |
+| ----------------- | ---------- | ------------------------------- | ---------------------------------- | --------------------------------------------- |
+| Development Tools | 8          | uv, ruff, mypy, pyright         | prospector, bandit                 | Package management, linting, type checking    |
+| Testing Tools     | 9          | pytest, pytest-mock, pytest-cov | hypothesis, mutmut, robotframework | Unit tests, BDD, mutation testing             |
+| CLI Frameworks    | 4          | typer, argparse                 | textual, click                     | Human-facing CLIs, portable scripts, TUIs     |
+| Data Libraries    | 5          | -                               | datasette, arrow, httpx, requests  | Data exploration, time handling, HTTP clients |
+| Workflow Tools    | 4          | -                               | prefect, fabric, copier, invoke    | Orchestration, automation, templating         |
+| IoT/Messaging     | 2          | -                               | paho-mqtt, blinker                 | MQTT messaging, signals/events                |
+| Build Tools       | 4          | uv                              | hatchling, shiv, pip-tools         | Package building, executable creation         |
+| Quality Tools     | 4          | pre-commit, ruff                | prospector, bandit                 | Code quality gates, security scanning         |
+| Utility Libraries | 3          | -                               | boltons, pydantic, structlog       | General utilities, validation, logging        |
+| MCP Tools         | 8          | -                               | context7, ref, exa, github         | Documentation lookup, code search, reasoning  |
 
 ---
 

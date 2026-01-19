@@ -4,13 +4,13 @@ Clavix applies the CLEAR framework to evaluate and improve every prompt and PRD 
 
 ## Components
 
-| Component | Focus | Typical improvements |
-| --- | --- | --- |
-| **Concise** | Reduce noise and pleasantries | Remove filler, tighten language, emphasize action verbs |
-| **Logical** | Improve flow and ordering | Restructure prompts into context → requirements → constraints → outputs |
-| **Explicit** | Clarify expectations | Specify persona, tone, output format, success criteria, examples |
-| **Adaptive** | Offer alternative approaches | Provide variations, alternative structures, temperature suggestions |
-| **Reflective** | Encourage validation | Add checklists, edge cases, fact-checking steps, risk mitigation |
+| Component      | Focus                         | Typical improvements                                                    |
+| -------------- | ----------------------------- | ----------------------------------------------------------------------- |
+| **Concise**    | Reduce noise and pleasantries | Remove filler, tighten language, emphasize action verbs                 |
+| **Logical**    | Improve flow and ordering     | Restructure prompts into context → requirements → constraints → outputs |
+| **Explicit**   | Clarify expectations          | Specify persona, tone, output format, success criteria, examples        |
+| **Adaptive**   | Offer alternative approaches  | Provide variations, alternative structures, temperature suggestions     |
+| **Reflective** | Encourage validation          | Add checklists, edge cases, fact-checking steps, risk mitigation        |
 
 ## How Clavix uses CLEAR
 

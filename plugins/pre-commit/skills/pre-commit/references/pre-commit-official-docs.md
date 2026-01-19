@@ -6,14 +6,14 @@ Complete reference links for pre-commit framework official documentation.
 
 ### Primary Documentation
 
-| Resource | URL | Description |
-| --- | --- | --- |
-| Official Site | <https://pre-commit.com/> | Main documentation hub |
-| GitHub Repository | <https://github.com/pre-commit/pre-commit> | Source code and issue tracking |
-| Creating New Hooks | <https://pre-commit.com/#creating-new-hooks> | Hook development guide |
-| Supported Git Hooks | <https://pre-commit.com/#supported-git-hooks> | Complete stage reference |
-| Confining Hooks to Stages | <https://pre-commit.com/#confining-hooks-to-run-at-certain-stages> | Stage configuration |
-| Command Line Interface | <https://pre-commit.com/#command-line-interface> | CLI reference |
+| Resource                  | URL                                                                | Description                    |
+| ------------------------- | ------------------------------------------------------------------ | ------------------------------ |
+| Official Site             | <https://pre-commit.com/>                                          | Main documentation hub         |
+| GitHub Repository         | <https://github.com/pre-commit/pre-commit>                         | Source code and issue tracking |
+| Creating New Hooks        | <https://pre-commit.com/#creating-new-hooks>                       | Hook development guide         |
+| Supported Git Hooks       | <https://pre-commit.com/#supported-git-hooks>                      | Complete stage reference       |
+| Confining Hooks to Stages | <https://pre-commit.com/#confining-hooks-to-run-at-certain-stages> | Stage configuration            |
+| Command Line Interface    | <https://pre-commit.com/#command-line-interface>                   | CLI reference                  |
 
 ### Git Hooks Documentation
 
@@ -79,12 +79,12 @@ Hook definition schema for hook authors:
 
 ## Environment Variables
 
-| Variable | Documentation URL | Purpose |
-| --- | --- | --- |
-| `SKIP` | <https://pre-commit.com/#temporarily-disabling-hooks> | Skip specific hooks |
-| `PRE_COMMIT_HOME` | <https://pre-commit.com/#environment-variables> | Override cache location |
-| `PRE_COMMIT_COMMIT_MSG_SOURCE` | Git documentation | Commit message source (prepare-commit-msg only) |
-| `PRE_COMMIT_COMMIT_OBJECT_NAME` | Git documentation | Commit SHA (prepare-commit-msg only) |
+| Variable                        | Documentation URL                                     | Purpose                                         |
+| ------------------------------- | ----------------------------------------------------- | ----------------------------------------------- |
+| `SKIP`                          | <https://pre-commit.com/#temporarily-disabling-hooks> | Skip specific hooks                             |
+| `PRE_COMMIT_HOME`               | <https://pre-commit.com/#environment-variables>       | Override cache location                         |
+| `PRE_COMMIT_COMMIT_MSG_SOURCE`  | Git documentation                                     | Commit message source (prepare-commit-msg only) |
+| `PRE_COMMIT_COMMIT_OBJECT_NAME` | Git documentation                                     | Commit SHA (prepare-commit-msg only)            |
 
 ## Hook Repositories
 

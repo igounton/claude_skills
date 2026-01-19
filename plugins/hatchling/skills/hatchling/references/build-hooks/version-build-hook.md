@@ -246,10 +246,12 @@ version = 1.0.0
 ## How It Works
 
 1. **Before build starts** (during `initialize()`), the version hook:
+
    - Reads the project version from the configured version source
    - Modifies the specified file with the version
 
 2. **File modification**:
+
    - **If `template` is provided**: Replaces entire file contents with template, substituting `{version}`
    - **If `pattern` is provided**: Finds matching text and replaces the `version` group with actual version
    - **If neither provided**: Uses default pattern (matching `__version__` or `VERSION`)

@@ -556,22 +556,26 @@ Include scenarios that might occur in production but are difficult to test manua
 ### Structuring Effective Testing Prompts
 
 1. **State Your Testing Objective Upfront**
+
    - Be explicit about what you want to test
    - Specify the component or feature in focus
    - Define success criteria
 
 2. **Include Relevant Context**
+
    - Technology stack and frameworks
    - Integration points and dependencies
    - Known constraints and limitations
    - Team expertise and available tools
 
 3. **Provide Code Samples When Applicable**
+
    - Include relevant code snippets or requirement specifications
    - Show existing test patterns you want to follow
    - Reference any framework-specific conventions
 
 4. **Request Specific Output Formats**
+
    - Specify desired documentation structure
    - Request code with comments and explanations
    - Ask for output organized by category
@@ -586,11 +590,13 @@ Include scenarios that might occur in production but are difficult to test manua
 When initial responses don't fully meet your needs:
 
 1. **Provide Feedback on Generated Content**
+
    - Explain what's missing or incomplete
    - Reference specific sections that need adjustment
    - Share examples of the expected format
 
 2. **Refine Your Prompt Based on Results**
+
    - Add missing context discovered during iteration
    - Be more specific about edge cases
    - Clarify output format preferences
@@ -652,21 +658,25 @@ performance under load, and rollback scenarios.
 ### Using ChatGPT Prompts in Your QA Process
 
 1. **Test Planning Phase**
+
    - Use strategy prompts to define comprehensive test plans
    - Identify risk areas and coverage gaps
    - Plan resource allocation and timeline
 
 2. **Test Design Phase**
+
    - Generate test cases from requirements
    - Create edge case scenarios
    - Design negative test paths
 
 3. **Automation Implementation**
+
    - Generate automation scripts
    - Get help with framework-specific syntax
    - Debug and troubleshoot failing tests
 
 4. **Defect Management**
+
    - Create well-structured bug reports
    - Analyze error patterns
    - Generate test cases for regression prevention

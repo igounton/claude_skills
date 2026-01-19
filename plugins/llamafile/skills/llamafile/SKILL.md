@@ -85,12 +85,12 @@ chmod +x llava-v1.5-7b-q4.llamafile
 
 **Recommended models by use case:**
 
-| Model | Size | Use Case | Download |
-| --- | --- | --- | --- |
-| Gemma 3 3B | ~2GB | Balanced speed/quality | [Mozilla/gemma-3-3b-it-gguf](https://huggingface.co/Mozilla/gemma-3-3b-it-gguf) |
-| Qwen3-0.6B | ~500MB | Fast, lower quality | [Mozilla/Qwen3-0.6B-gguf](https://huggingface.co/Mozilla/Qwen3-0.6B-gguf) |
-| Mistral 7B | ~4GB | Higher quality, slower | [Mozilla/Mistral-7B-gguf](https://huggingface.co/Mozilla/Mistral-7B-gguf) |
-| Llama 3.1 8B | ~5GB | Best quality, slowest | [Mozilla/Llama-3.1-8B-gguf](https://huggingface.co/Mozilla/Llama-3.1-8B-gguf) |
+| Model        | Size   | Use Case               | Download                                                                        |
+| ------------ | ------ | ---------------------- | ------------------------------------------------------------------------------- |
+| Gemma 3 3B   | ~2GB   | Balanced speed/quality | [Mozilla/gemma-3-3b-it-gguf](https://huggingface.co/Mozilla/gemma-3-3b-it-gguf) |
+| Qwen3-0.6B   | ~500MB | Fast, lower quality    | [Mozilla/Qwen3-0.6B-gguf](https://huggingface.co/Mozilla/Qwen3-0.6B-gguf)       |
+| Mistral 7B   | ~4GB   | Higher quality, slower | [Mozilla/Mistral-7B-gguf](https://huggingface.co/Mozilla/Mistral-7B-gguf)       |
+| Llama 3.1 8B | ~5GB   | Best quality, slowest  | [Mozilla/Llama-3.1-8B-gguf](https://huggingface.co/Mozilla/Llama-3.1-8B-gguf)   |
 
 **Quantization recommendation**: Use Q4_K_M quantized models for optimal balance of quality and performance.
 
@@ -135,16 +135,16 @@ For GPU-accelerated inference with higher throughput:
 
 **Advanced flags:**
 
-| Flag | Purpose | Default | When to Use |
-| --- | --- | --- | --- |
-| `--ctx-size` | Prompt context window size | 512 | Increase for longer conversations |
-| `--n-gpu-layers` | GPU offload layer count | 0 | Set to 99 to offload all layers to GPU |
-| `--threads` | CPU threads for generation | Auto | Set explicitly for consistent performance |
-| `--threads-batch` | Threads for batch processing | Same as `--threads` | Tune separately for prompt vs generation |
-| `--cont-batching` | Continuous batching | Off | Enable for multiple concurrent requests |
-| `--parallel` | Parallel sequence count | 1 | Increase for concurrent request handling |
-| `--mlock` | Lock model in memory | Off | Prevent swapping on systems with sufficient RAM |
-| `--embedding` | Enable embeddings endpoint | Off | Required for `/v1/embeddings` API |
+| Flag              | Purpose                      | Default             | When to Use                                     |
+| ----------------- | ---------------------------- | ------------------- | ----------------------------------------------- |
+| `--ctx-size`      | Prompt context window size   | 512                 | Increase for longer conversations               |
+| `--n-gpu-layers`  | GPU offload layer count      | 0                   | Set to 99 to offload all layers to GPU          |
+| `--threads`       | CPU threads for generation   | Auto                | Set explicitly for consistent performance       |
+| `--threads-batch` | Threads for batch processing | Same as `--threads` | Tune separately for prompt vs generation        |
+| `--cont-batching` | Continuous batching          | Off                 | Enable for multiple concurrent requests         |
+| `--parallel`      | Parallel sequence count      | 1                   | Increase for concurrent request handling        |
+| `--mlock`         | Lock model in memory         | Off                 | Prevent swapping on systems with sufficient RAM |
+| `--embedding`     | Enable embeddings endpoint   | Off                 | Required for `/v1/embeddings` API               |
 
 ### Network-Accessible Configuration
 

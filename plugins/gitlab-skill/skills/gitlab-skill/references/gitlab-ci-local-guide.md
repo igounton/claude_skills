@@ -51,6 +51,7 @@ Create a personal access token from your GitLab instance:
 1. Log in to your GitLab instance (e.g., <https://sourcery.assaabloy.net>)
 2. Go to **User Settings** → **Access Tokens**
 3. Create a new token with these scopes:
+
    - `api` - Full API access
    - `read_repository` - Read repository data
    - `write_repository` - Write repository data (for releases)
@@ -406,10 +407,12 @@ firefox .gitlab-ci-local/artifacts/coverage/htmlcov-py3.11/index.html
 ### ✅ Recommended Setup
 
 1. **For tokens and secrets**: Use `$HOME/.gitlab-ci-local/variables.yml`
+
    - Pros: Works across all projects, never accidentally committed
    - Cons: Must be set up once per developer workstation
 
 2. **For project metadata**: Use `.gitlab-ci-local-variables.yml` (committed)
+
    - Pros: Shared with team, consistent across developers
    - Cons: Cannot contain secrets
 

@@ -356,10 +356,12 @@ require-runtime-features = ["empty"]  # No packages installed
 ## Best Practices
 
 1. **Name Features Clearly**: Use descriptive names indicating what they're for
+
    - Good: `database`, `monitoring`, `testing`
    - Bad: `stuff`, `extra`, `things`
 
 2. **Keep Features Focused**: Each feature should represent a cohesive set of functionality
+
    - Group related packages together
    - Avoid creating catch-all features
 

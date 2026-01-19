@@ -791,6 +791,7 @@ dependencies = [
 ## Best Practices
 
 1. [Best practice 1]
+
    - Rationale: [Why]
    - Example: [Code example]
 
@@ -2461,11 +2462,11 @@ docs/templates/
 
 **Medium-Priority Gaps**:
 
-| Gap ID | Gap Name | Document | Status |
-| --- | --- | --- | --- |
+| Gap ID  | Gap Name                  | Document                                                     | Status              |
+| ------- | ------------------------- | ------------------------------------------------------------ | ------------------- |
 | GAP-001 | Textual Framework Support | docs/scenarios/tui-application.md + docs/frameworks/textual/ | Phase 10 (deferred) |
-| GAP-003 | Test Data Management | docs/standards/test-data-management.md | Future |
-| GAP-006 | SLO/SLA Framework | docs/standards/slo-framework.md | Future |
+| GAP-003 | Test Data Management      | docs/standards/test-data-management.md                       | Future              |
+| GAP-006 | SLO/SLA Framework         | docs/standards/slo-framework.md                              | Future              |
 
 ---
 

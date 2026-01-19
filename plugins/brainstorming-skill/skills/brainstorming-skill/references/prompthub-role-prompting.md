@@ -135,23 +135,23 @@ Comprehensive meta-analysis of persona/role-prompting effectiveness across multi
 
 ### Effectiveness by Pattern Type
 
-| Pattern Type | Task Category | Effectiveness | Strength of Evidence |
-| --- | --- | --- | --- |
-| Simple personas ("You are X") | Accuracy/Classification | Minimal to negative | Strong (multiple studies) |
-| Simple personas | Creative/Open-ended | High | Moderate |
-| Detailed, automated personas | Accuracy/Classification | Moderate | Moderate |
-| Detailed, automated personas | Specialized reasoning | Moderate to positive | Moderate |
-| LLM-generated personas (ExpertPrompting) | General tasks | Positive | Moderate |
-| Gender-based personas | Factual questions | Negligible | Strong |
+| Pattern Type                             | Task Category           | Effectiveness        | Strength of Evidence      |
+| ---------------------------------------- | ----------------------- | -------------------- | ------------------------- |
+| Simple personas ("You are X")            | Accuracy/Classification | Minimal to negative  | Strong (multiple studies) |
+| Simple personas                          | Creative/Open-ended     | High                 | Moderate                  |
+| Detailed, automated personas             | Accuracy/Classification | Moderate             | Moderate                  |
+| Detailed, automated personas             | Specialized reasoning   | Moderate to positive | Moderate                  |
+| LLM-generated personas (ExpertPrompting) | General tasks           | Positive             | Moderate                  |
+| Gender-based personas                    | Factual questions       | Negligible           | Strong                    |
 
 ### Effectiveness by Model Generation
 
-| Model Family | Simple Persona Effect | Detailed Persona Effect | Notes |
-| --- | --- | --- | --- |
-| GPT-3.5-turbo | +10% average improvement | Moderate gains | Older model; larger persona impact |
-| GPT-4 | Minimal effect (very small gap) | Small to moderate gains | Newer model; personas less impactful |
-| Claude (inferred) | Minimal effect (very small gap) | Small to moderate gains | Newer model; personas less impactful |
-| Llama 3-8b | Mixed results (task-dependent) | Task-dependent | Open-source; variable persona response |
+| Model Family      | Simple Persona Effect           | Detailed Persona Effect | Notes                                  |
+| ----------------- | ------------------------------- | ----------------------- | -------------------------------------- |
+| GPT-3.5-turbo     | +10% average improvement        | Moderate gains          | Older model; larger persona impact     |
+| GPT-4             | Minimal effect (very small gap) | Small to moderate gains | Newer model; personas less impactful   |
+| Claude (inferred) | Minimal effect (very small gap) | Small to moderate gains | Newer model; personas less impactful   |
+| Llama 3-8b        | Mixed results (task-dependent)  | Task-dependent          | Open-source; variable persona response |
 
 ---
 
@@ -160,6 +160,7 @@ Comprehensive meta-analysis of persona/role-prompting effectiveness across multi
 ### High-Effectiveness Domains for Personas
 
 1. **Open-ended/Creative Tasks**
+
    - Content generation
    - Brainstorming
    - Creative writing
@@ -167,6 +168,7 @@ Comprehensive meta-analysis of persona/role-prompting effectiveness across multi
    - Expected gain: High
 
 2. **Safety/Values Alignment**
+
    - Establishing guardrails
    - Content filtering
    - Behavior guidance
@@ -181,12 +183,14 @@ Comprehensive meta-analysis of persona/role-prompting effectiveness across multi
 ### Low-Effectiveness Domains for Personas
 
 1. **Factual Accuracy Tasks**
+
    - MMLU classification
    - Knowledge-based QA
    - Factual recall
    - Expected gain: Negligible to negative
 
 2. **Classification/Labeling Tasks**
+
    - Document categorization
    - Sentiment analysis
    - Text classification
@@ -260,16 +264,19 @@ Comprehensive meta-analysis of persona/role-prompting effectiveness across multi
 **Effective Use Cases**:
 
 1. **Establishing creative tone**: "You are a visionary product designer brainstorming radical innovations"
+
    - Helps generate bold, unconventional ideas
    - Shifts perspective and ideation patterns
    - Expected benefit: High
 
 2. **Cross-disciplinary ideation**: "You are a biologist approaching this business problem"
+
    - Brings domain-specific thinking patterns
    - Encourages novel solution approaches
    - Expected benefit: Moderate to high
 
 3. **Safety/values alignment**: "You are an ethical AI reviewing ideas for potential harms"
+
    - Establishes evaluation criteria
    - Guides feedback tone
    - Expected benefit: Moderate to high
@@ -284,11 +291,13 @@ Comprehensive meta-analysis of persona/role-prompting effectiveness across multi
 **Ineffective Use Cases**:
 
 1. Expecting personas to improve accuracy or correctness
+
    - Won't help factual accuracy
    - Won't improve technical correctness
    - Won't enhance knowledge-based answers
 
 2. Using generic, simple role descriptions
+
    - "You are a business expert" provides no value
    - "Think like a scientist" offers minimal signal
    - Research shows these are negligible
@@ -303,22 +312,26 @@ Comprehensive meta-analysis of persona/role-prompting effectiveness across multi
 **If Using Personas**:
 
 1. **Generate detailed, specific personas automatically**
+
    - Use ExpertPrompting approach: LLM generates detailed persona with context
    - Include background, expertise specifics, and domain knowledge
    - Don't rely on manual one-liners
 
 2. **Match persona to creative goal**
+
    - Use open-ended brainstorming (where personas excel)
    - Avoid accuracy-dependent evaluation (where personas fail)
    - Combine persona-based ideation with separate verification step
 
 3. **Use multiple diverse personas in ensemble**
+
    - Generate 3-5 contrasting personas
    - Have each solve/brainstorm independently
    - Synthesize results manually or via meta-reasoning
    - This approach leverages persona diversity for richer output
 
 4. **Combine personas with other prompt techniques**
+
    - Personas alone show modest gains
    - Personas + structured templates: Better
    - Personas + example outputs: Better
@@ -347,14 +360,17 @@ Comprehensive meta-analysis of persona/role-prompting effectiveness across multi
 ### Known Limitations
 
 1. **Generalization uncertainty**: Most studies use GPT-3.5 and GPT-4
+
    - Unclear how findings apply to other models (Claude variants, open-source LLMs)
    - Model capabilities improve; persona effects may shift
 
 2. **Task representation bias**: Heavy focus on factual/academic tasks (MMLU, math)
+
    - Creative task evaluation is harder to quantify
    - Real-world brainstorming effects under-researched
 
 3. **Interaction effects under-explored**:
+
    - How do personas combine with other prompt techniques?
    - Multi-prompt strategies not well studied
    - Ensemble effects mentioned but not systematically evaluated
@@ -373,16 +389,19 @@ Comprehensive meta-analysis of persona/role-prompting effectiveness across multi
 **Personas are valuable for brainstorming but require proper implementation**:
 
 1. **Frame personas as perspective-shifters, not accuracy-enhancers**
+
    - Document that personas help ideation, not verification
    - Recommend detailed personas over simple ones
    - Suggest ensemble (multiple personas) over single persona
 
 2. **Provide detailed persona templates for brainstorming**
+
    - Include background, expertise, thinking style
    - Don't rely on generic descriptions
    - Make personas specific to ideation domain
 
 3. **Combine personas with structured output**
+
    - Personas + templates: Better ideation
    - Personas + examples: Clearer direction
    - Personas + evaluation criteria: Better filtering

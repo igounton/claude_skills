@@ -133,11 +133,13 @@ dev = [
 **Approaches**:
 
 1. **Built-in Version Sources** (simplest):
+
    - `path`: Read version from Python file
    - `regex`: Extract using regex pattern
    - `env`: Read from environment variable
 
 2. **Custom Metadata Hooks** (most flexible):
+
    - Subclass `MetadataHookInterface`
    - Implement `update(metadata)` method
    - Set any PEP 621 metadata field
@@ -293,11 +295,13 @@ test = "pytest tests/ -k py{matrix:python:39}"
 ### Sources Evaluated
 
 1. **Official Documentation** (High Authority)
+
    - Hatch.pypa.io technical documentation
    - GitHub repository /docs/ directory
    - Release notes and changelogs
 
 2. **Code Examples** (High Authority)
+
    - Real Hatchling configurations
    - Official test cases
    - Community project examples

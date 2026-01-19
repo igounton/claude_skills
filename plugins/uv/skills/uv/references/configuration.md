@@ -7,10 +7,12 @@ Complete configuration guide for uv (v0.9.5).
 ### File Discovery Hierarchy
 
 1. **Project-level** (current or parent directories):
+
    - `pyproject.toml` (under `[tool.uv]`)
    - `uv.toml` (no prefix required)
 
 2. **User-level**:
+
    - Linux/macOS: `~/.config/uv/uv.toml`
    - Windows: `%APPDATA%\uv\uv.toml`
 

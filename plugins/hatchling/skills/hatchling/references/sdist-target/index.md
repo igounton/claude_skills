@@ -98,14 +98,14 @@ Complete guide to creating byte-for-byte identical distributions:
 
 ### By Topic
 
-| Topic | Primary | Related |
-| --- | --- | --- |
-| Configuration Options | [index.md](./index.md) | [legacy-setup-py.md](./legacy-setup-py.md) |
-| File Selection | [vcs-integration.md](./vcs-integration.md) | [index.md](./index.md) |
-| Metadata | [core-metadata-versions.md](./core-metadata-versions.md) | [index.md](./index.md) |
-| Backward Compatibility | [legacy-setup-py.md](./legacy-setup-py.md) | [core-metadata-versions.md](./core-metadata-versions.md) |
-| Special Files | [unix-socket-handling.md](./unix-socket-handling.md) | [vcs-integration.md](./vcs-integration.md) |
-| Build Integrity | [reproducible-builds.md](./reproducible-builds.md) | [index.md](./index.md) |
+| Topic                  | Primary                                                  | Related                                                  |
+| ---------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| Configuration Options  | [index.md](./index.md)                                   | [legacy-setup-py.md](./legacy-setup-py.md)               |
+| File Selection         | [vcs-integration.md](./vcs-integration.md)               | [index.md](./index.md)                                   |
+| Metadata               | [core-metadata-versions.md](./core-metadata-versions.md) | [index.md](./index.md)                                   |
+| Backward Compatibility | [legacy-setup-py.md](./legacy-setup-py.md)               | [core-metadata-versions.md](./core-metadata-versions.md) |
+| Special Files          | [unix-socket-handling.md](./unix-socket-handling.md)     | [vcs-integration.md](./vcs-integration.md)               |
+| Build Integrity        | [reproducible-builds.md](./reproducible-builds.md)       | [index.md](./index.md)                                   |
 
 ## Key Topics Covered
 

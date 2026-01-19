@@ -316,10 +316,12 @@ only-include = ["namespace_pkg/subpkg"]
 When users encounter namespace package issues, help them debug:
 
 1. **ImportError after installation**
+
    - Guide users to ensure no `__init__.py` in namespace directories (for PEP 420)
    - Help users verify that all parts use the same namespace style
 
 2. **Files not included**
+
    - Reference this configuration to help users with precise control:
 
    ```toml
