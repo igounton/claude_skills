@@ -15,7 +15,7 @@ You are a Claude Code agent architect specializing in creating high-quality, foc
 ## Quick Reference
 
 - [Agent Schema Reference](./references/agent-schema.md) - Complete frontmatter specification
-- [Agent Templates](./references/agent-templates.md) - Reusable patterns (standard + role-based contract)
+- [Agent Templates](./references/agent-templates.md) - Role-based archetypes and guidance for finding patterns
 - [Agent Examples](./references/agent-examples.md) - Real-world agent implementations
 
 **Related Skills:**
@@ -80,27 +80,21 @@ Ask the user or infer from context:
 
 </template_decision>
 
-**Step 2: Match to Archetypes**
+**Step 2: Find Matching Patterns**
 
-Consult [Agent Templates](./references/agent-templates.md) for full templates.
+Consult [Agent Templates](./references/agent-templates.md) for guidance.
 
-**Standard Templates** (user-facing, flexible output):
+**For Standard (User-Facing) Agents:**
 
-| User Need | Archetype |
-|-----------|-----------|
-| "Review code for X" | Code Reviewer |
-| "Understand architecture" | Architecture Analyzer |
-| "Generate documentation" | Documentation Writer |
-| "Write tests" | Test Generator |
-| "Fix this bug" | Bug Fixer |
-| "Refactor code" | Refactorer |
-| "Research before implementing" | Context Gatherer |
-| "Plan implementation" | Implementation Planner |
-| "Validate before commit" | Pre-Commit Validator |
-| "Expert in {language}" | Language Expert |
-| "Expert in {framework}" | Framework Expert |
+Look for similar agents in `.claude/agents/`:
+- Review agents → look for `tools: Read, Grep, Glob` with review in description
+- Documentation agents → look for `permissionMode: acceptEdits`
+- Research agents → look for `permissionMode: plan` or `dontAsk`
+- Language/framework experts → look for agents loading specific skills
 
-**Role-Based Contract Archetypes** (orchestrated, DONE/BLOCKED signaling):
+If no similar agent exists, build from scratch using [Agent Schema Reference](./references/agent-schema.md).
+
+**For Role-Based Contract Archetypes** (orchestrated, DONE/BLOCKED signaling):
 
 | User Need | Role Archetype |
 |-----------|----------------|
@@ -121,13 +115,13 @@ ALWAYS use AskUserQuestion to present template choices:
 ```
 Based on your requirements, I recommend these starting points:
 
-ARCHETYPE TEMPLATES (pre-built patterns):
-A) {Matching Archetype}: {Brief description from templates reference}
-B) {Second Match}: {Brief description}
+EXISTING PROJECT AGENTS (similar patterns found):
+A) {agent-name}: {Brief description}
+B) {agent-name}: {Brief description}
 
-EXISTING PROJECT AGENTS (similar agents):
-C) {agent-name}: {Brief description}
-D) {agent-name}: {Brief description}
+ROLE-BASED ARCHETYPES (for orchestrated workflows):
+C) {Role Archetype}: {Brief description from templates reference}
+D) {Role Archetype}: {Brief description}
 
 E) Build from scratch using best practices
 
