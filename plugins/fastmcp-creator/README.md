@@ -7,6 +7,7 @@ Build high-quality integrations that connect Claude to external services and API
 When you want Claude to interact with external services (Slack, GitHub, databases, web APIs, etc.), you need to build an MCP server - a specialized integration that bridges Claude with those services.
 
 Without this plugin, Claude might:
+
 - Create basic API wrappers that don't work well with AI workflows
 - Miss important design patterns that make integrations reliable
 - Skip critical error handling and validation
@@ -17,6 +18,7 @@ This plugin makes Claude an expert at building production-ready integrations.
 ## What Changes
 
 With this plugin installed, Claude will:
+
 - Build integrations optimized specifically for AI use (not just generic API wrappers)
 - Design tools around complete workflows instead of individual API calls
 - Include comprehensive validation using Pydantic (Python) or Zod (TypeScript)
@@ -44,6 +46,7 @@ Then install the plugin:
 Just install it - Claude will automatically use this knowledge when you ask it to build MCP servers or integrations.
 
 You'll get the best results when you:
+
 - Specify which service you want to integrate (e.g., "build a Slack MCP server")
 - Mention whether you prefer Python or TypeScript
 - Describe what workflows you need (e.g., "send messages and search channels")
@@ -65,6 +68,7 @@ You ask Claude to "create a GitHub MCP server." Claude builds a basic wrapper th
 
 **With this plugin**:
 Same request, but Claude:
+
 1. Studies GitHub's API thoroughly
 2. Designs workflow-oriented tools (like `github_create_pr_with_review_request` instead of separate create/assign tools)
 3. Adds Pydantic validation for all inputs
@@ -81,6 +85,7 @@ The result is a production-ready integration you can actually use reliably.
 - **TypeScript/Node.js** with official MCP SDK
 
 Both implementations include:
+
 - Input validation (Pydantic for Python, Zod for TypeScript)
 - Async/await patterns for I/O operations
 - Proper error handling and logging
@@ -90,6 +95,7 @@ Both implementations include:
 ## What's Included
 
 When Claude builds an MCP server using this plugin, you get:
+
 - Well-structured project with proper configuration
 - Input validation schemas
 - Clear, actionable error messages
@@ -107,6 +113,7 @@ When Claude builds an MCP server using this plugin, you get:
 ## Learn More
 
 After installing, ask Claude questions like:
+
 - "Build me a Slack MCP server with message sending and channel search"
 - "Create an MCP server for my PostgreSQL database"
 - "Build a GitHub integration that can create issues and PRs"

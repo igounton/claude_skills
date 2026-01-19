@@ -288,6 +288,7 @@ unzip -l dist/*.whl     # For wheel
 ## Best Practices
 
 1. **Use the right tool for the job**
+
    - `force-include`: For files that must be included
    - `exclude`: For filtering unwanted files
    - `artifacts`: For VCS-ignored build products

@@ -5,6 +5,7 @@ Helps Claude write professional README files for Python packages that render cor
 ## Why Install This?
 
 When you publish a Python package to PyPI, you've probably encountered:
+
 - Your README looks perfect on GitHub but broken on PyPI
 - Code examples don't render with syntax highlighting
 - Sphinx-specific markup causes validation errors
@@ -16,6 +17,7 @@ This plugin teaches Claude PyPI's specific README requirements and constraints.
 ## What Changes
 
 With this plugin installed, Claude will:
+
 - Choose the right format (Markdown vs reStructuredText) based on your project
 - Write READMEs that render correctly on PyPI, GitHub, GitLab, and BitBucket
 - Avoid PyPI's restrictions (like Sphinx extensions in RST files)
@@ -43,6 +45,7 @@ Then install the plugin:
 Just install it. Claude will apply this knowledge when you ask for help with Python package documentation.
 
 **Examples of requests:**
+
 - "Create a README.md for this Python package"
 - "Why is my README broken on PyPI?"
 - "Should I use Markdown or reStructuredText for my README?"

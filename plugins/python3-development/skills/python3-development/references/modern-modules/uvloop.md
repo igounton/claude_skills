@@ -239,11 +239,11 @@ asyncio.run(main())
 
 ## Python Version Compatibility
 
-| Python Version | uvloop Support | Notes |
-| --- | --- | --- |
-| 3.8-3.10 | ✅ Full | Use `uvloop.install()` or `asyncio.set_event_loop_policy()` |
-| 3.11-3.13 | ✅ Full | Can use `uvloop.run()` or `asyncio.Runner(loop_factory=uvloop.new_event_loop)` |
-| 3.14 | ✅ Full | Free-threading support added in v0.22.0 @ [#693](https://github.com/MagicStack/uvloop/pull/693) |
+| Python Version | uvloop Support | Notes                                                                                           |
+| -------------- | -------------- | ----------------------------------------------------------------------------------------------- |
+| 3.8-3.10       | ✅ Full        | Use `uvloop.install()` or `asyncio.set_event_loop_policy()`                                     |
+| 3.11-3.13      | ✅ Full        | Can use `uvloop.run()` or `asyncio.Runner(loop_factory=uvloop.new_event_loop)`                  |
+| 3.14           | ✅ Full        | Free-threading support added in v0.22.0 @ [#693](https://github.com/MagicStack/uvloop/pull/693) |
 
 ### Platform Support
 

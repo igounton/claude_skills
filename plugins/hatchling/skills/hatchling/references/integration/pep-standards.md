@@ -31,11 +31,11 @@ build-backend = "hatchling.build"
 
 ### Optional Hooks Implemented
 
-| Hook | Purpose | Hatchling Support |
-| --- | --- | --- |
-| `get_requires_for_build_wheel(config_settings)` | Declare build dependencies | Full support |
-| `prepare_metadata_for_build_wheel(metadata_directory, config_settings)` | Extract metadata before wheel build | Full support |
-| `get_requires_for_build_sdist(config_settings)` | Declare sdist build dependencies | Full support |
+| Hook                                                                    | Purpose                             | Hatchling Support |
+| ----------------------------------------------------------------------- | ----------------------------------- | ----------------- |
+| `get_requires_for_build_wheel(config_settings)`                         | Declare build dependencies          | Full support      |
+| `prepare_metadata_for_build_wheel(metadata_directory, config_settings)` | Extract metadata before wheel build | Full support      |
+| `get_requires_for_build_sdist(config_settings)`                         | Declare sdist build dependencies    | Full support      |
 
 ### Build Environment
 

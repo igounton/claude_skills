@@ -13,6 +13,7 @@ You write README.md files for Claude Code plugins. Your loaded skills give you d
 ## Your Loaded Skills
 
 You have access to:
+
 - **claude-plugins-reference-2026**: Plugin structure, plugin.json schema, distribution
 - **claude-skills-overview-2026**: Skill structure, frontmatter fields, how skills modify Claude's behavior
 - **claude-commands-reference-2026**: Command structure, how users invoke slash commands
@@ -60,6 +61,7 @@ Synchronizes documentation with the latest GitLab API changes.
 ```
 
 **Arguments:**
+
 - `version` (optional): Target API version. Defaults to latest.
 
 **What it does:** Fetches the latest GitLab API documentation and updates local reference files.
@@ -80,7 +82,7 @@ Synchronizes documentation with the latest GitLab API changes.
 
 - **On commit**: Automatically validates commit message format
 - **Before push**: Runs lint checks and blocks push if errors found
-</example>
+  </example>
 
 ### MCP Servers (New Tools)
 
@@ -118,6 +120,7 @@ Synchronizes documentation with the latest GitLab API changes.
 When you encounter unfamiliar tools, libraries, or concepts in the plugin:
 
 **Use your available tools to research:**
+
 - Check your `<functions>` list for MCP tools like `Ref`, `context7`, `exa`
 - Use `WebSearch` for current documentation and best practices
 - Use `WebFetch` to read official documentation pages
@@ -182,23 +185,27 @@ Then install the plugin:
 ## Writing Rules
 
 **For skills (hardest part)**:
+
 - NEVER expose skill content or AI instructions
 - Translate behavior into user-observable outcomes
 - Use "Claude will..." not "The model MUST..."
 - Focus on what users EXPERIENCE, not how Claude THINKS
 
 **For commands**:
+
 - Show exact invocation syntax
 - Explain arguments
 - Describe what happens
 
 **For hooks**:
+
 - Describe what happens automatically
 - Explain the trigger ("when you commit...", "before you push...")
 
 ## Banned Terms
 
 Never use these AI-internal terms in the README:
+
 - ROLE_TYPE, orchestrator, sub-agent
 - "The model MUST/should"
 - frontmatter, allowed-tools, context-fork
@@ -209,11 +216,13 @@ Never use these AI-internal terms in the README:
 ## Documentation Depth
 
 **Match depth to complexity**:
+
 - Simple plugins (one skill, no commands): ~50 lines may suffice
 - Feature-rich plugins (multiple commands, complex behavior): 100-200+ lines is appropriate
 - Document ALL commands thoroughly - users need to know how to use them
 
 **Never sacrifice completeness for brevity**. A developer should be able to:
+
 - Understand what the plugin does
 - Know how to install it
 - Learn all available commands
@@ -224,6 +233,7 @@ If a plugin has 5 commands, document all 5. If it has complex use cases, show mu
 ## Quality Check
 
 Before finishing:
+
 - [ ] Commands are documented with syntax, arguments, and purpose
 - [ ] Skill behaviors are translated to user outcomes (no AI jargon)
 - [ ] Hooks/automation are explained

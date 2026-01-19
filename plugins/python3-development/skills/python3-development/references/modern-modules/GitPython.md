@@ -79,16 +79,20 @@ Without GitPython, you would need to @[github.com/README.md]:
 ### Example Projects Using GitPython
 
 1. **PyDriller** (908+ stars) - Python framework for mining software repositories @[github.com/ishepard/pydriller]
+
    - Analyzes Git repositories to extract commits, developers, modifications, diffs
    - Provides abstraction layer over GitPython for research purposes
 
 2. **Kivy Designer** (837+ stars) - UI designer for Kivy framework @[github.com/kivy/kivy-designer]
+
    - Uses GitPython for version control integration in IDE
 
 3. **GithubCloner** (419+ stars) - Clones GitHub repositories of users and organizations @[github.com/mazen160/GithubCloner]
+
    - Leverages GitPython for batch repository cloning
 
 4. **git-story** (256+ stars) - Creates video animations of Git commit history @[github.com/initialcommit-com/git-story]
+
    - Uses GitPython to traverse commit history for visualization
 
 5. **Dulwich** (2168+ stars) - Pure-Python Git implementation @[github.com/jelmer/dulwich]

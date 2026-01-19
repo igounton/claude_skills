@@ -6,11 +6,11 @@
 
 ## Quick Navigation
 
-| Document | Purpose | Audience | Length |
-| --- | --- | --- | --- |
-| [MEMORY_BANK_QUICKSTART.md](#quick-start) | Get started quickly | New users | 10-15 min read |
-| [MEMORY_BANK_MCP_DOCUMENTATION.md](#comprehensive) | Complete verified reference | Developers | 30-45 min read |
-| [MEMORY_BANK_REFERENCE.md](#technical) | Technical implementation details | Technical users | 20-30 min read |
+| Document                                           | Purpose                          | Audience        | Length         |
+| -------------------------------------------------- | -------------------------------- | --------------- | -------------- |
+| [MEMORY_BANK_QUICKSTART.md](#quick-start)          | Get started quickly              | New users       | 10-15 min read |
+| [MEMORY_BANK_MCP_DOCUMENTATION.md](#comprehensive) | Complete verified reference      | Developers      | 30-45 min read |
+| [MEMORY_BANK_REFERENCE.md](#technical)             | Technical implementation details | Technical users | 20-30 min read |
 
 ---
 

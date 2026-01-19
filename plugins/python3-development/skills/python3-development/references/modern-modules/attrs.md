@@ -214,10 +214,12 @@ class NoAnnotations:
 ### Example Projects Using attrs
 
 1. **Black** - The uncompromising Python code formatter
+
    - Repository: <https://github.com/psf/black>
    - Usage: Extensive use of attrs for AST node classes (@source: GitHub search)
 
 2. **cattrs** - Composable custom class converters
+
    - Repository: <https://github.com/python-attrs/cattrs>
    - Usage: Built on top of attrs for serialization/deserialization (@source: python-attrs/cattrs)
 
@@ -379,18 +381,22 @@ event = Event(name="deploy", timestamp="2025-10-21T10:00:00")
 ## When NOT to Use
 
 1. **Simple data containers without validation**
+
    - If you just need `__init__` and `__repr__`, dataclasses suffice
    - Example: Simple config objects, DTOs without business logic
 
 2. **When you need JSON Schema / OpenAPI integration**
+
    - Pydantic provides this out-of-the-box
    - attrs requires additional libraries (cattrs + schema generators)
 
 3. **Heavy runtime type validation requirements**
+
    - Pydantic validates automatically; attrs requires explicit validators
    - If every field needs type checking at runtime, Pydantic is more convenient
 
 4. **No external dependencies allowed**
+
    - Use dataclasses from stdlib
    - Though attrs has zero dependencies itself
 

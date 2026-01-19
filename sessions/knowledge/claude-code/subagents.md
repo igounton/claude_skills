@@ -102,11 +102,11 @@ Include specific instructions, best practices, and any constraints the subagent 
 
 #### Configuration fields
 
-| Field | Required | Description |
-| :-- | :-- | :-- |
-| `name` | Yes | Unique identifier using lowercase letters and hyphens |
-| `description` | Yes | Natural language description of the subagent's purpose |
-| `tools` | No | Comma-separated list of specific tools. If omitted, inherits all tools from the main thread |
+| Field         | Required | Description                                                                                 |
+| :------------ | :------- | :------------------------------------------------------------------------------------------ |
+| `name`        | Yes      | Unique identifier using lowercase letters and hyphens                                       |
+| `description` | Yes      | Natural language description of the subagent's purpose                                      |
+| `tools`       | No       | Comma-separated list of specific tools. If omitted, inherits all tools from the main thread |
 
 ### Available tools
 

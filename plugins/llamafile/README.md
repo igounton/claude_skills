@@ -5,12 +5,14 @@ Helps Claude set up and manage local AI models on your computer using Mozilla's 
 ## Why Install This?
 
 Running AI models locally means:
+
 - No API costs or usage limits
 - Works offline or in air-gapped environments
 - Your data never leaves your machine
 - Full control over which models you use
 
 But setting up local LLMs is complicated. You need to:
+
 - Find and download the right binaries and models
 - Configure server settings correctly
 - Integrate with different frameworks (LiteLLM, OpenAI SDK)
@@ -21,6 +23,7 @@ This plugin makes Claude an expert at all of that.
 ## What Changes
 
 With this plugin installed, Claude will:
+
 - Guide you through downloading llamafile and GGUF models
 - Generate correct server startup commands with optimal flags
 - Help you integrate llamafile with Python code (LiteLLM, OpenAI SDK)
@@ -57,6 +60,7 @@ Just install it and ask Claude about llamafile. Examples:
 **Without this plugin**: You ask "How do I run a local AI model?" Claude gives generic advice about various tools but lacks specific knowledge about llamafile configuration, troubleshooting, or integration patterns.
 
 **With this plugin**: Same question, but Claude:
+
 1. Recommends llamafile and explains why
 2. Provides exact download commands for binary and model
 3. Generates correct server startup command with optimal flags

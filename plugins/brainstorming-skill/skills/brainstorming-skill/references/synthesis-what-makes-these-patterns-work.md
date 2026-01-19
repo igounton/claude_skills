@@ -43,16 +43,19 @@
 ### Red Flags: Patterns That Consistently Underperform
 
 1. **Completely Open-Ended Prompts** ("Brainstorm ideas for growth")
+
    - Generate 2-3 generic ideas before stalling
    - No differentiation vs. human brainstorming
    - Fail to challenge assumptions
 
 2. **Unspecified Output Format** (no mention of table/list/categories)
+
    - Formatting step requires follow-up prompts
    - Ideas lack structure/comparison
    - Higher chance of duplicative ideas
 
 3. **Single-Perspective Ideation** (one persona, one angle)
+
    - Reproduces existing ideas
    - Misses cross-domain innovations
    - Limited validity for diverse stakeholder needs

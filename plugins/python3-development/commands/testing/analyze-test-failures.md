@@ -32,17 +32,20 @@ Analyze the failing test case(s) $ARGUMENTS with a balanced, investigative appro
    - Review the error message and stack trace
 
 2. **Investigate the Implementation**
+
    - Check the actual implementation being tested
    - Trace through the code path that leads to the failure
    - Verify that the implementation matches its documented behavior
 
 3. **Apply Critical Thinking** For each failing test, ask:
+
    - What behavior is the test trying to verify?
    - Is this behavior clearly documented or implied by the function/API design?
    - Does the current implementation actually provide this behavior?
    - Could this be an edge case the implementation missed?
 
 4. **Make a Determination** Classify the failure as one of:
+
    - **Test Bug**: The test's expectations are incorrect
    - **Implementation Bug**: The code doesn't behave as it should
    - **Ambiguous**: The intended behavior is unclear and needs clarification

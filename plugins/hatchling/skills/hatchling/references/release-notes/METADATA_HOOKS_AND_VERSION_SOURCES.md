@@ -211,11 +211,13 @@ source = "vcs"
 ### How Metadata Hooks Work
 
 1. **Hooks run during build process**
+
    - Before wheel/sdist creation
    - Can access project configuration
    - May query external sources
 
 2. **Multiple hooks can cooperate**
+
    - Each hook provides specific metadata
    - Hooks can depend on each other
    - Executed in dependency order

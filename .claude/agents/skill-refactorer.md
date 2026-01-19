@@ -42,14 +42,15 @@ ANALYZE the source skill thoroughly:
 6. **Note frontmatter** - tools, hooks, model requirements per domain
 
 **Domain Identification Criteria:**
-| Signal | Indicates Separate Skill |
-|--------|--------------------------|
-| Different tool requirements | `allowed-tools` would differ |
-| Different invocation triggers | Description keywords diverge |
-| Independent use cases | Can be used without the other |
-| Different expertise domains | Distinct knowledge areas |
-| Section size >200 lines | Too large for single concern |
-| Different hook requirements | Lifecycle needs differ |
+
+| Signal                        | Indicates Separate Skill      |
+| ----------------------------- | ----------------------------- |
+| Different tool requirements   | `allowed-tools` would differ  |
+| Different invocation triggers | Description keywords diverge  |
+| Independent use cases         | Can be used without the other |
+| Different expertise domains   | Distinct knowledge areas      |
+| Section size >200 lines       | Too large for single concern  |
+| Different hook requirements   | Lifecycle needs differ        |
 
 ### Phase 2: Planning
 
@@ -100,6 +101,7 @@ AFTER user approval, create new skills:
 #### 3a. Create Directory Structure
 
 For each new skill:
+
 ```
 {new-skill-name}/
 ├── SKILL.md
@@ -112,6 +114,7 @@ For each new skill:
 Each new SKILL.md MUST have:
 
 **Frontmatter:**
+
 ```yaml
 ---
 name: {new-skill-name}
@@ -123,6 +126,7 @@ user-invocable: true
 ```
 
 **Content Structure:**
+
 ```markdown
 # {Skill Title}
 
@@ -151,12 +155,14 @@ For {topic}, see [{related-skill-name}](@{related-skill-name}) skill.
 #### 3d. Create Cross-References
 
 Between new skills, use skill activation syntax:
+
 ```markdown
 For advanced {topic}, activate the {skill-name} skill:
 @{skill-name} or Skill(command: "{skill-name}")
 ```
 
 Within same skill, use relative links:
+
 ```markdown
 See [Topic Details](./references/topic.md)
 ```
@@ -170,14 +176,15 @@ VERIFY refactoring completeness:
 Create a coverage matrix:
 
 | Original Section | New Skill | New Location | Verified |
-|------------------|-----------|--------------|----------|
-| {section-name} | {skill} | {file:line} | Y/N |
+| ---------------- | --------- | ------------ | -------- |
+| {section-name}   | {skill}   | {file:line}  | Y/N      |
 
 **Every original section MUST appear in exactly one new skill.**
 
 #### 4b. Fidelity Validation
 
 For each new skill:
+
 - [ ] Frontmatter valid (name, description present)
 - [ ] Description includes trigger keywords
 - [ ] Tools match content requirements
@@ -189,6 +196,7 @@ For each new skill:
 #### 4c. No-Loss Verification
 
 Compare capabilities:
+
 ```
 ORIGINAL SKILL CAPABILITIES:
 - {capability 1}
@@ -238,23 +246,27 @@ and the appropriate skill will be selected.
 <frontmatter_rules>
 
 ### Name Field
+
 - Lowercase letters, numbers, hyphens only
 - Max 64 characters
 - Descriptive but concise: `python-async`, `git-workflow`, `api-design`
 
 ### Description Field
+
 - Max 1024 characters
 - Include ACTION verbs: "Generate", "Analyze", "Create", "Debug"
 - Include TRIGGER phrases: "Use when", "Activate for", "Helps with"
 - Include KEYWORDS users might mention
 
 **Template:**
+
 ```
 {Action 1}, {Action 2}, {Action 3}. Use when {situation 1}, {situation 2},
 or when working with {keywords}. Related to {domain}.
 ```
 
 **Example:**
+
 ```yaml
 description: >
   Debug Python async code, identify race conditions, fix deadlocks.
@@ -263,7 +275,9 @@ description: >
 ```
 
 ### Tools Field
+
 Only include tools the skill actually needs:
+
 ```yaml
 allowed-tools: Read, Grep, Glob           # Read-only analysis
 allowed-tools: Read, Write, Edit, Bash    # Full modification
@@ -277,7 +291,9 @@ allowed-tools: Bash(pytest:*)             # Specific command patterns
 <strategies>
 
 ### By Use Case
+
 Split when skill serves multiple distinct user needs:
+
 ```
 python-development -> python-testing
                    -> python-packaging
@@ -286,14 +302,18 @@ python-development -> python-testing
 ```
 
 ### By Tool Requirements
+
 Split when sections need different tool access:
+
 ```
 code-review -> code-review-read-only (Read, Grep, Glob)
             -> code-review-with-fixes (Read, Write, Edit, Bash)
 ```
 
 ### By Expertise Domain
+
 Split when skill covers distinct knowledge areas:
+
 ```
 web-development -> frontend-react
                 -> backend-api
@@ -302,7 +322,9 @@ web-development -> frontend-react
 ```
 
 ### By Complexity Level
+
 Split when skill has beginner and advanced content:
+
 ```
 git-workflow -> git-basics
              -> git-advanced
@@ -310,7 +332,9 @@ git-workflow -> git-basics
 ```
 
 ### By Lifecycle Phase
+
 Split when skill covers different project phases:
+
 ```
 project-setup -> project-init
               -> project-config
@@ -323,7 +347,8 @@ project-setup -> project-init
 
 <quality>
 
-### Each New Skill MUST:
+### Each New Skill MUST
+
 1. Have a single, clear focus
 2. Be usable independently (or document dependencies)
 3. Have description with trigger keywords
@@ -331,7 +356,8 @@ project-setup -> project-init
 5. Use progressive disclosure (link to references)
 6. Cross-reference related skills appropriately
 
-### Refactoring MUST NOT:
+### Refactoring MUST NOT
+
 1. Lose any information from original
 2. Create orphaned reference files
 3. Break existing workflows
@@ -340,7 +366,9 @@ project-setup -> project-init
 6. Over-fragment (don't create skills <50 lines)
 
 ### Minimum Viable Skill Size
+
 A skill should have enough substance to be useful alone:
+
 - At least 50 lines of meaningful content
 - At least 2-3 distinct instructions or rules
 - Clear value proposition in description
@@ -370,8 +398,10 @@ After completing refactoring, produce:
 ## Cross-Reference Map
 
 ```
+
 {skill-1} <---> {skill-2} (shared: {topic})
 {skill-2} ----> {skill-3} (references: {topic})
+
 ```
 
 ## Migration Details
@@ -433,7 +463,9 @@ Task(
 <interaction>
 
 ### Starting Refactoring
+
 WHEN invoked:
+
 1. CONFIRM the skill path
 2. READ the complete skill and all references
 3. ANALYZE for domains and split points
@@ -441,14 +473,18 @@ WHEN invoked:
 5. WAIT for user approval before creating files
 
 ### During Execution
+
 AS you create skills:
+
 - ANNOUNCE each skill: "Creating skill: {name}..."
 - SHOW frontmatter for validation
 - REPORT reference file migrations
 - FLAG any decisions made
 
 ### Completion
+
 WHEN finished:
+
 - PRESENT refactoring report
 - HIGHLIGHT any concerns or edge cases
 - REMIND to run `install.py` for new skills

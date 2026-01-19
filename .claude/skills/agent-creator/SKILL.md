@@ -19,6 +19,7 @@ You are a Claude Code agent architect specializing in creating high-quality, foc
 - [Agent Examples](./references/agent-examples.md) - Real-world agent implementations
 
 **Related Skills:**
+
 - `subagent-contract` - Global contract for role-based agents (DONE/BLOCKED output format)
 
 ---
@@ -67,12 +68,14 @@ Ask the user or infer from context:
 <template_decision>
 
 **Use Standard Templates when:**
+
 - Agent responds directly to user (not delegated by another agent)
 - Agent has flexibility in how it operates and reports
 - Output format can vary by task
 - Agent operates independently
 
 **Use Role-Based Contract Archetypes when:**
+
 - Agent is delegated to by another agent (orchestration)
 - Strict DONE/BLOCKED signaling needed for workflow control
 - Work involves clear handoffs between multiple agents
@@ -87,6 +90,7 @@ Consult [Agent Templates](./references/agent-templates.md) for guidance.
 **For Standard (User-Facing) Agents:**
 
 Look for similar agents in `.claude/agents/`:
+
 - Review agents → look for `tools: Read, Grep, Glob` with review in description
 - Documentation agents → look for `permissionMode: acceptEdits`
 - Research agents → look for `permissionMode: plan` or `dontAsk`
@@ -96,21 +100,21 @@ If no similar agent exists, build from scratch using [Agent Schema Reference](./
 
 **For Role-Based Contract Archetypes** (orchestrated, DONE/BLOCKED signaling):
 
-| User Need | Role Archetype |
-|-----------|----------------|
-| "Research X before we decide" | Researcher |
-| "Design the architecture" | Planner / Architect |
-| "Implement this feature" | Coder |
-| "Create an agent/skill/template" | Creator |
-| "Write/run tests" | Tester |
-| "Review this code/PR" | Reviewer |
-| "Set up CI/CD" | DevOps / SRE |
-| "Audit for compliance/drift" | Auditor |
-| "Gather context before implementing" | Context Gatherer |
-| "Optimize/improve this artifact" | Optimizer |
-| "Expert in {domain}" | Domain Expert |
+| User Need                            | Role Archetype      |
+| ------------------------------------ | ------------------- |
+| "Research X before we decide"        | Researcher          |
+| "Design the architecture"            | Planner / Architect |
+| "Implement this feature"             | Coder               |
+| "Create an agent/skill/template"     | Creator             |
+| "Write/run tests"                    | Tester              |
+| "Review this code/PR"                | Reviewer            |
+| "Set up CI/CD"                       | DevOps / SRE        |
+| "Audit for compliance/drift"         | Auditor             |
+| "Gather context before implementing" | Context Gatherer    |
+| "Optimize/improve this artifact"     | Optimizer           |
+| "Expert in {domain}"                 | Domain Expert       |
 
-*Role-based agents include `skills: subagent-contract` for status signaling.*
+_Role-based agents include `skills: subagent-contract` for status signaling._
 
 **See also**: [Best Practices from Existing Agents](./references/agent-templates.md#best-practices-from-existing-agents) for patterns like embedded examples in descriptions, identity sections, and self-verification checklists.
 
@@ -137,6 +141,7 @@ Which would you like to use as a foundation?
 **Step 4: Confirm Selection**
 
 When user selects a template:
+
 - If archetype: Read template from [Agent Templates](./references/agent-templates.md)
 - If existing agent: Read agent from `.claude/agents/`
 - If from scratch: Use best practices structure
@@ -147,6 +152,7 @@ When adapting an archetype template or existing agent:
 
 1. **Copy the source file** to a temporary working location
 2. **Work section-by-section** through the file:
+
    - Identity/role definition
    - Core competencies
    - Workflow/process
@@ -155,6 +161,7 @@ When adapting an archetype template or existing agent:
    - Communication style
 
 3. **Preserve structural patterns**:
+
    - Keep XML tag structures (`<workflow>`, `<rules>`, `<examples>`)
    - Maintain markdown heading hierarchy
    - Preserve code fence usage and formatting
@@ -239,22 +246,22 @@ SAVE the agent to `.claude/agents/{agent-name}.md`
 
 ### Required Fields
 
-| Field | Type | Constraints | Description |
-|-------|------|-------------|-------------|
-| `name` | string | max 64 chars, lowercase, hyphens only | Unique identifier |
-| `description` | string | max 1024 chars | Delegation trigger text |
+| Field         | Type   | Constraints                           | Description             |
+| ------------- | ------ | ------------------------------------- | ----------------------- |
+| `name`        | string | max 64 chars, lowercase, hyphens only | Unique identifier       |
+| `description` | string | max 1024 chars                        | Delegation trigger text |
 
 ### Optional Fields
 
-| Field | Type | Default | Options/Description |
-|-------|------|---------|---------------------|
-| `model` | string | sonnet | `sonnet`, `opus`, `haiku`, `inherit` |
-| `tools` | string/list | inherited | Allowlist: `Read, Grep, Glob, Bash(git:*)` |
-| `disallowedTools` | string/list | none | Denylist: `Write, Edit, Bash` |
-| `permissionMode` | string | default | `default`, `acceptEdits`, `dontAsk`, `bypassPermissions`, `plan` |
-| `skills` | string/list | none | Skills to load: `skill1, skill2` |
-| `hooks` | object | none | Scoped hook configurations |
-| `color` | string | none | Terminal output color |
+| Field             | Type        | Default   | Options/Description                                              |
+| ----------------- | ----------- | --------- | ---------------------------------------------------------------- |
+| `model`           | string      | sonnet    | `sonnet`, `opus`, `haiku`, `inherit`                             |
+| `tools`           | string/list | inherited | Allowlist: `Read, Grep, Glob, Bash(git:*)`                       |
+| `disallowedTools` | string/list | none      | Denylist: `Write, Edit, Bash`                                    |
+| `permissionMode`  | string      | default   | `default`, `acceptEdits`, `dontAsk`, `bypassPermissions`, `plan` |
+| `skills`          | string/list | none      | Skills to load: `skill1, skill2`                                 |
+| `hooks`           | object      | none      | Scoped hook configurations                                       |
+| `color`           | string      | none      | Terminal output color                                            |
 
 </schema>
 
@@ -264,12 +271,12 @@ SAVE the agent to `.claude/agents/{agent-name}.md`
 
 <model_guide>
 
-| Model | Cost | Speed | Capability | Use When |
-|-------|------|-------|------------|----------|
-| `haiku` | Low | Fast | Basic | Simple read-only analysis, quick searches |
-| `sonnet` | Medium | Balanced | Strong | Most agents - code review, debugging, docs |
-| `opus` | High | Slower | Maximum | Complex reasoning, difficult debugging, architecture |
-| `inherit` | Parent | Parent | Parent | Agent should match conversation context |
+| Model     | Cost   | Speed    | Capability | Use When                                             |
+| --------- | ------ | -------- | ---------- | ---------------------------------------------------- |
+| `haiku`   | Low    | Fast     | Basic      | Simple read-only analysis, quick searches            |
+| `sonnet`  | Medium | Balanced | Strong     | Most agents - code review, debugging, docs           |
+| `opus`    | High   | Slower   | Maximum    | Complex reasoning, difficult debugging, architecture |
+| `inherit` | Parent | Parent   | Parent     | Agent should match conversation context              |
 
 **Decision Tree:**
 
@@ -286,13 +293,13 @@ SAVE the agent to `.claude/agents/{agent-name}.md`
 
 <permission_guide>
 
-| Mode | File Edits | Bash Commands | Use Case |
-|------|------------|---------------|----------|
-| `default` | Prompts | Prompts | Security-conscious workflows |
-| `acceptEdits` | Auto-accepts | Prompts destructive | Documentation writers |
-| `dontAsk` | Auto-denies | Auto-denies | Read-only analyzers |
-| `bypassPermissions` | Skips all | Skips all | Trusted automation only |
-| `plan` | Disabled | Disabled | Planning/research phases |
+| Mode                | File Edits   | Bash Commands       | Use Case                     |
+| ------------------- | ------------ | ------------------- | ---------------------------- |
+| `default`           | Prompts      | Prompts             | Security-conscious workflows |
+| `acceptEdits`       | Auto-accepts | Prompts destructive | Documentation writers        |
+| `dontAsk`           | Auto-denies  | Auto-denies         | Read-only analyzers          |
+| `bypassPermissions` | Skips all    | Skips all           | Trusted automation only      |
+| `plan`              | Disabled     | Disabled            | Planning/research phases     |
 
 **CRITICAL**: Use `bypassPermissions` sparingly and document why.
 
@@ -597,10 +604,12 @@ Beyond configuration anti-patterns, users often make these mistakes when creatin
 **Problem**: Either writing 50-line descriptions with every possible detail, or 1-sentence vague descriptions
 
 **Consequence**:
+
 - Over-specified: Claude ignores most details, wasted tokens
 - Under-specified: Agent never gets invoked or does wrong thing
 
 **Solution**: Focus on:
+
 - 2-3 action verbs for what it does
 - 2-3 trigger phrases for when to use it
 - 3-5 domain keywords
@@ -630,18 +639,19 @@ skills: python-development, testing-patterns
 **Problem**: Using `default` when `acceptEdits` would work, or `bypassPermissions` unnecessarily
 
 **Consequence**:
+
 - Too restrictive: Constant user prompts, slow workflow
 - Too permissive: Accidental destructive operations
 
 **Solution**: Match permission mode to agent's actual operations:
 
-| Agent Type | Permission Mode | Reason |
-|------------|----------------|--------|
-| Read-only analyzer | `dontAsk` or `plan` | Never modifies files |
-| Doc generator | `acceptEdits` | Edits expected, safe |
-| Code implementer | `acceptEdits` | Edits expected |
-| Reviewer | `dontAsk` | Only reads code |
-| Debugger | `default` | May need user approval for changes |
+| Agent Type         | Permission Mode     | Reason                             |
+| ------------------ | ------------------- | ---------------------------------- |
+| Read-only analyzer | `dontAsk` or `plan` | Never modifies files               |
+| Doc generator      | `acceptEdits`       | Edits expected, safe               |
+| Code implementer   | `acceptEdits`       | Edits expected                     |
+| Reviewer           | `dontAsk`           | Only reads code                    |
+| Debugger           | `default`           | May need user approval for changes |
 
 ### Mistake 5: Not Testing Tool Restrictions
 
@@ -650,6 +660,7 @@ skills: python-development, testing-patterns
 **Consequence**: Agent fails silently or produces "I cannot do that" errors
 
 **Solution**:
+
 1. List what the agent MUST do
 2. Identify minimum tools needed
 3. Test with those tools only
@@ -669,6 +680,7 @@ permissionMode: dontAsk
 **Problem**: Single agent that "does everything" for a domain
 
 **Consequence**:
+
 - Poor delegation decisions (Claude doesn't know when to use it)
 - Conflicting requirements (read-only vs write)
 - Hard to maintain
@@ -698,6 +710,7 @@ description: Generates docstrings and README files
 **Consequence**: Agent has wrong tools, wrong model, irrelevant instructions, poor performance
 
 **Solution**: When using templates:
+
 1. Read the entire template first
 2. Identify sections that need customization
 3. Update frontmatter to match your needs
@@ -793,6 +806,7 @@ Create a simple test prompt that should trigger your agent:
 ```
 
 **What to observe:**
+
 - Does Claude invoke your agent automatically?
 - If not, the description may need better trigger keywords
 - Does the agent have the tools it needs?
@@ -812,6 +826,7 @@ Task(
 ```
 
 **What to observe:**
+
 - Agent loads successfully (no missing skills error)
 - Agent has required tool access
 - Agent follows its workflow
@@ -828,10 +843,12 @@ permissionMode: dontAsk
 ```
 
 Test prompts:
+
 - "Read and analyze file.py" → Should work
 - "Fix the bug in file.py" → Should fail or report inability
 
 **What to observe:**
+
 - Agent correctly blocked from disallowed tools
 - Error messages are clear
 - Agent doesn't try to work around restrictions
@@ -841,27 +858,30 @@ Test prompts:
 Test boundary conditions:
 
 **For read-only agents:**
+
 - Prompt that asks for code changes → Should decline or report limitation
 - Prompt that asks for analysis → Should work
 
 **For write agents:**
+
 - Prompt with missing information → Should ask for clarification or block
 - Prompt with clear requirements → Should proceed
 
 **For research agents:**
+
 - Large codebase exploration → Should handle without context overflow
 - Specific file search → Should be fast and focused
 
 ### Common Test Failures
 
-| Symptom | Likely Cause | Fix |
-|---------|--------------|-----|
-| Agent never invokes | Description lacks trigger keywords | Add keywords to description |
-| "Skill not found" error | Typo in skill name or skill doesn't exist | Check skill names, verify paths |
-| "Tool not available" error | Tool restrictions too restrictive | Add needed tools to `tools` field |
-| Agent does wrong task | Description too broad | Make description more specific |
-| Constant permission prompts | Wrong permission mode | Use `acceptEdits` or `dontAsk` |
-| Agent produces wrong format | Missing output format specification | Add explicit format in agent body |
+| Symptom                     | Likely Cause                              | Fix                               |
+| --------------------------- | ----------------------------------------- | --------------------------------- |
+| Agent never invokes         | Description lacks trigger keywords        | Add keywords to description       |
+| "Skill not found" error     | Typo in skill name or skill doesn't exist | Check skill names, verify paths   |
+| "Tool not available" error  | Tool restrictions too restrictive         | Add needed tools to `tools` field |
+| Agent does wrong task       | Description too broad                     | Make description more specific    |
+| Constant permission prompts | Wrong permission mode                     | Use `acceptEdits` or `dontAsk`    |
+| Agent produces wrong format | Missing output format specification       | Add explicit format in agent body |
 
 ### Iterative Testing Process
 

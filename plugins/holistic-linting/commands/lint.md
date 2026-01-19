@@ -62,14 +62,17 @@ When this command is invoked, perform the following steps based on the arguments
    ```
 
 2. **If LINTERS section not found**:
+
    - Inform user: "No ## LINTERS section found in CLAUDE.md. Run `/lint init` first to discover project linters."
    - Exit
 
 3. **Parse LINTERS section** to identify:
+
    - Formatters list with file patterns
    - Linters list with file patterns
 
 4. **Match file paths to tools**:
+
    - For each provided path, determine which formatters/linters apply based on file extension
    - Example: `*.py` files → ruff format, ruff check, mypy, pyright
 
@@ -105,6 +108,7 @@ When this command is invoked, perform the following steps based on the arguments
    ```
 
 7. **If linting errors found**:
+
    - For each file with errors, launch a linting-root-cause-resolver agent:
      ```claude
      Task(subagent_type="linting-root-cause-resolver",
@@ -125,6 +129,7 @@ When this command is invoked, perform the following steps based on the arguments
    ```
 
 2. **If section exists and `--force` not provided**:
+
    - Inform user: "## LINTERS section already exists in CLAUDE.md. Use `/lint init --force` to overwrite."
    - Show existing configuration
    - Exit
@@ -163,6 +168,7 @@ When this command is invoked, perform the following steps based on the arguments
    ```
 
 7. **Scan for Shell linting**:
+
    - Look for shellcheck in `.pre-commit-config.yaml` or installed globally
    - Look for shfmt in `.pre-commit-config.yaml` or installed globally
 

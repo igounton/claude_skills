@@ -3611,6 +3611,7 @@ The style to handle braced lists.
 Possible values:
 
 - `BLS_Block` (in configuration: `Block`) Best suited for pre C++11 braced lists.
+
   - Spaces inside the braced list.
 
   - Line break before the closing brace.
@@ -3629,6 +3630,7 @@ Type name{ // Comment
 ```
 
 - `BLS_FunctionCall` (in configuration: `FunctionCall`) Best suited for C++11 braced lists.
+
   - No spaces inside the braced list.
 
   - No line break before the closing brace.
@@ -3648,6 +3650,7 @@ Type name{ // Comment
 ```
 
 - `BLS_AlignFirstComment` (in configuration: `AlignFirstComment`) Same as `FunctionCall`, except for the handling of a comment at the begin, it then aligns everything following with the comment.
+
   - No spaces inside the braced list. (Even for a comment at the first position.)
 
   - No line break before the closing brace.

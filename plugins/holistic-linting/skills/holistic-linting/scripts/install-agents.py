@@ -13,6 +13,8 @@ This script copies the agent file from the skill bundle to the appropriate
 overwrites of modified agent files.
 """
 
+from __future__ import annotations
+
 import hashlib
 import subprocess
 from enum import StrEnum
@@ -47,7 +49,11 @@ def get_git_root() -> Path | None:
     """
     try:
         result = subprocess.run(
-            ["git", "rev-parse", "--show-toplevel"], capture_output=True, text=True, check=True, timeout=5
+            ["git", "rev-parse", "--show-toplevel"],
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=5,
         )
         return Path(result.stdout.strip())
     except subprocess.CalledProcessError:
@@ -93,7 +99,9 @@ def show_diff(existing_file: Path, new_content: str) -> None:
     new_lines = new_content.splitlines()[:20]
 
     console.print("[cyan]Existing (first 20 lines):[/cyan]")
-    console.print(Panel("\n".join(existing_lines), border_style="cyan", box=box.ROUNDED))
+    console.print(
+        Panel("\n".join(existing_lines), border_style="cyan", box=box.ROUNDED)
+    )
 
     console.print("\n[green]New (first 20 lines):[/green]")
     console.print(Panel("\n".join(new_lines), border_style="green", box=box.ROUNDED))
@@ -139,16 +147,24 @@ def install_agent(source_file: Path, target_dir: Path, force: bool = False) -> b
 
         # Different content - check for force flag
         if not force:
-            error_console.print(f":cross_mark: [red]Agent file exists with different content:[/red] {target_file}")
+            error_console.print(
+                f":cross_mark: [red]Agent file exists with different content:[/red] {target_file}"
+            )
             show_diff(target_file, source_content)
-            error_console.print("\n[yellow]To overwrite the existing file, use:[/yellow] --force")
+            error_console.print(
+                "\n[yellow]To overwrite the existing file, use:[/yellow] --force"
+            )
             return False
 
-        console.print(f":warning: [yellow]Overwriting existing agent file:[/yellow] {target_file}")
+        console.print(
+            f":warning: [yellow]Overwriting existing agent file:[/yellow] {target_file}"
+        )
 
     # Install the file
     target_file.write_text(source_content, encoding="utf-8")
-    console.print(f":white_check_mark: [green]Agent installed successfully:[/green] {target_file}")
+    console.print(
+        f":white_check_mark: [green]Agent installed successfully:[/green] {target_file}"
+    )
     return True
 
 
@@ -168,7 +184,10 @@ def main(
             case_sensitive=False,
         ),
     ],
-    force: Annotated[bool, typer.Option("--force", help="Overwrite existing agent file even if different")] = False,
+    force: Annotated[
+        bool,
+        typer.Option("--force", help="Overwrite existing agent file even if different"),
+    ] = False,
 ) -> None:
     """Install linting-root-cause-resolver agent to specified scope.
 
@@ -187,7 +206,9 @@ def main(
     source_file = script_dir.parent / "agents" / "linting-root-cause-resolver.md"
 
     if not source_file.exists():
-        error_console.print(f":cross_mark: [red]Agent source file not found:[/red] {source_file}")
+        error_console.print(
+            f":cross_mark: [red]Agent source file not found:[/red] {source_file}"
+        )
         error_console.print(
             "\n[yellow]Expected location:[/yellow] holistic-linting/agents/linting-root-cause-resolver.md"
         )
@@ -203,11 +224,15 @@ def main(
             git_root = get_git_root()
             if git_root is None:
                 error_console.print(":cross_mark: [red]Not in a git repository[/red]")
-                error_console.print("\n[yellow]Project scope requires a git repository[/yellow]")
+                error_console.print(
+                    "\n[yellow]Project scope requires a git repository[/yellow]"
+                )
                 raise typer.Exit(code=1)
 
             target_dir = git_root / ".claude" / "agents"
-            console.print(f"[cyan]Installing to project scope:[/cyan] {target_dir}\n[dim]Git root:[/dim] {git_root}")
+            console.print(
+                f"[cyan]Installing to project scope:[/cyan] {target_dir}\n[dim]Git root:[/dim] {git_root}"
+            )
 
     # Install the agent
     try:

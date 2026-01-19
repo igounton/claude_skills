@@ -140,19 +140,19 @@ rules: {
 
 The most widely used shareable configuration. Default error-level rules:
 
-| Rule | Configuration | Pass Example | Fail Example |
-| --- | --- | --- | --- |
-| `type-enum` | `['build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test']` | `fix: message` | `foo: message` |
-| `type-case` | `'lowerCase'` | `fix: message` | `FIX: message` |
-| `type-empty` | `never` | `fix: message` | `: message` |
-| `subject-case` | `never` + `['sentence-case', 'start-case', 'pascal-case', 'upper-case']` | `fix: some message` | `fix: Some Message` |
-| `subject-empty` | `never` | `fix: message` | `fix:` |
-| `subject-full-stop` | `never`, `'.'` | `fix: message` | `fix: message.` |
-| `header-max-length` | `100` | Short header | Header > 100 chars |
-| `body-leading-blank` | `always` (warning) | Blank line before body | No blank line |
-| `body-max-line-length` | `100` | Lines <= 100 chars | Line > 100 chars |
-| `footer-leading-blank` | `always` (warning) | Blank line before footer | No blank line |
-| `footer-max-line-length` | `100` | Lines <= 100 chars | Line > 100 chars |
+| Rule                     | Configuration                                                                                    | Pass Example             | Fail Example        |
+| ------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------ | ------------------- |
+| `type-enum`              | `['build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test']` | `fix: message`           | `foo: message`      |
+| `type-case`              | `'lowerCase'`                                                                                    | `fix: message`           | `FIX: message`      |
+| `type-empty`             | `never`                                                                                          | `fix: message`           | `: message`         |
+| `subject-case`           | `never` + `['sentence-case', 'start-case', 'pascal-case', 'upper-case']`                         | `fix: some message`      | `fix: Some Message` |
+| `subject-empty`          | `never`                                                                                          | `fix: message`           | `fix:`              |
+| `subject-full-stop`      | `never`, `'.'`                                                                                   | `fix: message`           | `fix: message.`     |
+| `header-max-length`      | `100`                                                                                            | Short header             | Header > 100 chars  |
+| `body-leading-blank`     | `always` (warning)                                                                               | Blank line before body   | No blank line       |
+| `body-max-line-length`   | `100`                                                                                            | Lines <= 100 chars       | Line > 100 chars    |
+| `footer-leading-blank`   | `always` (warning)                                                                               | Blank line before footer | No blank line       |
+| `footer-max-line-length` | `100`                                                                                            | Lines <= 100 chars       | Line > 100 chars    |
 
 ### Complete Configuration Schema
 

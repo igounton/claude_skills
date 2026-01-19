@@ -226,16 +226,19 @@ Instead of AI client juggling 10 server connections:
 ### Key Takeaways
 
 1. **Use FastMCP's strengths**:
+
    - Schema validation
    - Structured I/O
    - Type safety
 
 2. **Optimize where possible**:
+
    - Cache results
    - Delegate heavy tasks to server
    - Use async for I/O operations
 
 3. **Security patterns**:
+
    - Don't execute arbitrary code unless necessary
    - Sandbox when you do
    - Respect user-provided scopes (directories, API quotas)

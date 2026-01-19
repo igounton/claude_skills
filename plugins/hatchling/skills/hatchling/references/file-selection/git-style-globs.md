@@ -11,13 +11,13 @@ Hatchling file selection uses Git-style glob patterns identical to `.gitignore` 
 
 ### Basic Patterns
 
-| Pattern | Description | Example Match |
-| --- | --- | --- |
-| `*` | Matches any string except `/` | `*.py` matches `file.py` but not `dir/file.py` |
-| `**` | Matches any string including `/` | `**/*.py` matches all `.py` files recursively |
-| `?` | Matches any single character except `/` | `test?.py` matches `test1.py`, `testA.py` |
-| `[...]` | Matches any character in brackets | `test[123].py` matches `test1.py`, `test2.py`, `test3.py` |
-| `[!...]` or `[^...]` | Matches any character NOT in brackets | `test[!0-9].py` matches `testA.py` but not `test1.py` |
+| Pattern              | Description                             | Example Match                                             |
+| -------------------- | --------------------------------------- | --------------------------------------------------------- |
+| `*`                  | Matches any string except `/`           | `*.py` matches `file.py` but not `dir/file.py`            |
+| `**`                 | Matches any string including `/`        | `**/*.py` matches all `.py` files recursively             |
+| `?`                  | Matches any single character except `/` | `test?.py` matches `test1.py`, `testA.py`                 |
+| `[...]`              | Matches any character in brackets       | `test[123].py` matches `test1.py`, `test2.py`, `test3.py` |
+| `[!...]` or `[^...]` | Matches any character NOT in brackets   | `test[!0-9].py` matches `testA.py` but not `test1.py`     |
 
 ### Path Patterns
 

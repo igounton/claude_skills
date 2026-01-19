@@ -18,25 +18,25 @@ This directory contains comprehensive reference documentation for Hatchling's pl
 
 ### Core Reference
 
-| Document | Purpose |
-| --- | --- |
+| Document                                      | Purpose                                                                                                  |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | [Plugin Development Guide](./PLUGIN-GUIDE.md) | **Start here** - Comprehensive guide covering all plugin types, development workflow, and best practices |
-| [Plugin System Overview](./index.md) | Plugin architecture, registration mechanisms, lifecycle management, and configuration patterns |
+| [Plugin System Overview](./index.md)          | Plugin architecture, registration mechanisms, lifecycle management, and configuration patterns           |
 
 ### Plugin Type References
 
-| Plugin Type | Reference | Use Case |
-| --- | --- | --- |
-| Builders | [Builder Plugins](./builder-plugins.md) | Create distributable package formats (wheels, sdists, custom) |
-| Build Hooks | [Build Hook Plugins](./build-hook-plugins.md) | Execute code during build phases (initialize, finalize, clean) |
-| Metadata Hooks | [Metadata Hook Plugins](./metadata-hook-plugins.md) | Dynamically generate project metadata (version, description, classifiers) |
-| Version Sources | [Version Source Plugins](./version-source-plugins.md) | Determine project version from various sources |
-| Version Schemes | [Version Scheme Plugins](./version-scheme-plugins.md) | Validate and normalize version numbers |
+| Plugin Type     | Reference                                             | Use Case                                                                  |
+| --------------- | ----------------------------------------------------- | ------------------------------------------------------------------------- |
+| Builders        | [Builder Plugins](./builder-plugins.md)               | Create distributable package formats (wheels, sdists, custom)             |
+| Build Hooks     | [Build Hook Plugins](./build-hook-plugins.md)         | Execute code during build phases (initialize, finalize, clean)            |
+| Metadata Hooks  | [Metadata Hook Plugins](./metadata-hook-plugins.md)   | Dynamically generate project metadata (version, description, classifiers) |
+| Version Sources | [Version Source Plugins](./version-source-plugins.md) | Determine project version from various sources                            |
+| Version Schemes | [Version Scheme Plugins](./version-scheme-plugins.md) | Validate and normalize version numbers                                    |
 
 ### Plugin Implementations
 
-| Plugin | Reference | Features |
-| --- | --- | --- |
+| Plugin    | Reference                                       | Features                                                           |
+| --------- | ----------------------------------------------- | ------------------------------------------------------------------ |
 | hatch-vcs | [hatch-vcs Plugin Guide](./hatch-vcs-plugin.md) | VCS-based versioning (Git, Mercurial), auto-generate version files |
 
 ## Plugin Types at a Glance
@@ -132,16 +132,19 @@ For more detailed information about Hatchling beyond plugins:
 This documentation is based on:
 
 1. **Official Hatchling Documentation**
+
    - Plugin system architecture and interfaces
    - Plugin registration mechanisms
    - Configuration patterns
 
 2. **Official Plugin Registry**
+
    - hatch-vcs plugin implementation
    - Third-party plugin references
    - Community contributions
 
 3. **pluggy Framework**
+
    - Hook registration and management
    - Plugin loading mechanisms
 

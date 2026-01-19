@@ -1095,12 +1095,14 @@ plugins:
 ## Tips and Best Practices
 
 1. **Plugin Order Matters**: Some plugins depend on others. Generally use this order:
+
    - gen-files (generates files)
    - literate-nav (processes navigation)
    - mkdocstrings (processes autodoc)
    - Other plugins
 
 2. **Performance Considerations**:
+
    - mkdocstrings with large codebases can slow builds
    - Use `show_source: false` if source code display isn't needed
    - Consider using `enable_inventory: false` if cross-references aren't needed

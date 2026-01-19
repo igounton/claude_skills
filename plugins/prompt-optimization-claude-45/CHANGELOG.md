@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-01-18
 
 ### Added
+
 - Initial release of prompt-optimization-claude-45 plugin
 - Core skill for optimizing CLAUDE.md and Skill files
 - Positive framing transformation patterns
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive README with installation and usage examples
 
 ### Features
+
 - Transform prohibition lists into actionable positive instructions
 - Replace vague quality instructions with concrete standards
 - Add contextual motivation with "Reason:" annotations
@@ -32,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Include Mermaid diagram support for complex workflows
 
 ### Documentation
+
 - Complete installation guide (marketplace and manual methods)
 - Quick start examples
 - Core optimization principles with before/after comparisons

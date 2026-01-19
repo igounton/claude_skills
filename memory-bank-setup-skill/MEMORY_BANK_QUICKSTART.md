@@ -700,7 +700,7 @@ ls -la /your/memory/bank/directory
 
 ## Helpful Resources
 
-**Official Repository**: https://github.com/alioshr/memory-bank-mcp
+**Official Repository**: <https://github.com/alioshr/memory-bank-mcp>
 
 **Comprehensive Documentation**:
 
@@ -709,7 +709,7 @@ ls -la /your/memory/bank/directory
 
 **Original Concept**:
 
-- Cline Memory Bank: https://github.com/nickbaumann98/cline_docs/blob/main/prompting/custom%20instructions%20library/cline-memory-bank.md
+- Cline Memory Bank: <https://github.com/nickbaumann98/cline_docs/blob/main/prompting/custom%20instructions%20library/cline-memory-bank.md>
 
 ---
 

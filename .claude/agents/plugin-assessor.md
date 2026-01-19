@@ -54,20 +54,22 @@ SCAN the plugin structure completely:
 VALIDATE plugin.json against required schema:
 
 **Required Fields:**
-| Field | Type | Constraints |
-|-------|------|-------------|
-| `name` | string | Lowercase, hyphens only, max 64 chars, must match directory |
-| `description` | string | Max 1024 chars, should include trigger keywords |
-| `version` | string | Semantic versioning (X.Y.Z) |
+
+| Field         | Type   | Constraints                                                 |
+| ------------- | ------ | ----------------------------------------------------------- |
+| `name`        | string | Lowercase, hyphens only, max 64 chars, must match directory |
+| `description` | string | Max 1024 chars, should include trigger keywords             |
+| `version`     | string | Semantic versioning (X.Y.Z)                                 |
 
 **Recommended Fields:**
-| Field | Type | Purpose |
-|-------|------|---------|
-| `author` | object | `{name, email?, url?}` |
-| `homepage` | string | Documentation URL |
-| `repository` | string | Source code URL |
-| `license` | string | SPDX identifier |
-| `keywords` | array | Marketplace discoverability |
+
+| Field        | Type   | Purpose                     |
+| ------------ | ------ | --------------------------- |
+| `author`     | object | `{name, email?, url?}`      |
+| `homepage`   | string | Documentation URL           |
+| `repository` | string | Source code URL             |
+| `license`    | string | SPDX identifier             |
+| `keywords`   | array  | Marketplace discoverability |
 
 ### Phase 3: Skills Analysis
 
@@ -75,17 +77,18 @@ For EACH skill directory, READ and analyze:
 
 #### 3a. Frontmatter Validation
 
-| Field | Required | Type | Constraints |
-|-------|----------|------|-------------|
-| `name` | **Yes** | string | Max 64 chars, lowercase, hyphens only |
-| `description` | **Yes** | string | Max 1024 chars, include trigger keywords |
-| `allowed-tools` | No | string | Comma-separated with patterns |
-| `model` | No | string | Valid model ID or `inherit` |
-| `context` | No | string | `fork` for isolated context |
-| `user-invocable` | No | boolean | Default: true |
-| `hooks` | No | object | Scoped hook configurations |
+| Field            | Required | Type    | Constraints                              |
+| ---------------- | -------- | ------- | ---------------------------------------- |
+| `name`           | **Yes**  | string  | Max 64 chars, lowercase, hyphens only    |
+| `description`    | **Yes**  | string  | Max 1024 chars, include trigger keywords |
+| `allowed-tools`  | No       | string  | Comma-separated with patterns            |
+| `model`          | No       | string  | Valid model ID or `inherit`              |
+| `context`        | No       | string  | `fork` for isolated context              |
+| `user-invocable` | No       | boolean | Default: true                            |
+| `hooks`          | No       | object  | Scoped hook configurations               |
 
 **Tool Pattern Syntax:**
+
 ```
 Read, Grep, Glob           # Multiple tools
 Bash(git:*)                # Pattern matching
@@ -95,7 +98,7 @@ Bash(npm:install)          # Specific command only
 #### 3b. Content Analysis
 
 - SKILL.md length (should be under 500 lines)
-- Progressive disclosure usage (links to ./references/*.md)
+- Progressive disclosure usage (links to ./references/\*.md)
 - Example quality and completeness
 - Instruction clarity and actionability
 
@@ -104,12 +107,14 @@ Bash(npm:install)          # Specific command only
 For each skill, perform comprehensive reference file analysis:
 
 **Step 1: Inventory All Reference Files**
+
 ```bash
 # Find all .md files in skill directory except SKILL.md
 find skills/{name}/ -name "*.md" ! -name "SKILL.md"
 ```
 
 **Step 2: Extract Links from SKILL.md**
+
 - Parse all markdown links: `[text](./path)`
 - Parse all file references in code blocks
 - Note inline file mentions
@@ -118,18 +123,19 @@ find skills/{name}/ -name "*.md" ! -name "SKILL.md"
 
 For EACH file in references/ or subdirectories:
 
-| Classification | Criteria | Recommendation |
-|----------------|----------|----------------|
-| **Linked** | File is referenced from SKILL.md | ✅ Good - verify link works |
+| Classification             | Criteria                                                | Recommendation                       |
+| -------------------------- | ------------------------------------------------------- | ------------------------------------ |
+| **Linked**                 | File is referenced from SKILL.md                        | ✅ Good - verify link works          |
 | **Orphaned - New Content** | Not linked, contains unique information not in SKILL.md | Add link to SKILL.md or create index |
-| **Orphaned - Duplicate** | Not linked, content duplicates SKILL.md | Merge into main file or delete |
-| **Orphaned - Notes** | Not linked, appears to be working notes/drafts | Move to separate location or delete |
-| **Orphaned - Examples** | Not linked, contains examples/templates | Link from appropriate section |
-| **Index File** | Named index.md or similar, links to other files | Verify all links, link from SKILL.md |
+| **Orphaned - Duplicate**   | Not linked, content duplicates SKILL.md                 | Merge into main file or delete       |
+| **Orphaned - Notes**       | Not linked, appears to be working notes/drafts          | Move to separate location or delete  |
+| **Orphaned - Examples**    | Not linked, contains examples/templates                 | Link from appropriate section        |
+| **Index File**             | Named index.md or similar, links to other files         | Verify all links, link from SKILL.md |
 
 **Step 4: Content Comparison**
 
 For orphaned files, READ the content and compare:
+
 - Does it introduce NEW concepts not in SKILL.md?
 - Does it DUPLICATE existing content?
 - Does it EXTEND a topic mentioned briefly in SKILL.md?
@@ -138,6 +144,7 @@ For orphaned files, READ the content and compare:
 **Step 5: Generate Recommendations**
 
 For each orphaned file, provide specific action:
+
 ```
 ORPHANED: ./references/advanced-config.md
 CONTENT: 450 lines of advanced configuration examples
@@ -149,6 +156,7 @@ SUGGESTED LINK: [Advanced Configuration Guide](./references/advanced-config.md)
 #### 3d. Link Validation
 
 For ALL links in SKILL.md and reference files:
+
 - Verify target file exists
 - Check for broken relative paths
 - Identify circular references
@@ -159,25 +167,29 @@ For ALL links in SKILL.md and reference files:
 For EACH command file, READ and analyze:
 
 **Frontmatter Validation:**
-| Field | Required | Type | Purpose |
-|-------|----------|------|---------|
-| `description` | **Yes** | string | Shown in `/help` menu |
-| `allowed-tools` | No | string | Tool allowlist with patterns |
-| `argument-hint` | No | string | Shows in autocomplete |
-| `model` | No | string | Override model |
-| `context` | No | string | `fork` for isolated context |
-| `agent` | No | string | Agent type when using `context: fork` |
-| `hooks` | No | object | Scoped hooks |
+
+| Field           | Required | Type   | Purpose                               |
+| --------------- | -------- | ------ | ------------------------------------- |
+| `description`   | **Yes**  | string | Shown in `/help` menu                 |
+| `allowed-tools` | No       | string | Tool allowlist with patterns          |
+| `argument-hint` | No       | string | Shows in autocomplete                 |
+| `model`         | No       | string | Override model                        |
+| `context`       | No       | string | `fork` for isolated context           |
+| `agent`         | No       | string | Agent type when using `context: fork` |
+| `hooks`         | No       | object | Scoped hooks                          |
 
 **Argument Syntax:**
+
 - `$ARGUMENTS` - All arguments as single string
 - `$1`, `$2`, `$3` - Positional arguments
 
 **Special Prefixes:**
+
 - `!command` - Execute bash command (output injected)
 - `@file` - Reference file content
 
 **Content Analysis:**
+
 - Instruction clarity
 - Example usage presence
 - Argument documentation
@@ -187,27 +199,30 @@ For EACH command file, READ and analyze:
 For EACH agent file, READ and analyze:
 
 **Frontmatter Validation:**
-| Field | Required | Type | Options |
-|-------|----------|------|---------|
-| `name` | **Yes** | string | Unique identifier |
-| `description` | **Yes** | string | Delegation trigger keywords |
-| `tools` | No | string/list | Allowlist |
-| `disallowedTools` | No | string/list | Denylist |
-| `model` | No | string | `sonnet`, `opus`, `haiku`, `inherit` |
-| `permissionMode` | No | string | See table below |
-| `skills` | No | string/list | Skills to load |
-| `hooks` | No | object | Scoped hooks |
+
+| Field             | Required | Type        | Options                              |
+| ----------------- | -------- | ----------- | ------------------------------------ |
+| `name`            | **Yes**  | string      | Unique identifier                    |
+| `description`     | **Yes**  | string      | Delegation trigger keywords          |
+| `tools`           | No       | string/list | Allowlist                            |
+| `disallowedTools` | No       | string/list | Denylist                             |
+| `model`           | No       | string      | `sonnet`, `opus`, `haiku`, `inherit` |
+| `permissionMode`  | No       | string      | See table below                      |
+| `skills`          | No       | string/list | Skills to load                       |
+| `hooks`           | No       | object      | Scoped hooks                         |
 
 **Permission Modes:**
-| Mode | Behavior |
-|------|----------|
-| `default` | Normal permission prompts |
-| `acceptEdits` | Auto-accept file edits |
-| `dontAsk` | Skip non-destructive permissions |
+
+| Mode                | Behavior                         |
+| ------------------- | -------------------------------- |
+| `default`           | Normal permission prompts        |
+| `acceptEdits`       | Auto-accept file edits           |
+| `dontAsk`           | Skip non-destructive permissions |
 | `bypassPermissions` | Skip all permissions (dangerous) |
-| `plan` | Planning mode, no write tools |
+| `plan`              | Planning mode, no write tools    |
 
 **Content Analysis:**
+
 - System prompt clarity
 - Tool restrictions appropriateness
 - Delegation trigger keywords in description
@@ -217,29 +232,32 @@ For EACH agent file, READ and analyze:
 IF `hooks.json` exists OR hooks in frontmatter:
 
 **Hook Events:**
-| Event | When Fired | Common Uses |
-|-------|------------|-------------|
-| `PreToolUse` | Before tool execution | Validation, blocking |
-| `PostToolUse` | After tool completes | Formatting, linting |
+
+| Event               | When Fired                 | Common Uses           |
+| ------------------- | -------------------------- | --------------------- |
+| `PreToolUse`        | Before tool execution      | Validation, blocking  |
+| `PostToolUse`       | After tool completes       | Formatting, linting   |
 | `PermissionRequest` | When requesting permission | Auto-approve policies |
-| `UserPromptSubmit` | User submits prompt | Input validation |
-| `Notification` | Claude needs attention | Custom notifications |
-| `Stop` | Claude finishes | Cleanup |
-| `SubagentStop` | Subagent completes | Result logging |
-| `PreCompact` | Before context compaction | State backup |
-| `SessionStart` | Session begins | Environment setup |
-| `SessionEnd` | Session ends | Persistence |
+| `UserPromptSubmit`  | User submits prompt        | Input validation      |
+| `Notification`      | Claude needs attention     | Custom notifications  |
+| `Stop`              | Claude finishes            | Cleanup               |
+| `SubagentStop`      | Subagent completes         | Result logging        |
+| `PreCompact`        | Before context compaction  | State backup          |
+| `SessionStart`      | Session begins             | Environment setup     |
+| `SessionEnd`        | Session ends               | Persistence           |
 
 **Hook Configuration Fields:**
-| Field | Type | Purpose |
-|-------|------|---------|
-| `matcher` | string | Regex pattern for tool names |
-| `type` | string | Always `command` |
-| `command` | string | Shell command to execute |
-| `timeout` | number | Max execution time in ms |
-| `once` | boolean | Run only once per session |
+
+| Field     | Type    | Purpose                      |
+| --------- | ------- | ---------------------------- |
+| `matcher` | string  | Regex pattern for tool names |
+| `type`    | string  | Always `command`             |
+| `command` | string  | Shell command to execute     |
+| `timeout` | number  | Max execution time in ms     |
+| `once`    | boolean | Run only once per session    |
 
 **Exit Codes:**
+
 - `0` = Allow operation
 - `2` = Block operation (stderr shown as error)
 
@@ -248,13 +266,15 @@ IF `hooks.json` exists OR hooks in frontmatter:
 IF `.mcp.json` exists:
 
 **Server Types:**
-| Type | Use Case | Required Fields |
-|------|----------|-----------------|
-| `http` | Remote cloud services | `url`, optional `headers` |
-| `sse` | Server-Sent Events (deprecated) | `url` |
-| `stdio` | Local tools/scripts | `command`, optional `args`, `env` |
+
+| Type    | Use Case                        | Required Fields                   |
+| ------- | ------------------------------- | --------------------------------- |
+| `http`  | Remote cloud services           | `url`, optional `headers`         |
+| `sse`   | Server-Sent Events (deprecated) | `url`                             |
+| `stdio` | Local tools/scripts             | `command`, optional `args`, `env` |
 
 **Environment Variables:**
+
 - Use `${VAR_NAME}` syntax for secrets
 - Document all required variables
 
@@ -265,6 +285,7 @@ COMPREHENSIVE cross-reference validation:
 #### 8a. Documentation Link Graph
 
 Build a complete link graph:
+
 ```
 SKILL.md
 ├── ./references/api.md (linked ✅)
@@ -296,6 +317,7 @@ SKILL.md
 #### 8d. Bidirectional Link Check
 
 For reference documentation:
+
 - Does SKILL.md link TO reference files?
 - Do reference files link BACK to SKILL.md?
 - Is there a clear navigation path?
@@ -321,7 +343,7 @@ IDENTIFY opportunities for:
 
 Generate assessment report in this structure:
 
-```markdown
+````markdown
 # Plugin Assessment Report: {plugin-name}
 
 ## Executive Summary
@@ -426,17 +448,20 @@ Generate assessment report in this structure:
   Add to SKILL.md under "## {Section Name}":
 
   For detailed {topic}, see [{Display Text}](./references/{filename}.md)
-  ```
+````
 
 #### Link Validation
-| Source | Target | Status |
-|--------|--------|--------|
-| SKILL.md:15 | ./references/api.md | ✅/❌ |
+
+| Source      | Target              | Status |
+| ----------- | ------------------- | ------ |
+| SKILL.md:15 | ./references/api.md | ✅/❌  |
 
 #### Issues
+
 - [{severity}] Line {N}: {description}
 
 #### Recommendations
+
 - {specific improvement with implementation details}
 
 ---
@@ -446,24 +471,28 @@ Generate assessment report in this structure:
 ## 4. Commands Assessment
 
 ### Overview
-| Command | Status | Has Args | Tools Restricted |
-|---------|--------|----------|------------------|
-| /{name} | ✅/⚠️/❌ | ✅/❌ | ✅/❌ |
+
+| Command | Status   | Has Args | Tools Restricted |
+| ------- | -------- | -------- | ---------------- |
+| /{name} | ✅/⚠️/❌ | ✅/❌    | ✅/❌            |
 
 ### /{command-name} Details
 
 **Location**: `commands/{name}.md`
 
 #### Frontmatter
-| Field | Present | Valid | Value |
-|-------|---------|-------|-------|
-| description | ✅/❌ | ✅/❌ | `{value}` |
-| argument-hint | ✅/❌ | - | `{value}` |
+
+| Field         | Present | Valid | Value     |
+| ------------- | ------- | ----- | --------- |
+| description   | ✅/❌   | ✅/❌ | `{value}` |
+| argument-hint | ✅/❌   | -     | `{value}` |
 
 #### Issues
+
 - [{severity}] {description}
 
 #### Recommendations
+
 - {specific improvement}
 
 ---
@@ -473,26 +502,30 @@ Generate assessment report in this structure:
 ## 5. Agents Assessment
 
 ### Overview
-| Agent | Status | Model | Tools | Permission Mode |
-|-------|--------|-------|-------|-----------------|
-| {name} | ✅/⚠️/❌ | {model} | N tools | {mode} |
+
+| Agent  | Status   | Model   | Tools   | Permission Mode |
+| ------ | -------- | ------- | ------- | --------------- |
+| {name} | ✅/⚠️/❌ | {model} | N tools | {mode}          |
 
 ### {agent-name} Details
 
 **Location**: `agents/{name}.md`
 
 #### Frontmatter
-| Field | Present | Valid | Value |
-|-------|---------|-------|-------|
-| name | ✅/❌ | ✅/❌ | `{value}` |
-| description | ✅/❌ | ✅/❌ | `{truncated}` |
-| tools | ✅/❌ | ✅/❌ | `{list}` |
-| model | ✅/❌ | ✅/❌ | `{value}` |
+
+| Field       | Present | Valid | Value         |
+| ----------- | ------- | ----- | ------------- |
+| name        | ✅/❌   | ✅/❌ | `{value}`     |
+| description | ✅/❌   | ✅/❌ | `{truncated}` |
+| tools       | ✅/❌   | ✅/❌ | `{list}`      |
+| model       | ✅/❌   | ✅/❌ | `{value}`     |
 
 #### Issues
+
 - [{severity}] {description}
 
 #### Recommendations
+
 - {specific improvement}
 
 ---
@@ -502,56 +535,66 @@ Generate assessment report in this structure:
 ## 6. Configuration Assessment
 
 ### Hooks
+
 **Status**: ✅ Valid / ❌ Invalid / N/A
 
-| Event | Handlers | Valid | Purpose |
-|-------|----------|-------|---------|
-| {event} | N | ✅/❌ | {description} |
+| Event   | Handlers | Valid | Purpose       |
+| ------- | -------- | ----- | ------------- |
+| {event} | N        | ✅/❌ | {description} |
 
 ### MCP Servers
+
 **Status**: ✅ Valid / ❌ Invalid / N/A
 
-| Server | Type | Valid | Security |
-|--------|------|-------|----------|
-| {name} | http/stdio | ✅/❌ | ✅/⚠️ |
+| Server | Type       | Valid | Security |
+| ------ | ---------- | ----- | -------- |
+| {name} | http/stdio | ✅/❌ | ✅/⚠️    |
 
 **Required Environment Variables**:
+
 - `{VAR_NAME}`: {purpose}
 
 ## 7. Cross-Reference Analysis
 
 ### Documentation Link Graph
+
 ```
 {Visual representation of link structure}
 ```
 
 ### Link Validation Summary
-| Status | Count |
-|--------|-------|
-| Valid links | N |
-| Broken links | N |
-| Orphaned files | N |
-| Missing back-links | N |
+
+| Status             | Count |
+| ------------------ | ----- |
+| Valid links        | N     |
+| Broken links       | N     |
+| Orphaned files     | N     |
+| Missing back-links | N     |
 
 ### Broken Links
-| Source | Target | Issue |
-|--------|--------|-------|
+
+| Source        | Target   | Issue                         |
+| ------------- | -------- | ----------------------------- |
 | {file}:{line} | {target} | {File not found / Wrong path} |
 
 ### Orphaned Files Summary
-| File | Skill | Classification | Action Required |
-|------|-------|----------------|-----------------|
-| {path} | {skill-name} | {classification} | {action} |
+
+| File   | Skill        | Classification   | Action Required |
+| ------ | ------------ | ---------------- | --------------- |
+| {path} | {skill-name} | {classification} | {action}        |
 
 ### Missing Back-links
+
 Files that should link back to their parent SKILL.md but don't:
-| File | Parent Skill |
-|------|--------------|
+
+| File   | Parent Skill |
+| ------ | ------------ |
 | {path} | {skill-name} |
 
 ## 8. Enhancement Opportunities
 
 ### High Priority
+
 1. **{Enhancement Name}**
    - **Type**: Script / Tool / MCP / Documentation / Structure
    - **Benefit**: {specific benefit}
@@ -559,33 +602,37 @@ Files that should link back to their parent SKILL.md but don't:
    - **Effort**: Low / Medium / High
 
 ### Medium Priority
+
 {Similar format}
 
 ### Low Priority (Optional)
+
 {Similar format}
 
 ### Orphan Resolution Plan
-| File | Action | Implementation |
-|------|--------|----------------|
-| {path} | Link from SKILL.md | Add `[text](./path)` to section X |
-| {path} | Merge into SKILL.md | Content belongs in section Y |
-| {path} | Create index.md | Group with related files |
-| {path} | Delete | Duplicate of X / Outdated |
+
+| File   | Action              | Implementation                    |
+| ------ | ------------------- | --------------------------------- |
+| {path} | Link from SKILL.md  | Add `[text](./path)` to section X |
+| {path} | Merge into SKILL.md | Content belongs in section Y      |
+| {path} | Create index.md     | Group with related files          |
+| {path} | Delete              | Duplicate of X / Outdated         |
 
 ## 9. Scoring Breakdown
 
-| Component | Weight | Score | Weighted |
-|-----------|--------|-------|----------|
-| Structural validity | 20% | X/100 | X |
-| Manifest completeness | 15% | X/100 | X |
-| Frontmatter correctness | 20% | X/100 | X |
-| Description quality | 15% | X/100 | X |
-| Reference organization | 15% | X/100 | X |
-| Documentation quality | 10% | X/100 | X |
-| Enhancement potential | 5% | X/100 | X |
-| **Total** | **100%** | - | **X/100** |
+| Component               | Weight   | Score | Weighted  |
+| ----------------------- | -------- | ----- | --------- |
+| Structural validity     | 20%      | X/100 | X         |
+| Manifest completeness   | 15%      | X/100 | X         |
+| Frontmatter correctness | 20%      | X/100 | X         |
+| Description quality     | 15%      | X/100 | X         |
+| Reference organization  | 15%      | X/100 | X         |
+| Documentation quality   | 10%      | X/100 | X         |
+| Enhancement potential   | 5%       | X/100 | X         |
+| **Total**               | **100%** | -     | **X/100** |
 
 **Reference Organization Scoring:**
+
 - 100: All references linked, bidirectional navigation, no orphans
 - 80: All references linked, minor navigation gaps
 - 60: Some orphaned files, most content linked
@@ -596,16 +643,21 @@ Files that should link back to their parent SKILL.md but don't:
 ## 10. Action Items
 
 ### Critical (Must Fix Before Release)
+
 - [ ] {action item with file:line reference}
 
 ### Recommended (Should Fix)
+
 - [ ] {action item}
 
 ### Optional (Nice to Have)
+
 - [ ] {action item}
 
 ### Orphan Resolution Checklist
+
 - [ ] {specific file}: {specific action}
+
 ```
 
 </report_format>
@@ -741,24 +793,30 @@ WHEN finished:
 ## Example Invocations
 
 ```
+
 Task(
-  agent="plugin-assessor",
-  prompt="Assess the plugin at ./python3-development for marketplace readiness"
+agent="plugin-assessor",
+prompt="Assess the plugin at ./python3-development for marketplace readiness"
 )
+
 ```
 
 ```
+
 Task(
-  agent="plugin-assessor",
-  prompt="Audit the gitlab-skill for orphaned documentation and suggest how to integrate them"
+agent="plugin-assessor",
+prompt="Audit the gitlab-skill for orphaned documentation and suggest how to integrate them"
 )
+
 ```
 
 ```
+
 Task(
-  agent="plugin-assessor",
-  prompt="Review ./my-plugin focusing on reference file organization and cross-linking"
+agent="plugin-assessor",
+prompt="Review ./my-plugin focusing on reference file organization and cross-linking"
 )
+
 ```
 
 The agent will:
@@ -767,3 +825,4 @@ The agent will:
 3. Identify and classify all orphaned documentation
 4. Validate against Claude Code plugin schema
 5. Produce comprehensive assessment with orphan resolution plan
+```

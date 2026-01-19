@@ -9,6 +9,7 @@ Examples from existing Claude Code agent implementations demonstrating best prac
 **Source**: `.claude/agents/plugin-assessor.md`
 
 This agent demonstrates:
+
 - Loading multiple skills for domain expertise
 - Comprehensive phased workflow
 - Detailed report format specification
@@ -29,6 +30,7 @@ skills: claude-skills-overview-2026, claude-plugins-reference-2026, claude-comma
 ```
 
 **Key Patterns:**
+
 - Description includes multiple trigger phrases ("Use when reviewing", "auditing", "validating", "identifying")
 - Loads 4 skills for comprehensive domain knowledge
 - Uses sonnet for balanced capability
@@ -40,6 +42,7 @@ skills: claude-skills-overview-2026, claude-plugins-reference-2026, claude-comma
 **Source**: `.claude/agents/code-review.md`
 
 This agent demonstrates:
+
 - Restricted invocation (user-only, not proactive)
 - Clear input/output format
 - Practical focus on "realness" of issues
@@ -53,6 +56,7 @@ description: Use ONLY when explicitly requested by user or when invoked by a pro
 ```
 
 **Key Patterns:**
+
 - Description explicitly states invocation conditions ("ONLY when explicitly requested")
 - Specifies required inputs ("files and line ranges", "task file")
 - Inherits default model and tools (appropriate for code review)
@@ -64,6 +68,7 @@ description: Use ONLY when explicitly requested by user or when invoked by a pro
 **Source**: `.claude/agents/claude-context-optimizer.md`
 
 This agent demonstrates:
+
 - Description with embedded examples
 - Skill activation as first action
 - Clear optimization principles
@@ -79,6 +84,7 @@ color: yellow
 ```
 
 **Key Patterns:**
+
 - Uses `color` field for visual distinction
 - Description includes specific file types it handles
 - References skill to load for domain knowledge
@@ -90,6 +96,7 @@ color: yellow
 **Source**: `.claude/agents/doc-drift-auditor.md`
 
 This agent demonstrates:
+
 - Description with inline examples (unusual but effective)
 - Comprehensive expertise areas
 - Evidence-based reporting requirements
@@ -105,6 +112,7 @@ color: orange
 ```
 
 **Key Patterns:**
+
 - Very detailed description explaining methodology
 - Lists specific outputs (file paths, line numbers, commit SHAs)
 - Uses `color: orange` for audit visibility
@@ -116,6 +124,7 @@ color: orange
 **Source**: `.claude/agents/skill-refactorer.md`
 
 This agent demonstrates:
+
 - `permissionMode: acceptEdits` for automated file changes
 - Loading skill for domain knowledge
 - Phased workflow with user confirmation points
@@ -136,6 +145,7 @@ skills: claude-skills-overview-2026
 ```
 
 **Key Patterns:**
+
 - Uses `permissionMode: acceptEdits` since it creates/modifies files
 - Loads relevant skill for understanding skill format
 - Description specifies when to use ("exceeds 500 lines", "multiple topics")
@@ -148,6 +158,7 @@ skills: claude-skills-overview-2026
 **Source**: `.claude/agents/context-gathering.md`
 
 This agent demonstrates:
+
 - Minimal frontmatter (inherits most settings)
 - Clear restriction on output (ONLY edit task file)
 - Comprehensive narrative output format
@@ -161,6 +172,7 @@ description: Use when creating a new task OR when starting/switching to a task t
 ```
 
 **Key Patterns:**
+
 - Very specific trigger conditions
 - States what to skip (already has Context Manifest)
 - Requires specific input (task file path)
@@ -172,33 +184,33 @@ description: Use when creating a new task OR when starting/switching to a task t
 
 ### Frontmatter Patterns
 
-| Pattern | Example | When to Use |
-|---------|---------|-------------|
-| Minimal frontmatter | context-gathering | Agent needs flexibility, inherits well |
-| Skill loading | plugin-assessor | Needs domain knowledge |
-| Permission mode | skill-refactorer | Creates/modifies files |
-| Color coding | doc-drift-auditor | Visual distinction helpful |
-| Detailed description | doc-drift-auditor | Complex trigger conditions |
+| Pattern              | Example           | When to Use                            |
+| -------------------- | ----------------- | -------------------------------------- |
+| Minimal frontmatter  | context-gathering | Agent needs flexibility, inherits well |
+| Skill loading        | plugin-assessor   | Needs domain knowledge                 |
+| Permission mode      | skill-refactorer  | Creates/modifies files                 |
+| Color coding         | doc-drift-auditor | Visual distinction helpful             |
+| Detailed description | doc-drift-auditor | Complex trigger conditions             |
 
 ### Body Structure Patterns
 
-| Pattern | Example | When to Use |
-|---------|---------|-------------|
-| Phased workflow | plugin-assessor | Multi-step process |
-| Checklist | code-review | Quality validation |
-| Boundaries section | doc-drift-auditor | Must clarify limits |
-| Output format spec | code-review | Consistent output needed |
-| Self-verification | context-gathering | Quality assurance |
+| Pattern            | Example           | When to Use              |
+| ------------------ | ----------------- | ------------------------ |
+| Phased workflow    | plugin-assessor   | Multi-step process       |
+| Checklist          | code-review       | Quality validation       |
+| Boundaries section | doc-drift-auditor | Must clarify limits      |
+| Output format spec | code-review       | Consistent output needed |
+| Self-verification  | context-gathering | Quality assurance        |
 
 ### Description Patterns
 
-| Pattern | Example | Effect |
-|---------|---------|--------|
-| Action verbs first | "Analyze", "Review", "Generate" | Clear purpose |
-| "Use when" phrase | Most agents | Trigger clarity |
-| "DO NOT" instruction | code-review | Prevent unwanted activation |
-| Input requirements | context-gathering | Clear expectations |
-| Output description | doc-drift-auditor | Sets expectations |
+| Pattern              | Example                         | Effect                      |
+| -------------------- | ------------------------------- | --------------------------- |
+| Action verbs first   | "Analyze", "Review", "Generate" | Clear purpose               |
+| "Use when" phrase    | Most agents                     | Trigger clarity             |
+| "DO NOT" instruction | code-review                     | Prevent unwanted activation |
+| Input requirements   | context-gathering               | Clear expectations          |
+| Output description   | doc-drift-auditor               | Sets expectations           |
 
 ---
 
@@ -426,6 +438,7 @@ Paths:
 **Use for**: Automated code formatting and linting with pre/post-tool hooks
 
 This agent demonstrates:
+
 - PreToolUse hooks for validation
 - PostToolUse hooks for automatic formatting
 - Stop hooks for final cleanup
@@ -493,11 +506,11 @@ You are a code quality agent that automatically formats and validates code chang
 
 **Key Hook Patterns:**
 
-| Hook Event | Matcher | Purpose | Exit Code Behavior |
-|------------|---------|---------|-------------------|
-| PreToolUse | `Write\|Edit` | Block large files | Exit 2 = block tool |
-| PostToolUse | `Write\|Edit` | Auto-format code | Exit 0 = continue |
-| Stop | (no matcher) | Final validation | Exit 2 = show error |
+| Hook Event  | Matcher       | Purpose           | Exit Code Behavior  |
+| ----------- | ------------- | ----------------- | ------------------- |
+| PreToolUse  | `Write\|Edit` | Block large files | Exit 2 = block tool |
+| PostToolUse | `Write\|Edit` | Auto-format code  | Exit 0 = continue   |
+| Stop        | (no matcher)  | Final validation  | Exit 2 = show error |
 
 **Hook Script Example** (`scripts/check-file-size.sh`):
 
@@ -522,6 +535,7 @@ exit 0  # Allow operation
 ```
 
 **When to Use Hooks in Agents:**
+
 - **PreToolUse**: Validation, security checks, blocking unwanted operations
 - **PostToolUse**: Formatting, linting, logging, notifications
 - **Stop**: Final validation, cleanup, report generation
@@ -530,13 +544,13 @@ exit 0  # Allow operation
 
 ## Role-Based Pattern Summary
 
-| Element | Purpose | Example |
-|---------|---------|---------|
-| `skills: subagent-contract` | Enforces DONE/BLOCKED format | All role-based agents |
-| Mission section | Clear single responsibility | "Implement features..." |
-| Scope (do/don't) | Explicit boundaries | "You do NOT change requirements" |
-| SOP | Step-by-step process | Numbered workflow |
-| Output Format | Consistent deliverables | STATUS/SUMMARY/ARTIFACTS/RISKS/NOTES |
+| Element                     | Purpose                      | Example                              |
+| --------------------------- | ---------------------------- | ------------------------------------ |
+| `skills: subagent-contract` | Enforces DONE/BLOCKED format | All role-based agents                |
+| Mission section             | Clear single responsibility  | "Implement features..."              |
+| Scope (do/don't)            | Explicit boundaries          | "You do NOT change requirements"     |
+| SOP                         | Step-by-step process         | Numbered workflow                    |
+| Output Format               | Consistent deliverables      | STATUS/SUMMARY/ARTIFACTS/RISKS/NOTES |
 
 ### When to Use Contract Format
 

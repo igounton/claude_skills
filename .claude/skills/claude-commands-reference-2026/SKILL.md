@@ -36,16 +36,16 @@ Your instructions here...
 
 ### All Frontmatter Fields
 
-| Field | Required | Type | Default | Description |
-|-------|----------|------|---------|-------------|
-| `description` | No | string | First line | Brief description for /help |
-| `argument-hint` | No | string | None | Shows in autocomplete |
-| `allowed-tools` | No | string/array | Inherits | Tool restrictions |
-| `model` | No | string | Inherits | Model override |
-| `context` | No | string | inline | `fork` for sub-agent context |
-| `agent` | No | string | general-purpose | Agent type (with context: fork) |
-| `disable-model-invocation` | No | boolean | false | Prevent Skill tool invocation |
-| `hooks` | No | object | None | PreToolUse, PostToolUse, Stop |
+| Field                      | Required | Type         | Default         | Description                     |
+| -------------------------- | -------- | ------------ | --------------- | ------------------------------- |
+| `description`              | No       | string       | First line      | Brief description for /help     |
+| `argument-hint`            | No       | string       | None            | Shows in autocomplete           |
+| `allowed-tools`            | No       | string/array | Inherits        | Tool restrictions               |
+| `model`                    | No       | string       | Inherits        | Model override                  |
+| `context`                  | No       | string       | inline          | `fork` for sub-agent context    |
+| `agent`                    | No       | string       | general-purpose | Agent type (with context: fork) |
+| `disable-model-invocation` | No       | boolean      | false           | Prevent Skill tool invocation   |
+| `hooks`                    | No       | object       | None            | PreToolUse, PostToolUse, Stop   |
 
 ---
 
@@ -149,12 +149,12 @@ agent: general-purpose
 ---
 ```
 
-| Agent | Model | Tools | Use Case |
-|-------|-------|-------|----------|
-| `general-purpose` | Inherits | All | Complex operations (default) |
-| `Explore` | Haiku | Read-only | Fast codebase analysis |
-| `Plan` | Inherits | Read-only | Research before planning |
-| Custom | Custom | Custom | Project-specific work |
+| Agent             | Model    | Tools     | Use Case                     |
+| ----------------- | -------- | --------- | ---------------------------- |
+| `general-purpose` | Inherits | All       | Complex operations (default) |
+| `Explore`         | Haiku    | Read-only | Fast codebase analysis       |
+| `Plan`            | Inherits | Read-only | Research before planning     |
+| Custom            | Custom   | Custom    | Project-specific work        |
 
 ---
 
@@ -184,6 +184,7 @@ hooks:
 **Supported Events**: PreToolUse, PostToolUse, Stop
 
 **Hook Fields**:
+
 - `matcher`: Tool pattern (regex, case-sensitive)
 - `type`: `command` or `prompt`
 - `command`: Bash command to execute
@@ -194,6 +195,7 @@ hooks:
 ## Discovery & Invocation
 
 ### Discovery
+
 - All commands in `.claude/commands/` and `~/.claude/commands/` auto-discovered
 - Listed in `/help` output
 - Autocomplete with `/` anywhere in input
@@ -207,6 +209,7 @@ hooks:
 ```
 
 ### Skill Tool Access
+
 - Custom commands available via `Skill` tool
 - Claude can invoke programmatically
 - Disable with `disable-model-invocation: true`
@@ -216,12 +219,12 @@ hooks:
 
 ## Built-in vs Custom Commands
 
-| Aspect | Built-in | Custom |
-|--------|----------|--------|
-| Location | Internal | `.claude/commands/` |
-| Skill tool access | No | Yes |
-| Overridable | No | Yes |
-| Hooks | Not supported | Supported |
+| Aspect            | Built-in      | Custom              |
+| ----------------- | ------------- | ------------------- |
+| Location          | Internal      | `.claude/commands/` |
+| Skill tool access | No            | Yes                 |
+| Overridable       | No            | Yes                 |
+| Hooks             | Not supported | Supported           |
 
 **Built-in Commands**: `/compact`, `/config`, `/cost`, `/help`, `/hooks`, `/init`, `/memory`, `/model`, `/plugin`, `/resume`, etc.
 
@@ -230,6 +233,7 @@ hooks:
 ## Plugin Commands
 
 ### Location
+
 `commands/` directory in plugin root
 
 ### Namespacing

@@ -645,11 +645,13 @@ def deploy(c):
 ## Performance Considerations
 
 1. **Parallel vs Serial Execution**:
+
    - Use `ThreadingGroup` for I/O-bound tasks (network operations)
    - Consider `SerialGroup` for order-dependent operations
    - Default thread pool size is 10 connections
 
 2. **Connection Pooling**:
+
    - Reuse `Connection` objects when possible
    - Close connections explicitly with `c.close()` or use context managers
 

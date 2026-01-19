@@ -279,10 +279,12 @@ GitLab sanitizes HTML through the Banzai pipeline. Commonly allowed elements:
 ### Critical Syntax Errors
 
 1. **Using uppercase alert types** (won't render)
+
    - ❌ WRONG: `> [!NOTE]`, `> [!TIP]`
    - ✅ CORRECT: `> [!note]`, `> [!tip]`
 
 2. **Markdown syntax in `<summary>` tags** (won't render)
+
    - ❌ WRONG: `<summary>## Configuration</summary>`
    - ✅ CORRECT: `<summary><h2>Configuration</h2></summary>`
 
@@ -293,18 +295,22 @@ GitLab sanitizes HTML through the Banzai pipeline. Commonly allowed elements:
 ### Information Architecture Mistakes
 
 4. **Collapsing essential information**
+
    - ❌ WRONG: Hiding installation requirements in collapsible
    - ✅ CORRECT: Essential info in main flow, advanced options collapsed
 
 5. **Overusing collapsibles**
+
    - ❌ WRONG: Every 3-line section wrapped in `<details>`
    - ✅ CORRECT: Collapsibles for optional/reference content (20+ lines)
 
 6. **Overusing alerts**
+
    - ❌ WRONG: Every paragraph is an alert
    - ✅ CORRECT: Reserve alerts for genuinely important information
 
 7. **Not leveraging GitLab references**
+
    - ❌ WRONG: Writing "See issue 123" as plain text
    - ✅ CORRECT: `See #123` (creates automatic link)
 

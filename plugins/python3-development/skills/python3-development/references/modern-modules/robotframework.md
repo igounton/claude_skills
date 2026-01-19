@@ -77,16 +77,19 @@ pip install robotframework robotframework-seleniumlibrary robotframework-request
 **Use Robot Framework when:**
 
 1. **Acceptance testing is the primary goal**
+
    - You need stakeholder-readable test cases
    - Business analysts or QA engineers write tests without coding
    - Tests serve as living documentation
 
 2. **Keyword-driven testing fits your workflow**
+
    - You want to build reusable test components (keywords)
    - Test cases follow similar patterns with different data
    - Abstraction layers improve maintainability
 
 3. **Cross-technology testing is required**
+
    - Testing web applications (via SeleniumLibrary or Browser library)
    - API testing (via RequestsLibrary)
    - Desktop applications (via various libraries)
@@ -94,6 +97,7 @@ pip install robotframework robotframework-seleniumlibrary robotframework-request
    - SSH/remote systems (via SSHLibrary)
 
 4. **Non-programmers need to contribute to tests**
+
    - QA teams without Python expertise
    - Domain experts need to validate test logic
    - Collaboration between technical and business teams
@@ -106,20 +110,24 @@ pip install robotframework robotframework-seleniumlibrary robotframework-request
 **Do NOT use Robot Framework when:**
 
 1. **Unit testing is the primary need**
+
    - Use pytest for Python unit tests
    - Robot Framework is too heavy for granular testing
    - Fast feedback loops are critical (TDD cycles)
 
 2. **Python-centric test suites**
+
    - Team consists entirely of Python developers
    - Complex test logic requires extensive Python code
    - pytest fixtures and parametrization are more natural
 
 3. **Performance testing**
+
    - Use locust, JMeter, or k6 instead
    - Robot Framework adds overhead for load testing
 
 4. **Rapid TDD cycles**
+
    - Robot Framework startup time is slower than pytest
    - Test discovery and execution have overhead
    - pytest is better for red-green-refactor cycles
@@ -615,11 +623,13 @@ robotidy tests/
 ## Example Projects
 
 1. **RobotDemo** - Official demo project
+
    - <https://github.com/robotframework/RobotDemo>
    - Shows keyword-driven, data-driven, and Gherkin styles
    - Calculator library implementation example
 
 2. **WebDemo** - Web testing demo
+
    - Referenced in SeleniumLibrary docs
    - Complete login test example with page objects
 

@@ -443,14 +443,17 @@ The model must provide clear decision guidance based on verified constraints:
 ### Use HTTP/REST Instead When
 
 1. **Request-Response Pattern**: Simple one-off queries without persistent connection
+
    - Example: Weather API calls, database queries
    - Reason: HTTP is simpler for synchronous request-response
 
 2. **Large Payload Transfer**: Transferring files, images, or large datasets
+
    - Example: Uploading videos, downloading reports
    - Reason: HTTP has better tooling for chunked transfer, range requests
 
 3. **Browser-Based Only**: Pure web applications without IoT integration
+
    - Example: Standard web app, SPA without real-time requirements
    - Reason: REST APIs are natively supported by browsers
 
@@ -461,6 +464,7 @@ The model must provide clear decision guidance based on verified constraints:
 ### Use WebSockets Instead When
 
 1. **Full-Duplex, Low-Latency Communication**: Real-time chat, gaming, collaborative editing
+
    - Example: Slack-like messaging, Google Docs collaboration
    - Reason: WebSockets provide bidirectional streams without MQTT protocol overhead
 
@@ -471,10 +475,12 @@ The model must provide clear decision guidance based on verified constraints:
 ### Use Message Queues (RabbitMQ, Kafka) Instead When
 
 1. **Complex Routing Logic**: Advanced routing rules, message transformation
+
    - Example: Enterprise service bus, workflow orchestration
    - Reason: RabbitMQ exchanges provide richer routing than MQTT topics
 
 2. **High-Throughput Log Streaming**: Million+ messages per second, log aggregation
+
    - Example: Centralized logging, event sourcing at scale
    - Reason: Kafka optimized for high-throughput sequential writes
 
@@ -486,15 +492,15 @@ The model must provide clear decision guidance based on verified constraints:
 
 The model must provide this decision matrix based on verified use cases:
 
-| **Use Case** | **MQTT (paho-mqtt)** | **HTTP/REST** | **WebSocket** | **Message Queue** |
-| --- | --- | --- | --- | --- |
-| **IoT Sensor Data** | ✅ Optimal | ❌ Too heavy | ⚠️ Possible | ❌ Overkill |
-| **Home Automation** | ✅ Optimal | ❌ Polling inefficient | ⚠️ Possible | ❌ Too complex |
-| **Mobile Notifications** | ✅ Good (battery efficient) | ⚠️ Polling wastes battery | ✅ Good | ❌ Overkill |
-| **Real-time Chat** | ⚠️ Possible | ❌ No real-time | ✅ Optimal | ⚠️ Possible |
-| **File Transfer** | ❌ Not designed for this | ✅ Better tools | ⚠️ Possible | ❌ Wrong tool |
-| **Microservices RPC** | ⚠️ Possible | ✅ Standard approach | ❌ Overkill | ✅ Enterprise scale |
-| **Telemetry Collection** | ✅ Optimal | ❌ Too chatty | ❌ Overkill | ✅ At massive scale |
+| **Use Case**             | **MQTT (paho-mqtt)**        | **HTTP/REST**             | **WebSocket** | **Message Queue**   |
+| ------------------------ | --------------------------- | ------------------------- | ------------- | ------------------- |
+| **IoT Sensor Data**      | ✅ Optimal                  | ❌ Too heavy              | ⚠️ Possible   | ❌ Overkill         |
+| **Home Automation**      | ✅ Optimal                  | ❌ Polling inefficient    | ⚠️ Possible   | ❌ Too complex      |
+| **Mobile Notifications** | ✅ Good (battery efficient) | ⚠️ Polling wastes battery | ✅ Good       | ❌ Overkill         |
+| **Real-time Chat**       | ⚠️ Possible                 | ❌ No real-time           | ✅ Optimal    | ⚠️ Possible         |
+| **File Transfer**        | ❌ Not designed for this    | ✅ Better tools           | ⚠️ Possible   | ❌ Wrong tool       |
+| **Microservices RPC**    | ⚠️ Possible                 | ✅ Standard approach      | ❌ Overkill   | ✅ Enterprise scale |
+| **Telemetry Collection** | ✅ Optimal                  | ❌ Too chatty             | ❌ Overkill   | ✅ At massive scale |
 
 ### Use MQTT When
 

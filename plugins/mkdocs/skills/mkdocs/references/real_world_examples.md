@@ -7,6 +7,7 @@ A comprehensive collection of active MkDocs implementations, deployment workflow
 ### Major Framework Documentation
 
 1. **FastAPI** - <https://github.com/fastapi/fastapi>
+
    - Modern web API framework documentation
    - Uses Material for MkDocs theme
    - Configuration: `docs/en/mkdocs.yml`
@@ -14,6 +15,7 @@ A comprehensive collection of active MkDocs implementations, deployment workflow
    - Stars: 70k+
 
 2. **Pydantic** - <https://github.com/pydantic/pydantic>
+
    - Data validation library documentation
    - Material for MkDocs with mkdocstrings
    - Configuration: `mkdocs.yml` at root
@@ -21,6 +23,7 @@ A comprehensive collection of active MkDocs implementations, deployment workflow
    - Stars: 20k+
 
 3. **Django REST Framework** - <https://github.com/encode/django-rest-framework>
+
    - Web API toolkit for Django
    - Custom theme with MkDocs
    - Configuration: `mkdocs.yml`
@@ -37,12 +40,14 @@ A comprehensive collection of active MkDocs implementations, deployment workflow
 ### AI/ML Projects
 
 5. **InvokeAI** - <https://github.com/invoke-ai/InvokeAI>
+
    - Stable Diffusion creative engine
    - Material for MkDocs theme
    - Workflow: `.github/workflows/mkdocs-material.yml`
    - Stars: 23k+
 
 6. **XGBoostLSS** - <https://github.com/StatMixedML/XGBoostLSS>
+
    - XGBoost extension for probabilistic modeling
    - Material for MkDocs
    - Workflow: `.github/workflows/mkdocs.yaml`
@@ -57,6 +62,7 @@ A comprehensive collection of active MkDocs implementations, deployment workflow
 ### Developer Tools
 
 8. **Titiler** - <https://github.com/developmentseed/titiler>
+
    - Dynamic map tile services
    - Material for MkDocs
    - Workflow: `.github/workflows/deploy_mkdocs.yml`
@@ -64,6 +70,7 @@ A comprehensive collection of active MkDocs implementations, deployment workflow
    - Stars: 800+
 
 9. **Google Timesketch** - <https://github.com/google/timesketch>
+
    - Collaborative forensic timeline analysis
    - MkDocs Material theme
    - Workflow: `.github/workflows/documentation.yml`
@@ -87,16 +94,19 @@ A comprehensive collection of active MkDocs implementations, deployment workflow
 ### Specialized Documentation
 
 12. **ABCI User Guide** - <https://github.com/aistabci/abci-docs>
+
     - Supercomputing resource documentation
     - MkDocs implementation
     - Stars: 64
 
 13. **Skytable Docs** - <https://github.com/skytable/docs>
+
     - NoSQL database documentation
     - MkDocs with custom theme
     - Stars: 10
 
 14. **Vaping** - <https://github.com/20c/vaping>
+
     - Network monitoring tool docs
     - MkDocs documentation
     - Workflow: `.github/workflows/ci.yml`
@@ -111,19 +121,23 @@ A comprehensive collection of active MkDocs implementations, deployment workflow
 ## Active GitLab Repositories Using MkDocs
 
 1. **GitLab Pages MkDocs Example** - <https://gitlab.com/pages/mkdocs>
+
    - Official GitLab Pages example
    - Live site: <https://pages.gitlab.io/mkdocs>
    - Default template for GitLab MkDocs projects
 
 2. **to-be-continuous MkDocs** - <https://to-be-continuous.gitlab.io/doc/ref/mkdocs/>
+
    - CI/CD pipeline templates for MkDocs
    - Provides reusable GitLab CI configurations
 
 3. **MkDocs Material Examples** - Various GitLab projects
+
    - Many projects use the Material theme
    - Common pattern: Python image + pip install
 
 4. **Corporate Documentation Projects**
+
    - Many internal corporate projects use GitLab + MkDocs
    - Private repositories but similar patterns
 
@@ -504,11 +518,13 @@ Deploy PR previews to separate URLs:
 ### Framework Documentation
 
 1. **FastAPI** - <https://fastapi.tiangolo.com/>
+
    - Multi-language support
    - API documentation integration
    - Interactive examples
 
 2. **Pydantic** - <https://docs.pydantic.dev/>
+
    - Versioned documentation
    - Auto-generated API docs
    - Rich examples
@@ -528,6 +544,7 @@ Deploy PR previews to separate URLs:
 ### Open Source Projects
 
 8. **90 Days of DevOps** - <https://90daysofdevops.com/>
+
    - Educational content
    - Multi-language translations
    - Community contributions

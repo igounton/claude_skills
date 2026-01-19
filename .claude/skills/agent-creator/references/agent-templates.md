@@ -98,19 +98,19 @@ cat .claude/agents/*.md
 
 For **user-facing agents**, look for similar agents in the project's `.claude/agents/` directory:
 
-| User Need | Look For |
-|-----------|----------|
-| "Review code for X" | Agents with `tools: Read, Grep, Glob` and review in description |
-| "Understand the architecture" | Read-only analyzers with `permissionMode: dontAsk` |
-| "Generate documentation" | Agents with `permissionMode: acceptEdits` and doc-related names |
-| "Write tests for" | Agents loading testing-related skills |
-| "Fix this bug" | Agents with full tool access and `model: opus` |
-| "Refactor this code" | Agents with edit permissions |
-| "Research before implementing" | Agents with `permissionMode: plan` or `dontAsk` |
-| "Plan how to build" | Planning agents with read-only access |
-| "Check before I commit" | Validator agents that run commands |
-| "Expert in {language}" | Agents loading language-specific skills |
-| "Expert in {framework}" | Agents loading framework-specific skills |
+| User Need                      | Look For                                                        |
+| ------------------------------ | --------------------------------------------------------------- |
+| "Review code for X"            | Agents with `tools: Read, Grep, Glob` and review in description |
+| "Understand the architecture"  | Read-only analyzers with `permissionMode: dontAsk`              |
+| "Generate documentation"       | Agents with `permissionMode: acceptEdits` and doc-related names |
+| "Write tests for"              | Agents loading testing-related skills                           |
+| "Fix this bug"                 | Agents with full tool access and `model: opus`                  |
+| "Refactor this code"           | Agents with edit permissions                                    |
+| "Research before implementing" | Agents with `permissionMode: plan` or `dontAsk`                 |
+| "Plan how to build"            | Planning agents with read-only access                           |
+| "Check before I commit"        | Validator agents that run commands                              |
+| "Expert in {language}"         | Agents loading language-specific skills                         |
+| "Expert in {framework}"        | Agents loading framework-specific skills                        |
 
 If no similar agent exists, build from scratch using [Agent Schema Reference](./agent-schema.md).
 
@@ -927,7 +927,7 @@ NOTES:
 
 **Use for**: Deep technical expertise in a specific language, framework, or domain
 
-````markdown
+```markdown
 ---
 name: {{domain}}-expert
 description: >
@@ -988,25 +988,25 @@ When reviewing or writing {{domain}} code, systematically check:
 ### {{Pattern_2}}
 
 {{When and how to apply this pattern}}
-````
+```
 
 ---
 
 ## Selecting Role-Based Archetypes
 
-| User Need | Recommended Role Archetype |
-|-----------|---------------------------|
-| "Research X before we decide" | Researcher |
-| "Design the architecture for" | Planner / Architect |
-| "Implement this feature" | Coder |
-| "Create an agent/skill/template" | Creator |
-| "Write tests for" | Tester |
-| "Review this code/PR" | Reviewer |
-| "Set up CI/CD for" | DevOps / SRE |
-| "Audit compliance/drift" | Auditor |
-| "Gather context for task" | Context Gatherer |
-| "Optimize/improve X" | Optimizer |
-| "Expert in {domain}" | Domain Expert |
+| User Need                        | Recommended Role Archetype |
+| -------------------------------- | -------------------------- |
+| "Research X before we decide"    | Researcher                 |
+| "Design the architecture for"    | Planner / Architect        |
+| "Implement this feature"         | Coder                      |
+| "Create an agent/skill/template" | Creator                    |
+| "Write tests for"                | Tester                     |
+| "Review this code/PR"            | Reviewer                   |
+| "Set up CI/CD for"               | DevOps / SRE               |
+| "Audit compliance/drift"         | Auditor                    |
+| "Gather context for task"        | Context Gatherer           |
+| "Optimize/improve X"             | Optimizer                  |
+| "Expert in {domain}"             | Domain Expert              |
 
 All role-based archetypes should include `skills: subagent-contract` to enforce consistent contract behavior.
 
@@ -1107,13 +1107,13 @@ Task(
 
 Use `color` in frontmatter for agents that benefit from visual identification:
 
-| Color | Use Case |
-|-------|----------|
-| `cyan` | Analysis, research |
+| Color    | Use Case               |
+| -------- | ---------------------- |
+| `cyan`   | Analysis, research     |
 | `yellow` | Optimization, warnings |
-| `orange` | Audits, reviews |
-| `green` | Validation, success |
-| `red` | Errors, security |
+| `orange` | Audits, reviews        |
+| `green`  | Validation, success    |
+| `red`    | Errors, security       |
 
 ### Pragmatic Review Guidance
 

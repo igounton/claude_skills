@@ -10,7 +10,7 @@
 # exclude-newer = "2025-10-24T00:00:00Z"  # Time-based reproducibility
 # ///
 
-"""Data Analysis Script Example
+"""Data Analysis Script Example.
 
 This script demonstrates PEP 723 inline script metadata with uv.
 It analyzes CSV data and creates visualizations.
@@ -26,6 +26,8 @@ Usage:
     # With additional dependencies
     uv run --with seaborn data_analysis.py data.csv
 """
+
+from __future__ import annotations
 
 import sys
 from pathlib import Path
@@ -56,7 +58,11 @@ def analyze_data(csv_path: str) -> None:
 
     for col in df.select_dtypes(include=["number"]).columns:
         table.add_row(
-            col, f"{df[col].mean():.2f}", f"{df[col].std():.2f}", f"{df[col].min():.2f}", f"{df[col].max():.2f}"
+            col,
+            f"{df[col].mean():.2f}",
+            f"{df[col].std():.2f}",
+            f"{df[col].min():.2f}",
+            f"{df[col].max():.2f}",
         )
 
     console.print(table)

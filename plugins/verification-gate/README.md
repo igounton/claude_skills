@@ -7,6 +7,7 @@ Makes Claude investigate before acting instead of jumping to solutions.
 Claude sometimes identifies the problem correctly but then applies the wrong fix. This happens when Claude recognizes an error pattern and immediately applies a "standard solution" from its training data without checking if that solution matches your specific project setup.
 
 Examples of what goes wrong without this plugin:
+
 - You get "module not found" error. Claude sees it's a PEP 723 script but runs `uv sync` (which updates pyproject.toml instead of the PEP 723 inline dependencies)
 - Your config isn't working. Claude modifies the config file without checking that your app reads environment variables first
 - Package won't import. Claude runs `pip install` globally when your script uses a virtualenv
@@ -14,6 +15,7 @@ Examples of what goes wrong without this plugin:
 ## What Changes
 
 With this plugin installed, Claude will:
+
 - Read relevant files before trying to fix things
 - Verify its diagnosis before taking action
 - Check that its fix actually targets the system it identified as the problem
@@ -38,6 +40,7 @@ Then install the plugin:
 ## Usage
 
 Just install it - it works automatically. You'll notice the difference when Claude:
+
 - Sees an error and reads files first instead of immediately running commands
 - States what it thinks the problem is and then gathers evidence
 - Explains what system it's targeting before making changes
@@ -45,6 +48,7 @@ Just install it - it works automatically. You'll notice the difference when Clau
 ## Example
 
 **Without this plugin:**
+
 ```
 You: This PEP 723 script can't find the pydantic module
 Claude: I'll install the dependencies
@@ -53,6 +57,7 @@ Result: Doesn't work - uv sync operates on pyproject.toml, not PEP 723
 ```
 
 **With this plugin:**
+
 ```
 You: This PEP 723 script can't find the pydantic module
 Claude: Let me check the script first

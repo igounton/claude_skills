@@ -479,14 +479,14 @@ result = service.process(data)
 
 ## Decision Guidance Matrix
 
-| Use Blinker When | Use Callbacks When | Use AsyncIO When | Use Message Queue When |
-| --- | --- | --- | --- |
-| Multiple independent handlers needed | Single handler sufficient | Async/await throughout codebase | Cross-process communication needed |
-| Plugin system with dynamic handlers | Tightly coupled components | I/O-bound async operations | Message persistence required |
-| Decoupled modules need communication | Callback logic is simple | Event loop already present | Distributed systems |
-| Framework-level hooks (like Flask) | Direct function call works | Concurrent async tasks | Reliability and retry needed |
-| Observable events in OOP design | Inline lambda sufficient | Network I/O heavy | Message ordering matters |
-| Weak reference cleanup needed | Manual lifecycle management OK | WebSockets/long-lived connections | Load balancing across workers |
+| Use Blinker When                     | Use Callbacks When             | Use AsyncIO When                  | Use Message Queue When             |
+| ------------------------------------ | ------------------------------ | --------------------------------- | ---------------------------------- |
+| Multiple independent handlers needed | Single handler sufficient      | Async/await throughout codebase   | Cross-process communication needed |
+| Plugin system with dynamic handlers  | Tightly coupled components     | I/O-bound async operations        | Message persistence required       |
+| Decoupled modules need communication | Callback logic is simple       | Event loop already present        | Distributed systems                |
+| Framework-level hooks (like Flask)   | Direct function call works     | Concurrent async tasks            | Reliability and retry needed       |
+| Observable events in OOP design      | Inline lambda sufficient       | Network I/O heavy                 | Message ordering matters           |
+| Weak reference cleanup needed        | Manual lifecycle management OK | WebSockets/long-lived connections | Load balancing across workers      |
 
 ### Decision Tree
 
@@ -551,6 +551,7 @@ Current version: 1.9.0 Minimum Python: 3.9+
    ```
 
 2. **Expecting signals to modify behavior:**
+
    - Signals are for observation, not control flow
    - Don't rely on signal handlers to prevent actions
    - Use explicit validation/authorization instead
@@ -564,6 +565,7 @@ Current version: 1.9.0 Minimum Python: 3.9+
    ```
 
 4. **Cross-process communication:**
+
    - Blinker is in-process only
    - Use message queues for distributed systems
 

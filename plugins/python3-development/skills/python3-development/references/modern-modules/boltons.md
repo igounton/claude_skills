@@ -344,28 +344,33 @@ Per @github/README.md:
 ### Use Boltons When
 
 1. **Need stdlib-style utilities with no dependencies**
+
    - Building libraries that avoid dependencies
    - Corporate environments with strict dependency policies
    - Want vendorable, copy-pasteable code
 
 2. **Iteration patterns beyond itertools**
+
    - Chunking/batching data
    - Sliding windows
    - Recursive data structure traversal
    - Exponential backoff
 
 3. **Enhanced caching needs**
+
    - Size-limited LRU caches
    - TTL expiration
    - Custom eviction policies
    - Better API than `functools.lru_cache`
 
 4. **Atomic file operations**
+
    - Safe configuration file updates
    - Preventing corrupted writes
    - Concurrent file access
 
 5. **Advanced debugging**
+
    - Structured traceback information
    - Custom error formatting
    - Error analysis tools
@@ -392,29 +397,32 @@ Per @github/README.md:
 
 ## Decision Matrix
 
-| Scenario | Use Boltons | Use Stdlib | Use Alternative |
-| --- | --- | --- | --- |
-| LRU cache with size limits | ✅ `cacheutils.LRU` | ⚠️ `lru_cache` (no size control) | `cachetools` (more features) |
-| Chunked iteration | ✅ `iterutils.chunked` | ❌ Manual slicing | `more-itertools.chunked` |
-| Atomic file writes | ✅ `fileutils.atomic_save` | ❌ Manual temp+rename | `atomicwrites` (archived) |
-| Enhanced tracebacks | ✅ `tbutils.TracebackInfo` | ❌ `traceback` (basic) | `rich.traceback` (prettier) |
-| OrderedMultiDict | ✅ `dictutils.OMD` | ❌ Custom solution | `werkzeug.datastructures` |
-| Exponential backoff | ✅ `iterutils.backoff` | ❌ Manual implementation | `tenacity`, `backoff` |
-| URL parsing | ✅ `urlutils.URL` | ⚠️ `urllib.parse` (basic) | `yarl`, `furl` |
-| Zero dependencies | ✅ Pure Python | ✅ Built-in | ❌ Most alternatives |
+| Scenario                   | Use Boltons                | Use Stdlib                       | Use Alternative              |
+| -------------------------- | -------------------------- | -------------------------------- | ---------------------------- |
+| LRU cache with size limits | ✅ `cacheutils.LRU`        | ⚠️ `lru_cache` (no size control) | `cachetools` (more features) |
+| Chunked iteration          | ✅ `iterutils.chunked`     | ❌ Manual slicing                | `more-itertools.chunked`     |
+| Atomic file writes         | ✅ `fileutils.atomic_save` | ❌ Manual temp+rename            | `atomicwrites` (archived)    |
+| Enhanced tracebacks        | ✅ `tbutils.TracebackInfo` | ❌ `traceback` (basic)           | `rich.traceback` (prettier)  |
+| OrderedMultiDict           | ✅ `dictutils.OMD`         | ❌ Custom solution               | `werkzeug.datastructures`    |
+| Exponential backoff        | ✅ `iterutils.backoff`     | ❌ Manual implementation         | `tenacity`, `backoff`        |
+| URL parsing                | ✅ `urlutils.URL`          | ⚠️ `urllib.parse` (basic)        | `yarl`, `furl`               |
+| Zero dependencies          | ✅ Pure Python             | ✅ Built-in                      | ❌ Most alternatives         |
 
 ## When NOT to Use Boltons
 
 1. **Already using specialized libraries**
+
    - Have `cachetools` for advanced caching
    - Have `tenacity` for retry logic
    - Have `rich` for pretty output
 
 2. **Need high-performance implementations**
+
    - Boltons prioritizes correctness over speed
    - C-extension alternatives may be faster
 
 3. **Want cutting-edge features**
+
    - Boltons is conservative, stdlib-like
    - Specialized libraries may innovate faster
 

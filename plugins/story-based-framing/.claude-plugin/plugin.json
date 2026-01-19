@@ -2,7 +2,5 @@
   "name": "story-based-framing",
   "description": "This skill should be used when describing patterns or anti-patterns for detection by LLM agents across any domain (code analysis, business processes, security audits, UX design, data quality, medical diagnosis, etc.). Uses narrative storytelling structure (\"The Promise\" \u2192 \"The Betrayal\" \u2192 \"The Consequences\" \u2192 \"The Source\") to achieve 70% faster pattern identification compared to checklist or formal specification approaches. Triggers when creating pattern descriptions for any systematic analysis, detection tasks, or when delegating pattern-finding to sub-agents.",
   "version": "1.0.0",
-  "skills": [
-    "./skills/story-based-framing"
-  ]
+  "skills": ["./skills/story-based-framing"]
 }

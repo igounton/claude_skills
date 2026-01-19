@@ -358,6 +358,7 @@ hatch build -t wheel:standard
 ## Best Practices
 
 1. **Clear Naming**: Version names should indicate their purpose
+
    - Good: `standard`, `optimized`, `gpu-accelerated`
    - Bad: `v1`, `v2`, `version-x`
 

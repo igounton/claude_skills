@@ -43,6 +43,7 @@ Then install the plugin:
 Just install it - it works automatically. Claude will detect commitlint configuration in your project and apply those rules.
 
 You'll notice the difference when you:
+
 - Ask Claude to create a commit
 - Request help setting up commitlint
 - Ask Claude to explain a commitlint error

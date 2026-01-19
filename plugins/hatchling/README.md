@@ -5,6 +5,7 @@ Expert guidance for Python packaging with Hatchling, the modern build backend.
 ## Why Install This?
 
 When you're working on Python projects that use Hatchling, Claude often:
+
 - Gives generic packaging advice that doesn't match Hatchling's approach
 - Suggests outdated setuptools patterns instead of modern pyproject.toml configuration
 - Can't help troubleshoot specific Hatchling build errors
@@ -15,6 +16,7 @@ This plugin gives Claude comprehensive knowledge of Hatchling's features, config
 ## What Changes
 
 With this plugin installed, Claude can:
+
 - Write correct pyproject.toml configuration for Hatchling projects
 - Explain and configure build hooks, version management, and file selection patterns
 - Troubleshoot build errors with specific solutions from Hatchling documentation
@@ -39,6 +41,7 @@ Then install the plugin:
 ## Usage
 
 Just install it - Claude will reference this knowledge automatically when you work with Hatchling projects. You'll notice the difference when you:
+
 - Ask "how do I configure dependencies in pyproject.toml?"
 - Request "help me fix this Hatchling build error"
 - Say "migrate this project from setuptools to Hatchling"

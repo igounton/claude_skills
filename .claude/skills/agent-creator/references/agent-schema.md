@@ -26,6 +26,7 @@ name: my-super-awesome-long-agent-name-that-exceeds-the-limit  # Invalid - too l
 - **Purpose**: Claude uses this to decide when to delegate tasks to this agent
 
 **Required Elements:**
+
 1. Action verbs (what it does)
 2. Trigger phrases (when to use)
 3. Domain keywords (topic areas)
@@ -51,12 +52,12 @@ description: Helps with Python
 - **Default**: sonnet (inherited from parent)
 - **Options**: `sonnet`, `opus`, `haiku`, `inherit`
 
-| Value | Use Case |
-|-------|----------|
-| `haiku` | Fast, simple operations (search, read) |
-| `sonnet` | Balanced - most agents (default) |
-| `opus` | Complex reasoning, difficult debugging |
-| `inherit` | Match parent conversation model |
+| Value     | Use Case                               |
+| --------- | -------------------------------------- |
+| `haiku`   | Fast, simple operations (search, read) |
+| `sonnet`  | Balanced - most agents (default)       |
+| `opus`    | Complex reasoning, difficult debugging |
+| `inherit` | Match parent conversation model        |
 
 ```yaml
 model: sonnet
@@ -69,11 +70,13 @@ The `inherit` option makes the agent use the same model as the parent conversati
 **Use `model: inherit` when:**
 
 1. **Context-appropriate capability** - Agent should match user's model choice
+
    - User chose Opus for complex work → agent gets Opus
    - User chose Haiku for speed → agent gets Haiku
    - Agent adapts to conversation context
 
 2. **User-controlled cost/capability trade-off** - Let user decide model via conversation settings
+
    - User sets model at conversation level
    - Agent respects that choice automatically
    - No need to change agent configuration
@@ -86,11 +89,13 @@ The `inherit` option makes the agent use the same model as the parent conversati
 **Use explicit model (`sonnet`, `opus`, `haiku`) when:**
 
 1. **Task requires specific capability** - Agent needs minimum model capability
+
    - Complex debugging always needs `opus`
    - Simple file search always works with `haiku`
    - Task complexity is known and fixed
 
 2. **Cost control** - Prevent unexpected high costs
+
    - Read-only analyzer should stay `haiku` even if parent uses Opus
    - Prevents accidental expensive operations
 
@@ -170,13 +175,13 @@ disallowedTools: Write, Edit, Bash
 - **Default**: `default`
 - **Options**:
 
-| Mode | File Edits | Bash Commands | Description |
-|------|------------|---------------|-------------|
-| `default` | Prompts user | Prompts user | Normal permission behavior |
-| `acceptEdits` | Auto-accepts | Prompts destructive | Good for documentation |
-| `dontAsk` | Auto-denies | Auto-denies | Read-only operation |
-| `bypassPermissions` | Skips all | Skips all | Dangerous - trusted only |
-| `plan` | Disabled | Disabled | Planning mode, no writes |
+| Mode                | File Edits   | Bash Commands       | Description                |
+| ------------------- | ------------ | ------------------- | -------------------------- |
+| `default`           | Prompts user | Prompts user        | Normal permission behavior |
+| `acceptEdits`       | Auto-accepts | Prompts destructive | Good for documentation     |
+| `dontAsk`           | Auto-denies  | Auto-denies         | Read-only operation        |
+| `bypassPermissions` | Skips all    | Skips all           | Dangerous - trusted only   |
+| `plan`              | Disabled     | Disabled            | Planning mode, no writes   |
 
 ```yaml
 permissionMode: acceptEdits
@@ -226,6 +231,7 @@ hooks:
 ```
 
 **Hook Events:**
+
 - `PreToolUse` - Before tool executes (can block with exit 2)
 - `PostToolUse` - After tool succeeds
 - `PermissionRequest` - When permission needed
@@ -279,28 +285,34 @@ color: red
 Before saving an agent, verify:
 
 1. **name**
+
    - [ ] Lowercase only
    - [ ] Only letters, numbers, hyphens
    - [ ] Max 64 characters
    - [ ] Unique in project
 
 2. **description**
+
    - [ ] Max 1024 characters
    - [ ] Contains action verbs
    - [ ] Contains trigger phrases
    - [ ] Contains relevant keywords
 
 3. **model** (if specified)
+
    - [ ] Valid option: sonnet, opus, haiku, inherit
 
 4. **tools** (if specified)
+
    - [ ] All tools are valid tool names
    - [ ] Pattern syntax correct for Bash restrictions
 
 5. **skills** (if specified)
+
    - [ ] All skills exist in project
 
 6. **permissionMode** (if specified)
+
    - [ ] Valid option with justification if bypassPermissions
 
 7. **YAML syntax**

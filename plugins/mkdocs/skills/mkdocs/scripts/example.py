@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Example helper script for mkdocs
+"""Example helper script for mkdocs.
 
 This is a placeholder script that can be executed directly.
 Replace with actual implementation or delete if not needed.
@@ -9,8 +9,10 @@ Example real scripts from other skills:
 - pdf/scripts/convert_pdf_to_images.py - Converts PDF pages to images
 """
 
+from __future__ import annotations
 
-def main():
+
+def main() -> None:
     """Execute the main script logic.
 
     This is a placeholder implementation that should be replaced

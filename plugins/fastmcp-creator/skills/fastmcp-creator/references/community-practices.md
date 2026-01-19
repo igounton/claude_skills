@@ -700,23 +700,27 @@ MCP is rapidly evolving. Stay updated:
 MANDATORY_PRACTICES:
 
 1. INTEGRATION:
+
    - The model must package servers as .mcpb for Claude Desktop
    - The model must provide manifest.json with user_config fields
    - The model must support environment variable configuration
 
 2. SECURITY:
+
    - The model must validate file paths against allowed directories
    - The model must use confirmation flags for destructive operations
    - The model must set destructiveHint annotation for state-changing tools
    - The model must rate limit expensive operations
 
 3. PERFORMANCE:
+
    - The model must cache repeated queries using lru_cache or similar
    - The model must use async for I/O-bound operations
    - The model must stream large responses in HTTP mode
    - The model must add performance annotations for orchestration
 
 4. OBSERVABILITY:
+
    - The model must test servers using fastmcp cli or mcp-cli
    - The model must emit tools/list_changed for dynamic tool updates
    - The model must use Context.info() for progress logging

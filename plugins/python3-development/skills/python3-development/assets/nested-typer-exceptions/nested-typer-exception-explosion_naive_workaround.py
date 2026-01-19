@@ -71,7 +71,9 @@ def parse_json_string(content: str, source: str) -> dict:
     try:
         return json.loads(content)
     except json.JSONDecodeError as e:
-        raise ConfigError(f"Invalid JSON in {source} at line {e.lineno}, column {e.colno}: {e.msg}") from e
+        raise ConfigError(
+            f"Invalid JSON in {source} at line {e.lineno}, column {e.colno}: {e.msg}"
+        ) from e
     except Exception as e:
         # NAIVE WORKAROUND: Check isinstance to avoid double-wrapping
         if isinstance(e, ConfigError):
@@ -88,8 +90,7 @@ def load_json_file(file_path: Path) -> dict:
     """
     try:
         contents = read_file_contents(file_path)
-        data = parse_json_string(contents, str(file_path))
-        return data
+        return parse_json_string(contents, str(file_path))
     except ConfigError as e:
         # ANTI-PATTERN: Wrap the already-wrapped exception AGAIN
         raise ConfigError(f"Failed to load JSON from {file_path}: {e}") from e
@@ -131,8 +132,7 @@ def load_config(file_path: Path) -> dict:
     """
     try:
         data = load_json_file(file_path)
-        validated = validate_config_structure(data, str(file_path))
-        return validated
+        return validate_config_structure(data, str(file_path))
     except ConfigError as e:
         # ANTI-PATTERN: Wrap the already-quadruple-wrapped exception
         raise ConfigError(f"Configuration loading failed: {e}") from e
@@ -166,7 +166,9 @@ def process_config(file_path: Path) -> None:
 # LAYER 7: CLI entry point
 @app.command()
 def main(
-    config_file: Annotated[Path, typer.Argument(help="Path to JSON configuration file")] = Path("broken.json"),
+    config_file: Annotated[
+        Path, typer.Argument(help="Path to JSON configuration file")
+    ] = Path("broken.json"),
 ) -> None:
     """Load and process a JSON configuration file.
 
@@ -189,7 +191,7 @@ def main(
 def create_test_file() -> None:
     """Create a broken JSON file for testing the exception explosion."""
     broken_file = Path("broken.json")
-    broken_file.write_text("i'm broken")
+    broken_file.write_text("i'm broken", encoding="utf-8")
     typer.echo(f"Created {broken_file} with invalid JSON content")
 
 
@@ -197,11 +199,13 @@ if __name__ == "__main__":
     # Auto-create broken.json if it doesn't exist and is being used
     if len(sys.argv) > 1:
         arg = sys.argv[-1]
-        if arg == "broken.json" or (not arg.startswith("-") and Path(arg).name == "broken.json"):
+        if arg == "broken.json" or (
+            not arg.startswith("-") and Path(arg).name == "broken.json"
+        ):
             broken_file = Path("broken.json")
             if not broken_file.exists():
                 typer.echo("Creating broken.json for demonstration...")
-                broken_file.write_text("i'm broken")
+                broken_file.write_text("i'm broken", encoding="utf-8")
                 typer.echo()
 
     app()

@@ -27,11 +27,13 @@ Use this skill when:
 PyPI's README renderer supports three formats with specific constraints:
 
 1. **Plain Text** (`text/plain`)
+
    - Use for minimal documentation
    - No formatting capabilities
    - Renders exactly as written
 
 2. **reStructuredText** (`text/x-rst`)
+
    - Rich formatting with directives and roles
    - **Critical limitation**: Sphinx extensions NOT allowed on PyPI
    - No `:py:func:`, `:ref:`, `:doc:`, or other Sphinx-specific roles
@@ -445,13 +447,13 @@ Checking dist/package_name-1.0.0.tar.gz: Passed
 
 **Common validation errors**
 
-| Error | Cause | Solution |
-| --- | --- | --- |
-| `Unknown interpreted text role "py:func"` | Sphinx role in RST | Remove Sphinx-specific roles, use plain text |
-| `Unexpected indentation` | RST indentation error | Fix indentation, ensure blank lines before/after directives |
-| `Unknown directive type "automodule"` | Sphinx directive in RST | Remove Sphinx directives, use standard docutils only |
-| `Invalid markup` | Malformed RST | Run `rst2html.py README.rst /dev/null` to test |
-| Content not showing | Wrong content-type | Verify `readme` setting in pyproject.toml matches file format |
+| Error                                     | Cause                   | Solution                                                      |
+| ----------------------------------------- | ----------------------- | ------------------------------------------------------------- |
+| `Unknown interpreted text role "py:func"` | Sphinx role in RST      | Remove Sphinx-specific roles, use plain text                  |
+| `Unexpected indentation`                  | RST indentation error   | Fix indentation, ensure blank lines before/after directives   |
+| `Unknown directive type "automodule"`     | Sphinx directive in RST | Remove Sphinx directives, use standard docutils only          |
+| `Invalid markup`                          | Malformed RST           | Run `rst2html.py README.rst /dev/null` to test                |
+| Content not showing                       | Wrong content-type      | Verify `readme` setting in pyproject.toml matches file format |
 
 **Publish to PyPI**
 

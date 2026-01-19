@@ -363,14 +363,17 @@ The model must explain the precedence rules:
 The model must cite verified GitHub repositories using python-dotenv:
 
 1. **theskumar/python-dotenv** (8,443 stars)
+
    - Source repository with comprehensive examples
    - @github:theskumar/python-dotenv
 
 2. **daveebbelaar/langchain-experiments** (1,104 stars)
+
    - LangChain AI applications with environment configuration
    - @github:daveebbelaar/langchain-experiments
 
 3. **iam-veeramalla/python-for-devops** (3,994 stars)
+
    - DevOps automation scripts using dotenv
    - @github:iam-veeramalla/python-for-devops
 
@@ -413,31 +416,37 @@ The model must state limitations and alternative approaches:
 ### Do NOT use python-dotenv when
 
 1. **Production Secrets Management**:
+
    - Problem: .env files are plaintext and not encrypted
    - Alternative: Use HashiCorp Vault, AWS Secrets Manager, Azure Key Vault, GCP Secret Manager
    - Reason: Production secrets require encryption, rotation, audit logging, and access control
 
 2. **Native Environment Variables Sufficient**:
+
    - Problem: Adds unnecessary dependency for simple cases
    - Alternative: Use `os.environ` directly
    - Reason: If environment already provides all variables, loading from file is redundant
 
 3. **Compiled Applications**:
+
    - Problem: .env files must be distributed with application
    - Alternative: Bake configuration into build or use external configuration service
    - Reason: Compiled/packaged applications should not rely on external files
 
 4. **Read-Only Filesystems**:
+
    - Problem: Cannot read .env file from disk
    - Alternative: Use environment variables directly
    - Reason: Some container runtimes and serverless platforms use read-only filesystems
 
 5. **Complex Configuration Schemas**:
+
    - Problem: .env files only support string key-value pairs
    - Alternative: Use YAML, TOML, JSON with schema validation
    - Reason: Complex nested configuration requires structured formats
 
 6. **Dynamic Configuration**:
+
    - Problem: .env files are loaded once at startup
    - Alternative: Use configuration management service (Consul, etcd)
    - Reason: Applications requiring runtime configuration updates need dynamic sources
@@ -531,14 +540,14 @@ Supported escape sequences:
 
 The model must list core functions from verified documentation:
 
-| Function | Purpose | Returns | Common Use |
-| --- | --- | --- | --- |
-| `load_dotenv(dotenv_path=None, stream=None, verbose=False, override=False, interpolate=True, encoding=None)` | Load .env into os.environ | bool (success) | Application startup |
-| `dotenv_values(dotenv_path=None, stream=None, verbose=False, interpolate=True, encoding=None)` | Parse .env to dict | dict | Config merging |
-| `find_dotenv(filename='.env', raise_error_if_not_found=False, usecwd=False)` | Search for .env file | str (path) | Auto-discovery |
-| `get_key(dotenv_path, key_to_get, encoding=None)` | Get single value | str or None | Read specific key |
-| `set_key(dotenv_path, key_to_set, value_to_set, quote_mode='always', export=False, encoding=None)` | Write key-value | tuple | Programmatic updates |
-| `unset_key(dotenv_path, key_to_unset, encoding=None)` | Remove key | tuple | Cleanup |
+| Function                                                                                                     | Purpose                   | Returns        | Common Use           |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------- | -------------- | -------------------- |
+| `load_dotenv(dotenv_path=None, stream=None, verbose=False, override=False, interpolate=True, encoding=None)` | Load .env into os.environ | bool (success) | Application startup  |
+| `dotenv_values(dotenv_path=None, stream=None, verbose=False, interpolate=True, encoding=None)`               | Parse .env to dict        | dict           | Config merging       |
+| `find_dotenv(filename='.env', raise_error_if_not_found=False, usecwd=False)`                                 | Search for .env file      | str (path)     | Auto-discovery       |
+| `get_key(dotenv_path, key_to_get, encoding=None)`                                                            | Get single value          | str or None    | Read specific key    |
+| `set_key(dotenv_path, key_to_set, value_to_set, quote_mode='always', export=False, encoding=None)`           | Write key-value           | tuple          | Programmatic updates |
+| `unset_key(dotenv_path, key_to_unset, encoding=None)`                                                        | Remove key                | tuple          | Cleanup              |
 
 ## Related Libraries
 

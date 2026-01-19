@@ -110,16 +110,19 @@ Without diskcache, you would need to:
 ### Example Projects Using diskcache
 
 1. **morss** (722+ stars) @ github.com/pictuga/morss
+
    - Full-text RSS feed generator
    - Pattern: Caching HTTP responses and parsed feed data
    - URL: <https://github.com/pictuga/morss>
 
 2. **git-pandas** (192+ stars) @ github.com/wdm0006/git-pandas
+
    - Git repository analysis with pandas dataframes
    - Pattern: Caching expensive git repository queries
    - URL: <https://github.com/wdm0006/git-pandas>
 
 3. **High-Traffic Website Caching** @ grantjenks.com/docs/diskcache
+
    - Testimonial: "Reduced Elasticsearch queries by over 25% for 1M+ users/day (100+ hits/second)" - Daren Hasenkamp
    - Pattern: Database query result caching in production web applications
 
@@ -610,31 +613,37 @@ filebased DjangoCache:
 ### Scenarios Where diskcache May Not Be Suitable
 
 1. **Distributed Systems** @ grantjenks.com/docs/diskcache
+
    - diskcache is single-machine only
    - Use Redis, Memcached, or distributed caches for multi-server architectures
    - Cannot share cache across network nodes
 
 2. **Extremely Low Latency Required** @ grantjenks.com/docs/diskcache/cache-benchmarks.html
+
    - In-memory caches (lru_cache, dict) are faster for frequently accessed data
    - diskcache adds disk I/O overhead (~20µs vs ~0.1µs)
    - Consider in-memory + diskcache two-tier strategy
 
 3. **Small Cache (< 100MB)** @ github.com/grantjenks/python-diskcache
+
    - functools.lru_cache more appropriate for small in-memory caches
    - Overhead of SQLite not justified for tiny caches
    - Use lru_cache for simplicity
 
 4. **Read-Only Access Patterns** @ grantjenks.com/docs/diskcache
+
    - If cache is never updated after initialization
    - Simple dict or frozen data structures may be simpler
    - No eviction or expiration needed
 
 5. **Cache Needs to Survive Disk Failures** @ grantjenks.com/docs/diskcache
+
    - diskcache stores on local disk
    - Disk failure = cache loss
    - Redis with persistence and replication for critical caches
 
 6. **Need Atomic Multi-Key Operations** @ grantjenks.com/docs/diskcache
+
    - diskcache operations are single-key atomic
    - No native support for transactions across multiple keys
    - Redis supports MULTI/EXEC for atomic multi-key operations

@@ -261,10 +261,10 @@ example_package-1.0.0.tar.gz (TAR archive, gzip compressed)
 
 ## Distribution Selection
 
-| Format | Use Case | Advantages | Disadvantages |
-| --- | --- | --- | --- |
-| Wheel | Most packages | Fast install, no compilation needed, consistent | Requires building for each platform/Python |
-| Sdist | Source availability | Single file for all platforms, enables local builds | Requires build tools installed, slower |
+| Format | Use Case            | Advantages                                          | Disadvantages                              |
+| ------ | ------------------- | --------------------------------------------------- | ------------------------------------------ |
+| Wheel  | Most packages       | Fast install, no compilation needed, consistent     | Requires building for each platform/Python |
+| Sdist  | Source availability | Single file for all platforms, enables local builds | Requires build tools installed, slower     |
 
 ## Best Practices
 

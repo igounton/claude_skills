@@ -5,6 +5,7 @@ Helps Claude write better asynchronous Python code using modern asyncio patterns
 ## Why Install This?
 
 When you ask Claude to write async Python code, you might get:
+
 - Outdated patterns or incorrect async/await usage
 - Missing error handling and timeouts
 - Inefficient sequential code instead of concurrent operations
@@ -15,6 +16,7 @@ This plugin teaches Claude modern asyncio best practices and proven patterns.
 ## What Changes
 
 With this plugin installed, Claude will:
+
 - Use proper async/await syntax and patterns
 - Implement concurrent operations with `asyncio.gather()` and task management
 - Add appropriate error handling, timeouts, and cancellation support

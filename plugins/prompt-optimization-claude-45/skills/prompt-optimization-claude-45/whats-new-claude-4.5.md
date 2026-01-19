@@ -498,11 +498,11 @@ For implementation details and migration guidance:
 
 Claude 4.5 models are available on:
 
-| Model | Claude API | Amazon Bedrock | Google Cloud Vertex AI |
-| --- | --- | --- | --- |
-| Claude Opus 4.5 | `claude-opus-4-5-20251101` | `anthropic.claude-opus-4-5-20251101-v1:0` | `claude-opus-4-5@20251101` |
+| Model             | Claude API                   | Amazon Bedrock                              | Google Cloud Vertex AI       |
+| ----------------- | ---------------------------- | ------------------------------------------- | ---------------------------- |
+| Claude Opus 4.5   | `claude-opus-4-5-20251101`   | `anthropic.claude-opus-4-5-20251101-v1:0`   | `claude-opus-4-5@20251101`   |
 | Claude Sonnet 4.5 | `claude-sonnet-4-5-20250929` | `anthropic.claude-sonnet-4-5-20250929-v1:0` | `claude-sonnet-4-5@20250929` |
-| Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | `anthropic.claude-haiku-4-5-20251001-v1:0` | `claude-haiku-4-5@20251001` |
+| Claude Haiku 4.5  | `claude-haiku-4-5-20251001`  | `anthropic.claude-haiku-4-5-20251001-v1:0`  | `claude-haiku-4-5@20251001`  |
 
 Also available through Claude.ai and Claude Code platforms.
 

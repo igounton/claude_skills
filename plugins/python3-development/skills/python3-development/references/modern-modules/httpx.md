@@ -102,21 +102,25 @@ Without httpx, you would need to:
 ### Example Projects Using httpx
 
 1. **notion-sdk-py** (2,086+ stars) @ github.com/ramnes/notion-sdk-py
+
    - Official Notion API client with sync and async support
    - Pattern: Client wrapper using httpx.Client and httpx.AsyncClient
    - URL: <https://github.com/ramnes/notion-sdk-py>
 
 2. **githubkit** (296+ stars) @ github.com/yanyongyu/githubkit
+
    - Modern GitHub SDK with REST API and GraphQL support
    - Pattern: Unified sync/async interface with httpx
    - URL: <https://github.com/yanyongyu/githubkit>
 
 3. **twscrape** (1,981+ stars) @ github.com/vladkens/twscrape
+
    - Twitter/X API scraper with authorization support
    - Pattern: Async httpx for high-performance concurrent requests
    - URL: <https://github.com/vladkens/twscrape>
 
 4. **TikTokDownloader** (12,018+ stars) @ github.com/JoeanAmier/TikTokDownloader
+
    - TikTok/Douyin data collection and download tool
    - Pattern: Async httpx for parallel downloads
    - URL: <https://github.com/JoeanAmier/TikTokDownloader>
@@ -444,24 +448,29 @@ response = httpx.get("https://api.example.com", headers=headers)
 ### Scenarios Where httpx May Not Be Suitable
 
 1. **Python 3.8 or Earlier Required** @ github.com/encode/httpx/pyproject.toml
+
    - httpx requires Python 3.9+
    - Use `requests` for older Python versions
 
 2. **Simple Scripts with Minimal Dependencies** @ python-httpx.org/compatibility
+
    - If you only need basic HTTP GET/POST in a simple script
    - `requests` has fewer dependencies and simpler API
    - httpx pulls in additional dependencies (httpcore, anyio, sniffio)
 
 3. **requests Plugin Ecosystem Required** @ python-httpx.org/compatibility
+
    - Libraries specifically built for requests (requests-oauthlib, etc.)
    - May not have httpx equivalents
    - Consider staying with requests if heavily invested in plugins
 
 4. **Need WebSocket Built-in** @ github.com/frankie567/httpx-ws
+
    - httpx requires separate httpx-ws extension
    - aiohttp has built-in WebSocket support
 
 5. **Auto-Redirect Preference** @ python-httpx.org/quickstart
+
    - httpx does NOT follow redirects by default (security-conscious design)
    - Requires explicit `follow_redirects=True`
    - requests follows redirects automatically
