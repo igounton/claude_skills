@@ -572,6 +572,320 @@ model: haiku  # Fast for simple operations
 
 ---
 
+## Common Mistakes
+
+<common_mistakes>
+
+Beyond configuration anti-patterns, users often make these mistakes when creating agents:
+
+### Mistake 1: Testing in Production
+
+**Problem**: Creating agent and immediately using it for real work without testing
+
+**Consequence**: Agent behaves unexpectedly, wrong tool access, poor output quality
+
+**Solution**: Always test with simple example prompts first (see "Testing Your Agent" section)
+
+### Mistake 2: Over-Specifying vs Under-Specifying
+
+**Problem**: Either writing 50-line descriptions with every possible detail, or 1-sentence vague descriptions
+
+**Consequence**:
+- Over-specified: Claude ignores most details, wasted tokens
+- Under-specified: Agent never gets invoked or does wrong thing
+
+**Solution**: Focus on:
+- 2-3 action verbs for what it does
+- 2-3 trigger phrases for when to use it
+- 3-5 domain keywords
+- Keep under 200 words
+
+### Mistake 3: Forgetting Skills Are Not Inherited
+
+**Problem**: Assuming agent inherits skills from parent conversation
+
+**Consequence**: Agent lacks domain knowledge, produces poor results, misses patterns
+
+**Solution**: Explicitly list all needed skills in frontmatter:
+
+```yaml
+# Wrong - assumes parent skills available
+name: python-expert
+description: Expert Python developer
+
+# Right - explicitly loads skills
+name: python-expert
+description: Expert Python developer
+skills: python-development, testing-patterns
+```
+
+### Mistake 4: Wrong Permission Mode for Task
+
+**Problem**: Using `default` when `acceptEdits` would work, or `bypassPermissions` unnecessarily
+
+**Consequence**:
+- Too restrictive: Constant user prompts, slow workflow
+- Too permissive: Accidental destructive operations
+
+**Solution**: Match permission mode to agent's actual operations:
+
+| Agent Type | Permission Mode | Reason |
+|------------|----------------|--------|
+| Read-only analyzer | `dontAsk` or `plan` | Never modifies files |
+| Doc generator | `acceptEdits` | Edits expected, safe |
+| Code implementer | `acceptEdits` | Edits expected |
+| Reviewer | `dontAsk` | Only reads code |
+| Debugger | `default` | May need user approval for changes |
+
+### Mistake 5: Not Testing Tool Restrictions
+
+**Problem**: Restricting tools but not verifying agent can still complete its task
+
+**Consequence**: Agent fails silently or produces "I cannot do that" errors
+
+**Solution**:
+1. List what the agent MUST do
+2. Identify minimum tools needed
+3. Test with those tools only
+4. Add tools back if needed
+
+```yaml
+# Example: Agent that reviews code
+# Needs: Read files, search patterns, find files
+# Does NOT need: Write, Edit, Bash
+
+tools: Read, Grep, Glob
+permissionMode: dontAsk
+```
+
+### Mistake 6: Creating One Giant Agent
+
+**Problem**: Single agent that "does everything" for a domain
+
+**Consequence**:
+- Poor delegation decisions (Claude doesn't know when to use it)
+- Conflicting requirements (read-only vs write)
+- Hard to maintain
+
+**Solution**: Create focused agents with single responsibilities:
+
+```yaml
+# Wrong - one agent for everything
+name: python-helper
+description: Helps with Python code, testing, documentation, and debugging
+
+# Right - separate focused agents
+name: python-code-reviewer
+description: Reviews Python code for quality issues
+
+name: python-test-writer
+description: Writes pytest tests for Python functions
+
+name: python-doc-generator
+description: Generates docstrings and README files
+```
+
+### Mistake 7: Copy-Pasting Without Adaptation
+
+**Problem**: Copying example agent or template without customizing for specific needs
+
+**Consequence**: Agent has wrong tools, wrong model, irrelevant instructions, poor performance
+
+**Solution**: When using templates:
+1. Read the entire template first
+2. Identify sections that need customization
+3. Update frontmatter to match your needs
+4. Adapt workflow to your specific use case
+5. Remove example placeholders and instructions
+6. Test the adapted agent
+
+### Mistake 8: Ignoring Output Format
+
+**Problem**: Not specifying expected output structure for agents that produce reports
+
+**Consequence**: Inconsistent outputs, hard to parse results, user confusion
+
+**Solution**: Include explicit output format in agent body:
+
+```markdown
+## Output Format
+
+Produce results in this structure:
+
+\`\`\`markdown
+# Review Summary
+
+## Critical Issues
+- {issue with file:line reference}
+
+## Recommendations
+- {actionable improvement}
+
+## Positive Findings
+- {what was done well}
+\`\`\`
+```
+
+### Mistake 9: Not Documenting Custom Conventions
+
+**Problem**: Creating agents that follow project-specific patterns without documenting them
+
+**Consequence**: Future users or Claude don't understand agent's behavior
+
+**Solution**: Add a "Conventions" or "Project Context" section:
+
+```markdown
+## Project Conventions
+
+This codebase uses:
+- `poe` task runner (not npm scripts)
+- `basedpyright` (not mypy)
+- Test files end with `_test.py` (not `test_*.py`)
+```
+
+### Mistake 10: Skipping Validation Checklist
+
+**Problem**: Saving agent immediately after writing without validation
+
+**Consequence**: Invalid YAML, missing fields, broken references
+
+**Solution**: Always use the validation checklist in Phase 6 of workflow before saving
+
+</common_mistakes>
+
+---
+
+## Testing Your Agent
+
+<testing>
+
+After creating an agent, test it before production use.
+
+### Testing Checklist
+
+- [ ] Agent file saved to `.claude/agents/{name}.md`
+- [ ] YAML frontmatter parses correctly (no syntax errors)
+- [ ] Name follows constraints (lowercase, hyphens, max 64 chars)
+- [ ] Description includes trigger keywords
+- [ ] All referenced skills exist
+
+### Testing Methods
+
+#### Method 1: Direct Invocation Test
+
+Create a simple test prompt that should trigger your agent:
+
+```text
+# For a code review agent
+"Please review the authentication code in src/auth.py for security issues"
+
+# For a documentation agent
+"Generate API documentation for the User model"
+
+# For a test writer agent
+"Write pytest tests for the calculate_total function"
+```
+
+**What to observe:**
+- Does Claude invoke your agent automatically?
+- If not, the description may need better trigger keywords
+- Does the agent have the tools it needs?
+- Does it produce the expected output format?
+
+#### Method 2: Explicit Agent Test
+
+Force invocation using the Task tool:
+
+```text
+Test my new agent explicitly:
+
+Task(
+  agent="my-agent-name",
+  prompt="Test task: Review this simple Python function for issues: def add(a, b): return a + b"
+)
+```
+
+**What to observe:**
+- Agent loads successfully (no missing skills error)
+- Agent has required tool access
+- Agent follows its workflow
+- Output matches specified format
+
+#### Method 3: Tool Restriction Test
+
+Verify tool restrictions work as intended:
+
+```yaml
+# Agent configured with restricted tools
+tools: Read, Grep, Glob
+permissionMode: dontAsk
+```
+
+Test prompts:
+- "Read and analyze file.py" → Should work
+- "Fix the bug in file.py" → Should fail or report inability
+
+**What to observe:**
+- Agent correctly blocked from disallowed tools
+- Error messages are clear
+- Agent doesn't try to work around restrictions
+
+#### Method 4: Edge Case Testing
+
+Test boundary conditions:
+
+**For read-only agents:**
+- Prompt that asks for code changes → Should decline or report limitation
+- Prompt that asks for analysis → Should work
+
+**For write agents:**
+- Prompt with missing information → Should ask for clarification or block
+- Prompt with clear requirements → Should proceed
+
+**For research agents:**
+- Large codebase exploration → Should handle without context overflow
+- Specific file search → Should be fast and focused
+
+### Common Test Failures
+
+| Symptom | Likely Cause | Fix |
+|---------|--------------|-----|
+| Agent never invokes | Description lacks trigger keywords | Add keywords to description |
+| "Skill not found" error | Typo in skill name or skill doesn't exist | Check skill names, verify paths |
+| "Tool not available" error | Tool restrictions too restrictive | Add needed tools to `tools` field |
+| Agent does wrong task | Description too broad | Make description more specific |
+| Constant permission prompts | Wrong permission mode | Use `acceptEdits` or `dontAsk` |
+| Agent produces wrong format | Missing output format specification | Add explicit format in agent body |
+
+### Iterative Testing Process
+
+1. **Create initial agent** using workflow
+2. **Test with simple prompt** - does it invoke?
+3. **Review agent output** - does it match expectations?
+4. **Identify issues** - wrong tools, wrong format, unclear instructions?
+5. **Edit agent file** - fix identified issues
+6. **Test again** - verify fixes work
+7. **Test edge cases** - boundary conditions and failures
+8. **Document learnings** - add notes to agent if needed
+
+### Testing Tips
+
+**Start simple**: Test with trivial examples before complex real-world tasks
+
+**Test tool access**: Explicitly verify the agent can (and cannot) use tools as intended
+
+**Test skills loading**: If agent uses skills, verify skill content is available in agent's context
+
+**Test descriptions**: Try variations of trigger phrases to ensure agent activates appropriately
+
+**Test with different models**: If using `inherit`, test with different parent models to verify behavior
+
+**Read the output**: Actually read what the agent produces, don't just check for absence of errors
+
+</testing>
+
+---
+
 ## Interaction Protocol
 
 <interaction>

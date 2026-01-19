@@ -62,6 +62,76 @@ description: Helps with Python
 model: sonnet
 ```
 
+#### When to Use `model: inherit`
+
+The `inherit` option makes the agent use the same model as the parent conversation rather than a fixed model.
+
+**Use `model: inherit` when:**
+
+1. **Context-appropriate capability** - Agent should match user's model choice
+   - User chose Opus for complex work → agent gets Opus
+   - User chose Haiku for speed → agent gets Haiku
+   - Agent adapts to conversation context
+
+2. **User-controlled cost/capability trade-off** - Let user decide model via conversation settings
+   - User sets model at conversation level
+   - Agent respects that choice automatically
+   - No need to change agent configuration
+
+3. **Flexible workflows** - Agent is used in multiple contexts with different needs
+   - Research phase (might use Haiku for speed)
+   - Implementation phase (might use Opus for complexity)
+   - Same agent, different requirements per context
+
+**Use explicit model (`sonnet`, `opus`, `haiku`) when:**
+
+1. **Task requires specific capability** - Agent needs minimum model capability
+   - Complex debugging always needs `opus`
+   - Simple file search always works with `haiku`
+   - Task complexity is known and fixed
+
+2. **Cost control** - Prevent unexpected high costs
+   - Read-only analyzer should stay `haiku` even if parent uses Opus
+   - Prevents accidental expensive operations
+
+3. **Consistent behavior** - Agent must perform the same way every time
+   - Production agents with SLAs
+   - Agents where capability variance is unacceptable
+
+**Decision Tree:**
+
+```
+Does the task REQUIRE a specific model capability?
+├─ Yes → Use explicit model (opus/sonnet/haiku)
+└─ No → Should the agent adapt to user's choice?
+   ├─ Yes → Use `inherit`
+   └─ No → Use `sonnet` (safe default)
+```
+
+**Examples:**
+
+```yaml
+# Inherit - adapts to conversation context
+name: general-helper
+model: inherit
+description: Helps with various tasks matching conversation complexity
+
+# Explicit Haiku - always fast and cheap
+name: file-searcher
+model: haiku
+description: Search files for patterns (simple task)
+
+# Explicit Opus - always maximum capability
+name: architecture-reviewer
+model: opus
+description: Review system architecture for flaws (complex task)
+
+# Explicit Sonnet - balanced default
+name: code-writer
+model: sonnet
+description: Write production code (moderate complexity)
+```
+
 ### tools
 
 - **Type**: string or array

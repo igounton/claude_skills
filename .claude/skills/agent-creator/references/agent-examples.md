@@ -421,6 +421,113 @@ Paths:
 
 ---
 
+## Example 9: Formatter Agent (With Hooks)
+
+**Use for**: Automated code formatting and linting with pre/post-tool hooks
+
+This agent demonstrates:
+- PreToolUse hooks for validation
+- PostToolUse hooks for automatic formatting
+- Stop hooks for final cleanup
+- Scoped hook configuration
+
+```yaml
+---
+name: auto-formatter
+description: >
+  Automatically formats and lints code after modifications. Use when writing
+  or editing code files to ensure consistent style. Runs formatters and linters
+  as hooks to maintain code quality without explicit user commands.
+model: sonnet
+permissionMode: acceptEdits
+hooks:
+  PreToolUse:
+    - matcher: "Write|Edit"
+      hooks:
+        - type: command
+          command: "./scripts/check-file-size.sh"
+          timeout: 5000
+  PostToolUse:
+    - matcher: "Write|Edit"
+      hooks:
+        - type: command
+          command: "npx prettier --write"
+          timeout: 10000
+        - type: command
+          command: "npx eslint --fix"
+          timeout: 10000
+  Stop:
+    - hooks:
+        - type: command
+          command: "./scripts/final-lint-check.sh"
+---
+
+# Auto Formatter
+
+You are a code quality agent that automatically formats and validates code changes.
+
+## Workflow
+
+1. When files are modified, PreToolUse hooks validate file size constraints
+2. After modifications, PostToolUse hooks run Prettier and ESLint
+3. Before finishing, Stop hook runs final validation check
+
+## Hook Behavior
+
+**PreToolUse (Validation)**:
+- Runs before Write/Edit operations
+- Exit 2 blocks the operation if validation fails
+- Checks file size limits to prevent large file mistakes
+
+**PostToolUse (Formatting)**:
+- Runs after successful Write/Edit operations
+- Applies Prettier formatting automatically
+- Fixes ESLint auto-fixable issues
+- Both run in parallel
+
+**Stop (Final Check)**:
+- Runs when agent completes all work
+- Verifies no linting issues remain
+- Exit 2 prevents task completion if issues found
+```
+
+**Key Hook Patterns:**
+
+| Hook Event | Matcher | Purpose | Exit Code Behavior |
+|------------|---------|---------|-------------------|
+| PreToolUse | `Write\|Edit` | Block large files | Exit 2 = block tool |
+| PostToolUse | `Write\|Edit` | Auto-format code | Exit 0 = continue |
+| Stop | (no matcher) | Final validation | Exit 2 = show error |
+
+**Hook Script Example** (`scripts/check-file-size.sh`):
+
+```bash
+#!/bin/bash
+# Receives tool input as JSON via stdin
+
+input=$(cat)
+file_path=$(echo "$input" | jq -r '.tool_input.file_path // empty')
+
+if [ -n "$file_path" ] && [ -f "$file_path" ]; then
+  size=$(stat -f%z "$file_path" 2>/dev/null || stat -c%s "$file_path")
+  max_size=$((1024 * 1024))  # 1MB
+
+  if [ "$size" -gt "$max_size" ]; then
+    echo "ERROR: File $file_path exceeds 1MB limit" >&2
+    exit 2  # Block the operation
+  fi
+fi
+
+exit 0  # Allow operation
+```
+
+**When to Use Hooks in Agents:**
+- **PreToolUse**: Validation, security checks, blocking unwanted operations
+- **PostToolUse**: Formatting, linting, logging, notifications
+- **Stop**: Final validation, cleanup, report generation
+
+---
+
 ## Role-Based Pattern Summary
 
 | Element | Purpose | Example |
