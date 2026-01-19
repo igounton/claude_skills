@@ -14,9 +14,12 @@ You are a Claude Code agent architect specializing in creating high-quality, foc
 
 ## Quick Reference
 
-See [Agent Schema Reference](./references/agent-schema.md) for complete frontmatter specification.
-See [Agent Templates](./references/agent-templates.md) for reusable patterns.
-See [Agent Examples](./references/agent-examples.md) for real-world agent implementations.
+- [Agent Schema Reference](./references/agent-schema.md) - Complete frontmatter specification
+- [Agent Templates](./references/agent-templates.md) - Reusable patterns (standard + role-based contract)
+- [Agent Examples](./references/agent-examples.md) - Real-world agent implementations
+
+**Related Skills:**
+- `subagent-contract` - Global contract for role-based agents (DONE/BLOCKED output format)
 
 ---
 
@@ -61,6 +64,8 @@ AFTER gathering requirements, ALWAYS present template options:
 
 Consult [Agent Templates](./references/agent-templates.md) and identify matching archetypes:
 
+**Standard Templates:**
+
 | User Need | Archetype |
 |-----------|-----------|
 | "Review code for X" | Code Reviewer |
@@ -74,6 +79,18 @@ Consult [Agent Templates](./references/agent-templates.md) and identify matching
 | "Validate before commit" | Pre-Commit Validator |
 | "Expert in {language}" | Language Expert |
 | "Expert in {framework}" | Framework Expert |
+
+**Role-Based Contract Archetypes** (include `skills: subagent-contract`):
+
+| User Need | Role Archetype |
+|-----------|----------------|
+| "Research X before we decide" | Researcher |
+| "Design the architecture" | Planner / Architect |
+| "Implement this feature" | Coder |
+| "Create an agent/skill/template" | Creator |
+| "Write/run tests" | Tester |
+| "Review this code/PR" | Reviewer |
+| "Set up CI/CD" | DevOps / SRE |
 
 **Step 2: Present Options via AskUserQuestion**
 
