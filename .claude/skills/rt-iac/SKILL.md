@@ -5,6 +5,7 @@ description: >
   blocks planning until prerequisites are verified. Use when receiving specs, PRDs, tickets, RFCs,
   architecture designs, or any multi-step engineering task. Integrates with CoVe-style planning
   pipelines. Invoke BEFORE creating plans, delegating to agents, or defining acceptance criteria.
+user-invocable: true
 ---
 
 # RT-IAC: Reverse Thinking - Information Completeness Assessment
@@ -19,7 +20,7 @@ This skill inserts a mandatory RT-IAC checkpoint into planning workflows. For ev
 
 <core_rule>
 
-**No planning, delegation, scheduling, or solutioning may begin until RT-IAC has been performed on:**
+**No planning, delegation, scheduling, or solution design may begin until RT-IAC has been performed on:**
 
 1. The overall goal/request
 2. Each decomposed goal or sub-goal that could fail due to missing information
@@ -368,5 +369,9 @@ Problem: Assumption may be wrong, causes rework or security issues
 
 ## Sources
 
-- RT-IAC framework: User-provided methodology for planner agents (January 2026)
-- CoVe (Chain of Verification): Planning verification pattern
+| Source                       | Attribution                                                                                                            | Access Date |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ----------- |
+| RT-ICA Framework             | [Liu et al., 2025 - Reverse Thinking Enhances Missing Information Detection in LLMs](https://arxiv.org/abs/2512.10273) | 2026-01-20  |
+| CoVe (Chain of Verification) | [Dhuliawala et al., 2023 - Chain-of-Verification Reduces Hallucination](https://arxiv.org/abs/2309.11495)              | 2026-01-20  |
+
+**Note**: This skill adapts the RT-ICA (Reverse Thinking for Information Completeness Assessment) framework for planning workflows with modified terminology (RT-IAC).
