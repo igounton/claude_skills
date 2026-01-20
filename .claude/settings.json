@@ -10,5 +10,18 @@
   "statusLine": {
     "type": "command",
     "command": "node $CLAUDE_PROJECT_DIR/sessions/statusline.js"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-start-rtiac.js\""
+          }
+        ]
+      }
+    ]
   }
 }
