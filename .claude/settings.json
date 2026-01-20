@@ -14,10 +14,11 @@
   "hooks": {
     "SessionStart": [
       {
+        "matcher": "startup|resume",
         "hooks": [
           {
             "type": "command",
-            "command": "cat <<'EOF'\n<session-start-reminder>\nRT-IAC CHECKPOINT REQUIRED: Before creating plans, delegating to agents, or defining acceptance criteria for any spec, PRD, ticket, RFC, or multi-step engineering task, invoke the rt-iac skill to perform Reverse Thinking - Information Completeness Assessment. Block planning until prerequisites are verified.\n</session-start-reminder>\nEOF"
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-start-rtiac.js\""
           }
         ]
       }
