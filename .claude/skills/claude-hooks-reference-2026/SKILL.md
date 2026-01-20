@@ -430,37 +430,100 @@ For deny:
 
 ## Prompt-Based Hooks
 
-LLM-evaluated decisions using Haiku model.
+LLM-evaluated decisions using a fast model (Haiku).
+
+### How Prompt-Based Hooks Work
+
+Instead of executing a bash command, prompt-based hooks:
+
+1. Send the hook input and your prompt to Haiku
+2. The LLM responds with structured JSON containing a decision
+3. Claude Code processes the decision automatically
+
+### Configuration
 
 ```json
 {
   "type": "prompt",
-  "prompt": "Evaluate if Claude should stop. Context: $ARGUMENTS\n\nReturn {\"ok\": true} to allow, or {\"ok\": false, \"reason\": \"...\"} to continue.",
+  "prompt": "Evaluate if Claude should stop: $ARGUMENTS. Check if all tasks are complete.",
   "timeout": 30
 }
 ```
 
+| Field     | Required | Description             |
+| --------- | -------- | ----------------------- |
+| `type`    | Yes      | Must be `"prompt"`      |
+| `prompt`  | Yes      | Prompt text sent to LLM |
+| `timeout` | No       | Seconds (default: 30)   |
+
 ### Response Schema
+
+The LLM must respond with JSON:
 
 ```json
 {
   "ok": true,
-  "reason": "Required when ok is false"
+  "reason": "Explanation for the decision"
 }
 ```
 
+| Field    | Type    | Description                                    |
+| -------- | ------- | ---------------------------------------------- |
+| `ok`     | boolean | `true` allows the action, `false` prevents it  |
+| `reason` | string  | Required when `ok` is `false`. Shown to Claude |
+
 ### $ARGUMENTS Placeholder
 
-Use `$ARGUMENTS` in prompt to include hook input JSON. If omitted, input is appended.
+Use `$ARGUMENTS` in prompt to include hook input JSON. If omitted, input is appended to the prompt.
+
+### Example: Intelligent Stop Hook
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "You are evaluating whether Claude should stop working. Context: $ARGUMENTS\n\nAnalyze the conversation and determine if:\n1. All user-requested tasks are complete\n2. Any errors need to be addressed\n3. Follow-up work is needed\n\nRespond with JSON: {\"ok\": true} to allow stopping, or {\"ok\": false, \"reason\": \"your explanation\"} to continue working.",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Example: SubagentStop Validation
+
+```json
+{
+  "hooks": {
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Evaluate if this subagent should stop. Input: $ARGUMENTS\n\nCheck if:\n- The subagent completed its assigned task\n- Any errors occurred that need fixing\n- Additional context gathering is needed\n\nReturn: {\"ok\": true} to allow stopping, or {\"ok\": false, \"reason\": \"explanation\"} to continue."
+          }
+        ]
+      }
+    ]
+  }
+}
+```
 
 ### Best Use Cases
 
-| Event              | Use Case                              |
-| ------------------ | ------------------------------------- |
-| `Stop`             | Intelligent task completion detection |
-| `SubagentStop`     | Verify subagent completed task        |
-| `UserPromptSubmit` | Context-aware prompt validation       |
-| `PreToolUse`       | Complex permission decisions          |
+| Event               | Use Case                              |
+| ------------------- | ------------------------------------- |
+| `Stop`              | Intelligent task completion detection |
+| `SubagentStop`      | Verify subagent completed task        |
+| `UserPromptSubmit`  | Context-aware prompt validation       |
+| `PreToolUse`        | Complex permission decisions          |
+| `PermissionRequest` | Intelligent allow/deny dialogs        |
 
 ### Comparison with Command Hooks
 
@@ -472,6 +535,14 @@ Use `$ARGUMENTS` in prompt to include hook input JSON. If omitted, input is appe
 | Context awareness | Limited             | Full understanding      |
 | Performance       | Fast (local)        | Slower (API call)       |
 | Use case          | Deterministic rules | Context-aware decisions |
+
+### Best Practices for Prompt Hooks
+
+1. **Be specific in prompts** - Clearly state what you want the LLM to evaluate
+2. **Include decision criteria** - List the factors the LLM should consider
+3. **Test your prompts** - Verify the LLM makes correct decisions for your use cases
+4. **Set appropriate timeouts** - Default is 30 seconds, adjust if needed
+5. **Use for complex decisions** - Bash hooks are better for simple, deterministic rules
 
 ---
 
