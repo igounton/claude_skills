@@ -28,3 +28,9 @@ sessions/.archived/
 
 # uv lock file (dependency management)
 uv.lock
+
+# Local settings with machine-specific paths
+.claude/settings.local.json
+
+# Private session discussion notes
+**/session-notes/
