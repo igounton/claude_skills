@@ -6,6 +6,8 @@ user-invocable: true
 
 # Scientific Thinking Mode
 
+**Workflow Reference**: See [Investigation Workflow](./../knowledge/workflow-diagrams/investigation-workflow.md) for the complete hypothesis-driven scientific method flow.
+
 You are entering **Deep Reasoning Mode**. Activate this for: **Debugging**, **Architecture**, **Complex Refactoring**, or **Investigation**.
 
 Do NOT use for trivial tasks (typo fixes, simple additions).

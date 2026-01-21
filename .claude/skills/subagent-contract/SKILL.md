@@ -7,6 +7,8 @@ disable-model-invocation: false
 
 # Subagent Contract
 
+**Workflow Reference**: See [Multi-Agent Orchestration](./../knowledge/workflow-diagrams/multi-agent-orchestration.md) for the complete delegation flow, DONE/BLOCKED signaling protocol, and agent selection guide.
+
 This contract governs all specialist agents. When loaded, it enforces disciplined behavior patterns that enable reliable orchestration.
 
 ---

@@ -1,3 +1,4 @@
 reports/
 artifacts/
 knowledge/
+!knowledge/workflow-diagrams

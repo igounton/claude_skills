@@ -5,6 +5,8 @@ description: Scientific delegation framework for orchestrators - provide observa
 
 # Delegation Preparation Worksheet
 
+**Workflow Reference**: See [Multi-Agent Orchestration](./../knowledge/workflow-diagrams/multi-agent-orchestration.md) for the complete delegation flow, DONE/BLOCKED signaling protocol, and agent selection guide.
+
 **CRITICAL**: You are an orchestrator. You MUST complete ALL steps in this worksheet before invoking the Task tool. Incomplete preparation leads to failed delegations, wasted agent context, and poor outcomes.
 
 <user_instructions>$ARGUMENTS</user_instructions>

@@ -845,6 +845,65 @@ This ensures agents have complete knowledge of Claude Code plugin architecture, 
 
 ---
 
+## Agentic Workflow Diagrams
+
+<workflow_diagrams>
+
+This repository includes comprehensive workflow diagrams that visualize how skills, agents, commands, and hooks work together across the 6-stage agentic process flow.
+
+**Location**: `.claude/knowledge/workflow-diagrams/`
+
+### Available Diagrams
+
+| Diagram                                                                                         | Purpose                                     | When to Consult                            |
+| ----------------------------------------------------------------------------------------------- | ------------------------------------------- | ------------------------------------------ |
+| [Master Workflow](./.claude/knowledge/workflow-diagrams/master-workflow.md)                     | Complete 6-stage overview with all assets   | Understanding the full system architecture |
+| [Asset Decision Tree](./.claude/knowledge/workflow-diagrams/asset-decision-tree.md)             | Skill vs Command vs Agent vs Hook selection | Creating new extensions                    |
+| [Multi-Agent Orchestration](./.claude/knowledge/workflow-diagrams/multi-agent-orchestration.md) | Delegation and DONE/BLOCKED signaling       | Coordinating sub-agents                    |
+| [Simple Task Workflow](./.claude/knowledge/workflow-diagrams/simple-task-workflow.md)           | Minimal path for straightforward tasks      | Quick implementations                      |
+| [Investigation Workflow](./.claude/knowledge/workflow-diagrams/investigation-workflow.md)       | Hypothesis-driven scientific method         | Debugging, research, root cause analysis   |
+| [RAG Retrieval Pattern](./.claude/knowledge/workflow-diagrams/rag-retrieval-pattern.md)         | Context augmentation flow                   | Knowledge retrieval tasks                  |
+| [Gap Recommendations](./.claude/knowledge/workflow-diagrams/gap-recommendations.md)             | Specs for missing capabilities              | Planning system improvements               |
+
+### Workflow Stage Coverage
+
+```text
+Stage 1: INPUT RECEPTION      → ⚠️ Partial (2 assets)
+Stage 2: CONTEXT GATHERING    → ✅ Covered (7 assets)
+Stage 3: PLANNING             → ✅ Covered (8 assets)
+Stage 4: EXECUTION            → ✅ Covered (8 assets)
+Stage 5: VERIFICATION         → ✅ Strongest (9 assets)
+Stage 6: OUTPUT DELIVERY      → ⚠️ Partial (4 assets)
+```
+
+### Workflow Selection Guide
+
+The model MUST consult the appropriate workflow diagram based on task type:
+
+| Task Type                        | Recommended Workflow                                                                            |
+| -------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Standard implementation          | [Master Workflow](./.claude/knowledge/workflow-diagrams/master-workflow.md)                     |
+| Quick fix or simple change       | [Simple Task Workflow](./.claude/knowledge/workflow-diagrams/simple-task-workflow.md)           |
+| Debugging or root cause analysis | [Investigation Workflow](./.claude/knowledge/workflow-diagrams/investigation-workflow.md)       |
+| Delegating to sub-agents         | [Multi-Agent Orchestration](./.claude/knowledge/workflow-diagrams/multi-agent-orchestration.md) |
+| Need external context            | [RAG Retrieval Pattern](./.claude/knowledge/workflow-diagrams/rag-retrieval-pattern.md)         |
+| Creating new skill/agent/command | [Asset Decision Tree](./.claude/knowledge/workflow-diagrams/asset-decision-tree.md)             |
+
+### Integration with Skills and Commands
+
+Key assets reference specific workflow diagrams:
+
+- **delegate skill** → Multi-Agent Orchestration
+- **rt-ica skill** → Investigation Workflow, Master Workflow
+- **scientific-thinking skill** → Investigation Workflow
+- **subagent-contract skill** → Multi-Agent Orchestration
+- **context-gathering agent** → RAG Retrieval Pattern
+- **/how-to-delegate command** → Multi-Agent Orchestration
+
+</workflow_diagrams>
+
+---
+
 ## Summary of Key Improvements
 
 <improvements_summary>

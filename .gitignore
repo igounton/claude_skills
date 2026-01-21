@@ -34,3 +34,5 @@ uv.lock
 
 # Private session discussion notes
 **/session-notes/
+
+!.claude/knowledge/workflow-diagrams

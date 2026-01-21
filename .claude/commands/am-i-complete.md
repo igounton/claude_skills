@@ -5,6 +5,8 @@ description: Self-verification protocol that drives completion of testing steps 
 
 # IS IT WORKING? - Task Verification Protocol
 
+**Workflow Reference**: See [Master Workflow](./../knowledge/workflow-diagrams/master-workflow.md) for how this command fits into the verification stage of the agentic workflow.
+
 You're in the middle of a task. Before claiming completion, execute this verification protocol.
 
 ## IMMEDIATE ACTION REQUIRED

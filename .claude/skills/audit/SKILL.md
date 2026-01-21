@@ -6,6 +6,8 @@ user-invocable: true
 
 # Hallucination Audit Protocol
 
+**Workflow Reference**: See [Master Workflow](./../knowledge/workflow-diagrams/master-workflow.md) for how this skill fits into the verification stage of the agentic workflow.
+
 Review the target content for these **HALLUCINATION TRIGGERS**:
 
 ---

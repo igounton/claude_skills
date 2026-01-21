@@ -6,6 +6,8 @@ user-invocable: true
 
 # RT-ICA: Reverse Thinking - Information Completeness Assessment
 
+**Workflow Reference**: See [Master Workflow](./../knowledge/workflow-diagrams/master-workflow.md) for how this skill fits into the planning stage, and [Investigation Workflow](./../knowledge/workflow-diagrams/investigation-workflow.md) for the verification-before-action pattern.
+
 ## Purpose
 
 This skill inserts a mandatory RT-ICA checkpoint into planning workflows. For every goal (top-level and each decomposed sub-goal), the model MUST:
