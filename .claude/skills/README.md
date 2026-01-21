@@ -9,6 +9,10 @@ This directory contains skills that extend Claude's capabilities with specialize
 | [agent-creator](#agent-creator)                                   | Creation Tools     | Create and design Claude Code agents                             | Yes                   |
 | [subagent-contract](#subagent-contract)                           | Workflow Contracts | Enforce specialist agent behavior patterns                       | No (loaded by agents) |
 | [rt-ica](#rt-ica)                                                 | Planning Tools     | Pre-planning checkpoint that blocks until prerequisites verified | Yes                   |
+| [scientific-thinking](#scientific-thinking)                       | Workflow Tools     | Hypothesis-driven reasoning for complex problems                 | Yes                   |
+| [verify](#verify)                                                 | Workflow Tools     | Self-assessment checklist before task completion                 | Yes                   |
+| [delegate](#delegate)                                             | Workflow Tools     | Quick delegation template for sub-agent prompts                  | Yes                   |
+| [audit](#audit)                                                   | Workflow Tools     | Hallucination detection for agent output review                  | Yes                   |
 | [claude-skills-overview-2026](#claude-skills-overview-2026)       | Reference          | Skills system documentation                                      | Yes                   |
 | [claude-commands-reference-2026](#claude-commands-reference-2026) | Reference          | Slash commands documentation                                     | Yes                   |
 | [claude-hooks-reference-2026](#claude-hooks-reference-2026)       | Reference          | Hooks system documentation                                       | Yes                   |
@@ -138,6 +142,128 @@ When an agent loads this skill, it will:
 → RT-ICA will identify MISSING prerequisites (auth protocol, session management, security requirements)
 → Ask only for missing inputs before proceeding with planning
 ```
+
+---
+
+## Workflow Tools
+
+### scientific-thinking
+
+**What it does**: Forces hypothesis-driven scientific reasoning for complex problems. Provides a structured framework for debugging, architecture design, and complex refactoring using the scientific method.
+
+**AI behavior when loaded**:
+
+- Lists only factual observations (logs, errors, file contents) without interpretation
+- Formulates null hypothesis (H₀) and alternative hypothesis (Hₐ)
+- Makes specific, testable predictions
+- Designs experiments with multiple paths (Tree-of-Thought)
+- Identifies and isolates confounding variables
+- Records results factually and draws evidence-based conclusions
+
+**How to trigger**:
+
+- Explicitly: `@scientific-thinking` or `Skill(command: "scientific-thinking")`
+- Automatically: When debugging strange behavior, investigating root causes, designing architecture, performing complex refactoring, or when initial attempts have failed
+
+**What to expect**:
+
+- Structured reasoning through Observation → Hypothesis → Prediction → Experiment → Conclusion
+- Clear separation of facts from interpretations
+- Multiple experimental paths to increase confidence
+- Evidence-based conclusions (Reject H₀ or Fail to Reject H₀)
+
+**When NOT to use**: Simple typo fixes, straightforward feature additions, following explicit instructions.
+
+---
+
+### verify
+
+**What it does**: Provides a rigorous self-assessment checklist before marking any task as complete. Requires evidence for every assertion to prevent premature completion claims.
+
+**AI behavior when loaded**:
+
+- Identifies task type (FIX, FEATURE, REFACTOR, DOCS, INVESTIGATION)
+- Determines verification strategy (executable vs static)
+- For code: requires execution output, regression evidence, edge case testing
+- For static assets: requires accuracy verification, format compliance, link validation
+- Enforces the "Golden Rule": no evidence = not done
+
+**How to trigger**:
+
+- Explicitly: `@verify` or `Skill(command: "verify")`
+- Automatically: When about to claim task completion, before final commit, when user asks "is it done?", or when transitioning from implementation to reporting
+
+**What to expect**:
+
+- Checklist with evidence requirements for each item
+- Task-type-specific verification criteria
+- Quality gate verification (pre-commit, linting, type checking)
+- Honesty check distinguishing "should work" from "verified to work"
+
+**The Golden Rule**: If you cannot demonstrate it working in practice with evidence, it is NOT done.
+
+---
+
+### delegate
+
+**What it does**: Provides a quick delegation template for constructing sub-agent prompts. Ensures proper structure with observations, success criteria, and context while preserving agent autonomy.
+
+**AI behavior when loaded**:
+
+- Analyzes task for WHERE, WHAT, WHY components
+- Constructs prompt using structured template
+- Enforces delegation rules (no micromanagement, no assumptions)
+- Validates prompt before sending
+
+**How to trigger**:
+
+- Explicitly: `@delegate` or `Skill(command: "delegate")`
+- Automatically: When assigning work to a sub-agent, before invoking the Task tool, or when preparing prompts for specialized agents
+
+**What to expect**:
+
+- Structured template with OBSERVATIONS, DEFINITION OF SUCCESS, CONTEXT, and AVAILABLE RESOURCES
+- Delegation rules checklist
+- Pre-flight validation of prompt quality
+
+**Delegation formula**: `Delegation = Observations + Success Criteria + Resources - Assumptions - Micromanagement`
+
+**Related skills**: For comprehensive 10-step delegation guidance, use `/how-to-delegate` command.
+
+---
+
+### audit
+
+**What it does**: Detects hallucinations, timeline fabrications, and unverified assumptions in agent output. Reviews content for specific trigger patterns that indicate unreliable information.
+
+**AI behavior when loaded**:
+
+- Scans for assumption language ("I think", "likely", "probably")
+- Detects project management timelines ("Week 1", "Sprint 2", "Q1")
+- Identifies pseudo-quantification without methodology ("8.5/10", "70% improvement")
+- Verifies completeness claims ("All files checked") against actual counts
+- Flags micromanagement in delegation prompts
+
+**How to trigger**:
+
+- Explicitly: `@audit` or `Skill(command: "audit")`
+- Automatically: When reviewing sub-agent results, receiving research findings, validating claims that seem suspicious, or when output contains assumption language
+
+**What to expect**:
+
+- Pass/Fail assessment with specific triggers found
+- Required corrections for each flagged item
+- Verification commands to validate claims
+
+**Hallucination triggers**:
+
+| Trigger         | Pattern              | Action                      |
+| --------------- | -------------------- | --------------------------- |
+| Guessing        | "probably", "likely" | Verify with tools           |
+| Timelines       | "Week 1", "Q2"       | Replace with priorities     |
+| Fake Metrics    | "8/10", "70%"        | Demand methodology          |
+| False Coverage  | "all", "every"       | Count and verify            |
+| Micromanagement | "change line X"      | Convert to success criteria |
 
 ---
 
@@ -370,6 +496,10 @@ Claude automatically activates skills based on your request. Skills have trigger
 
 - **agent-creator**: "create agent", "modify agent", "agent structure", "agent configuration"
 - **rt-ica**: "planning", "prerequisites", "spec", "PRD", "ticket", "RFC", "architecture design", "multi-step task"
+- **scientific-thinking**: "debugging", "strange behavior", "root cause", "architecture design", "complex refactoring", "investigation"
+- **verify**: "is it done", "task complete", "before commit", "completion", "finished"
+- **delegate**: "sub-agent", "Task tool", "delegation", "assign work"
+- **audit**: "review output", "hallucination", "suspicious", "probably", "likely", "verify claims"
 - **claude-skills-overview-2026**: "skill format", "SKILL.md", "skill frontmatter", "skill best practices"
 - **claude-commands-reference-2026**: "slash command", "custom command", "command frontmatter"
 - **claude-hooks-reference-2026**: "hook", "PreToolUse", "PostToolUse", "hook events"
