@@ -47,6 +47,20 @@ Your instructions here...
 | `disable-model-invocation` | No       | boolean      | false           | Prevent Skill tool invocation   |
 | `hooks`                    | No       | object       | None            | PreToolUse, PostToolUse, Stop   |
 
+### YAML Multiline Bug
+
+**Do NOT use YAML multiline indicators** (`>-`, `|`, `|-`) for descriptions. Claude Code's indexer does not parse them correctly - the description appears as ">-" instead of actual content.
+
+```yaml
+# WRONG - will show ">-" as description
+description: >-
+  This is a multiline
+  description that breaks.
+
+# CORRECT - single quoted string
+description: 'This works correctly. Use single quotes for descriptions with special characters or keep on one line.'
+```
+
 ---
 
 ## File Locations
