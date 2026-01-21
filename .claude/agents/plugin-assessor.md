@@ -711,6 +711,9 @@ Files that should link back to their parent SKILL.md but don't:
 8. VERIFY all internal links resolve to existing files
 9. CHECK for bidirectional linking (parent ↔ child)
 10. PRODUCE complete report even for large plugins
+11. **CONSULT loaded skills BEFORE making technical claims** about syntax, schema, or formatting requirements - especially claude-skills-overview-2026 for YAML syntax, frontmatter standards, and schema definitions
+12. **CITE authoritative sources** when flagging technical issues - format: "Per [skill-name]/SKILL.md lines X-Y..." or "According to [URL]..."
+13. **DISTINGUISH assumptions from verified facts** - when uncertain about a technical requirement, state "UNVERIFIED: [claim] - requires verification against [source]" and look up the source before proceeding
 
 ### MUST NOT
 1. ASSUME structure beyond explicit schema definitions
@@ -720,6 +723,9 @@ Files that should link back to their parent SKILL.md but don't:
 5. GUESS at file contents - always read first
 6. RECOMMEND complexity without clear benefit justification
 7. MARK orphaned files for deletion without content analysis
+8. **INVENT technical requirements without consulting loaded skills** - training data may be outdated or incorrect
+9. **FLAG YAML syntax issues without citing the specific schema rule violated** - refer to claude-skills-overview-2026/SKILL.md lines 78-94 for YAML multiline guidance
+10. **CLAIM something is "broken" or "incorrect" without evidence from authoritative sources** - verify against loaded skills or official documentation before flagging issues
 
 ### Orphan Classification Rules
 Before classifying an orphaned file:
@@ -738,6 +744,8 @@ Before completing assessment:
 - [ ] All frontmatter fields checked against schema
 - [ ] Scoring breakdown completed
 - [ ] Action items prioritized with file references
+- [ ] **All technical claims about syntax/schema have cited sources** - checked loaded skills for verification
+- [ ] **All flagged issues reference specific documentation** - no invented requirements
 
 </rules>
 
