@@ -62,6 +62,59 @@ Your instructions here...
 
 ---
 
+## Skill Tokenomics
+
+Skills use progressive disclosure - only frontmatter loads initially (~100 tokens), full content loads on activation.
+
+### Budget Constraints
+
+| Resource                   | Limit         | Notes                               |
+| -------------------------- | ------------- | ----------------------------------- |
+| `name` field               | 64 chars      | Lowercase, numbers, hyphens only    |
+| `description` field        | 1024 chars    | Critical for skill selection        |
+| `<available_skills>` block | ~15,000 chars | Separate from global context window |
+| Skills before truncation   | ~34-36        | Varies by description complexity    |
+
+### YAML Multiline Bug
+
+**Do NOT use YAML multiline indicators** (`>-`, `|`, `|-`) for descriptions. Claude Code's skill indexer does not parse them correctly - the description appears as ">-" instead of actual content.
+
+```yaml
+# WRONG - will show ">-" as description
+description: >-
+  This is a multiline
+  description that breaks.
+
+# WRONG - same problem
+description: |
+  This breaks too.
+
+# CORRECT - single quoted string
+description: 'This works correctly. Use single quotes for descriptions with special characters or keep on one line.'
+```
+
+### Truncation Behavior
+
+When total skill metadata exceeds ~15,000 characters:
+
+1. Skills are truncated from the `<available_skills>` block
+2. Truncated skills cannot be auto-invoked by Claude
+3. User can still invoke truncated skills explicitly with `@skill-name`
+
+### Fallback Strategy
+
+If you have many skills, embed pointers in CLAUDE.md as a safeguard:
+
+```markdown
+## Skills Available
+- For debugging: use `@scientific-thinking` skill
+- For delegation: use `@delegate` skill
+```
+
+This ensures Claude can find skills even if truncated from `<available_skills>`.
+
+---
+
 ## String Substitutions
 
 | Variable               | Description                       |
