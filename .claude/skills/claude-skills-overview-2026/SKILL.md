@@ -99,7 +99,7 @@ When total skill metadata exceeds ~15,000 characters:
 
 1. Skills are truncated from the `<available_skills>` block
 2. Truncated skills cannot be auto-invoked by Claude
-3. User can still invoke truncated skills explicitly with `@skill-name`
+3. User can still invoke truncated skills explicitly with `/skill-name`
 
 ### Fallback Strategy
 
@@ -107,8 +107,8 @@ If you have many skills, embed pointers in CLAUDE.md as a safeguard:
 
 ```markdown
 ## Skills Available
-- For debugging: use `@scientific-thinking` skill
-- For delegation: use `@delegate` skill
+- For debugging: use `/scientific-thinking` skill
+- For delegation: use `/delegate` skill
 ```
 
 This ensures Claude can find skills even if truncated from `<available_skills>`.
