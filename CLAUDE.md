@@ -82,13 +82,13 @@ CONTEXT:
 
 ---
 
-## Post-Creation Requirements
+## Plugin Post-Creation Requirements
 
-The model MUST run `install.py` after creating a new skill:
+The model MUST run `install.py` after creating a new plugin in the plugins/ directory:
 
-- This script executes `ln -sf` for each skill directory to symlink them to `~/.claude/skills/`
+- This script executes `ln -sf` for each skill directory nested in the plugins/ directory to symlink them to `~/.claude/skills/` this is to support instant testing of the skills by the local developer.
 - Safe to run multiple times (idempotent operation)
-- Modifications to existing skills do NOT require re-running install.py (symlinks point to directory)
+- Modifications to existing plugins do NOT require re-running install.py (symlinks point to directory)
 
 ---
 
@@ -888,9 +888,5 @@ This refactored version implements:
    - Clear lineage for each best practice applied
 
 </improvements_summary>
-
-```
-
-```
 
 - Read @sessions/CLAUDE.sessions.md for your AI workflow instructions.

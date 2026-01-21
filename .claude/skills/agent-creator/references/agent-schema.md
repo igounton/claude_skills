@@ -33,10 +33,7 @@ name: my-super-awesome-long-agent-name-that-exceeds-the-limit  # Invalid - too l
 
 ```yaml
 # Good - includes all elements
-description: >
-  Review Python code for security vulnerabilities, performance issues,
-  and PEP 8 compliance. Use when code changes are complete or when
-  reviewing pull requests. Specializes in async/await patterns.
+description: 'Review Python code for security vulnerabilities, performance issues, and PEP 8 compliance. Use when code changes are complete or when reviewing pull requests. Specializes in async/await patterns.'
 
 # Bad - too vague
 description: Helps with Python
@@ -259,11 +256,7 @@ color: red       # Error handling
 ```yaml
 ---
 name: security-auditor
-description: >
-  Audit code for security vulnerabilities including OWASP Top 10,
-  injection risks, and authentication flaws. Use when reviewing
-  security-sensitive code or before production deployment.
-  Proactively invoked after changes to auth or data handling code.
+description: 'Audit code for security vulnerabilities including OWASP Top 10, injection risks, and authentication flaws. Use when reviewing security-sensitive code or before production deployment. Proactively invoked after changes to auth or data handling code.'
 model: opus
 tools: Read, Grep, Glob, Bash(git:log), Bash(git:diff)
 disallowedTools: Write, Edit

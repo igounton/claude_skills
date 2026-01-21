@@ -8,7 +8,7 @@ This directory contains skills that extend Claude's capabilities with specialize
 | ----------------------------------------------------------------- | ------------------ | ---------------------------------------------------------------- | --------------------- |
 | [agent-creator](#agent-creator)                                   | Creation Tools     | Create and design Claude Code agents                             | Yes                   |
 | [subagent-contract](#subagent-contract)                           | Workflow Contracts | Enforce specialist agent behavior patterns                       | No (loaded by agents) |
-| [rt-iac](#rt-iac)                                                 | Planning Tools     | Pre-planning checkpoint that blocks until prerequisites verified | Yes                   |
+| [rt-ica](#rt-ica)                                                 | Planning Tools     | Pre-planning checkpoint that blocks until prerequisites verified | Yes                   |
 | [claude-skills-overview-2026](#claude-skills-overview-2026)       | Reference          | Skills system documentation                                      | Yes                   |
 | [claude-commands-reference-2026](#claude-commands-reference-2026) | Reference          | Slash commands documentation                                     | Yes                   |
 | [claude-hooks-reference-2026](#claude-hooks-reference-2026)       | Reference          | Hooks system documentation                                       | Yes                   |
@@ -97,7 +97,7 @@ When an agent loads this skill, it will:
 
 ## Planning Tools
 
-### rt-iac
+### rt-ica
 
 **What it does**: Reverse Thinking - Information Completeness Assessment. A mandatory pre-planning checkpoint that blocks planning until prerequisites are verified. Ensures all required information is AVAILABLE, DERIVABLE, or explicitly MISSING before proceeding with implementation planning.
 
@@ -108,17 +108,17 @@ When an agent loads this skill, it will:
 - Classifies each prerequisite as AVAILABLE, DERIVABLE, or MISSING
 - Makes completeness decision: APPROVED (proceed) or BLOCKED (request missing inputs)
 - Blocks planning with MISSING conditions unless user explicitly requests assumption-based planning
-- Produces structured RT-IAC SUMMARY output block
+- Produces structured RT-ICA SUMMARY output block
 
 **How to trigger**:
 
-- Explicitly: `@rt-iac` or `Skill(command: "rt-iac")`
+- Explicitly: `@rt-ica` or `Skill(command: "rt-ica")`
 - Automatically: When receiving specs, PRDs, tickets, RFCs, architecture designs, or any multi-step engineering task
 - Via SessionStart hook: Automatically reminded at session start in this repository
 
 **What to expect**:
 
-- Structured RT-IAC SUMMARY block with goal, conditions, verification status, and decision
+- Structured RT-ICA SUMMARY block with goal, conditions, verification status, and decision
 - BLOCKED decisions with categorized missing input questions
 - APPROVED decisions with assumptions to confirm for DERIVABLE items
 - Integration points: before top-level planning, agent delegation, acceptance criteria, and rollout steps
@@ -135,7 +135,7 @@ When an agent loads this skill, it will:
 
 ```
 "Build a user authentication service"
-→ RT-IAC will identify MISSING prerequisites (auth protocol, session management, security requirements)
+→ RT-ICA will identify MISSING prerequisites (auth protocol, session management, security requirements)
 → Ask only for missing inputs before proceeding with planning
 ```
 
@@ -369,7 +369,7 @@ Skill(command: "claude-skills-overview-2026")
 Claude automatically activates skills based on your request. Skills have trigger keywords in their descriptions that Claude uses for selection:
 
 - **agent-creator**: "create agent", "modify agent", "agent structure", "agent configuration"
-- **rt-iac**: "planning", "prerequisites", "spec", "PRD", "ticket", "RFC", "architecture design", "multi-step task"
+- **rt-ica**: "planning", "prerequisites", "spec", "PRD", "ticket", "RFC", "architecture design", "multi-step task"
 - **claude-skills-overview-2026**: "skill format", "SKILL.md", "skill frontmatter", "skill best practices"
 - **claude-commands-reference-2026**: "slash command", "custom command", "command frontmatter"
 - **claude-hooks-reference-2026**: "hook", "PreToolUse", "PostToolUse", "hook events"

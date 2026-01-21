@@ -18,7 +18,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-start-rtiac.js\""
+            "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/session-start-rtica.js\""
           }
         ]
       }

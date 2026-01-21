@@ -1,9 +1,6 @@
 ---
 name: subagent-contract
-description: >
-  Global contract for all specialist subagents. Enforces role boundaries, scope discipline,
-  and DONE/BLOCKED status signaling. Load this skill in any agent that should operate as
-  a bounded specialist following supervisor delegation patterns.
+description: 'Global contract for all specialist subagents. Enforces role boundaries, scope discipline, and DONE/BLOCKED status signaling. Load this skill in any agent that should operate as a bounded specialist following supervisor delegation patterns.'
 user-invocable: false
 disable-model-invocation: false
 ---

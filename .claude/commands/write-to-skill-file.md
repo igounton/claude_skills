@@ -1,5 +1,4 @@
 ---
-allowed-tools: *
 argument-hint: "provide the full text to be processed, or a list of files to be processed."
 description: "Text to LLM Optimized Text workflow instructions"
 disable-model-invocation: false

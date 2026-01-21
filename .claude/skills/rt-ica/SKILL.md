@@ -1,18 +1,14 @@
 ---
-name: rt-iac
-description: >
-  Reverse Thinking - Information Completeness Assessment. Mandatory pre-planning checkpoint that
-  blocks planning until prerequisites are verified. Use when receiving specs, PRDs, tickets, RFCs,
-  architecture designs, or any multi-step engineering task. Integrates with CoVe-style planning
-  pipelines. Invoke BEFORE creating plans, delegating to agents, or defining acceptance criteria.
+name: rt-ica
+description: 'Reverse Thinking - Information Completeness Assessment. Mandatory pre-planning checkpoint that blocks planning until prerequisites are verified. Use when receiving specs, PRDs, tickets, RFCs, architecture designs, or any multi-step engineering task. Integrates with CoVe-style planning pipelines. Invoke BEFORE creating plans, delegating to agents, or defining acceptance criteria.'
 user-invocable: true
 ---
 
-# RT-IAC: Reverse Thinking - Information Completeness Assessment
+# RT-ICA: Reverse Thinking - Information Completeness Assessment
 
 ## Purpose
 
-This skill inserts a mandatory RT-IAC checkpoint into planning workflows. For every goal (top-level and each decomposed sub-goal), the model MUST:
+This skill inserts a mandatory RT-ICA checkpoint into planning workflows. For every goal (top-level and each decomposed sub-goal), the model MUST:
 
 1. Reverse-think prerequisites from the goal
 2. Assess information completeness for each prerequisite
@@ -20,7 +16,7 @@ This skill inserts a mandatory RT-IAC checkpoint into planning workflows. For ev
 
 <core_rule>
 
-**No planning, delegation, scheduling, or solution design may begin until RT-IAC has been performed on:**
+**No planning, delegation, scheduling, or solution design may begin until RT-ICA has been performed on:**
 
 1. The overall goal/request
 2. Each decomposed goal or sub-goal that could fail due to missing information
@@ -33,13 +29,13 @@ This skill inserts a mandatory RT-IAC checkpoint into planning workflows. For ev
 
 <activation_triggers>
 
-Invoke RT-IAC when receiving ANY of:
+Invoke RT-ICA when receiving ANY of:
 
 - Spec, request, ticket, user story, PRD, architecture design, RFC
 - Request to produce a plan, execution order, agent delegation, guardrails, acceptance criteria, or rollout steps
 - Any multi-step engineering effort with dependencies, unknowns, constraints, or risk
 
-**Integration Points** (where RT-IAC checkpoints MUST occur):
+**Integration Points** (where RT-ICA checkpoints MUST occur):
 
 1. Before creating the top-level plan
 2. Before delegating tasks to specialized agents (per-agent input completeness)
@@ -63,7 +59,7 @@ Invoke RT-IAC when receiving ANY of:
 
 </definitions>
 
-## RT-IAC Procedure
+## RT-ICA Procedure
 
 Apply this procedure to each goal and sub-goal:
 
@@ -158,7 +154,7 @@ ELSE:
 The model MUST produce this summary block for each goal/sub-goal:
 
 ```text
-RT-IAC SUMMARY
+RT-ICA SUMMARY
 ==============
 
 Goal:
@@ -201,12 +197,12 @@ Assumptions to Confirm (DERIVABLE only):
 
 <cove_integration>
 
-Recommended sequence with RT-IAC:
+Recommended sequence with RT-ICA:
 
 ```text
-A) RT-IAC on top-level goal
+A) RT-ICA on top-level goal
 B) Draft plan and decomposition
-C) RT-IAC on each major workstream/sub-goal
+C) RT-ICA on each major workstream/sub-goal
 D) Assign agents with clearly bounded deliverables
 E) Verification pass: cross-check plan against conditions and acceptance criteria
 F) Refinement pass: resolve gaps, reduce risk, ensure ordering and guardrails
@@ -218,7 +214,7 @@ F) Refinement pass: resolve gaps, reduce risk, ensure ordering and guardrails
 
 <planning_deliverables>
 
-After RT-IAC APPROVED decision, produce a plan that includes:
+After RT-ICA APPROVED decision, produce a plan that includes:
 
 | Section             | Contents                                               |
 | ------------------- | ------------------------------------------------------ |
@@ -279,16 +275,16 @@ When requesting missing inputs, use structured questions:
 
 </question_templates>
 
-## Example: RT-IAC in Action
+## Example: RT-ICA in Action
 
 <example>
 
 **User Request:** "Build a user authentication service"
 
-**RT-IAC Summary:**
+**RT-ICA Summary:**
 
 ```text
-RT-IAC SUMMARY
+RT-ICA SUMMARY
 ==============
 
 Goal:
@@ -335,7 +331,7 @@ Compliance:
 
 <anti_patterns>
 
-**Planning without RT-IAC:**
+**Planning without RT-ICA:**
 
 ```text
 User: "Build auth service"
@@ -374,4 +370,4 @@ Problem: Assumption may be wrong, causes rework or security issues
 | RT-ICA Framework             | [Liu et al., 2025 - Reverse Thinking Enhances Missing Information Detection in LLMs](https://arxiv.org/abs/2512.10273) | 2026-01-20  |
 | CoVe (Chain of Verification) | [Dhuliawala et al., 2023 - Chain-of-Verification Reduces Hallucination](https://arxiv.org/abs/2309.11495)              | 2026-01-20  |
 
-**Note**: This skill adapts the RT-ICA (Reverse Thinking for Information Completeness Assessment) framework for planning workflows with modified terminology (RT-IAC).
+**Note**: This skill adapts the RT-ICA (Reverse Thinking for Information Completeness Assessment) framework for planning workflows.

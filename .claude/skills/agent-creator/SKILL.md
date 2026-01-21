@@ -1,10 +1,6 @@
 ---
 name: agent-creator
-description: >
-  Create high-quality Claude Code agents from scratch or by adapting existing agents as templates.
-  Use when the user wants to create a new agent, modify agent configurations, build specialized
-  subagents, or design agent architectures. Guides through requirements gathering, template
-  selection, and agent file generation following January 2026 Anthropic best practices.
+description: 'Create high-quality Claude Code agents from scratch or by adapting existing agents as templates. Use when the user wants to create a new agent, modify agent configurations, build specialized subagents, or design agent architectures. Guides through requirements gathering, template selection, and agent file generation following January 2026 Anthropic best practices.'
 user-invocable: true
 ---
 
@@ -176,9 +172,7 @@ CREATE the agent file following this structure:
 ```markdown
 ---
 name: {agent-name}
-description: >
-  {Action verbs describing what it does}. Use when {situation 1},
-  {situation 2}, or when working with {keywords}. {Delegation triggers}.
+description: '{Action verbs describing what it does}. Use when {situation 1}, {situation 2}, or when working with {keywords}. {Delegation triggers}.'
 model: {sonnet|opus|haiku|inherit}
 tools: {tool-list if restricting}
 disallowedTools: {denylist if needed}
@@ -369,11 +363,7 @@ or when working with {keywords}. {Optional: Proactive trigger instruction}.
 ### Good Example
 
 ```yaml
-description: >
-  Expert code review specialist. Proactively reviews code for quality,
-  security, and maintainability. Use immediately after writing or modifying
-  code. Provides specific, actionable feedback on bugs, performance issues,
-  and adherence to project patterns.
+description: 'Expert code review specialist. Proactively reviews code for quality, security, and maintainability. Use immediately after writing or modifying code. Provides specific, actionable feedback on bugs, performance issues, and adherence to project patterns.'
 ```
 
 ### Bad Example
@@ -387,9 +377,7 @@ description: Reviews code
 For agents that should be invoked automatically:
 
 ```yaml
-description: >
-  ... Use IMMEDIATELY after code changes. Invoke PROACTIVELY when
-  implementation is complete. DO NOT wait for user request.
+description: '... Use IMMEDIATELY after code changes. Invoke PROACTIVELY when implementation is complete. DO NOT wait for user request.'
 ```
 
 </description_guide>

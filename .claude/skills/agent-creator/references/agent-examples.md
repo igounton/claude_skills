@@ -18,12 +18,7 @@ This agent demonstrates:
 ```yaml
 ---
 name: plugin-assessor
-description: >
-  Analyze Claude Code plugins for structural correctness, frontmatter optimization,
-  schema compliance, and enhancement opportunities. Use when reviewing plugins before
-  marketplace submission, auditing existing plugins, validating plugin structure,
-  or identifying improvements. Handles large plugins with many reference files.
-  Detects orphaned documentation, duplicate content, and missing cross-references.
+description: 'Analyze Claude Code plugins for structural correctness, frontmatter optimization, schema compliance, and enhancement opportunities. Use when reviewing plugins before marketplace submission, auditing existing plugins, validating plugin structure, or identifying improvements. Handles large plugins with many reference files. Detects orphaned documentation, duplicate content, and missing cross-references.'
 model: sonnet
 skills: claude-skills-overview-2026, claude-plugins-reference-2026, claude-commands-reference-2026, claude-hooks-reference-2026
 ---
@@ -133,11 +128,7 @@ This agent demonstrates:
 ```yaml
 ---
 name: skill-refactorer
-description: >
-  Refactor large or multi-domain skills into smaller, focused skills without losing fidelity.
-  Use when a skill covers too many topics, exceeds 500 lines, or would benefit from
-  separation of concerns. Analyzes skill content, identifies logical partitions,
-  plans the split, creates new SKILL.md files, and validates complete coverage.
+description: 'Refactor large or multi-domain skills into smaller, focused skills without losing fidelity. Use when a skill covers too many topics, exceeds 500 lines, or would benefit from separation of concerns. Analyzes skill content, identifies logical partitions, plans the split, creates new SKILL.md files, and validates complete coverage.'
 model: sonnet
 permissionMode: acceptEdits
 skills: claude-skills-overview-2026
@@ -249,9 +240,7 @@ This filled example shows a Coder agent specialized for a modern web stack:
 ````markdown
 ---
 name: coder-web-nextjs-supabase
-description: >
-  Implements scoped features and fixes in TypeScript 5.9 using Bun, Biome,
-  Next.js, and Supabase with minimal diffs and reported command outcomes.
+description: 'Implements scoped features and fixes in TypeScript 5.9 using Bun, Biome, Next.js, and Supabase with minimal diffs and reported command outcomes.'
 model: sonnet
 permissionMode: acceptEdits
 skills: subagent-contract
@@ -344,10 +333,7 @@ This filled example shows a Coder agent specialized for Python TUI development:
 ````markdown
 ---
 name: coder-tui-textual-httpx
-description: >
-  Implements scoped features and fixes in Python 3.12 using uv, poe-the-poet,
-  Ruff, basedpyright, Textual, Rich, orjson, Pydantic, and httpx with minimal
-  diffs and reported command outcomes.
+description: 'Implements scoped features and fixes in Python 3.12 using uv, poe-the-poet, Ruff, basedpyright, Textual, Rich, orjson, Pydantic, and httpx with minimal diffs and reported command outcomes.'
 model: sonnet
 permissionMode: acceptEdits
 skills: subagent-contract, python3-development
@@ -447,10 +433,7 @@ This agent demonstrates:
 ```yaml
 ---
 name: auto-formatter
-description: >
-  Automatically formats and lints code after modifications. Use when writing
-  or editing code files to ensure consistent style. Runs formatters and linters
-  as hooks to maintain code quality without explicit user commands.
+description: 'Automatically formats and lints code after modifications. Use when writing or editing code files to ensure consistent style. Runs formatters and linters as hooks to maintain code quality without explicit user commands.'
 model: sonnet
 permissionMode: acceptEdits
 hooks:

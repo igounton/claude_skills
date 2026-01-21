@@ -700,9 +700,7 @@ NOTES:
 ````markdown
 ---
 name: {{agent_name_auditor}}
-description: >
-  Audits {{domain}} for compliance, drift, or gaps. Compares {{source_of_truth}} against
-  {{reality}} and generates categorized findings with evidence citations.
+description: 'Audits {{domain}} for compliance, drift, or gaps. Compares {{source_of_truth}} against {{reality}} and generates categorized findings with evidence citations.'
 model: sonnet
 permissionMode: dontAsk
 tools: Read, Grep, Glob, Bash(git:log), Bash(git:diff)
@@ -791,9 +789,7 @@ Report:
 ````markdown
 ---
 name: {{agent_name_context}}
-description: >
-  Gathers comprehensive context for {{task_type}} by researching codebase patterns,
-  tracing data flows, and documenting everything needed for error-free implementation.
+description: 'Gathers comprehensive context for {{task_type}} by researching codebase patterns, tracing data flows, and documenting everything needed for error-free implementation.'
 model: sonnet
 permissionMode: dontAsk
 tools: Read, Grep, Glob, Bash(git:log)
@@ -868,9 +864,7 @@ NOTES:
 ````markdown
 ---
 name: {{agent_name_optimizer}}
-description: >
-  Optimizes {{artifact_type}} for {{optimization_goal}}. Analyzes current state,
-  identifies issues, applies improvements, and shows before/after comparison.
+description: 'Optimizes {{artifact_type}} for {{optimization_goal}}. Analyzes current state, identifies issues, applies improvements, and shows before/after comparison.'
 model: sonnet
 permissionMode: acceptEdits
 skills: subagent-contract
@@ -930,16 +924,7 @@ NOTES:
 ```markdown
 ---
 name: {{domain}}-expert
-description: >
-  {{Domain}} specialist with expertise in {{specific_areas}}. Use when working with
-  {{domain}} code, debugging {{domain}} issues, or implementing {{domain}} best practices.
-
-  <examples>
-  <example>
-  user: "{{example_user_request}}"
-  assistant: "I'll use the {{domain}}-expert agent for {{reason}}."
-  </example>
-  </examples>
+description: '{{Domain}} specialist with expertise in {{specific_areas}}. Use when working with {{domain}} code, debugging {{domain}} issues, or implementing {{domain}} best practices. <examples><example>user: "{{example_user_request}}" assistant: "I will use the {{domain}}-expert agent for {{reason}}."</example></examples>'
 model: inherit
 color: {{color}}
 skills: {{domain_skill_if_exists}}
@@ -1021,15 +1006,7 @@ All role-based archetypes should include `skills: subagent-contract` to enforce 
 For complex agents, include `<example>` blocks in the description showing invocation:
 
 ```yaml
-description: >
-  Review Python code for issues. Use for code quality audits.
-
-  <examples>
-  <example>
-  user: "Review my authentication code for security issues"
-  assistant: "I'll use the python-reviewer agent for security-focused review."
-  </example>
-  </examples>
+description: 'Review Python code for issues. Use for code quality audits. <examples><example>user: "Review my authentication code for security issues" assistant: "I will use the python-reviewer agent for security-focused review."</example></examples>'
 ```
 
 ### Identity Section

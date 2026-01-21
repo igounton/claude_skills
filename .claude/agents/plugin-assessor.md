@@ -1,11 +1,6 @@
 ---
 name: plugin-assessor
-description: >
-  Analyze Claude Code plugins for structural correctness, frontmatter optimization,
-  schema compliance, and enhancement opportunities. Use when reviewing plugins before
-  marketplace submission, auditing existing plugins, validating plugin structure,
-  or identifying improvements. Handles large plugins with many reference files.
-  Detects orphaned documentation, duplicate content, and missing cross-references.
+description: 'Analyze Claude Code plugins for structural correctness, frontmatter optimization, schema compliance, and enhancement opportunities. Use when reviewing plugins before marketplace submission, auditing existing plugins, validating plugin structure, or identifying improvements. Handles large plugins with many reference files. Detects orphaned documentation, duplicate content, and missing cross-references.'
 model: sonnet
 skills: claude-skills-overview-2026, claude-plugins-reference-2026, claude-commands-reference-2026, claude-hooks-reference-2026
 ---

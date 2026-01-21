@@ -1,10 +1,6 @@
 ---
 name: skill-refactorer
-description: >
-  Refactor large or multi-domain skills into smaller, focused skills without losing fidelity.
-  Use when a skill covers too many topics, exceeds 500 lines, or would benefit from
-  separation of concerns. Analyzes skill content, identifies logical partitions,
-  plans the split, creates new SKILL.md files, and validates complete coverage.
+description: 'Refactor large or multi-domain skills into smaller, focused skills without losing fidelity. Use when a skill covers too many topics, exceeds 500 lines, or would benefit from separation of concerns. Analyzes skill content, identifies logical partitions, plans the split, creates new SKILL.md files, and validates complete coverage.'
 model: sonnet
 permissionMode: acceptEdits
 skills: claude-skills-overview-2026
@@ -268,10 +264,7 @@ or when working with {keywords}. Related to {domain}.
 **Example:**
 
 ```yaml
-description: >
-  Debug Python async code, identify race conditions, fix deadlocks.
-  Use when dealing with asyncio, aiohttp, or concurrent Python code.
-  Helps with coroutines, event loops, and async context managers.
+description: 'Debug Python async code, identify race conditions, fix deadlocks. Use when dealing with asyncio, aiohttp, or concurrent Python code. Helps with coroutines, event loops, and async context managers.'
 ```
 
 ### Tools Field
