@@ -159,13 +159,13 @@ Other agents may be working nearby on related tasks. If you notice edits to file
 
 Load these skills for guidance on proper formats:
 
-| Skill                          | Use For                   |
-| ------------------------------ | ------------------------- |
-| claude-skills-overview-2026    | Skill SKILL.md format     |
-| claude-plugins-reference-2026  | Plugin structure          |
-| claude-commands-reference-2026 | Command format            |
-| claude-hooks-reference-2026    | Hooks format              |
-| prompt-optimization-claude-45  | Agent prompt optimization |
+| Skill                         | Use For                   |
+| ----------------------------- | ------------------------- |
+| claude-skills-overview-2026   | Skill SKILL.md format     |
+| claude-plugins-reference-2026 | Plugin structure          |
+|                               | Command format            |
+| claude-hooks-reference-2026   | Hooks format              |
+| prompt-optimization-claude-45 | Agent prompt optimization |
 
 ### Research and Knowledge
 

@@ -67,7 +67,7 @@ WHERE you are working:
 - Agents directory: ./plugins/$ARGUMENTS/agents/ (if exists)
 
 WHAT already exists:
-- Reference skills for validation: claude-skills-overview-2026, claude-plugins-reference-2026, claude-commands-reference-2026, claude-hooks-reference-2026
+- Reference skills for validation: claude-skills-overview-2026, claude-plugins-reference-2026, claude-hooks-reference-2026
 - Plugin schema requirements from Claude Code marketplace
 </context>
 

@@ -4,20 +4,19 @@ This directory contains skills that extend Claude's capabilities with specialize
 
 ## Quick Reference Table
 
-| Skill Name                                                        | Category           | Purpose                                                          | User-Invocable        |
-| ----------------------------------------------------------------- | ------------------ | ---------------------------------------------------------------- | --------------------- |
-| [agent-creator](#agent-creator)                                   | Creation Tools     | Create and design Claude Code agents                             | Yes                   |
-| [subagent-contract](#subagent-contract)                           | Workflow Contracts | Enforce specialist agent behavior patterns                       | No (loaded by agents) |
-| [rt-ica](#rt-ica)                                                 | Planning Tools     | Pre-planning checkpoint that blocks until prerequisites verified | Yes                   |
-| [scientific-thinking](#scientific-thinking)                       | Workflow Tools     | Hypothesis-driven reasoning for complex problems                 | Yes                   |
-| [verify](#verify)                                                 | Workflow Tools     | Self-assessment checklist before task completion                 | Yes                   |
-| [delegate](#delegate)                                             | Workflow Tools     | Quick delegation template for sub-agent prompts                  | Yes                   |
-| [audit](#audit)                                                   | Workflow Tools     | Hallucination detection for agent output review                  | Yes                   |
-| [claude-skills-overview-2026](#claude-skills-overview-2026)       | Reference          | Skills system documentation                                      | Yes                   |
-| [claude-commands-reference-2026](#claude-commands-reference-2026) | Reference          | Slash commands documentation                                     | Yes                   |
-| [claude-hooks-reference-2026](#claude-hooks-reference-2026)       | Reference          | Hooks system documentation                                       | Yes                   |
-| [claude-plugins-reference-2026](#claude-plugins-reference-2026)   | Reference          | Plugins system documentation                                     | Yes                   |
-| [git-commit-helper](#git-commit-helper)                           | Development Tools  | Generate conventional commit messages                            | Yes                   |
+| Skill Name                                                      | Category           | Purpose                                                          | User-Invocable        |
+| --------------------------------------------------------------- | ------------------ | ---------------------------------------------------------------- | --------------------- |
+| [agent-creator](#agent-creator)                                 | Creation Tools     | Create and design Claude Code agents                             | Yes                   |
+| [subagent-contract](#subagent-contract)                         | Workflow Contracts | Enforce specialist agent behavior patterns                       | No (loaded by agents) |
+| [rt-ica](#rt-ica)                                               | Planning Tools     | Pre-planning checkpoint that blocks until prerequisites verified | Yes                   |
+| [scientific-thinking](#scientific-thinking)                     | Workflow Tools     | Hypothesis-driven reasoning for complex problems                 | Yes                   |
+| [verify](#verify)                                               | Workflow Tools     | Self-assessment checklist before task completion                 | Yes                   |
+| [delegate](#delegate)                                           | Workflow Tools     | Quick delegation template for sub-agent prompts                  | Yes                   |
+| [audit](#audit)                                                 | Workflow Tools     | Hallucination detection for agent output review                  | Yes                   |
+| [claude-skills-overview-2026](#claude-skills-overview-2026)     | Reference          | Skills and Slash Command system documentation                    | Yes                   |
+| [claude-hooks-reference-2026](#claude-hooks-reference-2026)     | Reference          | Hooks system documentation                                       | Yes                   |
+| [claude-plugins-reference-2026](#claude-plugins-reference-2026) | Reference          | Plugins system documentation                                     | Yes                   |
+| [git-commit-helper](#git-commit-helper)                         | Development Tools  | Generate conventional commit messages                            | Yes                   |
 
 ---
 
@@ -307,44 +306,6 @@ These skills provide comprehensive reference documentation for Claude Code's cap
 
 ---
 
-### claude-commands-reference-2026
-
-**What it does**: Complete reference guide for Claude Code slash commands system. Covers custom command creation, frontmatter syntax, argument handling, context forking, hooks, and plugin command namespacing.
-
-**AI behavior when loaded**:
-
-- Provides command frontmatter schema
-- Explains argument syntax ($ARGUMENTS, $1, $2, $3)
-- Documents special prefixes (bash execution with !, file references with @)
-- Clarifies context fork behavior for commands
-- Explains discovery and invocation mechanisms
-- Covers plugin command namespacing patterns
-
-**How to trigger**:
-
-- Explicitly: `@claude-commands-reference-2026`
-- Automatically: When creating custom commands, understanding command frontmatter, argument syntax, context fork, hooks, or plugin command namespacing
-
-**What to expect**:
-
-- Command frontmatter field reference
-- File location patterns for project vs personal commands
-- Argument substitution syntax and examples
-- Bash execution prefix and file reference (@) usage
-- Context fork options with agent selection
-- Hook configuration for commands
-- Plugin command namespacing rules
-
-**Key sections**:
-
-- All frontmatter fields table
-- Argument syntax patterns
-- Special prefixes (bash execution, file references)
-- Context fork agent comparison
-- Built-in vs custom command differences
-
----
-
 ### claude-hooks-reference-2026
 
 **What it does**: Complete reference guide for the Claude Code hooks system. Covers all hook events, matchers, exit codes, JSON output control, environment variables, and best practices.
@@ -501,7 +462,6 @@ Claude automatically activates skills based on your request. Skills have trigger
 - **delegate**: "sub-agent", "Task tool", "delegation", "assign work"
 - **audit**: "review output", "hallucination", "suspicious", "probably", "likely", "verify claims"
 - **claude-skills-overview-2026**: "skill format", "SKILL.md", "skill frontmatter", "skill best practices"
-- **claude-commands-reference-2026**: "slash command", "custom command", "command frontmatter"
 - **claude-hooks-reference-2026**: "hook", "PreToolUse", "PostToolUse", "hook events"
 - **claude-plugins-reference-2026**: "plugin", "plugin.json", "marketplace", "bundle"
 - **git-commit-helper**: "commit message", "staged changes", "git diff"
@@ -522,8 +482,7 @@ When creating orchestrated agents with DONE/BLOCKED signaling, use agent-creator
 
 ```
 claude-plugins-reference-2026
-  ├── references → claude-skills-overview-2026 (for bundled skills)
-  ├── references → claude-commands-reference-2026 (for bundled commands)
+  ├── references → claude-skills-overview-2026 (for bundled skills and commands)
   └── references → claude-hooks-reference-2026 (for bundled hooks)
 ```
 
