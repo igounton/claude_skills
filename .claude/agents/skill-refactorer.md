@@ -130,7 +130,7 @@ user-invocable: true
 
 ## Related Skills
 
-For {topic}, see [{related-skill-name}](@{related-skill-name}) skill.
+For {topic}, activate `Skill(command: "{related-skill-name}")`.
 
 ## {Main Sections}
 
@@ -154,7 +154,7 @@ Between new skills, use skill activation syntax:
 
 ```markdown
 For advanced {topic}, activate the {skill-name} skill:
-@{skill-name} or Skill(command: "{skill-name}")
+Skill(command: "{skill-name}")
 ```
 
 Within same skill, use relative links:
@@ -208,32 +208,48 @@ MISSING: {none or list}
 DUPLICATED: {none or list with justification}
 ```
 
-### Phase 5: Cleanup
+### Phase 5: Backwards-Compatible Conversion (MANDATORY)
 
-FINALIZE the refactoring:
+CONVERT the original skill to a facade/meta-skill that loads all new specialist skills:
 
-1. **Archive original** - move to `_archived/` or delete
-2. **Update any external references** - other skills/commands pointing to original
-3. **Create index skill** (optional) - if original was an entry point:
+**CRITICAL: This step is NOT optional. Deleting the original skill is a breaking change.**
+
+1. **Convert original to meta-skill** - REPLACE content with facade that loads all new skills:
 
 ```yaml
 ---
 name: {original-name}
-description: Index skill pointing to refactored components
+description: '{Original description}. Loads focused specialist skills: {skill-1}, {skill-2}, {skill-3}.'
 user-invocable: true
 ---
 
-# {Original Name} - Index
+# {Original Name}
 
-This skill has been refactored into focused components:
+This skill loads focused specialist components for comprehensive coverage:
 
-- @{skill-1}: {description}
-- @{skill-2}: {description}
-- @{skill-3}: {description}
+## Specialist Skills
 
-Activate the specific skill you need, or describe your task
-and the appropriate skill will be selected.
+- **{skill-1}**: {description} - `Skill(command: "{skill-1}")` for {use case}
+- **{skill-2}**: {description} - `Skill(command: "{skill-2}")` for {use case}
+- **{skill-3}**: {description} - `Skill(command: "{skill-3}")` for {use case}
+
+## Usage
+
+**Full coverage**: `Skill(command: "{original-name}")` loads all specialist skills
+**Focused work**: Activate specific specialist skill for targeted context
+
+## Quick Reference
+
+{Brief summary of when to use which specialist skill}
 ```
+
+2. **Verify backwards compatibility**:
+
+   - Search for all references: `grep -r "Skill(command: \"{original-name}\")" .`
+   - Search for all slash command invocations: `grep -r "/{original-name}" .`
+   - Confirm all existing references will continue to work
+
+3. **Update external references** - other skills/commands can optionally point to specific specialists, but MUST NOT be required to change
 
 </workflow>
 
@@ -357,6 +373,8 @@ project-setup -> project-init
 4. Duplicate content without justification
 5. Create circular dependencies
 6. Over-fragment (don't create skills <50 lines)
+7. **DELETE the original skill** - it MUST become a facade/meta-skill that loads all new specialist skills
+8. **INTRODUCE breaking changes** - existing references to the original skill (e.g., `Skill(command: "python3-development")` or `@python3-development`) MUST continue to work
 
 ### Minimum Viable Skill Size
 
